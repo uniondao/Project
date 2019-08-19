@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/issue.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/base.js"></script>
+    <script type="text/javascript" src="./js/token/coin/usdt.js"></script>
+    <script type="text/javascript" src="./js/token/coin/dai.js"></script>
+    <script type="text/javascript" src="./js/token/coin/tusd.js"></script>
+    <script type="text/javascript" src="./js/token/coin/usdc.js"></script>
+    <script type="text/javascript" src="./js/token/coin/pax.js"></script>
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <title>UnionDao</title>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./header.html");
+            $("#footCont").load("./footer.html");
+        });
+    </script>
+</head>
+
+<body >
+<input type="hidden" id="address">
+<input type="hidden" id="usdt_balance">
+<input type="hidden" id="dai_balance">
+<input type="hidden" id="tusd_balance">
+<input type="hidden" id="und_balance">
+<input type="hidden" id="usdc_balance">
+<input type="hidden" id="pax_balance">
+<input type="hidden" id="usdt_allowance">
+<input type="hidden" id="dai_allowance">
+<input type="hidden" id="tusd_allowance">
+<input type="hidden" id="usdc_allowance">
+<input type="hidden" id="pax_allowance">
+<input type="hidden" id="undFeeUdao">
+<input type="hidden" id="udaoPrice">
+<input type="hidden" id="udao_allowance">
+<input type="hidden" id="und_allowance">
+<input type="hidden" id="undopther_txt_cop">
+<input type="hidden" id="getGasPrice" value="100000000000">
+<div class="wrapper">
+    <div class="main">
+        <header></header>
+        <div id="issueCont">
+            <div class="issue-cont">
+                <div id="tabMain">
+                    <div class="tab-header">
+                        <ul id="tabs">
+                            <li  class="tab1"><a href="#" title="1">UNDT ISSUANCE</a></li>
+                            <li  class="tab2"><a href="#" title="2">UNDT REDEMPTION</a></li>
+                        </ul>
+                    </div>
+                    <div id="tabContent">
+                        <div id="1" class="tab-part tab-1">
+                            <div class="tab-part-1">
+                                <div class="radio-list">
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_usdt" name="radio" value="usdt" checked>
+                                        <label for="radio_usdt"></label>
+                                        <img src="./images/coin/coin_1.png" alt="">
+                                        <span>USDT</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_dai" name="radio" value="dai" >
+                                        <label for="radio_dai"></label>
+                                        <img src="./images/coin/coin_2.png" alt="">
+                                        <span> DAI</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_usdc" name="radio" value="usdc">
+                                        <label for="radio_usdc"></label>
+                                        <img src="./images/coin/coin_usdc.png" alt="">
+                                        <span>USDC</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_tusd" name="radio" value="tusd">
+                                        <label for="radio_tusd"></label>
+                                        <img src="./images/coin/coin_tusd.png" alt="">
+                                        <span>TUSD</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_pax" name="radio" value="pax">
+                                        <label for="radio_pax"></label>
+                                        <img src="./images/coin/coin_3.png" alt="">
+                                        <span> PAX</span>
+                                    </div>
+                                </div>
+                                <div class="ex-input">
+                                    <div>
+                                        <input type="text" placeholder="INPUT UNDT AMOUNT" id="issue_num"   oninput="linkage('issue_num','issue_und')"  onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">
+                                        <span>Currently available <font id="mybalance"></font></span>
+                                    </div>
+                                    <img src="./images/exchange.png" alt="" >
+                                    <div>
+                                        <div class="input-flex">
+                                            <input type="text" placeholder="UNDT" id="issue_und" readonly>
+                                        </div>
+                                        <span>Currently available <font id="mybalance_und"></font></span>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;color: red;margin: 10px" id="approve_commit"> &nbsp;</div>
+                                <div class="ex-btn">
+                                    <div onclick="issue()" id="issue">ISSUED NOW</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="2" class="tab-part tab-2">
+                            <div class="tab-part-2">
+                                <div class="radio-list2">
+                                    <span>Customized redemption currency</span>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_7" name="radio_2" value="usdt">
+                                        <label for="radio_7"></label>
+                                        <span>USDT</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_8" name="radio_2" value="dai">
+                                        <label for="radio_8"></label>
+                                        <span>DAI</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_9" name="radio_2" value="usdc">
+                                        <label for="radio_9"></label>
+                                        <span>USDC</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_10" name="radio_2" value="tusd">
+                                        <label for="radio_10"></label>
+                                        <span>TUSD</span>
+                                    </div>
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_11" name="radio_2" value="pax">
+                                        <label for="radio_11"></label>
+                                        <span>PAX</span>
+                                    </div>
+                                </div>
+                                <div class="radio-tip">
+                                    <div class="radio_box">
+                                        <input type="radio" id="radio_12" name="radio_2" value="all" checked>
+                                        <label for="radio_12"></label>
+                                        <span>Redeem the token ratio by system allocation</span>
+                                    </div>
+                                    <span id="bili"></span>
+                                </div>
+                                <div class="ex-input">
+                                    <div>
+                                        <div class="input-flex">
+                                            <div class="input-label">UNDT </div>
+                                            <input type="text" placeholder="1 UNDT" onpropertychange="cop()" oninput="cop()" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)" id="withdraw_num" >
+                                        </div>
+                                        <span style=" margin-left: 60px;">Currently available <font id="undt_balance"></font>UNDT</span>
+                                    </div>
+                                    <img src="./images/exchange.png" alt="">
+                                    <div>
+                                        <div class="input-flex">
+                                            <input type="text" placeholder="" id="undopther_txt" readonly>
+                                        </div>
+                                        <span>Currently available <font id="udao_balance"></font> UDAO
+                                            <span class="input-tips">fee: <font id="fee">0</font>UDAO </span>
+                                        </span>
+                                    </div>
+                                    <span class="txt1" style="display: none"></span>
+                                </div>
+                                <div class="ex-btn">
+                                    <div class="submit-issue" id="redemption" onclick="redemption()"> REDEMPTION NOW</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="issue-tips issue-tips-1">
+                    <h5>ISSUED NOTES:</h5>
+                    <p>1. 1<span class="notes">USDT</span> can be exchanged for 1UNDT. Each transaction requires the payment of the corresponding miner's fee, please check if the wallet has a certain amount of ETH.</p>
+                    <p>2. Contract authorization is required during the transaction. It takes a certain amount of time to return the authorization information, and the transaction can be performed after the authorization is completed.</p>
+                </div>
+                <div class="issue-tips issue-tips-2" style="display: none">
+                    <h5>REDEMPTION NOTES:</h5>
+                    <p>1. Each transaction requires the payment of the corresponding miner's fee, please check if the wallet has a certain amount of ETH.</p>
+                    <p>2. Redemption to take 1% handling fee. UDAO payment (UDAO can be pre-sold through UDAO or directly to the uniswap.exchenge exchange.</p>
+                </div>
+            </div>
+        </div>
+        <div id="issuetTable">
+            <div class="issue-table">
+                <h5 class="issue-table-title">ISSUE / REDEMPTION RECORD</h5>
+                <table>
+                    <tbody id="issue_log">
+                    <thead>
+                    <th>TRADING HOURS</th>
+                    <th>TRADING VOLUME</th>
+                    <th>COMPLETION QUANTITY</th>
+                    <th>SOURCE </th>
+                    </thead>
+
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>2000 UNDT</td>-->
+                    <!--<td>ISSUED</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>2000 UNDT</td>-->
+                    <!--<td>ISSUED</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>2000 UNDT</td>-->
+                    <!--<td>ISSUED</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>3400 UNDT | 1400 GUSD | 200AL</td>-->
+                    <!--<td>REDEMPTION</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>3400 UNDT | 1400 GUSD | 200AL</td>-->
+                    <!--<td>REDEMPTION</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>3400 UNDT | 1400 GUSD | 200AL</td>-->
+                    <!--<td>REDEMPTION</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>2019-05-09 18:00:00</td>-->
+                    <!--<td>2000 USDT</td>-->
+                    <!--<td>3400 UNDT | 1400 GUSD | 200AL</td>-->
+                    <!--<td>REDEMPTION</td>-->
+                    <!--</tr>-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!--<div class="readmore">-->
+        <!--<img src="./images/down.png" alt="">-->
+        <!--<span>READ MORE</span>-->
+        <!--</div>-->
+        <div id="footCont"> </div>
+    </div>
+</div>
+</body>
+
+</html>
+
+<script src="./js/layer.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tabContent .tab-part").hide(); // Initially hide all content
+        $("#tabs li:first").attr("id", "current"); // Activate first tab
+        $("#tabContent div:first").fadeIn(); // Show first tab content
+
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $("#tabContent .tab-part").hide(); //Hide all content
+            $("#tabs li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+        $('.tab1').click(function(){
+            $('.issue-tips-1').css('display','block');
+            $('.issue-tips-2').css('display','none');
+        })
+
+        $('.tab2').click(function(){
+            $('.issue-tips-2').css('display','block');
+            $('.issue-tips-1').css('display','none');
+        })
+
+            var ur = location.href;
+            // 获取该url  = 后面的数字 （id）
+            var type = ur.split('?')[1].split("=")[1];
+
+            // 使用传过来的 数字 （id） 来控制该选项卡的切换
+            // 其实就是从页面 A 通过 URL ？ 后面的参数 给页面B 传一个 index
+
+            $('#tabs li').eq(type- 1).attr('id','current').siblings().removeAttr('id');
+            $('#tabContent .tab-part').eq(type - 1).fadeIn().siblings().hide();
+    })
+    setTimeout(start, 1000);
+//    window.onload = function(){
+//            start();
+//        }
+    function start() {
+        setTimeout(ethAccounts, 500);
+        setTimeout(balance_usdt, 900);
+        setTimeout(balance_tusd, 800);
+        setTimeout(balance_dai, 900);
+        setTimeout(balance_usdc, 800);
+        setTimeout(balance_pax, 800);
+        setTimeout(balance_und, 900);
+        setTimeout(getnewprice, 1000);
+        setTimeout(balance_und, 1000);
+        setTimeout(balance_udao, 1000);
+        setTimeout(getFeeCosUDAO, 1200);
+        setTimeout(allowance_usdt, 1200);
+        setTimeout(allowance_dai, 1200);
+        setTimeout(allowance_tusd, 1200);
+        setTimeout(allowance_usdc, 1200);
+        setTimeout(allowance_pax, 1200);
+        setTimeout(allowance_udao, 1200);
+        setTimeout(allowance_und, 1200);
+        setTimeout(getGasPrice, 1500);
+        setTimeout(getPercent, 2000);
+        all_record(CONFIG.und_issue_addr)
+    }
+
+</script>
+
+<script>
+    //    $(document).on("click", ".submit-issue", function () {
+    //        layer.open({
+    //            type: 1,
+    //            title: false,
+    //            closeBtn: 0,
+    //            area: ['575px', '360px'],
+    //            shadeClose: true,
+    //            content: ' <div id="shLayer">'
+    //                + ' <div class="close-img">'
+    //                + '  <img src="./images/close.png" alt="">'
+    //                + ' </div>'
+    //                + '  <div class="shlayer-cont">'
+    //                + '    <p>Display authorization information</p>'
+    //                + '    </div>'
+    //                + '   <div class="shlayer-btn">'
+    //                + ' <div class="shlayer-close">CANCEL</div>'
+    //                + ' <div class="shlayer-confirm">CONFIRM</div>'
+    //                + ' </div>'
+    //                + '</div>'
+    //        });
+    //
+    //    });
+    //    $(document).on("click", ".close-img", function () {
+    //        layer.closeAll();
+    //    });
+    //    $(document).on("click", ".shlayer-close", function () {
+    //        layer.closeAll();
+    //    });
+</script>
+<script>
+    $(".radio-list > .radio_box > input[ name='radio']").click(function(){
+        var coin = $("input[name='radio']:checked").val();
+        Coin = coin.toLocaleUpperCase();
+        coin_id = coin+'_balance';
+        banlance =  $('#'+coin_id).val();
+        $('#mybalance').text(banlance+Coin);
+        $('.notes').text(Coin);
+    });
+
+    $(".radio-list2 > .radio_box > input[ name='radio_2']").click(function(){
+        var coin = $("input[name='radio_2']:checked").val();
+        Coin = coin.toLocaleUpperCase();
+        $('.notes').text(Coin);
+    });
+
+    function linkage(s_id, d_id) {
+        var temp = $('#' + s_id).val();
+        temp = toNum(temp);
+        $('#' + d_id).val(temp);
+    }
+    var click_und = 1;
+    function issue(){
+        coin = $("input[name='radio']:checked").val();
+        var num = $('#issue_num').val();
+        if (Number(num) < 1) {
+            alert(script_Lan.issue_num_min[currentLan]);
+            return false;
+        }
+        switch(coin)
+        {
+            case 'usdt':
+                var usdt_balance = $('#usdt_balance').val();
+                if (click_und != 1) {
+                    return false;
+                }
+                if (parseFloat(num) > parseFloat(usdt_balance)) {
+                    alert(script_Lan.issue_num_max[currentLan]);
+                    return false;
+                }
+
+                var usdt_allowance = $("#usdt_allowance").val();
+                usdt_allowance = Number(usdt_allowance);
+                if(usdt_allowance >0 && num > usdt_allowance){
+                    alert(script_Lan.issue_user_max[currentLan]+usdt_allowance);
+                    return false;
+                }
+                click_und = 0;
+                num = Number(num);
+                if (usdt_allowance != 0 && usdt_allowance >= num) {
+                    $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
+                    mortgage_usdt(num);
+                } else {
+                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                    shouquan_usdt(num);
+                }
+                break;
+            case 'dai':
+                var dai_balance = $('#dai_balance').val();
+                if (click_und != 1) {
+                    return false;
+                }
+                if (parseFloat(num) > parseFloat(dai_balance)) {
+                    alert(script_Lan.issue_num_max[currentLan]);
+                    return false;
+                }
+                click_und = 0;
+                var dai_allowance = $("#dai_allowance").val();
+                dai_allowance = Number(dai_allowance);
+                num = Number(num);
+                if (dai_allowance != 0 && dai_allowance >= num) {
+                    $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
+                    mortgage_dai(num);
+                } else {
+                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                    shouquan_dai(num);
+                }
+                break;
+            case 'usdc':
+                var usdc_balance = $('#usdc_balance').val();
+                if (click_und != 1) {
+                    return false;
+                }
+                if (parseFloat(num) > parseFloat(usdc_balance)) {
+         //           alert(script_Lan.issue_num_max[currentLan]);
+         //           return false;
+                }
+                click_und = 0;
+                var usdc_allowance = $("#usdc_allowance").val();
+                usdc_allowance = Number(usdc_allowance);
+                num = Number(num);
+                if (usdc_allowance != 0 && usdc_allowance >= num) {
+                    $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
+                    mortgage_usdc(num);
+                } else {
+                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                    shouquan_usdc(num);
+                }
+                break;
+            case 'tusd':
+                var tusd_balance = $('#tusd_balance').val();
+                if (click_und != 1) {
+                    return false;
+                }
+                if (parseFloat(num) > parseFloat(tusd_balance)) {
+                    alert(script_Lan.issue_num_max[currentLan]);
+                    return false;
+                }
+                click_und = 0;
+                var tusd_allowance = $("#tusd_allowance").val();
+                tusd_allowance = Number(tusd_allowance);
+                num = Number(num);
+                if (tusd_allowance != 0 && tusd_allowance >= num) {
+                    $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
+                    mortgage_tusd(num);
+                } else {
+                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                    shouquan_tusd(num);
+                }
+                break;
+            case 'pax':
+                var pax_balance = $('#pax_balance').val();
+                if (click_und != 1) {
+                    return false;
+                }
+                if (parseFloat(num) > parseFloat(pax_balance)) {
+                    alert(script_Lan.issue_num_max[currentLan]);
+                    return false;
+                }
+                click_und = 0;
+                var pax_allowance = $("#pax_allowance").val();
+                pax_allowance = Number(pax_allowance);
+                num = Number(num);
+                if (pax_allowance != 0 && pax_allowance >= num) {
+                    $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
+                    mortgage_pax(num);
+                } else {
+                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                    shouquan_pax(num);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    function cop() {
+        var udaoPrice = $("#udaoPrice").val();
+        var und2udaoP = 0;
+        if (udaoPrice == null || udaoPrice <= 0) {
+            und2udaoP = 0;
+        } else {
+            und2udaoP = 1 / udaoPrice;
+        }
+
+        var withdraw_num = document.getElementById("withdraw_num").value;
+        withdraw_num = toNum(withdraw_num);
+        var undFeeUdao = $("#undFeeUdao").val();
+        if (!undFeeUdao) {
+            undFeeUdao = 0;
+        }
+
+        console.log("withdraw_num:" + withdraw_num);
+        console.log("undFeeUdao:" + undFeeUdao);
+        console.log("und2udaoP:" + und2udaoP);
+        str4 = parseFloat((withdraw_num * undFeeUdao * und2udaoP));
+        document.getElementById("fee").innerText = str4.toFixed(4);
+
+        coin = $("input[name='radio_2']:checked").val();
+        str = "";
+        if(coin == 'all'){
+            $(".txt1 .num_per").each(function() {
+                arr = String($(this).html()).split("%");
+                console.log(arr);
+                t_num = Number(arr[0]) / 100 * withdraw_num;
+                s = t_num.toFixed(CONFIG.Fixed) + " " + arr[1];
+                str += " " + s;
+            });
+            str = str.substr(0, str.length - 1);
+        }else{
+            str += withdraw_num;
+            str += coin.toLocaleUpperCase();
+        }
+        $("#undopther_txt").val(str);
+    }
+
+    var click_und2other = 1;
+    function redemption(){
+        coin = $("input[name='radio_2']:checked").val();
+        var num = $('#withdraw_num').val();
+        var und_balance = $('#und_balance').val();
+        var udao_num = $('.udao_balance').html();
+        var fee = $('#fee').html();
+        if (click_und2other != 1) {
+            return false;
+        }
+
+        if (Number(num) < 1) {
+            alert(script_Lan.issue_num_min[currentLan]);
+            return false;
+        }
+        if (parseFloat(num) > parseFloat(und_balance)) {
+            alert(script_Lan.issue_num_max[currentLan]);
+            return false;
+        }
+        if (fee <= 0) {
+            alert(script_Lan.fee_fail[currentLan]);
+            location.reload();
+            return false;
+        }
+        if (fee > udao_num) {
+            alert(script_Lan.udao_fee_fail[currentLan]);
+            return false;
+        }
+        click_und2other = 0;
+        //获取已授权und数量
+        var und_allowance = $("#und_allowance").val();
+        var udao_allowance = $("#udao_allowance").val();
+        und_allowance = Number(und_allowance);
+        udao_allowance = Number(udao_allowance);
+        num = Number(num);
+
+        if(coin == 'all'){
+            if (und_allowance == 0 || und_allowance < num) {
+                //授权und
+                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                shouquan_und(num,fee,udao_allowance);
+            } else if (udao_allowance == 0 || udao_allowance < fee) {
+                //授权udao
+                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                shouquan_udao(fee,num);
+            } else {
+                $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
+                withdraw(num);
+            }
+        }else{
+            if (und_allowance == 0 || und_allowance < num) {
+                //授权und
+                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                shouquan_und(num,fee,udao_allowance,1,coin);
+            } else if (udao_allowance == 0 || udao_allowance < fee) {
+                //授权udao
+                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+                shouquan_udao(fee,num,1,coin);
+            } else {
+                $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
+                withdraw_onecoin(num,coin);
+            }
+        }
+
+    }
+    var hash = '';
+    var und_value = '';
+    function all_record(filt_addr) {
+        $("#issue_log").find("tr").remove();
+        web3.eth.getAccounts(function(err, accounts) {
+            if (accounts.length != 0) {
+                var selfaddr = accounts[0];
+                var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+                $.get(apiurl, function(data) {
+                    console.log(data);
+                    $.each(data.result, function(i, item) {
+                        item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
+                        item.from = item.from.toLocaleUpperCase();
+                        item.to = item.to.toLocaleUpperCase();
+                        selfaddr = selfaddr.toLocaleUpperCase();
+                        filt_addr = filt_addr.toLocaleUpperCase();
+                        if (item.tokenSymbol == "USDT" || item.tokenSymbol == "DAI" || item.tokenSymbol == "USDC" || item.tokenSymbol == "TUSD" || item.tokenSymbol == "PAX" || item.tokenSymbol == 'UNDT') {
+                            switch(item.tokenSymbol)
+                            {
+                                case 'USDT':
+                                    var wei = CONFIG.usdt_wei;
+                                    break;
+                                case 'DAI':
+                                    var wei = CONFIG.dai_wei;
+                                    break;
+                                case 'USDC':
+                                    var wei = CONFIG.usdc_wei;
+                                    break;
+                                case 'TUSD':
+                                    var wei = CONFIG.tusd_wei;
+                                    break;
+                                case 'PAX':
+                                    var wei = CONFIG.pax_wei;
+                                    break;
+                            }
+
+                            if(item.tokenSymbol == 'UNDT'){
+                                hash = item.hash;
+                                und_value = item.value;
+                            }
+                            if (item.from == filt_addr && item.to == selfaddr  ) {
+
+                                var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>'+ web3.utils.fromWei(und_value, CONFIG.und_wei) +  'UNDT</td><td>' + web3.utils.fromWei(item.value, wei) + item.tokenSymbol + '</td><td>REDEMPTION</td></tr>';
+                                $("#issue_log").append(temp);
+                            }
+
+                            if (item.from == selfaddr && item.to == filt_addr && item.tokenSymbol != 'UNDT') {
+
+                                var temp = '<tr ><td>' + timestampToTime(item.timeStamp) + '</td><td>' + web3.utils.fromWei(item.value, wei) + item.tokenSymbol + '</td><td>' + web3.utils.fromWei(item.value, wei) + 'UNDT</td><td>ISSUE</td></tr>';
+                                $("#issue_log").append(temp);
+
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
+
+
+</script>

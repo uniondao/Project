@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/wallet.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/base.js"></script>
+    <script type="text/javascript" src="./js/token/coin/pax.js"></script>
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <title>UnionDao</title>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./header.html");
+            $("#footCont").load("./footer.html");
+        });
+    </script>
+    <style>
+        .layui-m-layer1 .layui-m-layerchild {
+            border-radius: 12px !important;
+        }
+        .layui-m-layermain {
+            display: flex!important;
+            justify-content: center!important;
+            align-items: center!important;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" id="address">
+    <input type="hidden" id="und_balance">
+    <input type="hidden" id="udaoPrice">
+    <input type="hidden" id="getGasPrice">
+
+    <div class="wrapper">
+        <div class="main">
+            <header></header>
+            <div id="walletCont">
+                <div class="wallet-cont">
+                    <div class="w-card">
+                        <div class="w-card-cont">
+                            <div class="w-card-part-1"><img src="./images/logo_w.png" alt=""></div>
+                            <div class="w-card-part-2">
+                                <!-- <img src="./images/w_chip.png" alt=""> -->
+                                <span>UNPAY</span>
+                            </div>
+                            <div class="w-card-part-3">
+                                <span>CARD ID:</span>
+                                <div  id="bank_card">0000000000000000000</div>
+                            </div>
+                            <div class="w-card-part-4">
+                                <span>ADDDRESS:</span>
+                                <div>
+                                    <div id="address_account"> </div>
+                                    <img src="./images/w_code.png" alt="" class="address-img">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wallet-tips noaccounts" style="display: none">
+                        You don't have a digital bank card yet
+                    </div>
+                    <div class="wallet-btn noaccounts" style="display: none">
+                        <div onclick="createAccount()" style="cursor: pointer" id="createAccount">IMMEDIATE APPLICATION
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="walletList">
+                <div class="wallet-list">
+
+                    <div class="wallet-list-part">
+                        <div class="wallet-list-part-1">
+                            <a href="./walletRecord.html">
+                                <div class="wallet-list-part-img">
+                                    <img src="./images/icon-02_w.png" alt="">
+                                </div>
+                                <div> UDAO</div>
+                                <span>uniondao</span>
+                            </a>
+                        </div>
+                        <div class="wallet-list-part-2">
+                            <div>
+                                <font id="udao_balance">0.0000</font>≈$<font id="udao_price">0.0000</font>
+                            </div>
+                        </div>
+                        <div class="wallet-list-part-3">
+                            <div class="wallet-list-btn-1 collection_udao"> COLLECTION</div>
+                            <div class="wallet-list-btn-2 payment_udao"> PAYMENT</div>
+                        </div>
+                    </div>
+
+                    <div class="wallet-list-part">
+                        <div class="wallet-list-part-1">
+                            <a href="./walletRecord_undt.html">
+                                <div class="wallet-list-part-img">
+                                    <img src="./images/icon-01_w.png" alt="">
+                                </div>
+                                <div> UNDT</div>
+                                <span>Union Network Dollar Token</span>
+                            </a>
+                        </div>
+                        <div class="wallet-list-part-2">
+                            <div><span class="und_balance">0.0000</span>≈$<span class="und_balance">0.0000</span></div>
+                        </div>
+                        <div class="wallet-list-part-3">
+                            <div class="wallet-list-btn-1 collection_undt"> COLLECTION</div>
+                            <div class="wallet-list-btn-2 payment_undt"> PAYMENT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footCont"> </div>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        start();
+    }
+    function start() {
+        setTimeout(ethAccounts, 500);
+        setTimeout(getnewprice, 700);
+        setTimeout(balance_und, 800);
+        setTimeout(balance_udao, 800);
+        setTimeout(addressToAccounts, 800);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1500);
+    }
+    function accounts() {
+        $('#address_account').html($('#address').val());
+        var udao_price = parseFloat($('#udao_balance').html() / $('#udaoPrice').val()).toFixed(4);
+        if (udao_price && udao_price != 'NaN') {
+            $('#udao_price').html(udao_price);
+        }else{
+            $('#udao_price').html($('#udao_balance').html());
+        }
+    }
+</script>
+
+</html>
+
+<script src="./js/layer.js"></script>
+
+<script type="text/javascript">
+    $(document).on("click", ".payment_udao", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1143px', '764px'],
+            shadeClose: true,
+            content: '<div id="payLayer">'
+            + ' <div class="pay-layer">'
+            + ' <div class="layer-close">'
+            + ' <img src="./images/close_2.png" alt="">'
+            + '</div>'
+            + ' <h4 class="pay-layer-title">UDAO PAYMENT</h4>'
+            + ' <div class="pay-layer-cont">'
+            + ' <div class="pay-layer-part">'
+            + ' <span>Pay to</span>'
+            + ' <input type="text" class="pay-input" id="payee_udao">'
+// + ' < img src="./images/code.png" alt="">'
+            + ' </div>'
+            + ' <div class="pay-layer-part">'
+            + ' <span>Amount</span>'
+            + ' <input type="text" class="pay-input" id="amount_udao" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
+            + ' </div>'
+            + ' <div class="pay-layer-part">'
+            + ' <span>Remarks</span>'
+            + ' <input type="text" class="pay-input" id="remarks_udao">'
+            + ' </div>'
+//            + ' <div class="pay-layer-part" style="margin-top: 60px;">'
+//            + ' <span>Miner Fees</span>'
+//            + ' <div>'
+//            + ' <input type="range" class="pay-input-2" id="udao_range" name="volumeInput" max="" step="" value="">'
+//            + ' <div class="progress-text">'
+//            + ' <div>Slow</div>'
+//            + '<div id="per">0.0012</div>'
+//            + ' <div>Fast</div>'
+//            + ' </div>'
+//            + ' </div>'
+//            + ' </div>'
+            + ' <div class="pay-next">'
+            + ' <a href="javasrcipt:;" id="udao_send" onclick="udao_send()">NEXT</a>'
+            + ' </div>'
+            + ' </div>'
+            + ' </div>'
+            + ' </div>'
+        });
+//        var b = $('#getGasPrice').val()/1000000000;
+//        var udao_range_max = Number(b) + Number(6);
+//        var step = (udao_range_max+b)/2-1;
+//        console.log(step);
+//        console.log(b);
+//        $('#udao_range').attr("value",(udao_range_max+b)/2);
+//        $('#udao_range').attr('min', b);
+//        $('#udao_range').attr('max', udao_range_max);
+//
+//        $("#volumeShow1").text(b);
+//        $("#volumeShow2").text(udao_range_max);
+//        $("#per").text((udao_range_max+b)/2);
+//        $('#udao_range').attr('step', (udao_range_max+b)/2);
+//        $("input[name='volumeInput']").get(0).oninput = function () {
+//            var volumeInputJQ = $("input[name='volumeInput']");
+//            var volumeValue = volumeInputJQ.val();
+//            /****滑动条的值***/
+//            console.log('aaa'+volumeValue)
+//        }
+    });
+
+    $(document).on("click", ".payment_undt", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1143px', '764px'],
+            shadeClose: true,
+            content: '<div id="payLayer">'
+            + ' <div class="pay-layer">'
+            + ' <div class="layer-close">'
+            + ' <img src="./images/close_2.png" alt="">'
+            + '</div>'
+            + '  <h4 class="pay-layer-title">UNDT PAYMENT</h4>'
+            + '  <div class="pay-layer-cont">'
+            + '  <div class="pay-layer-part">'
+            + ' <span>Pay to</span>'
+            + '   <input type="text" class="pay-input"  id="payee_undt">'
+//            + ' <img src="./images/code.png" alt="">'
+            + '  </div>'
+            + '  <div class="pay-layer-part">'
+            + ' <span>Amount</span>'
+            + ' <input type="text" class="pay-input" id="amount_undt" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
+            + '  </div>'
+            + '    <div class="pay-layer-part">'
+            + '  <span>Remarks</span>'
+            + ' <input type="text" class="pay-input" id="remarks_undt">'
+            + '  </div>'
+//            + '  <div class="pay-layer-part" style="margin-top: 60px;">'
+//            + '  <span>Miner Fees</span>'
+//            + '  <input type="range" class="pay-input-2" value="0" id="undt_range">'
+//            + '  </div>'
+            + '  <div class="pay-next">'
+            + '   <a href="javasrcipt:;" id="undt_send" onclick="undt_send()">NEXT</a>'
+            + '   </div>'
+            + '    </div>'
+            + ' </div>'
+            + '  </div>'
+        });
+//        var b = $('#getGasPrice').val();
+//        var undt_range = Number(b)+Number(3000000000);
+//        $('#undt_range').val(undt_range);
+    });
+    $(document).on("click", ".layer-close", function () {
+        layer.closeAll();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).on("click", ".collection_udao", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1143px', '850px'],
+            shadeClose: true,
+            content: '<div id="coLayer">'
+                + '<div class="col-layer">'
+                + ' <div class="layer-close2">'
+                + '  <img src="./images/close_2.png" alt="">'
+                + '   </div>'
+                + '    <h4 class="col-layer-title">UDAO COLLECTION</h4>'
+                + '   <div class="col-layer-cont">'
+                + '  <div class="col-info">'
+                + '   <span>Scan the QR code below to pay me</span>'
+                + '  <div class="col-num">$ <span id="udao_collection">0</span></div>'
+                + '<div class="col-address">'
+                + '  <span style="text-align: center">0000000000000000000</span>'
+                + ' </div>'
+                + '<div class="col-address">'
+                + '      <div id="account_address">Switch to address collection</div>'
+                + ' </div>'
+                + '      <div class="col-code">'
+                + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account">'
+                + '  </div>'
+                + '       </div>'
+//                + '   <div class="col-input">'
+//                + '  <div class="col-input-part">'
+//                + '   <span>Set amount</span>'
+//                + ' <input type="text">'
+//                + '    </div>'
+//                + '  <div class="col-input-part">'
+//                + ' <span>Remark</span>'
+//                + '       <input type="text">'
+//                + '   </div>'
+//                + '  </div>'
+//                + '   <div class="col-next">'
+//                + '  <a href="">NEXT</a>'
+//                + '   </div>'
+                + '  </div>'
+                + '   </div>'
+                + '    </div>'
+        });
+        var b = $('#bank_card').text();
+        var c = $('#udao_balance').text();
+        $('.col-address span').text(b);
+        $('#udao_collection').text(c);
+        $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+b);
+    });
+    $(document).on("click", "#account_address", function () {
+        var bank_card = $('#bank_card').text();
+        var address_account = $('#address_account').text();
+        var collection = $('.col-address span').text();
+        if(bank_card == collection){
+            $('.col-address span').text(address_account);
+            $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+address_account);
+        }else{
+            $('.col-address span').text(bank_card);
+            $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+bank_card);
+        }
+    });
+    $(document).on("click", ".collection_undt", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['843px', '350px'],
+            shadeClose: true,
+            content: '<div id="coLayer">'
+            + '<div class="col-layer">'
+            + ' <div class="layer-close2">'
+            + '  <img src="./images/close_2.png" alt="">'
+            + '   </div>'
+            + '    <h4 class="col-layer-title">UNDT COLLECTION</h4>'
+            + '   <div class="col-layer-cont">'
+            + '  <div class="col-info">'
+            + '   <span>Scan the QR code below to pay me</span>'
+            + '  <div class="col-num">$ <span id="undt_collection">0</span></div>'
+            + '<div class="col-address">'
+            + '  <span style="text-align: center">0000000000000000000</span>'
+            + ' </div>'
+            + '<div class="col-address">'
+            + '       <div id="account_address_undt">Switch to address collection</div>'
+            + ' </div>'
+            + '      <div class="col-code">'
+            + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account_undt">'
+            + '  </div>'
+            + '       </div>'
+//            + '   <div class="col-input">'
+//            + '  <div class="col-input-part">'
+//            + '   <span>Set amount</span>'
+//            + ' <input type="text">'
+//            + '    </div>'
+//            + '  <div class="col-input-part">'
+//            + ' <span>Remark</span>'
+//            + '       <input type="text">'
+//            + '   </div>'
+//            + '  </div>'
+//                + '   <div class="col-next">'
+//                + '  <a href="">NEXT</a>'
+//                + '   </div>'
+            + '  </div>'
+            + '   </div>'
+            + '    </div>'
+        });
+        var b = $('#bank_card').text();
+        var c = $('#und_balance').val();
+        $('.col-address span').text(b);
+        $('#undt_collection').text(c);
+        $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+b);
+
+
+    });
+    $(document).on("click", "#account_address_undt", function () {
+        var bank_card = $('#bank_card').text();
+        var address_account = $('#address_account').text();
+        var collection = $('.col-address span').text();
+        if(bank_card == collection){
+            $('.col-address span').text(address_account);
+            $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+address_account);
+        }else{
+            $('.col-address span').text(bank_card);
+            $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+bank_card);
+        }
+    });
+    $(document).on("click", ".layer-close2", function () {
+        layer.closeAll();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).on("click", ".address-img", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['400px', '400px'],
+            shadeClose: true,
+            content: '<div id="layAddress">'
+           + '<div class="layer-close2">'
+                + '  <img src="./images/close_2.png" alt="">'
+                + '   </div>'
+                +'<div class="lay-address">'
+                +   ' <img src="http://qr.topscan.com/api.php?text=" alt="">'
+              + ' </div>'
+              + ' </div>'
+        });
+    });
+      $(document).on("click", ".layer-close", function () {
+        layer.closeAll();
+    });
+</script>

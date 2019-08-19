@@ -1,0 +1,279 @@
+<link rel="shortcut icon" href=" ./favicon.ico" /> 
+<script src="./js/jquery-3.4.0.min.js"></script>
+<script src="./js/lan/lan_init.js"></script>
+<script src="./js/lan/lan_srcipt.js"></script>
+<script>
+	function ScreenWidth() {
+		if (screen.width > 1920) {
+			$('#banner').css('background-size', '100%');
+			$('#contTwo').css('background-size', '100%');
+			$('#contFour').css('background-size', '100%');
+			$('#issueCont').css('background-size', '100%');
+			$('#exchangeCont').css('background-size', '100%');
+			$('#docBanner').css('background-size', '100%');
+			$('#teamBanner').css('background-size', '100%');
+			$('#privacyBanner').css('background-size', '100%');
+			$('#contactBanner').css('background-size', '100%');
+		}
+	}
+	ScreenWidth();
+</script>
+<style>
+	body {
+		min-width: 1200px;
+	}
+
+	header {
+		width: 100%;
+	}
+
+	.header-cont {
+		width: 83%;
+		margin: 0 auto;
+		height: 100px;
+		display: flex;
+		display: -webkit-flex;
+		justify-content: space-between;
+		align-items: center
+	}
+
+	.header-cont .logo,
+	.header-cont .header-right {
+		flex: 1
+	}
+
+	.header-cont .logo a {
+		display: block;
+		width: 166px;
+	}
+
+	.header-cont .logo img {
+		width: 166px;
+		height: auto;
+	}
+
+	.header-right {
+		display: flex;
+		display: -webkit-flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100px;
+	}
+
+	.header-right .language {
+		display: flex;
+		display: -webkit-flex;
+	}
+
+	.header-right nav {
+		width: 60%;
+		display: flex;
+		display: -webkit-flex;
+		justify-content: space-between;
+	}
+
+	.header-right .language {}
+
+
+	.header-right .language div {
+		font-family: MADEFutureX-Light;
+		font-size: 12px;
+		font-weight: normal;
+		font-stretch: normal;
+		color: #676767;
+		margin: 0 5px;
+	}
+
+	.header-right .language div a {
+		font-family: MADEFutureX-Light;
+		font-size: 14px;
+		font-weight: normal;
+		font-stretch: normal;
+		color: #676767;
+	}
+
+	.header-right .language div a.language-active {
+		font-family: MADEFutureX-Medium;
+		font-weight: normal;
+		font-stretch: normal;
+		color: #676767;
+	}
+
+	.menu {
+		display: block;
+		position: relative;
+		height: auto;
+		width: 100%;
+	}
+
+	.menu ul {
+		padding: 0;
+		margin: 0;
+		overflow: hidden;
+	}
+
+	.menu>ul>li {
+		float: left;
+		width: 33.3%;
+
+	}
+
+	.menu ul li.end {
+		height: 35px;
+		float: right;
+		width: 10px;
+
+	}
+
+	.menu ul li a,
+	.menu ul li a:visited {
+		display: block;
+		font-family: MADEFutureX;
+		display: block;
+		text-align: center;
+		color: #676767;
+		font-size: 14px;
+
+	}
+
+	.menu>ul>li>a {
+
+		height: 35px;
+		line-height: 35px;
+	}
+
+	.menu ul li ul {
+		display: none;
+		border-width: 1px;
+		border-style: solid;
+		border-color: rgba(14, 16, 41, 0.2);
+		border-radius: 5px;
+		background: #fff;
+		z-index: 99999;
+	}
+
+	.menu ul li:hover a {
+		font-family: MADEFutureX-Bold;
+		color: #2a7160;
+	}
+
+	.menu ul li:hover a {
+		font-family: MADEFutureX-Bold;
+		color: #2a7160;
+	}
+
+	.menu ul .one:hover ul {
+		display: block;
+		position: absolute;
+		top: 35px;
+	}
+
+	.menu ul .two:hover ul {
+		display: block;
+		position: absolute;
+		top: 35px;
+	}
+
+	.menu ul .three:hover ul {
+		display: block;
+		position: absolute;
+		top: 35px;
+	}
+
+	.menu ul li ul li a {
+		text-align: left;
+		display: block;
+		font-family: MADEFutureX-Light;
+		color: #727272 !important;
+		padding: 10px 5px 10px 15px;
+		width: 160px;
+	}
+
+	.menu ul li ul li a:hover {
+		font-family: MADEFutureX-Light;
+		color: #000 !important;
+	}
+
+	.menu ul li:hover ul li a {
+		font-family: MADEFutureX-Light;
+		display: block;
+		color: rgb(98, 118, 133);
+	}
+
+	.menu ul li:hover ul li a:hover {
+		font-family: MADEFutureX-Light;
+		color: #000;
+	}
+</style>
+<div class="header-cont">
+	<div class="logo">
+		<a href="./index.html">
+			<img src="./images/logo.png" alt="">
+		</a>
+	</div>
+	<div class="header-right">
+		<nav>
+			<div class="nav-list menu">
+				<ul>
+					<li class="first one">
+						<a href="javascript:;">PRODUCT</a>
+						<ul>
+							<li><a href="./issue.html?type=1">UNDT ISSUANCE</a></li>
+							<li><a href="./issue.html?type=2">UNDT REDEMPTION</a></li>
+							<li><a href="./presale.html">UDAO PRESALE</a></li>
+							<li><a href="./wallet.html">WALLET</a></li>
+							<li><a href="./exchange.html">EXCHANGE CENTER</a></li>
+							<li><a href="javascript:;" onclick="alert('In development...')">TO LOAN</a></li>
+						</ul>
+					</li>
+					<li class="hide two">
+						<a href="javascript:;">ABOUT US</a>
+						<ul>
+							<li><a href="./doc.html">FAQ</a></li>
+							<!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
+							<li><a href="./privacy.html">PRIVACY POLICY</a></li>
+							<li><a href="https://github.com/uniondao" target="_blank">GITHUB</a></li>
+							<li><a href="./uniondao-whitepaper-en.pdf" target="_blank">WHITEPAPER</a></li>
+							<!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
+						</ul>
+					</li>
+					<li class="hide three">
+						<a href="javascript:;">FOUNDATION</a>
+						<ul>
+							<!-- <li><a href="./team.html">TEAM</a></li> -->
+							<li><a href="./contact.html">CONTACT US</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="language">
+			<div><a href="javascript:void(0)" class="language-active lan" lan="en" id="en">EN</a></div>
+			<div> | </div>
+			<div><a href="javascript:void(0)" class="lan" lan="cn" id="cn">CN</a></div>
+		</div>
+		<div>
+			<a href="./indexMobile.html">
+				<img src="./images/phone.png" alt="">
+			</a>
+		</div>
+	</div>
+</div>
+<script>
+    window.onload = function(){
+        var user_lan = localStorage.getItem("language");
+        if(user_lan == null){
+            currentLan = "en";
+        }else{
+            currentLan = user_lan;
+        }
+
+        if(currentLan == "en"){
+            $("#cn").addClass("language-active");
+            $("#cn").removeClass("language-active");
+        }else if(currentLan == "cn"){
+            $("#cn").addClass("language-active");
+            $("#en").removeClass("language-active");
+        }
+    }
+</script>

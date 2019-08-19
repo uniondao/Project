@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UnionDao</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/presaleMobile.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./headerMobile.html");
+            $("#footCont").load("./footerMobile.html");
+        });
+    </script>
+    <!-- 合约 -->
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+
+    <script type="text/javascript" src="./js/token/base.js"></script>
+
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <!-- 合约 -->
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <header></header>
+            <div id="presaleBanner">
+                <div class="presale-banner">
+                    <div class="presale-banner-part">
+                        <a href="">
+                            <div class="preasale-img-bg">
+                                <img src="./images/presale_1.png" alt="">
+                            </div>
+                            <div class="preasale-banner-text">
+                                    COMMUNITY <br>
+                                    VOTING <br>
+                                    SYSTEM
+                            </div>
+                        </a>
+                    </div>
+                    <div class="presale-banner-part">
+                        <a href="">
+                            <div class="preasale-img-bg">
+                                <img src="./images/presale_2.png" alt="">
+                            </div>
+                            <div class="preasale-banner-text">
+                                UDAO IS THE 
+                                UNIONDAO <br>
+                                SERVICE CERTIFICATE
+                            </div>
+                        </a>
+                    </div>
+                    <div class="presale-banner-part">
+                        <a href="">
+                            <div class="preasale-img-bg">
+                                <img src="./images/presale_3.png" alt="">
+                            </div>
+                            <div class="preasale-banner-text">
+                                PAYMENT OF <br>
+                                REDEMPTION OF 
+                                UNDT FEE
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="presaleCont">
+                <div class="presale-cont">
+                    <div id="contOne">
+                        <h3 class="phase-title"> <span></span> PHASE <div id="current_period">0</div></h3>
+                        <div class="phase-cont">
+                            <div class="phase-data">
+                                <div class="phase-data-part">
+                                    <div>Participated UNDT</div>
+                                    <span class="phase-data-part-num" id="hasInvest">0</span>
+                                    <span class="phase-data-part-num">UNDT</span>
+                                </div>
+                                <div class="phase-data-part">
+                                    <div>Presales amount</div>
+                                    <span class="phase-data-part-num" id="yushou">0</span>
+                                    <span class="phase-data-part-num">UDAO</span>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-tip"> 
+                                    <div> CURRENT PROGRESS 0%</div>
+                                    <span></span>
+                                </div>
+                                <div id="progressBar">
+                                    <div class="progress-cont"> </div>
+                                    <div class="progress-percent"></div>
+                                </div>
+                                <div class="progress-text">
+                                    <div class="progress-text-part">
+                                        <div>Current block height  <span class="current_heigh">0</span></div>
+                                    </div>
+                                    <div class="progress-text-part">
+                                        <div>Remaining<span id="residue_block">0</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="phase-input">
+                                <div class="phase-input-left">
+                                    <div>Participate in the swap</div>
+                                    <input id="invest_num" type="text" placeholder="UNDT" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)">
+                                    <span>Currently available <span class="und_balance">0</span> UNDT/ <span class="eth_balance">0</span> ETH</span>
+                                </div>
+                                <div class="phase-input-right">
+                                    <div id="und2udao">
+                                        PARTICIPATE NOW
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="presale-tips">
+                                <p> 1. Appointment period: the height of each block is one period, and the end of the first period is automatic progress to the next period.</p>
+                                <p> 2. Exchange ratio: The ratios of each period of exchange will varies according to the number of reservations. The actual exchange ratio =UDAO the number of pre-sales / UNDT the total number of exhibitors and reservations.</p>
+                                <p> 3. The appointment requires the transfer of UNDT to the UDAO issuance contract, which will result in miners' fees. Please check if the wallet has a certain amount of ETH.</p>
+                            </div>
+                    </div>
+                    <div id="contTwo">
+                        <h4 class="cont-title">PRE-SALES RECORD</h4>
+                        <div id="tabMain">
+                            <div class="tab-header">
+                                <ul id="tabs">
+                                    <li><a href="#" title="tab1" style="width:125px">UDAO PRE-SALE</a></li>
+                                    <li><a href="#" title="tab2" style="width:210px">I PARTICIPATED IN THE PRE-SALE</a></li>
+                                </ul>
+                            </div>
+                            <div id="tabContent">
+                                <div id="tab1" class="tab-part">
+                                    <table>
+                                        <tbody class="sys_record">
+                                            <thead>
+                                                <th>TRADING HOURS</th>
+                                                <th>UNDT PRE-SALES TOTAL</th>
+                                                <th>EXCHANGE RATIO </th>
+                                            </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="tab2" class="tab-part">
+                                    <table>
+                                        <tbody class="user_record">
+                                            <thead>
+                                                <th>TRADING HOURS</th>
+                                                <th>TRADING VOLUME</th>
+                                                <th>COMPLETION QUANTITY</th>
+                                                <th>SOURCE</th>
+                                            </thead>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="contThree">
+                        <h4 class="cont-title">INTRODUCTION TO UNIONDAO TOKEN</h4>
+                        <div class="intro-cont">
+                            <div class="inptro-part">
+                                <span>Token information</span>
+                                <div></div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Token Name</span>
+                                <div>UNIONDAO</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Token Symbol</span>
+                                <div>UDAO</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Token Type</span>
+                                <div>ERC-20</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Smart Contract Address</span>
+                                <div></div>
+                            </div>
+
+                            <div class="inptro-part">
+                                <span>Token decimal point</span>
+                                <div>18</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Total Token Available</span>
+                                <div>The initial circulation is 21,000,000.Subsequently more will be generated. Total supply will not exceed 100,000,000.</div>
+                            </div>
+                            <!-- <div class="inptro-part">
+                                <span>Cornerstone Time</span>
+                                <div>07/2018</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Token sales</span>
+                                <div>6,000,000ONE</div>
+                            </div>
+                            <div class="inptro-part">
+                                <span>Sale Token Price</span>
+                                <div>1UDAO=0.5USD</div>
+                            </div> -->
+                            <div class="inptro-part">
+                                <span>Additional rules</span>
+                                <div>Additional rules：The daily market price auction coin shall not exceed 0.1% of the unissued amount.</div>
+                            </div>
+                            <!-- <div class="inptro-part">
+                                <span>Lock release rules</span>
+                                <div>The cornerstone is locked for 6 months, released 40%, and then released 10% per
+                                    month; The team takes 3 years to unlock and is released for the first time after 6
+                                    months of release.</div>
+                            </div> -->
+                            <div class="inptro-part">
+                                <span>Token utility usage</span>
+                                <div>Passes are used to pay for service fees and loan interest within the system for community governance voting.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div id="contFour">-->
+                        <!--<h5>•Address of token holder</h5>-->
+                        <!--<div class="address-table">-->
+                            <!--<table>-->
+                                <!--<tbody>-->
+                                    <!--<thead>-->
+                                        <!--<th>TOKEN</th>-->
+                                        <!--<th>TOKEN ALLOCATION</th>-->
+                                        <!--<th>TOKEN ADDRESS</th>-->
+                                    <!--</thead>-->
+                                    <!--<tr>-->
+                                        <!--<td>Cornerstone</td>-->
+                                        <!--<td>6%</td>-->
+                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td>Team</td>-->
+                                        <!--<td>3%</td>-->
+                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td>Foundation</td>-->
+                                        <!--<td>9%</td>-->
+                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td>Community Operation</td>-->
+                                        <!--<td>3%</td>-->
+                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                                    <!--</tr>-->
+                                    <!--<tr>-->
+                                        <!--<td>Mint Coin</td>-->
+                                        <!--<td>79%</td>-->
+                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                                    <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <div id="footCont"> </div>
+            <div>
+                <input type="hidden" id="address">
+                <input type="hidden" id="getBlockNumber">
+                <input type="hidden" id="how_manyperiod">
+                <input type="hidden" id="getGasPrice" value="100000000000">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        $("#tabContent .tab-part").hide(); // Initially hide all content
+        $("#tabs li:first").attr("id", "current"); // Activate first tab
+        $("#tabContent div:first").fadeIn(); // Show first tab content
+
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $("#tabContent .tab-part").hide(); //Hide all content
+            $("#tabs li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+
+        var W = $(".progress-percent").width();
+        var T =( W/100 *100).toFixed(0);
+        $('.progress-tip div').text(' CURRENT PROGRESS '+T+'%')
+        $(".progress-bar .progress-tip").css('left',W-100);
+    })
+
+    window.onload = function(){
+        start();
+    }
+
+    function start() {
+        setTimeout(ethAccounts, 800);
+        setTimeout(getBlockNumber, 800);
+        setTimeout(balance_und, 1000);
+        setTimeout(ethBalance, 1000);
+        // setTimeout(getMaxRate, 1000);
+        setTimeout(getSaleAmount, 1000);
+        setTimeout(getPeriod, 1500);
+        setTimeout(getGasPrice, 1500);
+        setTimeout(getAmount, 2500);
+        setTimeout(getPeriodData, 3000);
+        all_record(CONFIG.und_issue_addr)
+    }
+
+    var click_und2udao = 1;
+    $("#und2udao").click(function() {
+        var num = $("#invest_num").val();
+        if (num < 1) {
+            return false;
+        }
+        if (click_und2udao != 1) {
+            return false;
+        }
+
+        click_und2udao = -1;
+        num = Number(num);
+        var res = invest_und2udao(num);
+        if(res == 1){
+            click_und2udao = 1;
+        }
+    })
+
+    var getPeriodData = async function () {
+        let period = $("#current_period").text();
+        period = Number(period);
+        if(period <= 0){
+            // alert("期数获取失败");
+            return;
+        }
+        for(let i = 0;i < 3;i++){
+            period -= 1;
+            let num = await saleTotal(period);
+            num = web3.utils.fromWei(num, CONFIG.und_wei);
+            num = Number(num).toFixed(CONFIG.Fixed2);
+            let rate = await investRate(period);
+            rate = web3.utils.fromWei(rate, CONFIG.udao_wei);
+            rate = Number(rate).toFixed(CONFIG.Fixed2);
+            let str = "<tr>" +
+                "<td>"+period+"</td>\n" +
+                "<td>"+num+"</td>\n" +
+                "<td>1UNDT="+rate+"UDAO</td>\n" +
+                "</tr>";
+            $('.sys_record').append(str);
+        }
+    }
+
+    function all_record(filt_addr) {
+        web3.eth.getAccounts(function(err, accounts) {
+            if (accounts.length != 0) {
+                var selfaddr = accounts[0];
+                var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+                $.get(apiurl, function(data) {
+                    // console.log(data);
+                    $.each(data.result, function(i, item) {
+                        item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
+                        item.from = item.from.toLocaleUpperCase();
+                        item.to = item.to.toLocaleUpperCase();
+                        selfaddr = selfaddr.toLocaleUpperCase();
+                        filt_addr = filt_addr.toLocaleUpperCase();
+                        if (item.tokenSymbol == 'UNDT') {
+                            if (item.from == selfaddr && item.to == CONFIG.udao_issue_addr.toLocaleUpperCase()) {
+                                var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>'+ web3.utils.fromWei(item.value, CONFIG.und_wei) +  'UNDT</td><td>' + web3.utils.fromWei(item.value,  CONFIG.und_wei)  + 'UNDT</td><td>INVESTMENT</td></tr>';
+                                $(".user_record").append(temp);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
+</script>

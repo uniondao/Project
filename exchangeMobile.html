@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/presaleMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <title>UnionDao</title>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./headerMobile.html");
+            $("#footCont").load("./footerMobile.html");
+        });
+    </script>
+    <style>
+        .layui-m-layer1 .layui-m-layerchild {
+            border-radius: 6px !important;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .address-table table tr {
+            height: 41px;
+            line-height: 41px;
+        }
+
+        #exCont .ex-cont {
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="main">
+            <header></header>
+            <div id="exchangeCont">
+                <div class="exchange-cont">
+                    <div class="exchange-w">
+                        <div class="exchange-flex">
+                            <div class="exchange-w-1">
+                                <div class="exchange-w-1-part">
+                                    <div class="exchange-w-1-title">PAY WITH</div>
+                                    <div class="spe-input">
+                                        <input type="text" value="0">
+                                        <div class="exchange-w-2-part exchange-w-2-select layer-activation">
+                                            <div class="coin-name">
+                                                <img src="./images/coin/coin_14.png" alt="">
+                                                <div>UNDT </div>
+                                            </div>
+                                            <img src="./images/arrow_left_g.png" alt="">
+                                        </div>
+                                    </div>
+                                    <span>Balance : 0.580BTC</span>
+                                </div>
+                            </div>
+                            <div class="exchange-w-1 exchange-w-img">
+                                <img src="./images/ex_coin.png" alt="" class="exchange-coin">
+                            </div>
+                            <div class="exchange-w-1">
+                                <div class="exchange-w-1-part">
+                                    <div class="exchange-w-1-title">RECEIVE</div>
+                                    <div class="spe-input">
+                                        <input type="text" value="0">
+                                        <div class="exchange-w-2-part exchange-w-2-select layer-activation">
+                                            <div class="coin-name">
+                                                <img src="./images/coin/coin_0.png" alt="">
+                                                <div>UDAO</div>
+                                            </div>
+                                            <img src="./images/arrow_left_g.png" alt="">
+                                        </div>
+                                    </div>
+                                    <span>Balance : 5555UDAO</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="exchange-w-3">
+                            1BTC = 8888 UDAO
+                        </div>
+                        <div class="exchange-w-4">
+                            <div class="ex-btn">
+                                <img src="./images/ex_coin_2.png" alt="">
+                                <div>EXCHANGE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="exCont">
+                <div class="ex-cont">
+                    <div id="contFour">
+                        <h4 class="cont-title">EXCHAGE DETAILS</h4>
+                        <div class="exchange-table address-table">
+                            <table>
+                                <tbody>
+                                    <tr style="border-top: 1px solid #d2d2d2;">
+                                        <td>WALLET</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PAY</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RECEIVE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RATE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PROTOCOL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EXCHANGE FEE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRANSACTIONFEE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL COST</td>
+                                    </tr>
+                                    <tr>
+                                        <td>WALLET</td>
+                                    </tr>
+                                    <tr>
+                                        <td>RECEIVE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PROTOCOL</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EXCHANGE FEE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TRANSACTIONFEE</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TOTAL COST</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="readmore">
+                            <img src="./images/down.png" alt="">
+                            <span>READ MORE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footCont"> </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script src="./js/layer.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#tabContent .tab-part").hide(); // Initially hide all content
+        $("#tabs li:first").attr("id", "current"); // Activate first tab
+        $("#tabContent div:first").fadeIn(); // Show first tab content
+
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $("#tabContent .tab-part").hide(); //Hide all content
+            $("#tabs li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+
+        var W = $(".progress-percent").width();
+        var T = (W / 609 * 100).toFixed(0);
+        $('.progress-tip div').text(' CURRENT PROGRESS ' + T + '%')
+        $(".progress-bar .progress-tip").css('left', W - 100);
+    })
+
+</script>
+
+<script>
+    $(document).on("touchend", ".layer-activation", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['', ''],
+            shadeClose: true,
+            content: '<div class="select-layer">'
+                + '  <div class="layer-back">'
+                + '  <img src="./images/layer_back.png" alt="">'
+                + '  </div>'
+                + '    <h3 class="select-layer-title">SELECTION OF CURRENCY</h3>'
+                + '<div class="search-input">'
+                + '<input type="" name="" id="" value="" />'
+                + '<img src="./images/search.png" alt="">'
+                + '</div>'
+                + '   <div class="select-cont">'
+                + ' <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + ' <input type="radio" id="coin1" name="radio" checked>'
+                + '  <label for="coin1"></label>'
+                + '   <img src="./images/coin/coin_13.png" alt="">'
+                + ' <span>bitcion</span>'
+                + '  </div>'
+                + '  <div>0 BTC</div>'
+                + '    </div>'
+                + '   <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + ' <input type="radio" id="coin2" name="radio">'
+                + ' <label for="coin2"></label>'
+                + '   <img src="./images/coin/coin_13.png" alt="">'
+                + '  <span>Binance Cash</span>'
+                + '       </div>'
+                + '    <div>0 BCH</div>'
+                + '     </div>'
+                + '    <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + '  <input type="radio" id="coin3" name="radio">'
+                + '    <label for="coin3"></label>'
+                + '   <img src="./images/coin/coin_9.png" alt="">'
+                + '  <span>TRON</span>'
+                + '  </div>'
+                + '  <div>0 TRX</div>'
+                + ' </div>'
+                + ' <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + '   <input type="radio" id="coin4" name="radio">'
+                + '    <label for="coin4"></label>'
+                + ' <img src="./images/coin/coin_4.png" alt="">'
+                + ' <span>Ethereum</span>'
+                + '   </div>'
+                + '     <div>0 ETH</div>'
+                + '     </div>'
+                + '   <div class="select-part">'
+                + '    <div class="selec-flex">'
+                + '       <input type="radio" id="coin5" name="radio">'
+                + '<label for="coin5"></label>'
+                + ' <img src="./images/coin/coin_7.png" alt="">'
+                + ' <span>Binance Cash</span>'
+                + '   </div>'
+                + '   <div>0 BNB</div>'
+                + ' </div>'
+                + '   <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + ' <input type="radio" id="coin6" name="radio">'
+                + '   <label for="coin6"></label>'
+                + '    <img src="./images/coin/coin_10.png" alt="">'
+                + '    <span>Dash</span>'
+                + '</div>'
+                + '  <div>0 DASH</div>'
+                + '  </div>'
+                + '    <div class="select-part">'
+                + ' <div class="selec-flex">'
+                + '   <input type="radio" id="coin7" name="radio">'
+                + '  <label for="coin7"></label>'
+                + '   <img src="./images/coin/coin_5.png" alt="">'
+                + '     <span>Pipple</span>'
+                + '    </div>'
+                + '     <div>0 XRP</div>'
+                + ' </div>'
+                + '    <div class="select-part">'
+                + '     <div class="selec-flex">'
+                + '     <input type="radio" id="coin8" name="radio">'
+                + '   <label for="coin8"></label>'
+                + '    <img src="./images/coin/coin_1.png" alt="">'
+                + ' <span>Tether</span>'
+                + '     </div>'
+                + ' <div>0 USDT</div>'
+                + '   </div>'
+                + '    <div class="select-part">'
+                + ' <div class="selec-flex">'
+                + ' <input type="radio" id="coin9" name="radio">'
+                + '   <label for="coin9"></label>'
+                + ' <img src="./images/coin/coin_11.png" alt="">'
+                + '  <span>Loopring</span>'
+                + '  </div>'
+                + '   <div>0 LRC</div>'
+                + '  </div>'
+                + '   <div class="select-part">'
+                + '   <div class="selec-flex">'
+                + ' <input type="radio" id="coin10" name="radio">'
+                + ' <label for="coin10"></label>'
+                + ' <img src="./images/coin/coin_6.png" alt="">'
+                + '<span>Pipple</span>'
+                + '  </div>'
+                + '   <div>0 LTC</div>'
+                + '  </div>'
+                + '      <div class="select-part">'
+                + '<div class="selec-flex">'
+                + '    <input type="radio" id="coin11" name="radio">'
+                + '    <label for="coin11"></label>'
+                + '   <img src="./images/coin/coin_8.png" alt="">'
+                + '   <span>EOS</span>'
+                + '   </div>'
+                + '  <div>0 EOS</div>'
+                + '  </div>'
+                + '      <div class="select-part">'
+                + '  <div class="selec-flex">'
+                + ' <input type="radio" id="coin12" name="radio">'
+                + '  <label for="coin12"></label>'
+                + '  <img src="./images/coin/coin_12.png" alt="">'
+                + ' <span>Qtum</span>'
+                + '   </div>'
+                + '<div>0 QTUM</div>'
+                + '  </div>'
+                + '  </div>'
+                + '</div> '
+        });
+
+    });
+    $(document).on("click", ".layer-back", function () {
+        layer.closeAll();
+    });
+</script>

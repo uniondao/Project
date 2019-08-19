@@ -1,0 +1,269 @@
+<link rel="shortcut icon" href=" ./favicon.ico" /> 
+<script src="./js/leftMenu.js"></script>
+<script src="./js/lan/lan_init.js"></script>
+<script src="./js/lan/lan_srcipt.js"></script>
+<style>
+    header {
+        width: 100%;
+    }
+
+    .header-cont {
+        width: 90%;
+        margin: 0 auto;
+        height: 59.5px;
+        display: flex;
+        display: -webkit-flex;
+        justify-content: space-between;
+        align-items: center
+    }
+
+    .header-cont .logo,
+    .header-cont .header-right {
+        flex: 1
+    }
+
+    .header-cont .logo img {
+        width: 92px;
+        height: 25.5px;
+    }
+
+
+    .header-right {
+        display: flex;
+        display: -webkit-flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .header-right .language {
+        display: flex;
+        display: -webkit-flex;
+    }
+
+
+    .header-right .language div {
+        font-family: MADEFutureX-Light;
+        font-size: 12px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #676767;
+        margin: 0 5px;
+    }
+
+    .header-right .language div a {
+        font-family: MADEFutureX-Light;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #676767;
+    }
+
+    .header-right .language div a.language-active {
+        font-family: MADEFutureX-Medium;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #676767;
+    }
+
+    .header-right .nav-list {
+        margin-left: 25%;
+    }
+
+    .header-right .nav-list img {
+        width: 20.5px;
+        height: 20.5px;
+    }
+
+    .leftMenu>.f1>ul>li>a {
+        text-decoration: none;
+        display: block;
+        font-family: MADEFutureX-Medium;
+        font-weight: normal;
+        font-stretch: normal;
+        font-size: 14px;
+        color: #057067;
+    }
+
+    .leftMenu .f2>ul li.hasChild a {
+        font-family: MADEFutureX-Light;
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        color: #676767;
+    }
+
+    .leftMenu {
+        background: #fff;
+        left: -1000px;
+        position: fixed;
+        top: 50px;
+        display: block;
+        height: 100%;
+        width: 100%;
+        min-width: 140px;
+        max-width: 440px;
+        z-index: 90002;
+        transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        position: fixed;
+        overflow: auto;
+    }
+
+    .leftMenu.menu-open {
+        left: 0;
+    }
+
+    .leftMenu ul {
+        list-style: none;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .leftMenu .f1>ul li {
+        position: relative;
+        padding: 10px 0 10px 10%;
+        overflow: hidden;
+    }
+
+    .leftMenu ul li.padding-li {
+        padding-top: 30px
+    }
+
+    .leftMenu ul li.hasChild>a:after {
+        content: "+";
+        position: absolute;
+        left: 20px;
+        top: 22px;
+        font-size: 24px;
+        font-weight: 300;
+        color: #057067;
+    }
+
+    .leftMenu ul li.hasChild.open>a:after {
+        content: "-";
+        right: 23px;
+        font-size: 28px;
+        top: 19px;
+        color: #057067;
+    }
+
+    .f2,
+    .f3 {
+        height: 0;
+        padding-left: 20px;
+        overflow: hidden;
+        position: relative;
+        transition: height 0.4s ease;
+        -moz-transition: height 0.4s ease;
+        -webkit-transition: height 0.4s ease;
+        -o-transition: height 0.4s ease;
+    }
+
+    .menu-dark-backdrop {
+        background: rgba(0, 0, 0, 0);
+        transition: all 0.4s ease;
+        -moz-transition: all 0.4s ease;
+        -webkit-transition: all 0.4s ease;
+        -o-transition: all 0.4s ease;
+        width: 100%;
+        position: fixed;
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+    }
+
+    .menu-dark-backdrop.in {
+        height: 100%;
+        z-index: 90001;
+        background: #fff;
+        background: rgba(255, 255, 255, 0.5);
+    }
+</style>
+<div class="header-cont">
+    <div class="logo">
+        <a href="./indexMobile.html">
+            <img src="./images/logo.png" alt="">
+        </a>
+    </div>
+    <div class="header-right">
+        <!-- <nav>
+                <a href="" class="nav-active">PRODUCT</a>
+                <a href="">ABOUT US</a>
+                <a href="">FOUNDATION</a>
+            </nav> -->
+        <div class="language">
+            <div><a href="javascript:void(0)" class="language-active lan" lan="en">EN</a></div>
+            <div> | </div>
+            <div><a href="javascript:void(0)" class="lan" lan="cn">CN</a></div>
+        </div>
+        <div id="mobile-nav" class="nav-list">
+            <div><img src="./images/mobile_icon/recovery.png" alt="" class="nav-btn"></div>
+            <div id="menu">
+                <div class="f1">
+                    <ul>
+                        <li class="hasChild padding-li">
+                            <a href="#">PRODUCT</a>
+                            <div class="f2">
+                                <ul>
+                                    <li class="hasChild">
+                                        <ul>
+                                            <li><a href="./issueMobile.html?type=1">UNDT ISSUANCE</a></li>
+                                            <li><a href="./issueMobile.html?type=2">UNDT REDEMPTION</a></li>
+                                            <li><a href="./presaleMobile.html">UDAO PRESALE</a></li>
+                                            <li><a href="./walletMobile.html">WALLET</a>
+                                            </li>
+                                            <li><a href="./exchangeMobile.html">EXCHANGE CENTER</a></li>
+                                            <li><a href="javascript:;" onclick="alert('In development...')">TO LOAN</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="hasChild padding-li">
+                            <a href="#">ABOUT US</a>
+                            <div class="f2">
+                                <ul>
+                                    <li class="hasChild">
+                                        <ul>
+                                            <li><a href="./docMobile.html">FAQ</a></li>
+                                            <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
+                                            <li><a href="./privacyMobile.html">PRIVACY POLICY</a></li>
+                                            <li><a href="https://github.com/uniondao">GITHUB</a></li>
+                                            <li><a href="./uniondao-whitepaper-en.pdf">WHITEPAPER</a></li>
+                                            <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="hasChild padding-li">
+                            <a href="#">FOUNDATION</a>
+                            <div class="f2">
+                                <ul>
+                                    <li class="hasChild">
+                                        <ul>
+                                            <!-- <li><a href="./teamMobile.html">TEAM</a></li> -->
+                                            <li><a href="./contactMobile.html">CONTACT US</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function ($) {
+        $('#menu').leftMenu({
+            "triggerBtn": ".nav-btn"
+        }).init()
+    })
+</script>

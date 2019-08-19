@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <title>UnionDao</title>
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
+</head>
+<body>
+
+</body>
+</html>
+<script>
+
+    window.onload = function(){
+        checkIsRememberDevice();
+    }
+
+    function checkIsRememberDevice() {
+        // let device = $.cookie('the_cookie');
+        // if(device !== undefined){
+        //     if(device === 'pc'){
+        //         window.location.href = "./index.html";
+        //     }else if(device === 'mobile'){
+        //         window.location.href = "./indexMobile.html";
+        //     }else {
+        //         isPC();
+        //     }
+        // }else {
+            isPC();
+        // }
+    }
+
+    function isPC() {
+        if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+            window.location.href = "./indexMobile.html";
+        }else{
+            window.location.href = "./index.html";
+        }
+    }
+</script>

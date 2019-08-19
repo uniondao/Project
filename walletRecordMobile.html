@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/walletMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/base.js"></script>
+    <script type="text/javascript" src="./js/token/coin/pax.js"></script>
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <title>UnionDao</title>
+    <style>
+        .layui-m-layer1 .layui-m-layerchild {
+            border-radius: 6px !important;
+            width: 90%;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./headerMobile.html");
+            $("#footCont").load("./footerMobile.html");
+        });
+    </script>
+</head>
+
+<body>
+    <input type="hidden" id="address">
+    <input type="hidden" id="udaoPrice">
+    <input type="hidden" id="getGasPrice">
+    <div class="wrapper">
+        <div class="main">
+            <header></header>
+            <div id="walletRcont">
+                <div class="wallet-rcont">
+                    <div class="wallet-rcont-img">
+                        <img src="./images/icon-02_w.png" alt="">
+                    </div>
+                    <div class="wallet-rcont-name">
+                        UDAO
+                    </div>
+                    <div class="wallet-rcont-num" id="bank_card">
+                        0000000000000000000
+                    </div>
+                    <div class="wallet-rcont-num">
+                        <font id="udao_balance">0.0000</font>≈$<font id="udao_price">0.0000</font>
+                    </div>
+                    <div class="wallet-rcont-btn">
+                        <div class="wallet-rcont-btn-1">
+                            <div class="collection">COLLECTION</div>
+                        </div>
+                        <div class="wallet-rcont-btn-2">
+                            <div class="payment"> PAYMENT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="record">
+                <div class="record-cont">
+                    <h3 class="record-title">
+                        TRANSACTION HISTORY
+                    </h3>
+                </div>
+                <!-- <div class="readmore">
+                    <img src="./images/down.png" alt="">
+                    <span>READ MORE</span>
+                </div> -->
+            </div>
+            <div id="footCont"> </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="./js/layer.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        start();
+    });
+
+    function start() {
+        setTimeout(ethAccounts, 500);
+        setTimeout(balance_udao, 1000);
+        setTimeout(addressToAccounts, 1000);
+        setTimeout(getnewprice, 1000);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1500);
+    }
+
+    $(document).on("touchend", ".record-part", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1112px', '527px'],
+            shadeClose: true,
+            content: '<div id="detailLayer">'
+                + '  <div class="detail-layer">'
+                + ' <div class="layer-close3">'
+                + ' <img src="./images/layer_back.png" alt="">'
+                + '  </div>'
+                + '   <div class="detail-cont">'
+                + '  <div class="detail-left">'
+                + ' <img src="./images/finish.png" alt="">'
+                + '<!-- <img src="./images/processing.png" alt=""> -->'
+                + '<span>Transaction Amount:</span>'
+                + '   <div class="tran-num">0</div>'
+                + '  </div>'
+                + ' <div class="detail-right">'
+                + '  <div class="detail-right-part">'
+                + '  <span>Issuer:</span>'
+                + '  <div class="tran-from"></div>'
+                + ' </div>'
+                + '   <div class="detail-right-part">'
+                + '   <span>Payee:</span>'
+                + '   <div clas="detail-part-flex">'
+                + '  <span class="tran-to"></span>'
+                + '   </div>'
+                + '    </div>'
+                + ' <div class="detail-right-part">'
+                + '  <span>blockHash:</span>'
+                + ' <div><a href="" class="tran-hash"></a></div>'
+                + '  </div>'
+                + '   <div class="detail-right-part">'
+                + '   <span>Remark:</span>'
+                + '   <div class="detail-part-flex">'
+                + '   <span class="tran-remark"></span>'
+                + '</div>'
+                + '   </div>'
+                + '    <div class="detail-right-part">'
+                + '   <span>block:</span>'
+                + ' <div class="tran-block">564564</div>'
+                + ' </div>'
+                + '     <!-- <div class="detail-right-part"> <span>Network Confirmation:</span> <div>3/12</div></div> -->'
+                + '  <div class="detail-right-part">'
+                + '    <span>Transaction Time :</span>'
+                + '  <div class="tran-time"></div>'
+                + '  </div>'
+                + '</div>'
+                + ' </div>'
+                + '</div>'
+                + '</div>'
+        });
+        var trantime = $(this).find(".record-time").text();
+        var transBlock = $(this).find(".record-block").text();
+        var transFrom = $(this).find(".record-from").text();
+        var transTo = $(this).find(".record-to").text();
+        var transNum = $(this).find(".record-part-2 .record-num-1").text();
+        var transHash = $(this).find(".record-hash").text();
+        var transRemark = $(this).find(".record-remark").text();
+        $('.tran-num').text(transNum);
+        $('.tran-time').text(trantime);
+        $('.tran-block').text(transBlock);
+        $('.tran-from').text(transFrom);
+        $('.tran-to').text(transTo);
+        $('.tran-hash').text(transHash);
+        $('.tran-remark').text(transRemark);
+    });
+    $(document).on("click", ".layer-close3", function () {
+        layer.closeAll();
+    });
+    function accounts() {
+
+        var udao_price = parseFloat($('#udao_balance').html() / $('#udaoPrice').val()).toFixed(4);
+        if (udao_price && udao_price != 'NaN') {
+            $('#udao_price').html(udao_price);
+        } else {
+            $('#udao_price').html($('#udao_balance').html());
+        }
+    }
+    all_record();
+    function all_record() {
+        filt_addr = CONFIG.und_issue_addr;
+        web3.eth.getAccounts(function (err, accounts) {
+            if (accounts.length != 0) {
+                var selfaddr = accounts[0];
+                var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+                $.get(apiurl, function (data) {
+
+                    $.each(data.result, function (i, item) {
+                        item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
+                        item.from = item.from.toLocaleUpperCase();
+                        item.to = item.to.toLocaleUpperCase();
+                        selfaddr = selfaddr.toLocaleUpperCase();
+                        filt_addr = filt_addr.toLocaleUpperCase();
+
+                        if ((item.from == selfaddr || item.to == selfaddr) && item.tokenSymbol == 'UDAO' && item.to != filt_addr) {
+                            var account_have = '';
+                            var account = '';
+                            var remark = '';
+                            if (item.from == selfaddr) {
+                                Contract_udao.methods.addressToAccounts(item.to).call()
+                                    .then(function (data) {
+                                        if (data == 0) {
+                                            account = '';
+                                            account_have = '';
+                                            var temp = '<div class="record-list">'
+                                                + '<div class="record-part">'
+                                                + '<div class="record-part-1" style="width: 60%;">'
+                                                + '<div class="record-address">'
+                                                + '<span>' + item.to + '</span>'
+                                                + '<span>' + account_have + '</span>'
+                                                + '<span>' + account + '</span>'
+                                                + '</div>'
+                                                + '<div class="record-time">'
+                                                + ' <img src="../images/transfer_out.png">'
+                                                + timestampToTime(item.timeStamp)
+                                                + '</div>'
+                                                + '<div class="record-from" style="display: none">'
+                                                + item.from
+                                                + '</div>'
+                                                + '<div class="record-to" style="display: none">'
+                                                + item.to + account_have + account
+                                                + '</div>'
+                                                + '<div class="record-block" style="display: none">'
+                                                + item.blockNumber
+                                                + '</div>'
+                                                + '<div class="record-hash" style="display: none">'
+                                                + item.hash
+                                                + '</div>'
+                                                + '<div class="record-remark" style="display: none">'
+                                                + remark
+                                                + '</div>'
+                                                + '</div>'
+                                                + '<div class="record-part-2">'
+                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                + '</div>'
+                                                + '<div class="record-part-3">'
+                                                + '<div class="record-status">transaction success</div>'
+                                                + '</div>'
+                                                + '</div>'
+                                                + '</div>';
+
+                                            $(".record-cont").append(temp);
+                                        } else {
+                                            account = data;
+                                            account_have = '/';
+                                            Contract_udao.events.TransferAndSendMsg({
+                                                filter: { _from: item.from, _to: item.to },
+                                                fromBlock: item.blockNumber
+                                            }, function (error, event) { })
+                                                .on('data', function (event) {
+                                                    remark = event.returnValues._msg;
+                                                    var temp = '<div class="record-list">'
+                                                        + '<div class="record-part">'
+                                                        + '<div class="record-part-1" style="width: 60%;">'
+                                                        + '<div class="record-address">'
+                                                        + '<span>' + item.to + '</span>'
+                                                        + '<span>' + account_have + '</span>'
+                                                        + '<span>' + account + '</span>'
+                                                        + '</div>'
+                                                        + '<div class="record-time">'
+                                                        + ' <img src="../images/transfer_out.png">'
+                                                        + timestampToTime(item.timeStamp)
+                                                        + '</div>'
+                                                        + '<div class="record-from" style="display: none">'
+                                                        + item.from
+                                                        + '</div>'
+                                                        + '<div class="record-to" style="display: none">'
+                                                        + item.to + account_have + account
+                                                        + '</div>'
+                                                        + '<div class="record-block" style="display: none">'
+                                                        + item.blockNumber
+                                                        + '</div>'
+                                                        + '<div class="record-hash" style="display: none">'
+                                                        + item.hash
+                                                        + '</div>'
+                                                        + '<div class="record-remark" style="display: none">'
+                                                        + remark
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '<div class="record-part-2">'
+                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                        + '</div>'
+                                                        + '<div class="record-part-3">'
+                                                        + '<div class="record-status">transaction success</div>'
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '</div>';
+
+                                                    $(".record-cont").append(temp);
+                                                });
+                                        }
+                                    })
+                            } else if (item.to == selfaddr && item.from != '0X0000000000000000000000000000000000000000') {
+                                Contract_udao.methods.addressToAccounts(item.from).call()
+                                    .then(function (data) {
+                                        console.log(data);
+                                        if (data == 0) {
+                                            account = '';
+                                            account_have = '';
+                                            var temp = '<div class="record-list">'
+                                                + '<div class="record-part">'
+                                                + '<div class="record-part-1" style="width: 60%;">'
+                                                + '<div class="record-address">'
+                                                + '<span>' + item.from + '</span>'
+                                                + '<span>' + account_have + '</span>'
+                                                + '<span>' + account + '</span>'
+                                                + '</div>'
+                                                + '<div class="record-time">'
+                                                + ' <img src="../images/transfer.png">'
+                                                + timestampToTime(item.timeStamp)
+                                                + '</div>'
+                                                + '<div class="record-from" style="display: none">'
+                                                + item.from
+                                                + '</div>'
+                                                + '<div class="record-to" style="display: none">'
+                                                + item.to + account_have + account
+                                                + '</div>'
+                                                + '<div class="record-block" style="display: none">'
+                                                + item.blockNumber
+                                                + '</div>'
+                                                + '<div class="record-hash" style="display: none">'
+                                                + item.hash
+                                                + '</div>'
+                                                + '<div class="record-remark" style="display: none">'
+                                                + remark
+                                                + '</div>'
+                                                + '</div>'
+                                                + '<div class="record-part-2">'
+                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                + '</div>'
+                                                + '<div class="record-part-3">'
+                                                + '<div class="record-status">transaction success</div>'
+                                                + '</div>'
+                                                + '</div>'
+                                                + '</div>';
+
+                                            $(".record-cont").append(temp);
+                                        } else {
+                                            account = data;
+                                            account_have = '/';
+                                            Contract_udao.events.TransferAndSendMsg({
+                                                filter: { _from: item.from, _to: item.to },
+                                                fromBlock: item.blockNumber
+                                            }, function (error, event) { })
+                                                .on('data', function (event) {
+                                                    remark = event.returnValues._msg;
+                                                    var temp = '<div class="record-list">'
+                                                        + '<div class="record-part">'
+                                                        + '<div class="record-part-1" style="width: 60%;">'
+                                                        + '<div class="record-address">'
+                                                        + '<span>' + item.from + '</span>'
+                                                        + '<span>' + account_have + '</span>'
+                                                        + '<span>' + account + '</span>'
+                                                        + '</div>'
+                                                        + '<div class="record-time">'
+                                                        + ' <img src="../images/transfer.png">'
+                                                        + timestampToTime(item.timeStamp)
+                                                        + '</div>'
+                                                        + '<div class="record-from" style="display: none">'
+                                                        + item.from
+                                                        + '</div>'
+                                                        + '<div class="record-to" style="display: none">'
+                                                        + item.to + account_have + account
+                                                        + '</div>'
+                                                        + '<div class="record-block" style="display: none">'
+                                                        + item.blockNumber
+                                                        + '</div>'
+                                                        + '<div class="record-hash" style="display: none">'
+                                                        + item.hash
+                                                        + '</div>'
+                                                        + '<div class="record-remark" style="display: none">'
+                                                        + remark
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '<div class="record-part-2">'
+                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                        + '</div>'
+                                                        + '<div class="record-part-3">'
+                                                        + '<div class="record-status">transaction success</div>'
+                                                        + '</div>'
+                                                        + '</div>'
+                                                        + '</div>';
+
+                                                    $(".record-cont").append(temp);
+                                                });
+                                        }
+
+
+                                    })
+                            }
+
+
+                        }
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+    $(document).on("touchend", ".payment", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1143px', '764px'],
+            shadeClose: true,
+            content: '<div id="payLayer">'
+                + ' <div class="pay-layer">'
+                + ' <div class="layer-close">'
+                + ' <img src="./images/close_2.png" alt="">'
+                + '</div>'
+                + '  <h4 class="pay-layer-title">UDAO PAYMENT</h4>'
+                + '  <div class="pay-layer-cont">'
+                + '  <div class="pay-layer-part">'
+                + ' <span>Pay to</span>'
+                + '   <input type="text" class="pay-input" id="payee_udao">'
+                //                + ' <img src="./images/code.png" alt="">'
+                + '  </div>'
+                + '  <div class="pay-layer-part">'
+                + ' <span>Amount</span>'
+                + ' <input type="text" class="pay-input" id="amount_udao" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
+                + '  </div>'
+                + '    <div class="pay-layer-part">'
+                + '  <span>Remarks</span>'
+                + ' <input type="text" class="pay-input" id="remarks_udao">'
+                + '  </div>'
+                //                + '  <div class="pay-layer-part" style="margin-top: 60px;">'
+                //                + '  <span>Miner Fees</span>'
+                //                + '  <input type="range" class="pay-input-2" value="0">'
+                //                + '  </div>'
+                + '  <div class="pay-next">'
+                + '   <a href="javasrcipt:;" id="udao_send" onclick="udao_send()">NEXT</a>'
+                + '   </div>'
+                + '    </div>'
+                + ' </div>'
+                + '  </div>'
+        });
+    });
+    $(document).on("click", ".layer-close", function () {
+        layer.closeAll();
+    });
+</script>
+
+<script type="text/javascript">
+    $(document).on("touchend", ".collection", function () {
+        layer.open({
+            type: 1,
+            title: false,
+            closeBtn: 0,
+            area: ['1143px', '850px'],
+            shadeClose: true,
+            content: '<div id="coLayer">'
+                + '<div class="col-layer">'
+                + ' <div class="layer-close2">'
+                + '  <img src="./images/close_2.png" alt="">'
+                + '   </div>'
+                + '    <h4 class="col-layer-title">UDAO COLLECTION</h4>'
+                + '   <div class="col-layer-cont">'
+                + '  <div class="col-info">'
+                + '   <span>Scan the QR code below to pay me</span>'
+                + '  <div class="col-num">$ <span id="udao_collection">0</span></div>'
+                + '<div class="col-address">'
+                + '  <span style="text-align: center">0000000000000000000</span>'
+                + '       <div id="account_address">Switch to address collection</div>'
+                + ' </div>'
+                + '      <div class="col-code">'
+                + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account">'
+                + '  </div>'
+                + '       </div>'
+                //                + '   <div class="col-input">'
+                //                + '  <div class="col-input-part">'
+                //                + '   <span>Set amount</span>'
+                //                + ' <input type="text">'
+                //                + '    </div>'
+                //                + '  <div class="col-input-part">'
+                //                + ' <span>Remark</span>'
+                //                + '       <input type="text">'
+                //                + '   </div>'
+                //                + '  </div>'
+                //                + '   <div class="col-next">'
+                //                + '  <a href="">NEXT</a>'
+                //                + '   </div>'
+                + '  </div>'
+                + '   </div>'
+                + '    </div>'
+        });
+
+        var b = $('#bank_card').text();
+        var c = $('#udao_balance').text();
+        $('.col-address span').text(b);
+        $('#udao_collection').text(c);
+        $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + b);
+
+    });
+    $(document).on("click", "#account_address", function () {
+        var bank_card = $('#bank_card').text();
+        var address_account = $('#address').val();
+
+        var collection = $('.col-address span').text();
+        if (bank_card == collection) {
+            $('.col-address span').text(address_account);
+            $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + address_account);
+        } else {
+            $('.col-address span').text(bank_card);
+            $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + bank_card);
+        }
+    });
+    $(document).on("click", ".layer-close2", function () {
+        layer.closeAll();
+    });
+</script>
