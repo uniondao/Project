@@ -1,0 +1,383 @@
+/*开发文档、隐私调条款、团队、联系我们*/
+
+@media screen and (min-width:900px) {
+    body {
+        width: 720px !important;
+        margin: 0 auto !important;
+    }
+}
+
+body {
+    background: #fff;
+    margin: 0 auto;
+}
+
+
+.readmore {
+    text-align: center;
+    margin-top: 38px;
+}
+
+.readmore span {
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40px;
+    letter-spacing: 0px;
+    color: #a8a8a8;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.readmore img {
+    width: 20px;
+    height: 12px;
+}
+
+#docBanner {
+    background: url('../images/mobile_icon/doc_bg.png') no-repeat center 0;
+    background-size: 100%;
+    position: relative
+}
+
+#docBanner .doc-banner {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    padding: 6.3rem 0 6.8rem 0
+}
+
+
+.doc-icon {
+    background-size: contain;
+    background: url('../images/mobile_icon/doc_c2.png') no-repeat center 0;
+    width: 111px;
+    height: 111px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.doc-icon div.doc-c1 {
+    background-size: contain;
+    background: url('../images/mobile_icon/doc_c1.png') no-repeat center 0;
+    width: 86px;
+    height: 86px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.doc-icon div.doc-c2 {
+    width: 60.5px;
+    height: 60.5px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.doc-icon div img {
+    width: 22px;
+    height: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#docText {
+    width: 100%;
+}
+
+#docText .doc-text {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+h4.cont-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 22.5px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    margin: 1.9rem 0 1.8rem;
+}
+
+.doc-text-list {
+    border-top: solid 1px #d2d2d2;
+}
+
+.doc-text-list .doc-text-part {
+    padding: 0.7rem 0 0.8rem 0;
+    border-bottom: solid 1px #d2d2d2;
+}
+
+.doc-text-list .doc-text-part h5 {
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 15px;
+    margin-bottom: 10px;
+    letter-spacing: 0px;
+    color: #282828;
+}
+
+.doc-text-list .doc-text-part p {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 14px;
+    letter-spacing: 0px;
+    color: #7a7a7a;
+}
+
+
+.doc-text-list .doc-text-part p span{
+    text-decoration: underline
+}
+
+.doc-text-list .doc-text-part ul{
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 14px;
+    letter-spacing: 0px;
+    color: #7a7a7a;
+    margin-left: 5%;
+}
+
+.doc-text-list .doc-text-part ul li{
+    list-style-type: disc;
+}
+
+.doc-text-list .doc-text-part ul li ul{
+    margin-left: 5%;
+}
+
+
+#privacyBanner {
+    background: url('../images/mobile_icon/privacy_bg.png') no-repeat center 0;
+    background-size: 100%;
+    position: relative
+}
+
+#privacyBanner .privacy-banner {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+
+    padding: 6.3rem 0 6.8rem 0
+}
+
+
+#contactBanner {
+    background: url('../images/mobile_icon/contact_bg.png') no-repeat center 0;
+    background-size: 100%;
+    position: relative
+}
+
+#contactBanner .contact-banner {
+    width: 90%;
+    margin: 0 auto;
+    padding: 8.5rem 0 8.5rem 0
+}
+
+.contact-icon {
+    width: 60.5px;
+    height: 60.5px;
+    background-color: #057067;
+    border-radius: 50%;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+
+.contact-icon img {
+    width: 21.5px;
+    height: 27.5px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+#contactCont {
+    width: 100%;
+}
+
+#contactCont .contact-cont {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    border-bottom: solid 1px #d2d2d2;
+    padding-bottom: 2.8remx;
+    margin-bottom: 1.7rem;
+}
+
+
+h4.contact-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 22.5px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    text-align: center;
+    margin: 2.3rem 0 2.3rem 0;
+}
+
+h4.contact-title:before,
+h4.contact-title:after {
+    content: '';
+    /*CSS伪类用法*/
+    position: absolute;
+    /*定位背景横线的位置*/
+    top: 11px;
+    background: #d2d2d2;
+    /*宽和高做出来的背景横线*/
+    width: 27%;
+    height: 1px;
+}
+
+h4.contact-title:before {
+    left: 0;
+    /*调整背景横线的左右距离*/
+}
+
+h4.contact-title:after {
+    right: 0;
+}
+
+.contact-cont-flex {
+    text-align: center;
+}
+
+
+.contact-cont-flex .contact-part {
+    margin-bottom: 2.1rem;
+}
+
+.contact-cont-flex .contact-part a {
+    display: block
+}
+
+
+.contact-cont-flex .contact-part img {
+    width: 24px;
+}
+
+.contact-cont-flex .contact-part span {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    display: block;
+    font-weight: normal;
+    font-stretch: normal;
+    margin-top: 0.5rem;
+    color: #737373;
+}
+
+#teamBanner {
+    background: url('../images/mobile_icon/team_bg.png') no-repeat center 0;
+    background-size: 100%;
+    position: relative
+}
+
+#teamBanner .team-banner {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+    padding: 6.3rem 0 6.9rem 0
+}
+
+#teamCont {
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+#teamCont .team-cont {
+    width: 90%;
+    margin: 0 auto;
+}
+
+
+h4.team-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    text-align: center;
+    color: #057067;
+    margin: 2.8rem 0 1.3rem 0
+}
+
+.team-cont-flex {
+    
+    align-items: center;
+    margin-bottom: 2.3rem;
+
+}
+
+.team-part {    margin-bottom: 2.3rem;
+    text-align: center;}
+
+.team-part .team-img img {
+    width: 345px;
+    border-radius: 5px;
+}
+
+.team-part .team-img {
+    position: relative;
+
+}
+
+.team-part .team-img .team-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #057067;
+    opacity: 0;
+    border-radius: 5px;
+}
+
+.team-part .team-img .team-mask img {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.team-part a:hover .team-mask {
+    opacity: 0.7;
+}
+
+.team-part .team-name {
+    font-family: MADEFutureX-Medium;
+    font-size: 17.5px;
+    font-weight: normal;
+    font-stretch: normal;
+    margin: 1.1rem 0 0.5rem 0;
+    letter-spacing: 0px;
+    color: #057067;
+}
+
+.team-part .team-span {
+    font-family: MADEFutureX-Light;
+    font-size: 14.6px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #737373;
+}

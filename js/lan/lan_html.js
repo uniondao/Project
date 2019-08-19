@@ -1,0 +1,3 @@
+var html_lan = {
+
+}

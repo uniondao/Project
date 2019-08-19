@@ -1,0 +1,615 @@
+@media screen and (min-width:900px) {
+    body {
+        width: 720px !important;
+        margin: 0 auto !important;
+    }
+   
+}
+
+body {
+    background: #fff;
+    margin: 0 auto;
+}
+
+
+
+#issueCont {
+    background: url('../images/mobile_icon/issue_bg.png') no-repeat center 0;
+    /* background-size: 100%; */
+    position: relative
+}
+
+#issueCont .issue-cont {
+    width: 90%;
+    margin: 0 auto;
+}
+
+/****************tab*******************/
+
+#tabMain {
+    width: 100%;
+    padding-top: 2.6rem;
+    padding-bottom: 1.3rem;
+}
+
+
+.tab-header {
+    width: 100%;
+}
+
+
+#tabs {
+    display: flex;
+    display: -webkit-flex;
+}
+
+#tabs li {
+    display: flex;
+    align-items: flex-end;
+    display: -webkit-flex
+}
+
+#tabs li:nth-child(1) {
+    margin-left: 5.5px;
+    margin-right: 2.5px;
+}
+
+#tabs a {
+    display: block;
+    width: 160px;
+    height: 33.5px;
+    background-image: linear-gradient(90deg,
+            #36a99f 0%,
+            #0f9186 100%),
+        linear-gradient(#eeeeee,
+            #eeeeee);
+    background-blend-mode: normal,
+        normal;
+    border-radius: 5px 5px 0 0;
+    font-family: MADEFutureX-Light;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #ffffff;
+    text-align: center;
+    line-height: 33.5px;
+}
+/* 
+#tabs a:hover,
+#tabs a:hover::after,
+#tabs a:focus,
+#tabs a:focus::after {
+    font-family: MADEFutureX-Bold;
+    background: #ffffff;
+    font-size: 12.5px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    height: 38px;
+    line-height: 38px;
+    color: #057067;
+} */
+
+#tabs a:focus {
+    outline: 0;
+}
+
+#tabs #current a,
+#tabs #current a::after {
+    font-family: MADEFutureX-Bold;
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    height: 38px;
+    line-height: 38px;
+    color: #057067;
+}
+
+/* ------------------------------------------------- */
+
+#tabContent {
+    width: 100%;
+    z-index: 2;
+    background-color: #ffffff;
+    border-radius: 6px;
+    box-sizing: border-box
+}
+
+.tab-1 {
+    padding: 2.1rem 5%;
+    box-sizing: border-box
+}
+
+.radio-list {
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.radio-list .radio_box {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    position: relative;
+    float: left;
+    width: 50%;
+    margin-bottom: 16px;
+}
+
+.radio-list .radio_box input {
+    visibility: hidden;
+}
+
+.radio-list .radio_box img {
+    margin: 0 8px 0 20%;
+    height: 24px;
+}
+
+.radio-list .radio_box label {
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid #0f5153;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.radio-list .radio_box input:checked+label:after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #0f5153;
+    border-radius: 50%;
+}
+
+.radio-list .radio_box span {
+    cursor: pointer;
+    font-family: MADEFutureX;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #777777;
+}
+
+
+.radio-list2 .radio_box {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    position: relative;
+    margin-right: 5%;
+    float: left;
+    margin-bottom: 16px;
+}
+
+.radio-list2 .radio_box input {
+    visibility: hidden;
+}
+
+.radio-list2 .radio_box img {
+    margin: 0 8px 0 20%;
+    height: 24px;
+}
+
+.radio-list2 .radio_box label {
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid #0f5153;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.radio-list2 .radio_box input:checked+label:after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #0f5153;
+    border-radius: 50%;
+}
+
+.radio-list2 .radio_box span {
+    cursor: pointer;
+    font-family: MADEFutureX;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #777777;
+    margin-left: 26px;
+    line-height: 21px;
+}
+
+.radio-tip .radio_box {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    position: relative;
+    flex: 1;
+
+}
+
+.radio-tip .radio_box input {
+    visibility: hidden;
+}
+
+.radio-tip .radio_box img {
+    margin: 0 8px 0 20%;
+    height: 24px;
+}
+
+.radio-tip .radio_box label {
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: 2px solid #0f5153;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+}
+
+.radio-tip .radio_box input:checked+label:after {
+    content: '';
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: #0f5153;
+    border-radius: 50%;
+}
+
+.radio-tip .radio_box span {
+    cursor: pointer;
+    font-family: MADEFutureX;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #777777;
+    margin-left: 26px;
+}
+
+.ex-input {
+    width: 100%;
+    margin: 25px 0 14px;
+}
+
+.ex-input input {
+    width: 94%;
+    height: 43.5px;
+    margin: 0 3%;
+    background-color: #ffffff;
+    box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    padding: 0 16px;
+    box-sizing: border-box;
+    border-radius: 6px;
+}
+
+.ex-input input::-webkit-input-placeholder {
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #d9d9d9;
+}
+
+.ex-input input:-moz-placeholder {
+    color: #d9d9d9;
+}
+
+
+.ex-input span {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    display: block;
+    margin: 0 3%;
+    margin-top: 7px;
+}
+
+
+.ex-input img {
+    width: 12px;
+    height: 22px;
+    margin: 5px 50%;
+    transform: rotate(90deg)
+}
+
+.ex-btn {
+    width: 94%;
+    margin: 0 auto
+}
+
+.ex-btn div {
+    width: 100%;
+    height: 40px;
+    background-image: linear-gradient(180deg,
+            #36a99f 0%,
+            #0f9186 100%),
+        linear-gradient(#057067,
+            #057067);
+    background-blend-mode: normal,
+        normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 6px;
+    font-family: MADEFutureX-Bold;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #ffffff;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+
+.issue-tips {
+    padding-bottom: 59px;
+}
+
+.issue-tips h5 {
+    font-family: MADEFutureX-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.issue-tips p {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 20px;
+    letter-spacing: 0px;
+    color: #ffffff;
+}
+
+.tab-2 {
+    padding: 2.1rem 5%;
+    box-sizing: border-box;
+}
+
+.tab-part-2 .radio-list2 {
+    margin: 24px 0 43px 0;
+    overflow: hidden;
+}
+
+.tab-part-2>span {
+    font-family: MADEFutureX;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #727272;
+}
+
+.tab-part-2 .radio-list2 .radio-list .radio_box>span {
+    font-family: MADEFutureX-Light;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #727272;
+    margin-left: 30%;
+    line-height: 22px;
+}
+
+.tab-part-2 .radio-tip {}
+
+.tab-part-2 .radio-tip>span {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #989898;
+    margin-left: 32px;
+}
+
+
+.tab-part-2 .radio-tip .radio-list .radio_box>span {
+    font-family: MADEFutureX-Bold;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    margin-left: 20px;
+    line-height: 19px;
+}
+
+
+.ex-input .input-flex {}
+
+
+.ex-input .input-flex .input-label {
+    font-family: MADEFutureX-Bold;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    margin: 0 3%;
+    margin-bottom: 5px;
+}
+
+.ex-input .input-flex .input-tips {
+    font-family: MADEFutureX-Light;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    margin-top: 5px;
+}
+
+.tab-part-2 .ex-input span {
+    color: #555555;
+
+}
+
+.tab-part-2 .ex-input {}
+
+#issuetTable {
+    width: 100%
+}
+
+#issuetTable .issue-table {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 2.1rem;
+    margin-bottom: 2.1rem;
+}
+
+.issue-table .issue-table-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 22.5px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #057067;
+    text-align: center
+}
+
+.issue-table table {
+    margin: 2.1rem 0;
+    width: 100%;
+}
+
+.issue-table table thead {
+    height: 41px;
+    background-color: #057067;
+}
+
+.issue-table table thead th {
+    font-family: MADEFutureX-Medium;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    height: 41px;
+    line-height: 22px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    background-color: #057067;
+
+}
+
+.issue-table table tr {
+    height: 41px;
+    line-height: 22px;
+}
+
+.issue-table table tr td {
+    text-align: center;
+    font-family: MADEFutureX;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #9f9f9f;
+}
+
+.issue-table table tr:nth-child(even) {
+    background-color: #eeeeee;
+    border-bottom: 1px solid #d2d2d2;
+    box-sizing: border-box
+}
+
+.issue-table table tr:nth-child(odd) {
+    background-color: #ffffff;
+    border-bottom: 1px solid #d2d2d2;
+}
+
+
+.readmore {
+    text-align: center;
+    margin-top: 38px;
+}
+
+.readmore span {
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40px;
+    letter-spacing: 0px;
+    color: #a8a8a8;
+    display: block;
+    padding-bottom: 20px;
+}
+
+.readmore img {
+    width: 20px;
+    height: 12px;
+}
+
+#shLayer {
+    width: 335px;
+    height: 250px;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #fff
+}
+
+#shLayer .close-img {
+    float: right;
+}
+
+.shlayer-cont p {
+    font-family: MADEFutureX-Light;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 30px;
+    letter-spacing: 0px;
+    color: #989898;
+    text-align: center;
+    margin: 76px 0 60px 0;
+}
+
+#shLayer .shlayer-btn {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around
+}
+
+#shLayer .shlayer-btn div {
+    width: 146px;
+    height: 32px;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+#shLayer .shlayer-btn div.shlayer-close {
+    font-family: MADEFutureX;
+    background: #EEEEEE;
+    color: #888
+}
+
+#shLayer .shlayer-btn div.shlayer-confirm {
+    font-family: MADEFutureX-Bold;
+    background: #057068;
+    color: #fff
+}
