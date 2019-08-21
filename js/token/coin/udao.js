@@ -1,17 +1,13 @@
 /*稳定币合约*/
 
 //授权
-function shouquan_udao(udao_num, und_num,if_one=null,coin=null) {
+function shouquan_udao() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
         return false;
     }
-    if (udao_num <= 0) {
-        alert(script_Lan.approve_num_min[currentLan]);
-        return false;
-    }
-    udao_num = Number(udao_num)+Number(100000000000000000000);  //+Number(10000)
+    udao_num = Math.pow(10,16);  //+Number(10000)
     udao_num = web3.utils.toWei(udao_num, CONFIG.udao_wei);
     udao_num = web3.utils.toBN(udao_num);
     var gas = $("#getGasPrice").val();
@@ -20,22 +16,17 @@ function shouquan_udao(udao_num, und_num,if_one=null,coin=null) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas })
-        .on("receipt", function(data) {
-            $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
+    Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_apply(transactionHash);
+        }
 
-            if(if_one){
-                withdraw_onecoin(temp_num,coin);
-            }else{
-                withdraw(und_num);
-            }
+    });
 
-            return true;
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
 }
 
 //获取UDAO代币数量
@@ -217,12 +208,18 @@ function createAccount(){
         gas = Number(gas)+Number(3000000000)
     }
     $('#createAccount').html(script_Lan.create_wait[currentLan]+"<dot>···</dot>");
-    Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas })
-        .then(function(data) {
-            console.log(data);
-            alert(script_Lan.create_acount[currentLan]);
-            location.reload();
-        })
+    Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $('#createAccount').html(script_Lan.immediate_application[currentLan]);
+        }else{
+            console.log(transactionHash);
+            Verification_immediate(transactionHash);
+        }
+
+
+    });
+
 }
 //查看地址人数
 function accountsNumber(){
@@ -258,19 +255,25 @@ function udao_send(){
     num = web3.utils.toBN(num);
     $('#udao_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
-        Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
-            .then(function(data) {
-                console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
-                location.reload();
-            })
+        Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+            if(error){
+                alert(script_Lan.operate_err[currentLan]);
+                $('#udao_send').html(script_Lan.next[currentLan]);
+            }else{
+                Verification_send(transactionHash);
+            }
+
+        });
     }else{
-        Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
-            .then(function(data) {
-                console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
-                location.reload();
-            })
+        Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+            if(error){
+                alert(script_Lan.operate_err[currentLan]);
+                $('#udao_send').html(script_Lan.next[currentLan]);
+            }else{
+                Verification_send(transactionHash);
+            }
+
+        });
     }
 
 }

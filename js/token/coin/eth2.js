@@ -3,9 +3,9 @@ async function ethAccounts() {
     return new Promise(function (resolve, reject) {
         web3.eth.getAccounts(function(err, accounts) {
             if(err){
-                reject(err);
+                return reject(err);
             }else{
-                resolve(accounts[0]);
+                return resolve(accounts[0]);
             }
         });
     });
@@ -48,6 +48,7 @@ function reserve_undt(){
         var balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
         $('#reserve_undt').val(balance_num);
     });
+
 }
 
 //获取Reserve的值

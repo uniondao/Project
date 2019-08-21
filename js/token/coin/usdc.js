@@ -1,12 +1,11 @@
 //授权
-function shouquan_usdc(num) {
+function shouquan_usdc() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
         location.reload();
     }
-    temp_num = num;
-    num = Number(num)+Number(100000000000000000000);  //+Number(10000)
+    num = Math.pow(10,16);  //+Number(10000)
     num = web3.utils.toWei(num, CONFIG.usdc_wei);
     num = web3.utils.toBN(num);
     var gas = $("#getGasPrice").val();
@@ -15,17 +14,17 @@ function shouquan_usdc(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    $("#approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    Contract_usdc.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas})
-        .on("receipt", function(data) {
-            $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
-            mortgage_usdc(temp_num)
-            return true;
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
+    $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
+    Contract_usdc.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_apply(transactionHash);
+        }
+    });
+
 }
 
 //获取USDT代币数量
@@ -64,14 +63,14 @@ function mortgage_usdc(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
     var usdc_balance = $("#usdc_balance").val();
     if (Number(num) > Number(usdc_balance)) {
         alert(script_Lan.dusc_num_min[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
 
     other2und(num, CONFIG.usdc_addr, SELF_ADDR, CONFIG.usdc_wei);

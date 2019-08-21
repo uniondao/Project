@@ -32,15 +32,14 @@ function allowance_tusd() {
 
 
 //授权
-function shouquan_tusd(num) {
+function shouquan_tusd() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
         location.reload();
     }
 
-    temp_num = num;
-    num = Number(num)+Number(100000000000000000000);  //+Number(10000)
+    num = Math.pow(10,16);  //+Number(10000)
     num = web3.utils.toWei(num, CONFIG.tusd_wei);
     num = web3.utils.toBN(num);
     var gas = $("#getGasPrice").val();
@@ -49,18 +48,18 @@ function shouquan_tusd(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    $("#approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    Contract_tusd.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR, gasPrice: gas })
-        .on("receipt", function(data) {
+    $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
+    Contract_tusd.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        if(error){
+            alert(script_Lan.operate_err[currentLan]);
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }else{
+            Verification_apply(transactionHash);
+        }
 
-            $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
-            mortgage_tusd(temp_num)
-            return true;
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
+    });
+
 }
 
 
@@ -69,14 +68,14 @@ function mortgage_tusd(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
         alert(script_Lan.sign_login[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
     var tusd_balance = $("#tusd_balance").val();
     if (Number(num) > Number(tusd_balance)) {
         alert(script_Lan.tusd_num_min[currentLan]);
-        return false;
         location.reload();
+        return false;
     }
     other2und(num, CONFIG.tusd_addr, SELF_ADDR, CONFIG.tusd_wei);
 }

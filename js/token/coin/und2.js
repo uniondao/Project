@@ -16,7 +16,8 @@ async function authorize_und(UserAddr,addr,num,gas) {
         num = Number(num);
         num = web3.utils.toWei(num, CONFIG.und_wei);
         num = web3.utils.toBN(num);
-        Contract_und.methods.approve(addr, num).send({ from: UserAddr, gasPrice: gas})
+        gas = Number(gas) + Number(3000000000);
+        Contract_und.methods.approve(addr, num).send({ from: UserAddr, gasPrice: gas,gas:200000})
             .on("receipt", function(data) {
                 resolve(data);
             })
@@ -47,10 +48,10 @@ async function balance_und(UserAddr) {
         Contract_und.methods.balanceOf(UserAddr).call().then(function (data) {
             if(data){
                 let balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
-                balance_num = Number(balance_num).toFixed(CONFIG.Fixed);
-                resolve(balance_num);
+                balance_num = Number(balance_num).toFixed(8);
+                return resolve(balance_num);
             }else{
-                reject(err);
+                return reject(err);
             }
         });
     });

@@ -1,41 +1,26 @@
 /*稳定币合约*/
 
 //授权
-function shouquan_udao(udao_num, und_num,if_one=null,coin=null) {
-    var SELF_ADDR = $("#address").val();
-    if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
-        return false;
-    }
-    if (udao_num <= 0) {
-        alert(script_Lan.approve_num_min[currentLan]);
-        return false;
-    }
-    udao_num = Number(udao_num)+Number(100000000000000000000);  //+Number(10000)
-    udao_num = web3.utils.toWei(udao_num, CONFIG.udao_wei);
-    udao_num = web3.utils.toBN(udao_num);
-    var gas = $("#getGasPrice").val();
-    if(!gas){
-        gas = 10000000000;
-    }else{
-        gas = Number(gas)+Number(3000000000)
-    }
-    Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas })
-        .on("receipt", function(data) {
-            $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
-
-            if(if_one){
-                withdraw_onecoin(temp_num,coin);
-            }else{
-                withdraw(und_num);
-            }
-
-            return true;
-        })
-        .on("error", function(error) {
-            alert(script_Lan.approve_fail[currentLan]);
-            location.reload();
-        });
+async function authorize_udao(UserAddr,addr,num,gas) {
+    return new Promise(function (resolve, reject) {
+        if (!addr) {
+            reject(script_Lan.sign_login[currentLan]);
+        }
+        if (num <= 0) {
+            reject(script_Lan.approve_num_min[currentLan]);
+        }
+        num = Number(num);
+        num = web3.utils.toWei(num, CONFIG.udao_wei);
+        num = web3.utils.toBN(num);
+        gas = Number(gas) + Number(3000000000);
+        Contract_udao.methods.approve(addr, num).send({ from: UserAddr, gasPrice: gas,gas:200000})
+            .on("receipt", function(data) {
+                resolve(data);
+            })
+            .on("error", function(error) {
+                reject(script_Lan.approve_fail[currentLan]);
+            });
+    });
 }
 
 //获取UDAO代币数量
@@ -45,29 +30,28 @@ async function balance_udao(UserAddr) {
             .then(function(data) {
                 if(data){
                     let balance_num = web3.utils.fromWei(data, CONFIG.udao_wei);
-                    balance_num = Number(balance_num).toFixed(CONFIG.Fixed);
-                    resolve(balance_num);
+                    balance_num = Number(balance_num).toFixed(8);
+                    return resolve(balance_num);
                 }else{
-                    reject(err);
+                    return reject(err);
                 }
             })
     });
 }
 
 //获取UDAO授权数量
-function allowance_udao() {
-    var SELF_ADDR = $("#address").val();
-    Contract_udao.methods.allowance(SELF_ADDR, CONFIG.und_issue_addr).call()
-        .then(function(data) {
-
-            if (data > 0) {
-                var num = web3.utils.fromWei(data, CONFIG.udao_wei);
-            } else {
-                var num = 0;
-            }
-            $("#udao_allowance").val(num);
-            return null;
-        });
+function authorize_udao_num(UserAddr,CoinAddr) {
+    return new Promise(function (resolve, reject) {
+        Contract_udao.methods.allowance(UserAddr, CoinAddr).call()
+            .then(function(data) {
+                if (data > 0) {
+                    var num = web3.utils.fromWei(data, CONFIG.udao_wei);
+                } else {
+                    var num = 0;
+                }
+                resolve(num);
+            });
+    });
 }
 
 /*稳定币的发行合约*/
