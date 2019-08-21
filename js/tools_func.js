@@ -61,3 +61,137 @@ function  timestampToTime(timestamp) {        
 function dNum(num1,num2) {
     return (Math.floor(num1/num2 * 10000) / 100.00)
 }
+
+//验证创建账号txid是否成功
+function Verification_send(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_send(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.send_success[currentLan]);
+            }else{
+                alert(script_Lan.send_fail[currentLan]);
+            }
+            $('#udao_send').html(script_Lan.next[currentLan]);
+            $('#undt_send').html(script_Lan.next[currentLan]);
+        }
+    });
+}
+
+//验证创建账号txid是否成功
+function Verification_immediate(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_immediate(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.create_acount[currentLan]);
+            }else{
+                alert(script_Lan.operate_err[currentLan]);
+            }
+            $('#createAccount').html(script_Lan.immediate_application[currentLan]);
+        }
+    });
+}
+
+//验证认购txid是否成功
+function Verification_presale(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_presale(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.submitSuccess[currentLan]);
+            }else{
+                alert(script_Lan.submitError[currentLan]);
+            }
+            $("#und2udao").html(script_Lan.participate_now[currentLan]);
+        }
+    });
+}
+
+//验证授权txid是否成功
+function Verification_apply(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_apply(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.approve_success[currentLan]);
+            }else{
+                alert(script_Lan.approve_fail[currentLan]);
+            }
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }
+    });
+}
+
+//验证发行txid是否成功
+function Verification_issue(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_issue(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.issue_success[currentLan]);
+            }else{
+                alert(script_Lan.issue_fail[currentLan]);
+            }
+            $("#issue").html(script_Lan.issue_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }
+    });
+}
+
+//验证赎回txid是否成功
+function Verification_redemption(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        console.log(data);
+        if(!data.result){
+            setTimeout(Verification_redemption(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.redeem_success[currentLan]);
+            }else{
+                alert(script_Lan.redeem_fail[currentLan]);
+            }
+            $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".approve_commit").html('&nbsp');
+        }
+    });
+}
+
+function Verification2(txid,type){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification2(txid,type), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                if(type == 1){
+                    hidePwait();
+                    hideNeedAuth()
+                    initState();
+                }else{
+                    //兑换
+                    alert(script_Lan.swap_success[currentLan]);
+                    location.reload();
+                }
+            }else{
+                hidePwait();
+                buttonState.isdoing = 0;
+                alert(script_Lan.lockErr[currentLan]);
+                console.log(buttonState);
+            }
+        }
+    });
+}
