@@ -115,7 +115,9 @@
                                             <input type="text" placeholder="INPUT UNDT AMOUNT" id="issue_num"
                                                 oninput="linkage('issue_num','issue_und')" onkeyup="onlyNumber(this)"
                                                 onblur="onlyNumber(this)">
-                                            <span>Currently available <font id="mybalance"></font></span>
+                                            <span>Currently available <font id="mybalance"></font>
+                                             <font class="issue_unlock" data-value="usdt" onclick="issue_unlock()">Unlock</font>
+                                            </span>
                                         </div>
                                         <img src="./images/exchange.png" alt="">
                                         <div>
@@ -125,7 +127,7 @@
                                             <span>Currently available <font id="mybalance_und"></font></span>
                                         </div>
                                     </div>
-                                    <div style="text-align: center;color: red;margin: 10px" id="approve_commit"> &nbsp;</div>
+                                    <div style="text-align: center;color: red;margin: 10px" class="approve_commit"> &nbsp;</div>
                                     <div class="ex-btn">
                                         <div onclick="issue()" id="issue">ISSUED NOW</div>
                                     </div>
@@ -167,7 +169,7 @@
                                             <label for="radio_12"></label>
                                             <span>Redeem the token ratio by system allocation</span>
                                         </div>
-                                        <span id="bili" style="overflow-wrap: break-word;"></span>
+                                        <span id="bili" style="overflow-wrap: break-word;margin-left: 26px"></span>
                                     </div>
                                     <div class="ex-input">
                                         <div>
@@ -175,15 +177,19 @@
                                                 <div class="input-label">UNDT </div>
                                                 <input type="text" placeholder="1 UNDT" onpropertychange="cop()" oninput="cop()" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)" id="withdraw_num">
                                             </div>
-                                            <span>Currently available <font id="undt_balance"></font>USDT</span>
+                                            <span>Currently available <font id="undt_balance"></font> UNDT
+                                             <font id="undt_unlock" onclick="undt_unlock()">Unlock</font>
+                                            </span>
                                         </div>
                                         <img src="./images/exchange.png" alt="">
                                         <div>
                                             <div class="input-flex">
                                                 <input type="text" placeholder="" id="undopther_txt" readonly>
                                             </div>
-                                            <span>Currently available <font id="udao_balance"></font> UDAO <br/>
-                                               fee: <font id="fee">0</font>UDAO
+                                            <span>Currently available <font id="udao_balance"></font> UDAO
+                                                  <font id="udao_unlock" onclick="udao_unlock()">Unlock</font>
+                                                <br/>
+                                               Fee: <font id="fee">0</font>UDAO
                                             </span>
                                         </div>
                                         <span class="txt1" style="display: none"></span>
@@ -212,7 +218,7 @@
                     <h5 class="issue-table-title">ISSUE
                         <br>   REDEMPTION RECORD</h5>
                     <table>
-                        <tbody>
+                        <tbody id="issue_log">
                             <thead>
                                 <th>TIME</th>
                                 <th>TRADING VOLUME</th>
@@ -270,33 +276,48 @@
             $('#tabs li').eq(type- 1).attr('id','current').siblings().removeAttr('id');
             $('#tabContent .tab-part').eq(type - 1).fadeIn().siblings().hide();
     })
-    window.onload = function(){
-        start();
-    }
+    start();
     function start() {
-        setTimeout(ethAccounts, 500);
-        setTimeout(balance_usdt, 900);
-        setTimeout(balance_tusd, 800);
-        setTimeout(balance_dai, 900);
-        setTimeout(balance_usdc, 800);
-        setTimeout(balance_pax, 800);
-        setTimeout(balance_und, 900);
-        setTimeout(getnewprice, 1000);
-        setTimeout(balance_und, 1000);
-        setTimeout(balance_udao, 1000);
-        setTimeout(getFeeCosUDAO, 1200);
-        setTimeout(allowance_usdt, 1200);
-        setTimeout(allowance_dai, 1200);
-        setTimeout(allowance_tusd, 1200);
-        setTimeout(allowance_usdc, 1200);
-        setTimeout(allowance_pax, 1200);
-        setTimeout(allowance_udao, 1200);
-        setTimeout(allowance_und, 1200);
-        setTimeout(getGasPrice, 1500);
-        setTimeout(getPercent, 2000);
+        setInterval(ethAccounts, 500);
+        setInterval(balance_tusd, 800);
+        setInterval(balance_usdt, 800);
+        setInterval(balance_dai, 900);
+        setInterval(balance_usdc, 800);
+        setInterval(balance_pax, 800);
+        setInterval(balance_und, 900);
+        setInterval(getnewprice, 1000);
+        setInterval(balance_und, 1000);
+        setInterval(balance_udao, 1000);
+        setInterval(getFeeCosUDAO, 1200);
+        setInterval(allowance_usdt, 1200);
+        setInterval(allowance_dai, 1200);
+        setInterval(allowance_tusd, 1200);
+        setInterval(allowance_usdc, 1200);
+        setInterval(allowance_pax, 1200);
+        setInterval(allowance_udao, 1200);
+        setInterval(allowance_und, 1200);
+        setInterval(getGasPrice, 1500);
+        setInterval(getPercent, 2000);
+        setInterval(start_first, 2000);
         all_record(CONFIG.und_issue_addr)
     }
+    function start_first(){
+        var issue_unlock =  $('.issue_unlock').attr('data-value');
+        if(issue_unlock == 'usdt'){
+            $('#mybalance').text($('#usdt_balance').val()+' USDT');
+            var usdt_allowance = $('#usdt_allowance').val();
+            if(usdt_allowance > 100000){
+                $('.issue_unlock').css('display','none');
+            }
+        }
 
+        if($('#und_allowance').val() > 100000){
+            $('#undt_unlock').css('display','none');
+        }
+        if($('#udao_allowance').val() > 100000){
+            $('#udao_unlock').css('display','none');
+        }
+    }
 </script>
 
 <script>
@@ -336,14 +357,23 @@
         Coin = coin.toLocaleUpperCase();
         coin_id = coin+'_balance';
         banlance =  $('#'+coin_id).val();
-        $('#mybalance').text(banlance+Coin);
+        coin_allowance =  $('#'+coin+'_allowance').val();
+        if(coin_allowance > 0){
+            $('.issue_unlock').css('display','none');
+            $('.issue_unlock').attr('data-value',coin);
+        }else{
+            $('.issue_unlock').css('display','block');
+            $('.issue_unlock').attr('data-value',coin);
+        }
+        $('#mybalance').text(banlance+" "+Coin);
         $('.notes').text(Coin);
     });
 
-    $(".radio-list2 > .radio_box > input[ name='radio_2']").click(function(){
+    $(".tab-part-2 .radio_box > input[ name='radio_2']").click(function(){
         var coin = $("input[name='radio_2']:checked").val();
         Coin = coin.toLocaleUpperCase();
         $('.notes').text(Coin);
+        cop();
     });
 
     function linkage(s_id, d_id) {
@@ -383,8 +413,9 @@
                     $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
                     mortgage_usdt(num);
                 } else {
-                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                    shouquan_usdt(num);
+                    $('.issue_unlock').css('display','block');
+                    $('.issue_unlock').attr('data-value',coin);
+                    alert(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'dai':
@@ -404,8 +435,9 @@
                     $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
                     mortgage_dai(num);
                 } else {
-                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                    shouquan_dai(num);
+                    $('.issue_unlock').css('display','block');
+                    $('.issue_unlock').attr('data-value',coin);
+                    alert(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'usdc':
@@ -425,8 +457,9 @@
                     $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
                     mortgage_usdc(num);
                 } else {
-                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                    shouquan_usdc(num);
+                    $('.issue_unlock').css('display','block');
+                    $('.issue_unlock').attr('data-value',coin);
+                    alert(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'tusd':
@@ -446,8 +479,9 @@
                     $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
                     mortgage_tusd(num);
                 } else {
-                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                    shouquan_tusd(num);
+                    $('.issue_unlock').css('display','block');
+                    $('.issue_unlock').attr('data-value',coin);
+                    alert(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'pax':
@@ -467,8 +501,9 @@
                     $("#issue").html(script_Lan.issue_wait[currentLan]+"<dot>···</dot>");
                     mortgage_pax(num);
                 } else {
-                    $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                    shouquan_pax(num);
+                    $('.issue_unlock').css('display','block');
+                    $('.issue_unlock').attr('data-value',coin);
+                    alert(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             default:
@@ -500,6 +535,7 @@
 
         coin = $("input[name='radio_2']:checked").val();
         str = "";
+
         if(coin == 'all'){
             $(".txt1 .num_per").each(function() {
                 arr = String($(this).html()).split("%");
@@ -555,12 +591,12 @@
         if(coin == 'all'){
             if (und_allowance == 0 || und_allowance < num) {
                 //授权und
-                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                shouquan_und(num,fee,udao_allowance);
+                $('#undt_unlock').css('display','block');
+                alert(script_Lan.please_unlock[currentLan]+'UNDT');
             } else if (udao_allowance == 0 || udao_allowance < fee) {
-                //授权udao
-                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                shouquan_udao(fee,num);
+                /  //授权udao
+                $('#udao_unlock').css('display','block');
+                alert(script_Lan.please_unlock[currentLan]+'UDAO');
             } else {
                 $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
                 withdraw(num);
@@ -568,12 +604,12 @@
         }else{
             if (und_allowance == 0 || und_allowance < num) {
                 //授权und
-                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                shouquan_und(num,fee,udao_allowance,1,coin);
+                $('#undt_unlock').css('display','block');
+                alert(script_Lan.please_unlock[currentLan]+'UNDT');
             } else if (udao_allowance == 0 || udao_allowance < fee) {
                 //授权udao
-                $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
-                shouquan_udao(fee,num,1,coin);
+                $('#udao_unlock').css('display','block');
+                alert(script_Lan.please_unlock[currentLan]+'UDAO');
             } else {
                 $("#redemption").html(script_Lan.redeem_wait[currentLan]+"<dot>···</dot>");
                 withdraw_onecoin(num,coin);
@@ -639,5 +675,35 @@
         });
     }
 
+    function issue_unlock(){
+        var coin = $('.issue_unlock').attr('data-value');
+        $("#issue").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+        switch(coin)
+        {
+            case 'usdt':
+                shouquan_usdt();
+                break;
+            case 'dai':
+                shouquan_dai();
+                break;
+            case 'usdc':
+                shouquan_usdc();
+                break;
+            case 'tusd':
+                shouquan_tusd();
+                break;
+            case 'pax':
+                shouquan_pax();
+                break;
+        }
+    }
+    function undt_unlock(){
+        $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+        shouquan_und();
 
+    }
+    function udao_unlock(){
+        $("#redemption").html(script_Lan.approve_wait[currentLan]+"<dot>···</dot>");
+        shouquan_udao();
+    }
 </script>

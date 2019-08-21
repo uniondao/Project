@@ -100,6 +100,7 @@ body {
     width: 90%;
     margin: 0 auto;
     margin-bottom: 30px;
+    border-bottom: solid 1px #d2d2d2;
 }
 
 h4.cont-title {
@@ -117,7 +118,6 @@ h4.cont-title {
 
 .doc-text-list .doc-text-part {
     padding: 0.7rem 0 0.8rem 0;
-    border-bottom: solid 1px #d2d2d2;
 }
 
 .doc-text-list .doc-text-part h5 {

@@ -18,7 +18,7 @@
 	display: flex;
 	display: -webkit-flex;
 	justify-content: space-around;
-	padding: 273px 0 313px 0;
+	padding: 100px 0 150px 0;
 }
 
 .presale-banner .presale-banner-part {}
@@ -29,8 +29,8 @@
 }
 
 .presale-banner .presale-banner-part a .preasale-img-bg {
-	width: 198px;
-	height: 198px;
+	width: 180px;
+	height: 180px;
 	background-color: #ffffff;
 	border-radius: 50%;
 	position: relative;
@@ -45,6 +45,7 @@
 
 
 .presale-banner .presale-banner-part a .preasale-img-bg img {
+	width:80px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -216,7 +217,7 @@
 	letter-spacing: 0px;
 	color: #ffffff;
 	text-align: center;
-
+	cursor: pointer;
 }
 
 .presale-tips {
@@ -291,7 +292,7 @@ h4.cont-title {
 	line-height: 54px;
 }
 
-#tabs a:hover,
+/* #tabs a:hover,
 #tabs a:hover::after,
 #tabs a:focus,
 #tabs a:focus::after {
@@ -304,7 +305,7 @@ h4.cont-title {
 	height: 64px;
 	line-height: 64px;
 	color: #057067;
-}
+} */
 
 #tabs a:focus {
 	outline: 0;
@@ -617,7 +618,7 @@ h4.cont-title {
 	/* height: 624px; */
 	background-color: #ffffff;
 	border-radius: 10px;
-	padding: 88px 0 ;
+	padding: 66px 0 ;
 	box-sizing: border-box;
 }
 
@@ -727,7 +728,7 @@ h4.cont-title {
 .exchange-w-1{
 	width: 80%;
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 }
 
 .exchange-w-1 .exchange-w-1-part div.exchange-w-1-title{
@@ -748,8 +749,8 @@ h4.cont-title {
 }
 
 .exchange-w-1 .exchange-w-1-part input {
-	width: 100%;
-	height:112px;
+	width: 80%;
+	height:80px;
 	background-color: #ffffff;
 	box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
 	border-radius: 6px;

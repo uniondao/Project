@@ -26,6 +26,8 @@
             align-items: center!important;
         }
 	</style>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
 	<!-- 合约 -->
 	<script type="text/javascript" src="./js/config/coinList.js"></script>
 	<script type="text/javascript" src="./js/tools_func.js"></script>
@@ -37,15 +39,29 @@
     <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
-    <script type="text/javascript" src="./js/token/abi/abi_factory.js"></script>
-    <script type="text/javascript" src="./js/token/abi/abi_exchange.js"></script>
+    <script type="text/javascript" src="js/token/abi/abi_exchange.js"></script>
 	<script type="text/javascript" src="./js/token/web3_init.js"></script>
 
     <script type="text/javascript" src="./js/token/coin/eth2.js"></script>
     <script type="text/javascript" src="./js/token/coin/und2.js"></script>
     <script type="text/javascript" src="./js/token/coin/udao2.js"></script>
-	<script type="text/javascript" src="./js/token/coin/exchange2.js"></script>
+	<script type="text/javascript" src="./js/token/coin/common.js"></script>
+    <script type="text/javascript" src="./js/token/coin/exContract.js"></script>
 	<!-- 合约 -->
+    <style>
+        .issue_unlock {
+            color: #fff;
+            cursor: pointer;
+            background: #b51717;
+            padding: 4px;
+            border-radius: 3px;
+            margin-left: 15px;
+        }
+        #pwaite{
+            margin-left: 26%;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,43 +71,12 @@
 			<div id="exchangeCont">
 				<div class="exchange-cont">
 					<div class="exchange-w">
-						<!-- <div class="exchange-w-1">
-								<div class="exchange-w-1-part">
-									<div>PAY WITH</div>
-									<input type="text" value="0">
-									<span>Balance : 0.580BTC</span>
-								</div>
-								<div class="exchange-w-1-part">
-									<div>RECEIVE</div>
-									<input type="text" value="0">
-									<span>Balance : 5555UDAO</span>
-								</div>
-							</div>
-							<div class="exchange-w-2">
-								<div class="exchange-w-2-part exchange-w-2-select layer-activation">
-									<div class="coin-name">
-										<img src="./images/coin/coin_13.png" alt="">
-										<div>BTC</div>
-									</div>
-									<img src="./images/arrow_left_g.png" alt="">
-								</div>
-								<div class="exchange-w-2-part">
-									<img src="./images/ex_coin.png" alt="">
-								</div>
-								<div class="exchange-w-2-part exchange-w-2-select">
-									<div class="coin-name">
-										<img src="./images/coin/coin_0.png" alt="">
-										<div>UDAO</div>
-									</div>
-									<img src="./images/arrow_left_g.png" alt="">
-								</div>
-							</div> -->
 						<div class="exchange-flex">
 							<div class="exchange-w-1">
 								<div class="exchange-w-1-part">
-									<div class="exchange-w-1-title">PAY WITH</div>
+									<div class="exchange-w-1-title">PAY WITH </div>
 									<div class="spe-input">
-										<input type="text" value="0" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="paywithNum">
+										<input type="text" value="" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="paywithNum">
 										<div class="exchange-w-2-part exchange-w-2-select changeOne myType paywith" type="paywith">
 											<div class="coin-name">
 												<img src="./images/coin/coin_14.png" alt="" class="CurrentImg">
@@ -100,6 +85,7 @@
 										</div>
 									</div>
 									<span>Balance : </span><span class="payCurrentBalance balance">0</span><span class="coin">UNDT</span>
+									<span class="isShouldAuthorize" onclick="authorize()" style="display: none;"><font  class="issue_unlock">Unlock</font></span><span id="pwaite"></span>
 								</div>
 							</div>
 							<div class="exchange-w-1 exchange-w-img">
@@ -109,7 +95,7 @@
 								<div class="exchange-w-1-part">
 									<div class="exchange-w-1-title">RECEIVE</div>
 									<div class="spe-input">
-										<input type="text" value="0" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="receiveNum" disabled>
+										<input type="text" value="" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="receiveNum" disabled>
 										<div class="exchange-w-2-part exchange-w-2-select changeTwo myType receive" type="receive">
 											<div class="coin-name layer-activation">
 												<img src="./images/coin/coin_0.png" alt="" class="CurrentImg">
@@ -134,65 +120,47 @@
 					</div>
 				</div>
 			</div>
-			<div id="exCont">
-				<div class="ex-cont">
-					<div id="contFour">
-						<h4 class="cont-title">EXCHAGE DETAILS</h4>
-						<div class="exchange-table address-table">
-							<table>
-								<tbody>
-									<tr style="border-top: 1px solid #d2d2d2;">
-										<td>WALLET</td>
-									</tr>
-									<tr>
-										<td>PAY</td>
-									</tr>
-									<tr>
-										<td>RECEIVE</td>
-									</tr>
-									<tr>
-										<td>RATE</td>
-									</tr>
-									<tr>
-										<td>PROTOCOL</td>
-									</tr>
-									<tr>
-										<td>EXCHANGE FEE</td>
-									</tr>
-									<tr>
-										<td>TRANSACTIONFEE</td>
-									</tr>
-									<tr>
-										<td>TOTAL COST</td>
-									</tr>
-									<tr>
-										<td>WALLET</td>
-									</tr>
-									<tr>
-										<td>RECEIVE</td>
-									</tr>
-									<tr>
-										<td>PROTOCOL</td>
-									</tr>
-									<tr>
-										<td>EXCHANGE FEE</td>
-									</tr>
-									<tr>
-										<td>TRANSACTIONFEE</td>
-									</tr>
-									<tr>
-										<td>TOTAL COST</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-						<div class="readmore">
-							<img src="./images/down.png" alt="">
-							<span>READ MORE</span>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--<div id="exCont">-->
+				<!--<div class="ex-cont">-->
+					<!--<div id="contFour">-->
+						<!--<h4 class="cont-title">EXCHAGE DETAILS</h4>-->
+						<!--<div class="exchange-table address-table">-->
+							<!--<table>-->
+								<!--<tbody>-->
+									<!--<tr style="border-top: 1px solid #d2d2d2;">-->
+										<!--<td>WALLET</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>PAY</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>RECEIVE</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>RATE</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>PROTOCOL</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>EXCHANGE FEE</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>TRANSACTIONFEE</td>-->
+									<!--</tr>-->
+									<!--<tr>-->
+										<!--<td>TOTAL COST</td>-->
+									<!--</tr>-->
+								<!--</tbody>-->
+							<!--</table>-->
+						<!--</div>-->
+						<!--<div class="readmore">-->
+							<!--&lt;!&ndash; <img src="./images/down.png" alt="">-->
+							<!--<span>READ MORE</span> &ndash;&gt;-->
+						<!--</div>-->
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
 			<div id="footCont"> </div>
             <input type="hidden" id="address">
 			<input type="hidden" id="getGasPrice" value="100000000000">
@@ -205,6 +173,45 @@
 <script src="./js/layer.js"></script>
 
 <script>
+    let buttonState = {
+        "flag" : 0,
+        "isdoing" : 0,
+        "msg" : "",
+    }
+
+    function initState() {
+        buttonState.flag = 0;
+        buttonState.isdoing = 0;
+        buttonState.msg = "";
+    }
+
+    function updateState(msg) {
+        if((buttonState.flag === 0)){
+            buttonState.flag = 1;
+            buttonState.msg = msg;
+        }
+    }
+
+    function showPwait() {
+        console.log("显示PENDING")
+        $("#pwaite").show();
+    }
+
+    function hidePwait() {
+        console.log("隐藏PENDING")
+        $("#pwaite").hide();
+    }
+
+    function showNeedAuth() {
+        console.log("显示等待解锁")
+        $('.isShouldAuthorize').show();
+    }
+
+    function hideNeedAuth() {
+        console.log("隐藏等待解锁")
+        $('.isShouldAuthorize').hide();
+    }
+
 	$(document).ready(function () {
 		$("#tabContent .tab-part").hide(); // Initially hide all content
 		$("#tabs li:first").attr("id", "current"); // Activate first tab
@@ -228,29 +235,48 @@
                 //实例化web3
                 window.web3 = await getWeb3();
                 //实例化需要用到的合约
-                window.Contract_und = await getContract(abi_und, CONFIG.und_addr);
+                window.Contract_und = await getContract(abi_und, CONFIG.undt_addr);
                 window.Contract_udao = await getContract(abi_udao, CONFIG.udao_addr);
-                window.Contract_exchange = await getContract(abi_exchange, CONFIG.exchange_addr);
+                window.Contract_exchange = await getContract(abi_exchange, CONFIG.exchange_undt_addr);
+                window.Contract_exchange_udao = await getContract(abi_exchange, CONFIG.exchange_udao_addr);
+                window.Contract_Coin = Contract_und;
 
                 //调用合约方法
                 let account = await ethAccounts();
-                let paybalance = await balance_und(account);
-                let rebalance = await balance_udao(account);
-                $(".payCurrentBalance").html(paybalance);
-                $(".reCurrentBalance").html(rebalance);
-                undt2other(0.01);
+                $("#address").val(account);
+                balance_und(account).then(
+                    function (v) {
+                        $(".payCurrentBalance").html(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                    }
+                );
+                balance_udao(account).then(
+                    function (v) {
+                        $(".reCurrentBalance").html(v);
+                    },
+                    function (e) {
+                        console.log(e);
+                    }
+                );
+                let needAuth = await IsNeedAuth(CONFIG.exchange_undt_addr,'UNDT',0);
+                if(needAuth === true){
+                    updateState(msg);
+                }
+                getPrice();
             } catch (e) {
                 console.log(e);
             }
         }
 
         init_exchange();
+        $("#pwaite").text(script_Lan.waitting[currentLan]);
 	})
 </script>
 
 <script>
 	$(document).on("click", ".layer-activation", function () {
-
 	    var type = $(this).parents(".myType").attr('type');
 		layer.open({
 			type: 1,
@@ -289,46 +315,12 @@
         }
 	});
 
-    $(document).on("click", ":radio", function () {
-       	var name = $(this).parents(".select-part").find('.stName').text();
-       	var logo = $(this).parents(".selec-flex").find('img').attr('src');
-       	var type = $(this).parents(".select-cont").attr('type');
-
-
+    $(document).on("click", ".layer-back", function () {
         layer.closeAll();
-        var dom = '.'+type;
-        $(dom).find(".coin-name .CurrentImg").attr('src',logo);
-        $(dom).find(".coin-name .CurrentCoin").text(name);
-        $(dom).parents(".exchange-w-1-part").find('.coin').text(name);
-
-        getPrice();
     });
-
-    $(document).on("click", ".exchange-coin", function () {
-        var changeOne = $(".changeOne").html();
-        var changeTwo = $(".changeTwo").html();
-        var balance0 = $(".balance").eq(0).html();
-        var balance1 = $(".balance").eq(1).html();
-        var coin0 = $(".coin").eq(0).html();
-        var coin1 = $(".coin").eq(1).html();
-        $(".changeOne").empty();
-        $(".changeTwo").empty();
-        $(".changeOne").html(changeTwo);
-        $(".changeTwo").html(changeOne);
-        $(".balance").eq(0).html(balance1);
-        $(".balance").eq(1).html(balance0);
-        $(".coin").eq(0).html(coin1);
-        $(".coin").eq(1).html(coin0);
-
-        getPrice()
-    });
-
-	$(document).on("click", ".layer-back", function () {
-		layer.closeAll();
-	});
 
     $(document).on("keyup", "#serch-content", function () {
-		var serch = $(this).val();
+        var serch = $(this).val();
         var has = 0;
         serch = String(serch).toUpperCase();
         $(".select-cont").empty();
@@ -347,47 +339,135 @@
                     '    </div>';
                 $(".select-cont").append(str);
                 has = 1;
-			}
+            }
         })
 
-		if(has == 0){
+        if(has == 0){
             // console.log("暂不支持该币种");
-		}
-    });
-
-    $(document).on("keyup", "#paywithNum", function () {
-
-    });
-
-    async function swap() {
-        var num = $("#paywithNum").val();
-        if(num <= 0){
-            alert("请输入兑换数量");
-            return;
         }
+    });
 
-		var payCoin = $(".paywith").find(".coin-name .CurrentCoin").text();
-        payCoin   =   payCoin.replace(/^\s+|\s+$/g,"");
-        var receiveCoin = $(".receive").find(".coin-name .CurrentCoin").text();
-        receiveCoin   =   receiveCoin.replace(/^\s+|\s+$/g,"");
+    $(document).on("click", ":radio", function () {
+       	var name = $(this).parents(".select-part").find('.stName').text();
+       	var logo = $(this).parents(".selec-flex").find('img').attr('src');
+       	var type = $(this).parents(".select-cont").attr('type');
 
-        if(payCoin == receiveCoin){
-            alert("相同币种无法交换");
-            return;
+        layer.closeAll();
+        var dom = '.'+type;
+        $(dom).find(".coin-name .CurrentImg").attr('src',logo);
+        $(dom).find(".coin-name .CurrentCoin").text(name);
+        $(dom).parents(".exchange-w-1-part").find('.coin').text(name);
+
+        $(dom).parents(".exchange-w-1-part").find(".balance").text(0);
+
+        var userAddr = $("#address").val();
+        if(name == "ETH"){
+            ethBalance(userAddr).then(function (result) {
+                $(dom).parents(".exchange-w-1-part").find(".balance").text(result);
+            });
+		}else{
+            var tokenAddr = name .toLowerCase()+'_addr';
+            getTokenBalance(CONFIG[tokenAddr],userAddr,dom);
 		}
 
-		if(payCoin == "ETH"){
-            eth2undt();
-		}else if(receiveCoin == "ETH"){
-            undt2eth();
-		}else if(payCoin == "UNDT"){
-            undt2other()
-		}else if(receiveCoin == "UNDT"){
-            other2undt()
-		}else {
-            alert("操作异常");
+		$(".getNum").text(0);
+
+        getPrice();
+        hideNeedAuth();
+        initState();
+        $("#receiveNum").val('');
+        $("#paywithNum").val('');
+        let coin = $(".coin").eq(0).html();
+        let temp = 'exchange_'+coin.toLowerCase()+'_addr';
+        let Exaddr = CONFIG[temp];
+        IsNeedAuth(Exaddr,coin,0).then(
+            function (v) {
+                console.log(buttonState);
+                if(v === true){
+                    updateState("待解锁");
+                    showNeedAuth();
+                }
+                console.log(buttonState);
+            },
+            function (e) {
+                console.log("获取已授权信息失败");
+            }
+        );
+    });
+
+    $(document).on("click", ".exchange-coin", function () {
+        let changeOne = $('.changeOne').html();
+        let changeTwo = $('.changeTwo').html();
+        let balance0 = $('.balance').eq(0).html();
+        let balance1 = $('.balance').eq(1).html();
+        let coin0 = $('.coin').eq(0).html();
+        let coin1 = $('.coin').eq(1).html();
+        $('.changeOne').empty();
+        $('.changeTwo').empty();
+        $('.changeOne').html(changeTwo);
+        $('.changeTwo').html(changeOne);
+        $('.balance').eq(0).html(balance1);
+        $('.balance').eq(1).html(balance0);
+        $('.coin').eq(0).html(coin1);
+        $('.coin').eq(1).html(coin0);
+
+        $(".getNum").text(0);
+        hideNeedAuth();
+        initState();
+        getPrice();
+        let coin = coin1;
+        let temp = 'exchange_'+coin.toLowerCase()+'_addr';
+        let Exaddr = CONFIG[temp];
+
+        let num = balance1;
+        num = Number(num);
+        IsNeedAuth(Exaddr,coin,num).then(
+            function (v) {
+                console.log(buttonState);
+                if(v === true){
+                    updateState("待解锁");
+                    showNeedAuth();
+                }
+                console.log(buttonState);
+            },
+            function (e) {
+                console.log("获取已授权信息失败");
+            }
+        );
+    });
+
+    $(document).on("keyup","#paywithNum",function () {
+        let num = $(this).val();
+		let swap_one = $(".getNum").text();
+        num = Number(num);
+        swap_one = Number(swap_one);
+		if(swap_one <= 0){
+			console.log("暂未获取到相应比列");
 		}
-    }
+
+		let swap_num = num * swap_one;
+		$("#receiveNum").val(swap_num);
+
+        hideNeedAuth();
+        initState();
+
+        let coin = $('.coin').eq(0).html();
+        let temp = 'exchange_'+coin.toLowerCase()+'_addr';
+        let Exaddr = CONFIG[temp];
+        IsNeedAuth(Exaddr,coin,num).then(
+            function (v) {
+                console.log(buttonState);
+                if(v === true){
+                    updateState("待解锁");
+                    showNeedAuth();
+                }
+                console.log(buttonState);
+            },
+            function (e) {
+                console.log("获取已授权信息失败");
+            }
+        );
+    });
 
     async function getPrice() {
         var coin0 = $(".coin").eq(0).html();
@@ -395,10 +475,277 @@
         $(".sellCoin").text(coin0);
         $(".buyCoin").text(coin1);
 
+        let num = 0;
         if(coin0 == 'ETH' && coin1 == 'UNDT'){
-            eth2undtNum();
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+            num = await eth2exchangeNum();
 		}else if(coin0 == 'UNDT' && coin1 == 'ETH'){
-            undt2ethNum();
-		}
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+            num = await eth2exchangeNum();
+            if(num > 0){
+                num = (1 / num).toFixed(CONFIG.Fixed);
+			}
+		}else if(coin0 == 'UNDT'){
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+			let eth2exchange1 = await eth2exchangeNum();
+            console.log('1ETH能兑换：'+eth2exchange1+" UNDT")
+			let ex_addr = "exchange_"+coin1.toLowerCase()+"_addr";
+			window.Contract_exchange = await getContract(abi_exchange , CONFIG[ex_addr]);
+			let eth2exchange2 = await eth2exchangeNum();
+
+			if(eth2exchange1 <= 0 && eth2exchange2 <= 0){
+				num = 0;
+			}
+
+			if(eth2exchange1 > 0 && eth2exchange2 > 0){
+                console.log('1ETH能兑换：'+eth2exchange2+" "+coin1)
+				num = Number(eth2exchange2) / Number(eth2exchange1);
+			}
+
+			if(eth2exchange1 >0 && eth2exchange2<= 0){
+                eth2exchange2 = await exchange2ethNum();
+                console.log('1'+coin1+'能兑换：'+eth2exchange2+" ETH")
+			    if(coin1 == 'WBTC'){
+			        if(eth2exchange2 > 0){
+                        eth2exchange2 = eth2exchange2 / Math.pow(10,10);
+                        num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
+                    }else{
+                        num = 0;
+                    }
+                }else{
+                    if(eth2exchange2 > 0){
+                        num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
+                    }else{
+                        num = 0;
+                    }
+                }
+                console.log('1'+coin0+'能兑换：'+num+" "+coin1)
+            }
+
+		}else if(coin1 == 'UNDT'){
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+			let eth2exchange1 = await eth2exchangeNum();
+            console.log('1ETH能兑换：'+eth2exchange1+" UNDT")
+            let ex_addr = "exchange_"+coin0.toLowerCase()+"_addr";
+			window.Contract_exchange = await getContract(abi_exchange , CONFIG[ex_addr]);
+			let eth2exchange2 = await eth2exchangeNum();
+
+            if(eth2exchange1 <= 0 && eth2exchange2 <= 0){
+                num = 0;
+            }
+
+            if(eth2exchange1 > 0 && eth2exchange2 > 0){
+                console.log('1ETH能兑换：'+eth2exchange2+" "+coin1)
+                num = Number(eth2exchange1) / Number(eth2exchange2);
+            }
+
+            if(eth2exchange1 >0 && eth2exchange2<= 0){
+                eth2exchange2 = await exchange2ethNum();
+                if(coin0 == 'WBTC'){
+                    if(eth2exchange2 > 0){
+                        console.log(1111);
+                        eth2exchange2 = eth2exchange2 / Math.pow(10,10);
+                        console.log('1'+coin0+'能兑换：'+eth2exchange2+" ETH");
+                        num = Number(eth2exchange1) * Number(eth2exchange2);
+                    }else{
+                        num = 0;
+                    }
+                }else{
+                    if(eth2exchange2 > 0){
+                        num = Number(eth2exchange1) * Number(eth2exchange2);
+                    }else{
+                        num = 0;
+                    }
+                }
+                console.log('1'+coin0+'能兑换：'+num+" "+coin1)
+            }
+
+		}else{
+            num = 0;
+        }
+
+		num = Number(num);
+        $(".getNum").text(num.toFixed(8));
+    }
+
+    async function IsNeedAuth(exAddr,coin,num) {
+        if(coin == 'ETH'){
+            return false;
+        }else {
+            let authorizeNum = await authorize_coin_num(exAddr,coin);
+            if(authorizeNum <= 0){
+                //需要授权
+                return true;
+            }
+
+            if(authorizeNum < num){
+                return true;
+            }else{
+                return false;
+            }
+        }
+    }
+
+    //授权入口
+    function authorize() {
+        if(buttonState.flag === 1){
+            if(buttonState.isdoing === 1){
+                alert("请等待解锁操作完成");
+                return;
+            }
+            let coin = $(".coin").eq(0).html();
+            let temp = 'exchange_'+coin.toLowerCase()+'_addr';
+            let Exaddr = CONFIG[temp];
+            showPwait();
+            buttonState.isdoing = 1;
+            authorize_coin(Exaddr,coin,Math.pow(10,16)).then(
+                function (v) {
+                    console.log(v);
+                    Verification2(v,1);
+                    console.log(buttonState);
+                },
+                function (e) {
+                    hidePwait();
+                    buttonState.isdoing = 0;
+                    console.log(buttonState);
+                }
+            );
+        }
+    }
+
+    //交换
+    async function swap() {
+        if(buttonState.flag === 1){
+            alert(script_Lan.locked[currentLan]);
+            return;
+        }
+
+        if(buttonState.isdoing === 1 && buttonState.flag === 0){
+            alert("请勿重复提交");
+            return;
+        }
+
+        let num = $("#paywithNum").val();
+        let Balance = $(".payCurrentBalance").text();
+        let payCoin = $(".paywith").find(".coin-name .CurrentCoin").text();
+        let receiveCoin = $(".receive").find(".coin-name .CurrentCoin").text();
+        let rateNum = $(".getNum").text();
+        let msg = '';
+
+        if(num <= 0){
+            alert(script_Lan.num_no_empty[currentLan]);
+            return;
+        }
+
+        if(Number(num) > Number(Balance)){
+            alert(script_Lan.money_no_enough[currentLan]);
+            return;
+        }
+
+        if(Number(rateNum) <= 0 ){
+            alert(script_Lan.no_rateNum[currentLan]);
+            return;
+        }
+
+        payCoin   =   payCoin.replace(/^\s+|\s+$/g,"");
+        receiveCoin   =   receiveCoin.replace(/^\s+|\s+$/g,"");
+
+        if(payCoin == receiveCoin){
+            alert(script_Lan.no_keep_same[currentLan]);
+            return;
+        }
+
+        if(payCoin == "ETH"){
+            showPwait();
+            buttonState.isdoing = 1;
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+            eth2exchange(num,receiveCoin).then(
+                function (v) {
+                    Verification2(v,2);
+                    console.log(buttonState);
+                },
+                function (e) {
+                    hidePwait();
+                    buttonState.isdoing = 0;
+                    console.log(buttonState);
+                }
+            );
+        }else if(receiveCoin == "ETH"){
+            showPwait();
+            buttonState.isdoing = 1;
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+            exchange2eth(num,payCoin).then(
+                function (v) {
+                    Verification2(v,2);
+                    console.log(buttonState);
+                },
+                function (e) {
+                    hidePwait();
+                    buttonState.isdoing = 0;
+                    console.log(buttonState);
+                }
+            );
+        }else if(payCoin == "UNDT"){
+            showPwait();
+            buttonState.isdoing = 1;
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
+            exchange2other(num,rateNum,payCoin,receiveCoin).then(
+                function (v) {
+                    Verification2(v,2);
+                    console.log(buttonState);
+                },
+                function (e) {
+                    hidePwait();
+                    buttonState.isdoing = 0;
+                    console.log(buttonState);
+                }
+            );
+        }else if(receiveCoin == "UNDT"){
+            let tempCoin = 'exchange_'+payCoin.toLowerCase()+'_addr';
+            showPwait();
+            buttonState.isdoing = 1;
+            window.Contract_exchange = await getContract(abi_exchange , CONFIG[tempCoin]);
+            exchange2other(num,rateNum,payCoin,receiveCoin).then(
+                function (v) {
+                    Verification2(v,2);
+                    console.log(buttonState);
+                },
+                function (e) {
+                    hidePwait();
+                    buttonState.isdoing = 0;
+                    console.log(buttonState);
+                }
+            );
+        }else {
+            alert(script_Lan.operate_err[currentLan]);
+        }
+    }
+
+    //获取合约余额
+    function getTokenBalance(tokenAddr,userAddr,dom) {
+        var url = "https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress="+tokenAddr+"&address="+userAddr+"&tag=latest&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+        $.ajax({
+            url: url,
+            type: "Get",
+            time:3000,
+            dataType: "json",
+            success: function (data) {
+                if (data.status == 1) {
+                    let balance = data.result / Math.pow(10,18);
+                    balance = Number(balance).toFixed(8);
+                    $(dom).parents(".exchange-w-1-part").find(".balance").text(balance);
+                } else {
+                    console.log('获取失败：'+data.message);
+                }
+            },
+            error: function () {
+                // alert('请求失败');
+            },
+            complete: function (XMLHttpRequest,status) {
+                if(status == 'timeout') {
+                    console.log("获取合约余额请求超时");
+                }
+            }
+        });
     }
 </script>

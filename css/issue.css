@@ -13,7 +13,7 @@
 }
 
 #issueCont .issue-cont {
-     width:83%;
+    width: 83%;
     margin: 0 auto;
 }
 
@@ -105,7 +105,7 @@
 /* ------------------------------------------------- */
 
 #tabContent {
-     width:100%;
+    width: 100%;
     margin: 0 auto;
     z-index: 2;
     background-color: #ffffff;
@@ -114,7 +114,7 @@
     box-sizing: border-box
 }
 
-.tab-1{
+.tab-1 {
     padding: 54px 3% 107px 3%;
     box-sizing: border-box
 }
@@ -134,7 +134,7 @@
 }
 
 
-.radio-list .radio_box input{
+.radio-list .radio_box input {
     visibility: hidden;
 }
 
@@ -191,7 +191,7 @@
 }
 
 
-.radio-list2 .radio_box input{
+.radio-list2 .radio_box input {
     visibility: hidden;
 }
 
@@ -238,16 +238,15 @@
 
 
 .radio-tip .radio_box {
-    display: flex;
-    display: -webkit-flex;
-    align-items: center;
+    /* display: flex;
+    display: -webkit-flex; */
+    /* align-items: center; */
     position: relative;
-    float: left;
-    margin-right: 30px;
+    /* float: left; */
 }
 
 
-.radio-tip .radio_box input{
+.radio-tip .radio_box input {
     visibility: hidden;
 }
 
@@ -395,7 +394,7 @@
 }
 
 .tab-2 {
-    padding: 83px 43px 107px 43px;
+    padding: 54px 43px 90px 43px;
     box-sizing: border-box;
 }
 
@@ -409,6 +408,7 @@
     font-weight: normal;
     font-stretch: normal;
     color: #727272;
+    display: block
 }
 
 .tab-part-2 .radio-list2 .radio-list .radio_box>span {
@@ -422,16 +422,16 @@
 }
 
 
-.tab-part-2 .radio-list2>span{
-    float: left;
-    margin-right: 20px;
+.tab-part-2 .radio-list2>span {
+    /* float: left; */
+    margin-bottom: 20px;
 }
 
 .tab-part-2 .radio-tip {
-    display: flex;
-    display: -webkit-flex;
+    /* display: flex;
+    display: -webkit-flex; */
     margin: 0 auto;
-    margin-top: 28px;
+    margin-top: 8px;
 }
 
 .tab-part-2 .radio-tip>span {
@@ -439,9 +439,10 @@
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 30px;
     letter-spacing: 0px;
     color: #989898;
+    display:block;
+    padding-top: 20px
 }
 
 
@@ -495,7 +496,7 @@
 }
 
 #issuetTable .issue-table {
-     width:83%;
+    width: 83%;
     margin: 0 auto;
     margin-top: 94px;
     margin-bottom: 63px;
@@ -627,4 +628,22 @@
     font-family: MADEFutureX-Bold;
     background: #057068;
     color: #fff
+}
+
+#undt_unlock {
+    float: right;
+    color: #fff;
+    cursor: pointer;
+    background: #b51717;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+#udao_unlock,.issue_unlock{
+    float: right;
+    color: #fff;
+    cursor: pointer;
+    background: #b51717;
+    padding: 5px;
+    border-radius: 3px;
 }

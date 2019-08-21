@@ -97,17 +97,15 @@
 </html>
 <script src="./js/layer.js"></script>
 <script type="text/javascript">
-    $(document).ready(function () {
-        start();
-    });
 
+    start();
     function start() {
-        setTimeout(ethAccounts, 500);
-        setTimeout(balance_udao, 1000);
-        setTimeout(addressToAccounts, 1000);
-        setTimeout(getnewprice, 1000);
-        setTimeout(getGasPrice, 1000);
-        setTimeout(accounts, 1500);
+        setInterval(ethAccounts, 500);
+        setInterval(balance_udao, 1000);
+        setInterval(addressToAccounts, 1000);
+        setInterval(getnewprice, 1000);
+        setInterval(getGasPrice, 1000);
+        setInterval(accounts, 1500);
     }
 
     $(document).on("click", ".record-part", function () {

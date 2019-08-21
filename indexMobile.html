@@ -30,19 +30,17 @@
         $("header").load("./headerMobile.html");
         $("#footCont").load("./footerMobile.html");
     });
-    window.onload = function () {
-        start();
-    }
+    start();
     function start() {
-        setTimeout(reserve_undt, 800);
-        setTimeout(reserve_usdt, 800);
-        setTimeout(reserve_tusd, 800);
-        setTimeout(reserve_pax, 800);
-        setTimeout(reserve_dai, 800);
-        setTimeout(reserve_usdc, 800);
-        setTimeout(supply, 1000);
-        setTimeout(accountsNumber, 1000);
-        setTimeout(fund_banance, 2200);
+        setInterval(reserve_undt, 800);
+        setInterval(reserve_usdt, 800);
+        setInterval(reserve_tusd, 800);
+        setInterval(reserve_pax, 800);
+        setInterval(reserve_dai, 800);
+        setInterval(reserve_usdc, 800);
+        setInterval(supply, 1000);
+        setInterval(accountsNumber, 1000);
+        setInterval(fund_banance, 2200);
     }
     function fund_banance() {
         var fund_banance = Number($('#reserve_undt').val()) + Number($('#reserve_usdt').val()) + Number($('#reserve_tusd').val()) + Number($('#reserve_pax').val()) + Number($('#reserve_dai').val()) + Number($('#reserve_usdc').val());

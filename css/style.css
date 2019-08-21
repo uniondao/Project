@@ -559,6 +559,7 @@ h3.cont-title2{
     line-height: 45px;
     letter-spacing: 0px;
     color: #848484;
+    cursor: pointer;
 }
 
 .news-part .news-down .more-news div {

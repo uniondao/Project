@@ -304,21 +304,19 @@
         $(".progress-bar .progress-tip").css('left',W-100);
     })
 
-    window.onload = function(){
-        start();
-    }
 
+    start();
     function start() {
-        setTimeout(ethAccounts, 800);
-        setTimeout(getBlockNumber, 800);
-        setTimeout(balance_und, 1000);
-        setTimeout(ethBalance, 1000);
+        setInterval(ethAccounts, 800);
+        setInterval(getBlockNumber, 800);
+        setInterval(balance_und, 1000);
+        setInterval(ethBalance, 1000);
         // setTimeout(getMaxRate, 1000);
-        setTimeout(getSaleAmount, 1000);
-        setTimeout(getPeriod, 1500);
-        setTimeout(getGasPrice, 1500);
-        setTimeout(getAmount, 2500);
-        setTimeout(getPeriodData, 3000);
+        setInterval(getSaleAmount, 1000);
+        setInterval(getPeriod, 1500);
+        setInterval(getGasPrice, 1500);
+        setInterval(getAmount, 2500);
+        setInterval(getPeriodData, 3000);
         all_record(CONFIG.und_issue_addr)
     }
 

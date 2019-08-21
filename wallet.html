@@ -133,17 +133,15 @@
     </div>
 </body>
 <script>
-    window.onload = function () {
-        start();
-    }
+    start();
     function start() {
-        setTimeout(ethAccounts, 500);
-        setTimeout(getnewprice, 700);
-        setTimeout(balance_und, 800);
-        setTimeout(balance_udao, 800);
-        setTimeout(addressToAccounts, 800);
-        setTimeout(getGasPrice, 1000);
-        setTimeout(accounts, 1500);
+        setInterval(ethAccounts, 500);
+        setInterval(getnewprice, 700);
+        setInterval(balance_und, 800);
+        setInterval(balance_udao, 800);
+        setInterval(addressToAccounts, 800);
+        setInterval(getGasPrice, 1000);
+        setInterval(accounts, 1500);
     }
     function accounts() {
         $('#address_account').html($('#address').val());
