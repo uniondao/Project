@@ -61,11 +61,11 @@ var script_Lan = {
         "en" : "Please login first",
     },
     "approve_success" : {
-        "cn" : "授权成功",
+        "cn" : "解锁完成",
         "en" : "Approved！",
     },
     "approve_fail" : {
-        "cn" : "授权失败",
+        "cn" : "解锁失败",
         "en" : "Approval not passed！",
     },
     "dai_num_min" : {
@@ -132,4 +132,73 @@ var script_Lan = {
         "cn" : "创建中，请等待",
         "en" : "Please wait for created",
     },
+    "issue_now" : {
+        "cn" : "立即发行",
+        "en" : "ISSUED NOW",
+    },
+    "please_unlock" : {
+        "cn" : "请先解锁",
+        "en" : "Please unlock first",
+    },
+    "num_no_empty" :{
+        "cn" : "请先输入数量",
+        "en" : "Please enter number",
+    },
+    "money_no_enough" :{
+        "cn" : "余额不足",
+        "en" : "Money no enough",
+    },
+    "no_rateNum" :{
+        "cn" : "未获取到兑换比列",
+        "en" : "Exchange Ratio Not Obtained",
+    },
+    "no_keep_same" :{
+        "cn" : "相同币种无法交换",
+        "en" : "The same currency cannot be exchanged",
+    },
+    "operate_err" :{
+        "cn" : "操作异常",
+        "en" : "Abnormal operation",
+    },
+    "waitting" :{
+        "cn" : "请等待..",
+        "en" : "pending...",
+    },
+    "locked" :{
+        "cn" : "请先解锁",
+        "en" : "Please unlock.",
+    },
+    "lockErr" :{
+        "cn" : "解锁失败",
+        "en" : "unlock fail",
+    },
+    "swap_success" :{
+        "cn" : "转换成功",
+        "en" : "Exchange Success",
+    },
+    "redemption_now" : {
+        "cn" : "立即赎回",
+        "en" : "REDEMPTION NOW",
+    },
+    "participate_now" : {
+        "cn" : "立即参与",
+        "en" : "PARTICIPATE NOW",
+    },
+    "immediate_application" : {
+        "cn" : "立即申请",
+        "en" : "IMMEDIATE APPLICATION",
+    },
+    "next" : {
+        "cn" : "下一步",
+        "en" : "NEXT",
+    },
+    "send_success" : {
+        "cn" : "转账成功",
+        "en" : "Successful transfer",
+    },
+    "send_fail" : {
+        "cn" : "转账失败",
+        "en" : "Transfer failure",
+    },
+
 };
