@@ -1,6 +1,8 @@
-<link rel="shortcut icon" href=" ./favicon.ico" /> 
+<link rel="shortcut icon" href=" ./favicon.ico" />
+<script src="./js/jquery-3.4.0.min.js"></script>
 <script src="./js/leftMenu.js"></script>
 <script src="./js/lan/lan_init.js"></script>
+<script src="./js/lan/lan_html.js"></script>
 <script src="./js/lan/lan_srcipt.js"></script>
 <style>
     header {
@@ -60,9 +62,9 @@
 
     .header-right .language div a.language-active {
         font-family: MADEFutureX-Medium;
-        font-weight: normal;
         font-stretch: normal;
-        color: #676767;
+        color: #057067;
+        font-weight: 600;
     }
 
     .header-right .nav-list {
@@ -196,9 +198,10 @@
                 <a href="">FOUNDATION</a>
             </nav> -->
         <div class="language">
-            <div><a href="javascript:void(0)" class="language-active lan" lan="en">EN</a></div>
+            <div><a href="javascript:void(0)" class="language-active lan translate" lan="en" id="en"
+                    data-lang="language-1"></a></div>
             <div> | </div>
-            <div><a href="javascript:void(0)" class="lan" lan="cn">CN</a></div>
+            <div><a href="javascript:void(0)" class="lan translate" lan="cn" id="cn" data-lang="language-2"></a></div>
         </div>
         <div id="mobile-nav" class="nav-list">
             <div><img src="./images/mobile_icon/recovery.png" alt="" class="nav-btn"></div>
@@ -206,37 +209,53 @@
                 <div class="f1">
                     <ul>
                         <li class="hasChild padding-li">
-                            <a href="#">PRODUCT</a>
+                            <a href="#" class="translate" data-lang="product"></a>
                             <div class="f2">
                                 <ul>
                                     <li class="hasChild">
                                         <ul>
-                                            <li><a href="./issueMobile.html?type=1">UNDT ISSUANCE</a></li>
-                                            <li><a href="./issueMobile.html?type=2">UNDT REDEMPTION</a></li>
-                                            <li><a href="./presaleMobile.html">UDAO PRESALE</a></li>
-                                            <li><a href="./walletMobile.html">WALLET</a>
+                                            <li><a href="./issueMobile.html?type=1" class="translate"
+                                                    data-lang="product-1"></a></li>
+                                            <li><a href="./issueMobile.html?type=2" class="translate"
+                                                    data-lang="product-2"></a></li>
+                                            <li><a href="./presaleMobile.html" class="translate"
+                                                    data-lang="product-3"></a>
                                             </li>
-                                            <li><a href="./exchangeMobile.html">EXCHANGE CENTER</a></li>
-                                            <li><a href="javascript:;" onclick="alert('In development...')">TO LOAN</a>
+                                            <li><a href="./walletMobile.html" class="translate"
+                                                    data-lang="product-4"></a>
                                             </li>
+                                            <li><a href="./exchangeMobile.html" class="translate"
+                                                    data-lang="product-5"></a>
+                                            </li>
+                                            <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"
+                                                    onclick="alert('In development...')"></a></li> -->
+                                                    <li><a href="./candyMobile.html" class="translate"
+                                                        data-lang="product-6"></a>
+                                                </li>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
                         </li>
                         <li class="hasChild padding-li">
-                            <a href="#">ABOUT US</a>
+                            <a href="javascript:;" class="translate" data-lang="about"></a>
                             <div class="f2">
                                 <ul>
                                     <li class="hasChild">
                                         <ul>
-                                            <li><a href="./docMobile.html">FAQ</a></li>
-                                            <li><a href="https://udao.zendesk.com" target="_blank">HELP CENTER</a></li>
+                                            <li><a href="https://udao.zendesk.com" class="translate"
+                                                    data-lang="about-0"></a></li>
+                                            <li><a href="./docMobile.html" class="translate" data-lang="about-1"></a>
+                                            </li>
                                             <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
-                                            <li><a href="./privacyMobile.html">PRIVACY POLICY</a></li>
-                                            <li><a href="https://github.com/uniondao">GITHUB</a></li>
-                                            <li><a href="./uniondao-whitepaper-en.pdf">WHITEPAPER</a></li>
-                                            <li><a href="./smartMobile.html">SMART CONTRACT</a></li>
+                                            <li><a href="./privacyMobile.html" class="translate"
+                                                    data-lang="about-2"></a></li>
+                                            <li><a href="https://github.com/uniondao" target="_blank" class="translate"
+                                                    data-lang="about-3"></a></li>
+                                            <li><a href="./uniondao-whitepaper-en.pdf" target="_blank" class="translate"
+                                                    data-lang="about-4"></a></li>
+                                            <li><a href="./smartMobile.html" class="translate" data-lang="about-5"></a>
+                                            </li>
                                             <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
                                         </ul>
                                     </li>
@@ -244,13 +263,14 @@
                             </div>
                         </li>
                         <li class="hasChild padding-li">
-                            <a href="#">FOUNDATION</a>
+                            <a href="javascript:;" class="translate" data-lang="foundation"></a>
                             <div class="f2">
                                 <ul>
                                     <li class="hasChild">
                                         <ul>
-                                            <!-- <li><a href="./teamMobile.html">TEAM</a></li> -->
-                                            <li><a href="./contactMobile.html">CONTACT US</a></li>
+                                            <!-- <li><a href="./teamMobileMobile.html">TEAM</a></li> -->
+                                            <li><a href="./contactMobile.html" class="translate"
+                                                    data-lang="foundation-1"></a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -266,6 +286,6 @@
     $(function ($) {
         $('#menu').leftMenu({
             "triggerBtn": ".nav-btn"
-        }).init()
+        }).init();
     })
 </script>

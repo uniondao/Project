@@ -27,7 +27,8 @@
     <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
-
+    <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
     <script type="text/javascript" src="./js/token/base.js"></script>
 
     <script type="text/javascript" src="./js/token/coin/eth.js"></script>
@@ -47,10 +48,7 @@
                             <div class="preasale-img-bg">
                                 <img src="./images/presale_1.png" alt="">
                             </div>
-                            <div class="preasale-banner-text">
-                                    COMMUNITY <br>
-                                    VOTING <br>
-                                    SYSTEM
+                            <div class="preasale-banner-text translate" data-lang="presale-banner-1">
                             </div>
                         </a>
                     </div>
@@ -59,10 +57,7 @@
                             <div class="preasale-img-bg">
                                 <img src="./images/presale_2.png" alt="">
                             </div>
-                            <div class="preasale-banner-text">
-                                UDAO IS THE 
-                                UNIONDAO <br>
-                                SERVICE CERTIFICATE
+                            <div class="preasale-banner-text translate" data-lang="presale-banner-2">
                             </div>
                         </a>
                     </div>
@@ -71,10 +66,7 @@
                             <div class="preasale-img-bg">
                                 <img src="./images/presale_3.png" alt="">
                             </div>
-                            <div class="preasale-banner-text">
-                                PAYMENT OF <br>
-                                REDEMPTION OF 
-                                UNDT FEE
+                            <div class="preasale-banner-text translate" data-lang="presale-banner-3">
                             </div>
                         </a>
                     </div>
@@ -83,24 +75,28 @@
             <div id="presaleCont">
                 <div class="presale-cont">
                     <div id="contOne">
-                        <h3 class="phase-title"> <span></span> PHASE <div id="current_period">0</div></h3>
+                        <h3 class="phase-title"> <span></span> PHASE <div id="current_period">0</div>
+                        </h3>
                         <div class="phase-cont">
                             <div class="phase-data">
                                 <div class="phase-data-part">
-                                    <div>Participated UNDT</div>
+                                    <div class="translate" data-lang="presale-part-1"></div>
                                     <span class="phase-data-part-num" id="hasInvest">0</span>
                                     <span class="phase-data-part-num">UNDT</span>
                                 </div>
                                 <div class="phase-data-part">
-                                    <div>Presales amount</div>
+                                    <div class="translate" data-lang="presale-part-2"></div>
                                     <span class="phase-data-part-num" id="yushou">0</span>
                                     <span class="phase-data-part-num">UDAO</span>
                                 </div>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-tip"> 
-                                    <div> CURRENT PROGRESS 0%</div>
-                                    <span></span>
+                                <div class="progress-tip">
+                                    <div>
+                                        <div class="translate" data-lang="presale-part-3" style="display: initial">
+                                        </div> <span>0%</span>
+                                    </div>
+                                    <span class="arrow-down"></span>
                                 </div>
                                 <div id="progressBar">
                                     <div class="progress-cont"> </div>
@@ -108,39 +104,51 @@
                                 </div>
                                 <div class="progress-text">
                                     <div class="progress-text-part">
-                                        <div>Current block height  <span class="current_heigh">0</span></div>
+                                        <div class="translate" data-lang="presale-part-4" style="display: initial">
+                                        </div>
+                                        <span class="current_heigh">0</span>
                                     </div>
                                     <div class="progress-text-part">
-                                        <div>Remaining<span id="residue_block">0</span></div>
+                                        <div class="translate" data-lang="presale-part-5" style="display: initial">
+                                        </div>
+                                        <span id="residue_block">0</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="phase-input">
                                 <div class="phase-input-left">
-                                    <div>Participate in the swap</div>
-                                    <input id="invest_num" type="text" placeholder="UNDT" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)">
-                                    <span>Currently available <span class="und_balance">0</span> UNDT/ <span class="eth_balance">0</span> ETH</span>
+                                    <div class="translate" data-lang="presale-part-6"></div>
+                                    <input id="invest_num" type="text" placeholder="UNDT" onkeyup="onlyNumber(this)"
+                                        onkeydown="onlyNumber(this)">
+                                    <span>
+                                        <div class="translate" data-lang="presale-part-7" style="display: initial">
+                                        </div>
+
+                                        <span class="und_balance">0</span> UNDT
+                                        <!-- /<span class="eth_balance">0</span>ETH -->
+                                    </span>
                                 </div>
                                 <div class="phase-input-right">
-                                    <div id="und2udao">
-                                        PARTICIPATE NOW
+                                    <div id="und2udao" class="translate" data-lang="presale-part-8">
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="presale-tips">
-                                <p> 1. Appointment period: the height of each block is one period, and the end of the first period is automatic progress to the next period.</p>
-                                <p> 2. Exchange ratio: The ratios of each period of exchange will varies according to the number of reservations. The actual exchange ratio =UDAO the number of pre-sales / UNDT the total number of exhibitors and reservations.</p>
-                                <p> 3. The appointment requires the transfer of UNDT to the UDAO issuance contract, which will result in miners' fees. Please check if the wallet has a certain amount of ETH.</p>
-                            </div>
+                            <p class="translate" data-lang="presale-part-9"></p>
+                            <p class="translate" data-lang="presale-part-10"></p>
+                            <p class="translate" data-lang="presale-part-11"></p>
+                        </div>
                     </div>
                     <div id="contTwo">
-                        <h4 class="cont-title">PRE-SALES RECORD</h4>
+                        <h4 class="cont-title translate" data-lang="presale-part-12"></h4>
                         <div id="tabMain">
                             <div class="tab-header">
                                 <ul id="tabs">
-                                    <li><a href="#" title="tab1" style="width:125px">UDAO PRE-SALE</a></li>
-                                    <li><a href="#" title="tab2" style="width:210px">I PARTICIPATED IN THE PRE-SALE</a></li>
+                                    <li><a href="#" title="tab1" class="cont-title translate"
+                                            data-lang="presale-part-13" style="width: 130px;"></a></li>
+                                    <li><a href="#" title="tab2" class="cont-title translate"
+                                            data-lang="presale-part-14" style="width: 210px;"></a></li>
                                 </ul>
                             </div>
                             <div id="tabContent">
@@ -148,9 +156,9 @@
                                     <table>
                                         <tbody class="sys_record">
                                             <thead>
-                                                <th>TRADING HOURS</th>
-                                                <th>UNDT PRE-SALES TOTAL</th>
-                                                <th>EXCHANGE RATIO </th>
+                                                <th class="translate" data-lang="presale-part-15"></th>
+                                                <th class="translate" data-lang="presale-part-16"></th>
+                                                <th class="translate" data-lang="presale-part-17"></th>
                                             </thead>
                                         </tbody>
                                     </table>
@@ -159,10 +167,10 @@
                                     <table>
                                         <tbody class="user_record">
                                             <thead>
-                                                <th>TRADING HOURS</th>
-                                                <th>TRADING VOLUME</th>
-                                                <th>COMPLETION QUANTITY</th>
-                                                <th>SOURCE</th>
+                                                <th class="translate" data-lang="presale-part-18"></th>
+                                                <th class="translate" data-lang="presale-part-19"></th>
+                                                <th class="translate" data-lang="presale-part-20"></th>
+                                                <th class="translate" data-lang="presale-part-21"></th>
                                             </thead>
                                         </tbody>
                                     </table>
@@ -171,103 +179,103 @@
                         </div>
                     </div>
                     <div id="contThree">
-                        <h4 class="cont-title">INTRODUCTION TO UNIONDAO TOKEN</h4>
+                        <h4 class="cont-title translate" data-lang="presale-part-22"></h4>
                         <div class="intro-cont">
-                            <div class="inptro-part">
-                                <span>Token information</span>
+                            <!-- <div class="inptro-part">
+                                <span class="translate" data-lang="presale-part-23"></span>
                                 <div></div>
-                            </div>
+                            </div> -->
                             <div class="inptro-part">
-                                <span>Token Name</span>
+                                <span class="translate" data-lang="presale-part-24"></span>
                                 <div>UNIONDAO</div>
                             </div>
                             <div class="inptro-part">
-                                <span>Token Symbol</span>
+                                <span class="translate" data-lang="presale-part-25"></span>
                                 <div>UDAO</div>
                             </div>
                             <div class="inptro-part">
-                                <span>Token Type</span>
+                                <span class="translate" data-lang="presale-part-26"></span>
                                 <div>ERC-20</div>
                             </div>
                             <div class="inptro-part">
-                                <span>Smart Contract Address</span>
-                                <div></div>
+                                <span class="translate" data-lang="presale-part-27"></span>
+                                <div>0x4a32e09c60af50f0a5869bf5c622f4e5d57c3b37</div>
                             </div>
 
                             <div class="inptro-part">
-                                <span>Token decimal point</span>
+                                <span class="translate" data-lang="presale-part-28"></span>
                                 <div>18</div>
                             </div>
                             <div class="inptro-part">
-                                <span>Total Token Available</span>
-                                <div>The initial circulation is 21,000,000.Subsequently more will be generated. Total supply will not exceed 100,000,000.</div>
+                                <span class="translate" data-lang="presale-part-29"></span>
+                                <div class="translate" data-lang="presale-part-30"></div>
                             </div>
                             <!-- <div class="inptro-part">
-                                <span>Cornerstone Time</span>
-                                <div>07/2018</div>
-                            </div>
+                                    <span>Cornerstone Time</span>
+                                    <div>07/2018</div>
+                                </div>
+                                <div class="inptro-part">
+                                    <span>Token sales</span>
+                                    <div>6,000,000ONE</div>
+                                </div>
+                                <div class="inptro-part">
+                                    <span>Sale Token Price</span>
+                                    <div>1UDAO=0.5USD</div>
+                                </div> -->
                             <div class="inptro-part">
-                                <span>Token sales</span>
-                                <div>6,000,000ONE</div>
-                            </div>
-                            <div class="inptro-part">
-                                <span>Sale Token Price</span>
-                                <div>1UDAO=0.5USD</div>
-                            </div> -->
-                            <div class="inptro-part">
-                                <span>Additional rules</span>
-                                <div>Additional rules：The daily market price auction coin shall not exceed 0.1% of the unissued amount.</div>
+                                <span class="translate" data-lang="presale-part-31"></span>
+                                <div class="translate" data-lang="presale-part-32"></div>
                             </div>
                             <!-- <div class="inptro-part">
-                                <span>Lock release rules</span>
-                                <div>The cornerstone is locked for 6 months, released 40%, and then released 10% per
-                                    month; The team takes 3 years to unlock and is released for the first time after 6
-                                    months of release.</div>
-                            </div> -->
+                                    <span>Lock release rules</span>
+                                    <div>The cornerstone is locked for 6 months, released 40%, and then released 10% per
+                                        month; The team takes 3 years to unlock and is released for the first time after 6
+                                        months of release.</div>
+                                </div> -->
                             <div class="inptro-part">
-                                <span>Token utility usage</span>
-                                <div>Passes are used to pay for service fees and loan interest within the system for community governance voting.</div>
+                                <span class="translate" data-lang="presale-part-33"></span>
+                                <div class="translate" data-lang="presale-part-34"></div>
                             </div>
                         </div>
                     </div>
                     <!--<div id="contFour">-->
-                        <!--<h5>•Address of token holder</h5>-->
-                        <!--<div class="address-table">-->
-                            <!--<table>-->
-                                <!--<tbody>-->
-                                    <!--<thead>-->
-                                        <!--<th>TOKEN</th>-->
-                                        <!--<th>TOKEN ALLOCATION</th>-->
-                                        <!--<th>TOKEN ADDRESS</th>-->
-                                    <!--</thead>-->
-                                    <!--<tr>-->
-                                        <!--<td>Cornerstone</td>-->
-                                        <!--<td>6%</td>-->
-                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td>Team</td>-->
-                                        <!--<td>3%</td>-->
-                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td>Foundation</td>-->
-                                        <!--<td>9%</td>-->
-                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td>Community Operation</td>-->
-                                        <!--<td>3%</td>-->
-                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
-                                    <!--</tr>-->
-                                    <!--<tr>-->
-                                        <!--<td>Mint Coin</td>-->
-                                        <!--<td>79%</td>-->
-                                        <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
-                                    <!--</tr>-->
-                                <!--</tbody>-->
-                            <!--</table>-->
-                        <!--</div>-->
+                    <!--<h5>•Address of token holder</h5>-->
+                    <!--<div class="address-table">-->
+                    <!--<table>-->
+                    <!--<tbody>-->
+                    <!--<thead>-->
+                    <!--<th>TOKEN</th>-->
+                    <!--<th>TOKEN ALLOCATION</th>-->
+                    <!--<th>TOKEN ADDRESS</th>-->
+                    <!--</thead>-->
+                    <!--<tr>-->
+                    <!--<td>Cornerstone</td>-->
+                    <!--<td>6%</td>-->
+                    <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>Team</td>-->
+                    <!--<td>3%</td>-->
+                    <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>Foundation</td>-->
+                    <!--<td>9%</td>-->
+                    <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>Community Operation</td>-->
+                    <!--<td>3%</td>-->
+                    <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                    <!--<td>Mint Coin</td>-->
+                    <!--<td>79%</td>-->
+                    <!--<td>aurwqufjkhfkglfdjkgllgfksdlkf;sdkf;sdkffsk</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                    <!--</table>-->
+                    <!--</div>-->
                     <!--</div>-->
                 </div>
             </div>
@@ -299,29 +307,41 @@
         });
 
         var W = $(".progress-percent").width();
-        var T =( W/100 *100).toFixed(0);
-        $('.progress-tip div').text(' CURRENT PROGRESS '+T+'%')
-        $(".progress-bar .progress-tip").css('left',W-100);
+        var T = (W / 100 * 100).toFixed(0);
+        $('.progress-tip div').text(' CURRENT PROGRESS ' + T + '%')
+        $(".progress-bar .progress-tip").css('left', W - 100);
     })
 
-
-    start();
+    setTimeout(start, 200);
+    setTimeout(start_Interval, 1000);
     function start() {
-        setInterval(ethAccounts, 800);
-        setInterval(getBlockNumber, 800);
-        setInterval(balance_und, 1000);
-        setInterval(ethBalance, 1000);
+        setTimeout(ethAccounts, 800);
+        setTimeout(getBlockNumber, 800);
+        setTimeout(balance_und, 1000);
+        setTimeout(ethBalance, 1000);
         // setTimeout(getMaxRate, 1000);
-        setInterval(getSaleAmount, 1000);
-        setInterval(getPeriod, 1500);
-        setInterval(getGasPrice, 1500);
-        setInterval(getAmount, 2500);
-        setInterval(getPeriodData, 3000);
+        setTimeout(getSaleAmount, 1000);
+        setTimeout(getPeriod, 1500);
+        setTimeout(getGasPrice, 1500);
+        setTimeout(getAmount, 2500);
+        setTimeout(getPeriodData, 3000);
         all_record(CONFIG.und_issue_addr)
+    }
+    function start_Interval() {
+        setInterval(ethAccounts, 2000);
+        setInterval(getBlockNumber, 2000);
+        setInterval(balance_und, 2000);
+        setInterval(ethBalance, 2000);
+        // setTimeout(getMaxRate, 1000);
+        setInterval(getSaleAmount, 2000);
+        setInterval(getPeriod, 2000);
+        setInterval(getGasPrice, 2000);
+        setInterval(getAmount, 2000);
+        // setInterval(getPeriodData, 2000);
     }
 
     var click_und2udao = 1;
-    $("#und2udao").click(function() {
+    $("#und2udao").click(function () {
         var num = $("#invest_num").val();
         if (num < 1) {
             return false;
@@ -333,7 +353,7 @@
         click_und2udao = -1;
         num = Number(num);
         var res = invest_und2udao(num);
-        if(res == 1){
+        if (res == 1) {
             click_und2udao = 1;
         }
     })
@@ -341,11 +361,11 @@
     var getPeriodData = async function () {
         let period = $("#current_period").text();
         period = Number(period);
-        if(period <= 0){
+        if (period <= 0) {
             // alert("期数获取失败");
             return;
         }
-        for(let i = 0;i < 3;i++){
+        for (let i = 0; i < 3; i++) {
             period -= 1;
             let num = await saleTotal(period);
             num = web3.utils.fromWei(num, CONFIG.und_wei);
@@ -354,22 +374,22 @@
             rate = web3.utils.fromWei(rate, CONFIG.udao_wei);
             rate = Number(rate).toFixed(CONFIG.Fixed2);
             let str = "<tr>" +
-                "<td>"+period+"</td>\n" +
-                "<td>"+num+"</td>\n" +
-                "<td>1UNDT="+rate+"UDAO</td>\n" +
+                "<td>" + period + "</td>\n" +
+                "<td>" + num + "</td>\n" +
+                "<td>1UNDT=" + rate + "UDAO</td>\n" +
                 "</tr>";
             $('.sys_record').append(str);
         }
     }
 
     function all_record(filt_addr) {
-        web3.eth.getAccounts(function(err, accounts) {
+        web3.eth.getAccounts(function (err, accounts) {
             if (accounts.length != 0) {
                 var selfaddr = accounts[0];
                 var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
-                $.get(apiurl, function(data) {
+                $.get(apiurl, function (data) {
                     // console.log(data);
-                    $.each(data.result, function(i, item) {
+                    $.each(data.result, function (i, item) {
                         item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
                         item.from = item.from.toLocaleUpperCase();
                         item.to = item.to.toLocaleUpperCase();
@@ -377,7 +397,7 @@
                         filt_addr = filt_addr.toLocaleUpperCase();
                         if (item.tokenSymbol == 'UNDT') {
                             if (item.from == selfaddr && item.to == CONFIG.udao_issue_addr.toLocaleUpperCase()) {
-                                var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>'+ web3.utils.fromWei(item.value, CONFIG.und_wei) +  'UNDT</td><td>' + web3.utils.fromWei(item.value,  CONFIG.und_wei)  + 'UNDT</td><td>INVESTMENT</td></tr>';
+                                var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>' + web3.utils.fromWei(item.value, CONFIG.und_wei) + 'UNDT</td><td>' + web3.utils.fromWei(item.value, CONFIG.und_wei) + 'UNDT</td><td>INVESTMENT</td></tr>';
                                 $(".user_record").append(temp);
                             }
                         }

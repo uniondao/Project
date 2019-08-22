@@ -33,6 +33,7 @@
 	<script type="text/javascript" src="./js/tools_func.js"></script>
 	<script type="text/javascript" src="./js/config2.js"></script>
 	<script type="text/javascript" src="./js/token/web3.min.js"></script>
+	<script type="text/javascript" src="./js/token/abi/abi_base.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
@@ -74,7 +75,7 @@
 						<div class="exchange-flex">
 							<div class="exchange-w-1">
 								<div class="exchange-w-1-part">
-									<div class="exchange-w-1-title">PAY WITH </div>
+									<div class="exchange-w-1-title translate" data-lang="exchange-part-1"></div>
 									<div class="spe-input">
 										<input type="text" value="" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="paywithNum">
 										<div class="exchange-w-2-part exchange-w-2-select changeOne myType paywith" type="paywith">
@@ -84,8 +85,8 @@
 											</div>
 										</div>
 									</div>
-									<span>Balance : </span><span class="payCurrentBalance balance">0</span><span class="coin">UNDT</span>
-									<span class="isShouldAuthorize" onclick="authorize()" style="display: none;"><font  class="issue_unlock">Unlock</font></span><span id="pwaite"></span>
+									<span class="translate" data-lang="exchange-part-2"> </span><span class="payCurrentBalance balance">0</span><span class="coin">UNDT</span>
+									<span class="isShouldAuthorize" onclick="authorize()" style="display: none;"><font  class="issue_unlock translate" data-lang="exchange-part-4"></font></span><span id="pwaite"></span>
 								</div>
 							</div>
 							<div class="exchange-w-1 exchange-w-img">
@@ -93,7 +94,7 @@
 							</div>
 							<div class="exchange-w-1">
 								<div class="exchange-w-1-part">
-									<div class="exchange-w-1-title">RECEIVE</div>
+									<div class="exchange-w-1-title translate" data-lang="exchange-part-3"></div>
 									<div class="spe-input">
 										<input type="text" value="" placeholder="0" onkeyup="onlyNumber(this)" onkeydown="onlyNumber(this)" id="receiveNum" disabled>
 										<div class="exchange-w-2-part exchange-w-2-select changeTwo myType receive" type="receive">
@@ -104,7 +105,7 @@
 											<img src="./images/arrow_left_g.png" alt="" class="layer-activation">
 										</div>
 									</div>
-									<span>Balance : </span><span class="reCurrentBalance balance">0</span><span class="coin">UDAO</span>
+									<span class="translate" data-lang="exchange-part-2"></span><span class="reCurrentBalance balance">0</span><span class="coin">UDAO</span>
 								</div>
 							</div>
 						</div>
@@ -114,7 +115,7 @@
 						<div class="exchange-w-4">
 							<div class="ex-btn" onclick="swap()">
 								<img src="./images/ex_coin_2.png" alt="">
-								<div>EXCHANGE</div>
+								<div class="translate" data-lang="exchange-part-5"></div>
 							</div>
 						</div>
 					</div>
@@ -175,13 +176,13 @@
 <script>
     let buttonState = {
         "flag" : 0,
-        "isdoing" : 0,
+        "forbid" : 0,
         "msg" : "",
     }
 
     function initState() {
         buttonState.flag = 0;
-        buttonState.isdoing = 0;
+        buttonState.forbid = 0;
         buttonState.msg = "";
     }
 
@@ -260,10 +261,20 @@
                         console.log(e);
                     }
                 );
-                let needAuth = await IsNeedAuth(CONFIG.exchange_undt_addr,'UNDT',0);
-                if(needAuth === true){
-                    updateState(msg);
-                }
+
+                IsNeedAuth(CONFIG.exchange_undt_addr,'UNDT',0).then(
+                    function (v) {
+                        if(v === true){
+                            buttonState.forbid = 0;
+                            updateState(script_Lan.locked[currentLan]);
+                            showNeedAuth();
+                        }
+                        console.log(buttonState);
+                    },
+                    function (e) {
+                        console.log("获取已授权信息失败");
+                    }
+                );
                 getPrice();
             } catch (e) {
                 console.log(e);
@@ -288,7 +299,7 @@
 				'  <div class="layer-back">' +
 				'  <img src="./images/layer_back.png" alt="">' +
 				'  </div>' +
-				'    <h3 class="select-layer-title">SELECTION OF CURRENCY</h3>' +
+				' <h3 class="select-layer-title">'+html_lan['exchange-part-6'][currentLan]+'</h3>' +
 				'<div class="search-input">' +
 				'<input type="text" name="" id="serch-content" value="" />' +
 				'<img src="./images/search.png" alt="">' +
@@ -347,10 +358,14 @@
         }
     });
 
-    $(document).on("click", ":radio", function () {
-       	var name = $(this).parents(".select-part").find('.stName').text();
-       	var logo = $(this).parents(".selec-flex").find('img').attr('src');
-       	var type = $(this).parents(".select-cont").attr('type');
+    // $(document).on("click", ":radio", function () {
+       	// var name = $(this).parents(".select-part").find('.stName').text();
+       	// var logo = $(this).parents(".selec-flex").find('img').attr('src');
+           // var type = $(this).parents(".select-cont").attr('type');
+    $(document).on("click", ".select-part", function () {
+        var name = $(this).find('.stName').text();
+        var logo = $(this).find(".selec-flex").find('img').attr('src');
+        var type = $(this).parents(".select-cont").attr('type');
 
         layer.closeAll();
         var dom = '.'+type;
@@ -376,7 +391,6 @@
         hideNeedAuth();
         initState();
         $("#receiveNum").val('');
-        $("#paywithNum").val('');
         let coin = $(".coin").eq(0).html();
         let temp = 'exchange_'+coin.toLowerCase()+'_addr';
         let Exaddr = CONFIG[temp];
@@ -384,7 +398,8 @@
             function (v) {
                 console.log(buttonState);
                 if(v === true){
-                    updateState("待解锁");
+                    buttonState.forbid = 0;
+                    updateState(script_Lan.locked[currentLan]);
                     showNeedAuth();
                 }
                 console.log(buttonState);
@@ -412,6 +427,7 @@
         $('.coin').eq(1).html(coin0);
 
         $(".getNum").text(0);
+        $("#receiveNum").val("");
         hideNeedAuth();
         initState();
         getPrice();
@@ -425,7 +441,8 @@
             function (v) {
                 console.log(buttonState);
                 if(v === true){
-                    updateState("待解锁");
+                    buttonState.forbid = 0;
+                    updateState(script_Lan.locked[currentLan]);
                     showNeedAuth();
                 }
                 console.log(buttonState);
@@ -458,7 +475,8 @@
             function (v) {
                 console.log(buttonState);
                 if(v === true){
-                    updateState("待解锁");
+                    buttonState.forbid = 0;
+                    updateState(script_Lan.locked[currentLan]);
                     showNeedAuth();
                 }
                 console.log(buttonState);
@@ -505,20 +523,13 @@
 			if(eth2exchange1 >0 && eth2exchange2<= 0){
                 eth2exchange2 = await exchange2ethNum();
                 console.log('1'+coin1+'能兑换：'+eth2exchange2+" ETH")
-			    if(coin1 == 'WBTC'){
-			        if(eth2exchange2 > 0){
-                        eth2exchange2 = eth2exchange2 / Math.pow(10,10);
-                        num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
-                    }else{
-                        num = 0;
-                    }
-                }else{
-                    if(eth2exchange2 > 0){
-                        num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
-                    }else{
-                        num = 0;
-                    }
-                }
+
+				if(eth2exchange2 > 0){
+					num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
+				}else{
+					num = 0;
+				}
+
                 console.log('1'+coin0+'能兑换：'+num+" "+coin1)
             }
 
@@ -541,22 +552,12 @@
 
             if(eth2exchange1 >0 && eth2exchange2<= 0){
                 eth2exchange2 = await exchange2ethNum();
-                if(coin0 == 'WBTC'){
-                    if(eth2exchange2 > 0){
-                        console.log(1111);
-                        eth2exchange2 = eth2exchange2 / Math.pow(10,10);
-                        console.log('1'+coin0+'能兑换：'+eth2exchange2+" ETH");
-                        num = Number(eth2exchange1) * Number(eth2exchange2);
-                    }else{
-                        num = 0;
-                    }
-                }else{
-                    if(eth2exchange2 > 0){
-                        num = Number(eth2exchange1) * Number(eth2exchange2);
-                    }else{
-                        num = 0;
-                    }
-                }
+				if(eth2exchange2 > 0){
+					num = Number(eth2exchange1) * Number(eth2exchange2);
+				}else{
+					num = 0;
+				}
+
                 console.log('1'+coin0+'能兑换：'+num+" "+coin1)
             }
 
@@ -564,8 +565,26 @@
             num = 0;
         }
 
-		num = Number(num);
+        let coin_decimals = coin1.toLowerCase() +'_decimals';
+        let pow = 18 - CONFIG[coin_decimals];
+        if(coin0 == 'UNDT'){
+            num = Number(num) * Math.pow(10,pow);
+		}else{
+            num = Number(num) / Math.pow(10,pow);
+		}
+
         $(".getNum").text(num.toFixed(8));
+
+        let num2 = $("#paywithNum").val();
+        let swap_one = num;
+        num2 = Number(num2);
+        swap_one = Number(swap_one);
+        if(swap_one <= 0){
+            console.log("暂未获取到相应比列");
+        }
+
+        let swap_num = num2 * swap_one;
+        $("#receiveNum").val(swap_num);
     }
 
     async function IsNeedAuth(exAddr,coin,num) {
@@ -588,16 +607,19 @@
 
     //授权入口
     function authorize() {
+        if(buttonState.forbid === 1) {
+			alert(buttonState.msg);
+			return;
+        }
+
         if(buttonState.flag === 1){
-            if(buttonState.isdoing === 1){
-                alert("请等待解锁操作完成");
-                return;
-            }
             let coin = $(".coin").eq(0).html();
             let temp = 'exchange_'+coin.toLowerCase()+'_addr';
             let Exaddr = CONFIG[temp];
             showPwait();
-            buttonState.isdoing = 1;
+            buttonState.flag = 1;
+            buttonState.forbid = 1;
+            buttonState.msg = script_Lan.waitlock[currentLan];
             authorize_coin(Exaddr,coin,Math.pow(10,16)).then(
                 function (v) {
                     console.log(v);
@@ -606,22 +628,19 @@
                 },
                 function (e) {
                     hidePwait();
-                    buttonState.isdoing = 0;
+                    initState();
+                    updateState(script_Lan.locked[currentLan]);
+                    buttonState.forbid = 0;
                     console.log(buttonState);
                 }
             );
-        }
+		}
     }
 
     //交换
     async function swap() {
         if(buttonState.flag === 1){
-            alert(script_Lan.locked[currentLan]);
-            return;
-        }
-
-        if(buttonState.isdoing === 1 && buttonState.flag === 0){
-            alert("请勿重复提交");
+            alert(buttonState.msg);
             return;
         }
 
@@ -630,7 +649,6 @@
         let payCoin = $(".paywith").find(".coin-name .CurrentCoin").text();
         let receiveCoin = $(".receive").find(".coin-name .CurrentCoin").text();
         let rateNum = $(".getNum").text();
-        let msg = '';
 
         if(num <= 0){
             alert(script_Lan.num_no_empty[currentLan]);
@@ -657,7 +675,9 @@
 
         if(payCoin == "ETH"){
             showPwait();
-            buttonState.isdoing = 1;
+            buttonState.flag = 1;
+            buttonState.forbid = 1;
+            buttonState.msg = script_Lan.dontAgain[currentLan];
             window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
             eth2exchange(num,receiveCoin).then(
                 function (v) {
@@ -666,13 +686,15 @@
                 },
                 function (e) {
                     hidePwait();
-                    buttonState.isdoing = 0;
+                    initState();
                     console.log(buttonState);
                 }
             );
         }else if(receiveCoin == "ETH"){
             showPwait();
-            buttonState.isdoing = 1;
+            buttonState.flag = 1;
+            buttonState.forbid = 1;
+            buttonState.msg = script_Lan.dontAgain[currentLan];
             window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
             exchange2eth(num,payCoin).then(
                 function (v) {
@@ -681,13 +703,15 @@
                 },
                 function (e) {
                     hidePwait();
-                    buttonState.isdoing = 0;
+                    initState();
                     console.log(buttonState);
                 }
             );
         }else if(payCoin == "UNDT"){
             showPwait();
-            buttonState.isdoing = 1;
+            buttonState.flag = 1;
+            buttonState.forbid = 1;
+            buttonState.msg = script_Lan.dontAgain[currentLan];
             window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
             exchange2other(num,rateNum,payCoin,receiveCoin).then(
                 function (v) {
@@ -696,14 +720,16 @@
                 },
                 function (e) {
                     hidePwait();
-                    buttonState.isdoing = 0;
+                    initState();
                     console.log(buttonState);
                 }
             );
         }else if(receiveCoin == "UNDT"){
             let tempCoin = 'exchange_'+payCoin.toLowerCase()+'_addr';
             showPwait();
-            buttonState.isdoing = 1;
+            buttonState.flag = 1;
+            buttonState.forbid = 1;
+            buttonState.msg = script_Lan.dontAgain[currentLan];
             window.Contract_exchange = await getContract(abi_exchange , CONFIG[tempCoin]);
             exchange2other(num,rateNum,payCoin,receiveCoin).then(
                 function (v) {
@@ -712,7 +738,7 @@
                 },
                 function (e) {
                     hidePwait();
-                    buttonState.isdoing = 0;
+                    initState();
                     console.log(buttonState);
                 }
             );

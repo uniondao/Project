@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UnionDao</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/base.js"></script>
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/airdrop.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./header.html");
+            $("#footCont").load("./footer.html");
+        });
+    </script>
+
+</head>
+
+<body>
+    <input type="hidden" id="address">
+    <input type="hidden" id="candy_card">
+    <input type="hidden" id="getGasPrice">
+    <input type="hidden" id="invit_referee">
+    <input type="hidden" id="und_balance">
+    <div class="wrapper">
+        <div class="main">
+            <header></header>
+            <div id="candyBanner">
+                <div class="candy-banner">
+                    <h4 class="candy-title">
+                        CANDY
+                    </h4>
+                    <div class="candy-banner-text translate" data-lang="candy-part-1">
+                    </div>
+                    <div class="candy-banner-btn translate" id="createAccount" onclick="createAccount()"
+                        data-lang="candy-part-2">
+                    </div>
+                    <div class="candy-banner-card translate" data-lang="candy-part-3">
+                    </div>
+                    <div id="bank_card" class="candy-bank-card"></div>
+                </div>
+            </div>
+            <div id="candyCont">
+                <div class="candy-cont-1">
+                    <div class="candy-card">
+                        <span class="bind_card_span translate" data-lang="candy-part-4"></span>
+                        <div class="candy-input">
+                            <label for="" class="translate" data-lang="candy-part-44"></label>
+                            <input type="text" id="bind_card">
+                            <!--<img src="./images/code.png" alt="">-->
+                        </div>
+                        <div class="candy-cont-btn translate" onclick="bindInvit()" data-lang="candy-part-5">
+                        </div>
+                    </div>
+                </div>
+                <div class="candy-cont-2">
+                    <div class="candy-win">
+                        <h5 class="winning-title translate" data-lang="candy-part-6">
+
+                        </h5>
+                        <div class="winning-header">
+                            <div class="translate" data-lang="candy-part-7"></div>
+                            <div class="translate" data-lang="candy-part-8"></div>
+                            <div class="translate" data-lang="candy-part-9"></div>
+                        </div>
+                        <div class="winning-cont">
+                        </div>
+                    </div>
+                </div>
+                <div class="candy-cont-3">
+                    <div class="candy-receive">
+                        <h5 class="receive-title translate" data-lang="candy-part-10">
+                        </h5>
+                        <div class="candy-receive-text">
+                            <div class="translate" data-lang="candy-part-11" style="display: inline">
+
+                            </div>
+                            <span id="all_winning">0</span>UDAO
+                        </div>
+                        <div class="candy-receive-text">
+                            <div class="translate" data-lang="candy-part-12" style="display: inline">
+
+                            </div>
+                            <span id="have_received">0</span>UDAO，
+                            <div class="translate" data-lang="candy-part-13" style="display: inline">
+
+                            </div>
+                            <span id="not_received">0</span>UDAO
+                        </div>
+                        <div class="candy-receive-btn translate" data-lang="candy-part-14" onclick="getGift()">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="candy-cont-4">
+                    <div class="candy-recommend">
+                        <div class="candy-recommend-title">
+                            <span class="translate" data-lang="candy-part-15"></span>
+                            <div class="translate" data-lang="candy-part-16"></div>
+                        </div>
+                        <div class="candy-recommend-text translate" data-lang="candy-part-17">
+
+                        </div>
+                        <div class="candy-recommend-input">
+                            <textarea type="text" id="copyAddress" value="https://uniondao.com/candy.html?"
+                                readonly>
+                                </textarea>
+                            <div class="copy-link translate" onclick="copyUrl()" data-lang="candy-part-18">
+                            </div>
+                        </div>
+                        <!--<div class="candy-recommend-btn" onclick="copyUrl()">-->
+                        <!--立即邀请-->
+                        <!--</div>-->
+                        <div class="candy-recommend-num">
+                            <div class="translate" data-lang="candy-part-19" style="display: inline">
+
+                            </div>
+                            <span id="invit_winning">0</span>UDAO
+                        </div>
+                        <div class="candy-recommend-num">
+                            <div class="translate" data-lang="candy-part-20" style="display: inline">
+
+                            </div>
+                            <span id="have_received_invit">0</span>UDAO
+                        </div>
+                        <div class="candy-recommend-num">
+                            <div class="translate" data-lang="candy-part-21" style="display: inline">
+
+                            </div>
+                            <span id="not_received_invit">0</span>UDAO
+                        </div>
+                        <div class="candy-recommend-tip translate" data-lang="candy-part-22">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="candy-cont-5">
+                    <div class="candy-rule">
+                        <p class="rule-req translate" data-lang="candy-part-44"></p>
+                        <h5 class="rule-title translate" data-lang="candy-part-23">
+
+                        </h5>
+                        <div class="candy-rule-cont">
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-24"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-25"></li>
+                                    <li class="translate" data-lang="candy-part-26"></li>
+                                    <li class="translate" data-lang="candy-part-27"></li>
+                                    <li class="translate" data-lang="candy-part-28"></li>
+                                </ul>
+                            </div>
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-29"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-30">
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-31"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-32"></li>
+                                    <li class="translate" data-lang="candy-part-33"></li>
+                                    <li class="translate" data-lang="candy-part-34"></li>
+                                    <li class="translate" data-lang="candy-part-35"></li>
+                                    <li class="translate" data-lang="candy-part-36"></li>
+                                    <li class="translate" data-lang="candy-part-37"></li>
+                                </ul>
+                            </div>
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-38"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-39">
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-40"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-41">
+
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="candy-rule-part">
+                                <span class="translate" data-lang="candy-part-42"></span>
+                                <ul>
+                                    <li class="translate" data-lang="candy-part-43">
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footCont"> </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    setTimeout(start, 500);
+    getQueryVariable();
+    setTimeout(history, 2000);
+    function start() {
+        setTimeout(ethAccounts, 500);
+        setTimeout(addressToAccounts, 800);
+        setTimeout(invit_referee, 800);
+        setTimeout(balance_und, 800);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1000);
+        setTimeout(winning, 1500);
+        setTimeout(haveGetGift, 1500);
+        setTimeout(queryRefereeLuck, 1500);
+        setTimeout(haveGetRefereeGift, 1500);
+
+    }
+    setTimeout(start_Interval, 1000);
+    function start_Interval() {
+        setInterval(ethAccounts, 2000);
+        setInterval(addressToAccounts, 2000);
+        setInterval(invit_referee, 2000);
+        setInterval(balance_und, 2000);
+        setInterval(getGasPrice, 2000);
+        setInterval(accounts, 2000);
+        setInterval(winning, 200);
+        setInterval(haveGetGift, 200);
+        setInterval(queryRefereeLuck, 2000);
+        setInterval(haveGetRefereeGift, 2000);
+    }
+    function accounts() {
+        account = $('#candy_card').val();
+        if (account) {
+            $('.candy-banner-btn').css('display', 'none');
+            $('.candy-banner-card').css('display', 'none');
+            $('.candy-bank-card').css('display', 'block');
+            $('#copyAddress').val('https://uniondao.com/candy.html?card=' + account);
+        } else {
+            $('.candy-banner-btn').css('display', 'block');
+            $('.candy-banner-btn').css('display', 'block');
+            $('.candy-bank-card').css('display', 'none');
+            $('#copyAddress').val('https://uniondao.com/candy.html');
+        }
+        referee = $('#invit_referee').val();
+        if (referee) {
+            $('.candy-cont-btn').css('display', 'none');
+            $('#bind_card').css('display', 'none');
+            $('.candy-input').html(referee);
+            $('.candy-input').css('color', '#676767');
+        } else {
+            $('.candy-cont-1').css('display', 'block');
+        }
+    }
+    function getQueryVariable() {
+        getcookie_name = getCookie('card');
+        if (getcookie_name) {
+            $('#bind_card').val(getcookie_name);
+        }
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == 'card') {
+                $('#bind_card').val(pair[1]);
+                setCookie('card', pair[1]);
+            }
+        }
+    }
+
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+        if (arr = document.cookie.match(reg))
+
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+
+    function setCookie(name, value) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() + 60 * 60 * 1000 * 24 * 30);
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+    }
+
+    function history() {
+        var qi = 101;
+        var html = '';
+        Contract_airdrop.methods.queryLuckNumber().call()
+            .then(function (data) {
+                if(Array.isArray(data)){
+                    data.reverse();
+                    data.forEach(function (item, index) {
+                        qi--;
+                        if (item != "0" || item != 0) {
+
+                            block = Number(qi) * 6000 + 8395100;
+                            html += "<div class='winning-part'>" +
+                                "<div>" + qi + "</div>" +
+                                "<div>" + item + "</div>" +
+                                "<div>" + block + "</div>" +
+                                "</div>";
+
+                        }
+                    });
+                }else{
+                    block = 6000 + 8395100;
+                    html += "<div class='winning-part'>" +
+                        "<div>" + 1 + "</div>" +
+                        "<div>" + data + "</div>" +
+                        "<div>" + block + "</div>" +
+                        "</div>";
+
+                }
+
+                $(".winning-cont").append(html);
+            });
+    }
+</script>
+<script>
+    function copyUrl() {
+        var Url = document.getElementById("copyAddress");
+        Url.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        alert("复制成功！");
+    }
+</script>

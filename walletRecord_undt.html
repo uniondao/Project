@@ -20,6 +20,8 @@
     <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
     <script type="text/javascript" src="./js/token/base.js"></script>
     <script type="text/javascript" src="./js/token/coin/pax.js"></script>
     <script type="text/javascript" src="./js/token/coin/eth.js"></script>
@@ -69,18 +71,17 @@
                     </div>
                     <div class="wallet-rcont-btn">
                         <div class="wallet-rcont-btn-1">
-                            <div class="collection">COLLECTION</div>
+                            <div class="collection translate" data-lang="wallet-part-3"></div>
                         </div>
                         <div class="wallet-rcont-btn-2">
-                            <div class="payment"> PAYMENT</div>
+                            <div class="payment translate" data-lang="wallet-part-4"> </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="record">
                 <div class="record-cont">
-                    <h3 class="record-title">
-                        TRANSACTION HISTORY
+                    <h3 class="record-title translate" data-lang="wallet-part-15">
                     </h3>
                 </div>
                 <div class="readmore">
@@ -125,37 +126,37 @@
                 + '  <div class="detail-left">'
                 + ' <img src="./images/finish.png" alt="">'
                 + '<!-- <img src="./images/processing.png" alt=""> -->'
-                + '<span>Transaction Amount:</span>'
+                + '<span>' + html_lan['wallet-part-16'][currentLan] + '</span>'
                 + '   <div class="tran-num">0</div>'
                 + '  </div>'
                 + ' <div class="detail-right">'
                 + '  <div class="detail-right-part">'
-                + '  <span>Issuer:</span>'
+                + '  <span>' + html_lan['wallet-part-17'][currentLan] + '</span>'
                 + '  <div class="tran-from"></div>'
                 + ' </div>'
                 + '   <div class="detail-right-part">'
-                + '   <span>Payee:</span>'
+                + '   <span>' + html_lan['wallet-part-18'][currentLan] + '</span>'
                 + '   <div clas="detail-part-flex">'
                 + '  <span class="tran-to"></span>'
                 + '   </div>'
                 + '    </div>'
                 + ' <div class="detail-right-part">'
-                + '  <span>blockHash:</span>'
+                + '  <span>' + html_lan['wallet-part-19'][currentLan] + '</span>'
                 + ' <div><a href="" class="tran-hash"></a></div>'
                 + '  </div>'
                 + '   <div class="detail-right-part">'
-                + '   <span>Remark:</span>'
+                + '   <span>' + html_lan['wallet-part-8'][currentLan] + ':</span>'
                 + '   <div class="detail-part-flex">'
                 + '   <span class="tran-remark"></span>'
                 + '</div>'
                 + '   </div>'
                 + '    <div class="detail-right-part">'
-                + '   <span>block:</span>'
+                + '   <span>' + html_lan['wallet-part-20'][currentLan] + '</span>'
                 + ' <div class="tran-block">564564</div>'
                 + ' </div>'
                 + '     <!-- <div class="detail-right-part"> <span>Network Confirmation:</span> <div>3/12</div></div> -->'
                 + '  <div class="detail-right-part">'
-                + '    <span>Transaction Time :</span>'
+                + '    <span>' + html_lan['wallet-part-21'][currentLan] + '</span>'
                 + '  <div class="tran-time"></div>'
                 + '  </div>'
                 + '</div>'
@@ -209,7 +210,7 @@
                                             account_have = '';
                                             var temp = '<div class="record-list">'
                                                 + '<div class="record-part">'
-                                                +'<div class="record-part-0"><img src="../images/transfer_out.png"></div>'
+                                                + '<div class="record-part-0"><img src="../images/transfer_out.png"></div>'
                                                 + '<div class="record-part-1" style="width:55%;">'
                                                 + '<div class="record-address">'
                                                 + '<span>' + item.to + '</span>'
@@ -239,7 +240,7 @@
                                                 + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
                                                 + '</div>'
                                                 + '<div class="record-part-3">'
-                                                + '<div class="record-status">transaction success</div>'
+                                                + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
                                                 + '</div>'
                                                 + '</div>'
                                                 + '</div>';
@@ -256,7 +257,7 @@
                                                     remark = event.returnValues._msg;
                                                     var temp = '<div class="record-list">'
                                                         + '<div class="record-part">'
-                                                        +'<div class="record-part-0"><img src="../images/transfer_out.png"></div>'
+                                                        + '<div class="record-part-0"><img src="../images/transfer_out.png"></div>'
                                                         + '<div class="record-part-1" style="width:55%;">'
                                                         + '<div class="record-address">'
                                                         + '<span>' + item.to + '</span>'
@@ -286,7 +287,7 @@
                                                         + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
                                                         + '</div>'
                                                         + '<div class="record-part-3">'
-                                                        + '<div class="record-status">transaction success</div>'
+                                                        + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
                                                         + '</div>'
                                                         + '</div>'
                                                         + '</div>';
@@ -306,7 +307,7 @@
                                             account_have = '';
                                             var temp = '<div class="record-list">'
                                                 + '<div class="record-part">'
-                                                +'<div class="record-part-0"><img src="../images/transfer.png"></div>'
+                                                + '<div class="record-part-0"><img src="../images/transfer.png"></div>'
                                                 + '<div class="record-part-1" style="width:55%;">'
                                                 + '<div class="record-address">'
                                                 + '<span>' + item.from + '</span>'
@@ -336,7 +337,7 @@
                                                 + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
                                                 + '</div>'
                                                 + '<div class="record-part-3">'
-                                                + '<div class="record-status">transaction success</div>'
+                                                + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
                                                 + '</div>'
                                                 + '</div>'
                                                 + '</div>';
@@ -353,7 +354,7 @@
                                                     remark = event.returnValues._msg;
                                                     var temp = '<div class="record-list">'
                                                         + '<div class="record-part">'
-                                                        +'<div class="record-part-0"><img src="../images/transfer.png"></div>'
+                                                        + '<div class="record-part-0"><img src="../images/transfer.png"></div>'
                                                         + '<div class="record-part-1" style="width:55%;">'
                                                         + '<div class="record-address">'
                                                         + '<span>' + item.from + '</span>'
@@ -383,7 +384,7 @@
                                                         + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
                                                         + '</div>'
                                                         + '<div class="record-part-3">'
-                                                        + '<div class="record-status">transaction success</div>'
+                                                        + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
                                                         + '</div>'
                                                         + '</div>'
                                                         + '</div>';
@@ -420,19 +421,19 @@
                 + ' <div class="layer-close">'
                 + ' <img src="/images/close_2.png" alt="">'
                 + '</div>'
-                + '  <h4 class="pay-layer-title">UNDT PAYMENT</h4>'
+                + '  <h4 class="pay-layer-title">' + html_lan['wallet-part-10'][currentLan] + '</h4>'
                 + '  <div class="pay-layer-cont">'
                 + '  <div class="pay-layer-part">'
-                + ' <span>Pay to</span>'
+                + ' <span>' + html_lan['wallet-part-6'][currentLan] + '</span>'
                 + '   <input type="text" class="pay-input" id="payee_undt">'
                 //                + ' <img src="./images/code.png" alt="">'
                 + '  </div>'
                 + '  <div class="pay-layer-part">'
-                + ' <span>Amount</span>'
+                + ' <span>' + html_lan['wallet-part-7'][currentLan] + '</span>'
                 + ' <input type="text" class="pay-input" id="amount_undt" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
                 + '  </div>'
                 + '    <div class="pay-layer-part">'
-                + '  <span>Remarks</span>'
+                + '  <span>' + html_lan['wallet-part-8'][currentLan] + '</span>'
                 + ' <input type="text" class="pay-input" id="remarks_undt">'
                 + '  </div>'
                 //                + '  <div class="pay-layer-part" style="margin-top: 60px;">'
@@ -440,7 +441,7 @@
                 //                + '  <input type="range" class="pay-input-2" value="0">'
                 //                + '  </div>'
                 + '  <div class="pay-next">'
-                + '   <a href="javasrcipt:;" id="undt_send" onclick="undt_send()">NEXT</a>'
+                + '   <a href="javasrcipt:;" id="undt_send" onclick="undt_send()">' + html_lan['wallet-part-9'][currentLan] + '</a>'
                 + '   </div>'
                 + '    </div>'
                 + ' </div>'
@@ -465,14 +466,14 @@
                 + ' <div class="layer-close2">'
                 + '  <img src="/images/close_2.png" alt="">'
                 + '   </div>'
-                + '    <h4 class="col-layer-title">UNDT COLLECTION</h4>'
+                + '    <h4 class="col-layer-title">' + html_lan['wallet-part-14'][currentLan] + '</h4>'
                 + '   <div class="col-layer-cont">'
                 + '  <div class="col-info">'
-                + '   <span>Scan the QR code below to pay me</span>'
+                + '   <span>' + html_lan['wallet-part-12'][currentLan] + '</span>'
                 + '  <div class="col-num">$ <span id="undt_collection">0</span></div>'
                 + '<div class="col-address">'
                 + '  <span style="text-align: center">0000000000000000000</span>'
-                + '       <div id="account_address">Switch to address collection</div>'
+                + '       <div id="account_address">' + html_lan['wallet-part-13'][currentLan] + '</div>'
                 + ' </div>'
                 + '      <div class="col-code">'
                 + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account">'
