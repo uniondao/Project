@@ -62,7 +62,7 @@ function dNum(num1,num2) {
     return (Math.floor(num1/num2 * 10000) / 100.00)
 }
 
-//验证创建账号txid是否成功
+//验证发送txid是否成功
 function Verification_send(txid){
     var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
     $.get(apiurl, function(data) {
@@ -170,27 +170,71 @@ function Verification_redemption(txid){
     });
 }
 
+//验证绑定推荐txid是否成功
+function Verification_bind(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_bind(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.bind_success[currentLan]);
+            }else{
+                alert(script_Lan.bind_fail[currentLan]);
+            }
+            $(".candy-cont-btn").html(script_Lan.determine_binding[currentLan]);
+        }
+    });
+}
+
+//验证领取奖励txid是否成功
+function Verification_airdrop(txid){
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_airdrop(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.aipdrop_success[currentLan]);
+            }else{
+                alert(script_Lan.aipdrop_fail[currentLan]);
+            }
+            $(".candy-receive-btn").html(script_Lan.free_receive[currentLan]);
+        }
+    });
+}
+
 function Verification2(txid,type){
     var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
     $.get(apiurl, function(data) {
         if(!data.result){
             setTimeout(Verification2(txid,type), 1000);
         }else{
-            if(data.result.status == '0x1'){
-                if(type == 1){
+            if(type == 1){
+                if(data.result.status == '0x1'){
+                    //授权
                     hidePwait();
                     hideNeedAuth()
                     initState();
                 }else{
-                    //兑换
+                    hidePwait();
+                    initState();
+                    updateState(script_Lan.locked[currentLan]);
+                    buttonState.forbid = 0;
+                    console.log(buttonState);
+                    alert(buttonState.msg);
+                }
+            }else {
+                if(data.result.status == '0x1'){
+                    //转换
                     alert(script_Lan.swap_success[currentLan]);
                     location.reload();
+                }else{
+                    hidePwait();
+                    initState();
+                    console.log(buttonState);
+                    alert(script_Lan.swap_err[currentLan]);
                 }
-            }else{
-                hidePwait();
-                buttonState.isdoing = 0;
-                alert(script_Lan.lockErr[currentLan]);
-                console.log(buttonState);
             }
         }
     });
