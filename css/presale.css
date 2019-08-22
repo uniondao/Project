@@ -62,7 +62,8 @@
 	letter-spacing: 0px;
 	color: #ffffff;
 	margin-top: 47px;
-	text-align: center
+	text-align: center;
+	width:248px;
 }
 
 #presaleCont {
@@ -765,7 +766,8 @@ h4.cont-title {
 }
 
 .exchange-w-1 .exchange-w-1-part .coin-name div{
-	padding: 0 15px
+	padding: 0 15px;
+	cursor: pointer;
 }
 
 .exchange-w-1 .exchange-w-1-part .coin-name img{
@@ -872,7 +874,7 @@ position: relative;
 	align-items: center;
 	padding: 0 44px;
 	box-sizing: border-box;
-	justify-content: space-between;
+	justify-content: center;
 	cursor: pointer;
 }
 
@@ -882,6 +884,7 @@ position: relative;
 	font-weight: normal;
 	font-stretch: normal;
 	color: #ffffff;
+	margin-left: 10px;
 }
 
 
@@ -921,11 +924,11 @@ position: relative;
 	padding: 40px 4% 20px 4%;
 	box-sizing: border-box;
 	flex-wrap: wrap;
-	justify-content: space-between
 }
 
 .select-layer .select-cont .select-part {
-	width: 32%;
+	width: 31%;
+    margin-left: 2%;
 	height: 50px;
 	background-color: #ffffff;
 	border-radius: 3px;
@@ -934,7 +937,7 @@ position: relative;
 	display: -webkit-flex;
 	align-items: center;
 	justify-content: space-between;
-
+	cursor: pointer;
 	padding: 0 44px 0 10px;
 	box-sizing: border-box;
 	margin-bottom: 46px;

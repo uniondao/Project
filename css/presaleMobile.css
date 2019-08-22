@@ -239,7 +239,7 @@ body {
     font-size: 10px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 14px;
+    line-height: 16px;
     letter-spacing: 0px;
     color: #666666;
 }
@@ -363,11 +363,10 @@ h4.cont-title {
     font-size: 10px;
     font-weight: normal;
     font-stretch: normal;
-    height: 41px;
-    line-height: 41px;
     color: #ffffff;
     background-color: #057067;
-
+    padding: 10px 0;
+    line-height: 20px;
 }
 
 .tab-part table tr {
@@ -527,15 +526,15 @@ h4.cont-title {
     border-radius: 4px;
 }
 
-.progress-bar .progress-tip span {
-    width: 0;
-    height: 0;
-    border-left: 12px solid transparent;
-    border-right: 12px solid transparent;
-    border-top: 15px solid #ececec;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0%);
+.progress-bar .progress-tip span.arrow-down {
+	width: 0;
+	height: 0;
+	border-left: 12px solid transparent;
+	border-right: 12px solid transparent;
+	border-top: 15px solid #ececec;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0%);
 }
 
 #progressBar {
@@ -661,7 +660,7 @@ h4.cont-title {
 	font-weight: normal;
 	font-stretch: normal;
 	color: #777777;
-	display: block;
+	display: inline-block;
 }
 
 .exchange-w-1 .exchange-w-1-part input {
@@ -677,6 +676,7 @@ h4.cont-title {
 	color: #777777;
 	padding: 0 10px;
     box-sizing: border-box;
+    border: 1px solid #d2d2d2;
 }
 
 .exchange-w-1 .exchange-w-1-part .coin-name div{
@@ -690,7 +690,6 @@ h4.cont-title {
 .exchange-w-1 .exchange-w-1-part .spe-input{
 position: relative;
     margin: 10px 0 5px 0;
-    border: 1px solid #d2d2d2;
     border-radius: 3px;
 }
 
@@ -738,7 +737,8 @@ position: relative;
 	border-radius: 4px;
 	line-height: 38px;
 	padding: 0 6px;
-	box-sizing: border-box
+    box-sizing: border-box;
+    cursor: pointer;
 } 
 
 
@@ -796,7 +796,7 @@ position: relative;
     align-items: center;
     padding: 0 30px;
     box-sizing: border-box;
-    justify-content: space-between;
+    justify-content:center;
     cursor: pointer;
 }
 
@@ -810,6 +810,7 @@ position: relative;
     font-weight: normal;
     font-stretch: normal;
     color: #ffffff;
+    margin-left: 5px;
 }
 
 
@@ -865,6 +866,7 @@ position: relative;
     padding: 0 5%;
     box-sizing: border-box;
     margin-bottom: 8.5px;
+    cursor: pointer;
 }
 
 .select-part .selec-flex {
@@ -872,10 +874,11 @@ position: relative;
     display: -webkit-flex;
     align-items: center;
     position: relative;
+    height: 23.5px;
 }
 
 .select-part img {
-    margin: 0 14px 0 20px;
+    margin: 0 10px 0 25px;
     width:26.5px;
     height: 26.5px;
 }

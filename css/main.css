@@ -366,3 +366,459 @@ h4.team-title {
     font-stretch: normal;
     color: #737373;
 }
+
+
+#candyBanner {
+    background: url(../images/presale_bg.png) no-repeat center 0;
+    /* background-size: 100%; */
+}
+
+#candyBanner .candy-banner {
+    padding: 100px 0 150px 0;
+}
+
+.candy-banner .candy-banner-text,
+.candy-banner .candy-title,
+.candy-banner .candy-banner-card {
+    font-family: MADEFutureX-Medium;
+    font-size: 23px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+    margin: 50px 0;
+}
+
+.candy-banner .candy-title {
+    font-size:30px;
+}
+
+.candy-banner .candy-banner-text {
+    
+}
+
+
+.candy-banner .candy-banner-btn {
+    width: 274px;
+    height: 52px;
+    margin: 0 auto;
+    background-image: linear-gradient(90deg,
+ #057067 0%,
+ #0f9186 100%),
+ linear-gradient(#057067,
+ #057067);
+    background-blend-mode: normal,
+ normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 5px;
+    border: solid 1px #ffffff;
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 52px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.candy-banner .candy-banner-card {
+    color: #e4c297
+}
+
+#candyCont {
+    width: 100%;
+}
+
+
+#candyCont .candy-cont-1,
+#candyCont .candy-cont-2,
+#candyCont .candy-cont-3,
+#candyCont .candy-cont-4,
+#candyCont .candy-cont-5 {
+    width: 83%;
+    margin: 0 auto;
+    padding-top:40px;
+}
+
+#candyCont .candy-cont-1 .candy-card {
+    padding: 50px 0;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px 0px rgba(175, 175, 175, 0.75);
+    border-radius: 5px;
+}
+
+.candy-card span {
+    display: block;
+    font-family: MADEFutureX-Medium;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #057067;
+    text-align: center;
+}
+
+.candy-card .candy-input {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.candy-card .candy-input input {
+    width: 325px;
+    height: 56px;
+    background-color: #ffffff;
+    box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    padding: 0 12px;
+    font-family: MADEFutureX-Thin;
+    font-size: 14px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 50px 0;
+}
+
+.candy-card .candy-input label{
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #057067;
+    margin-right: 20px;
+}
+
+.candy-card .candy-input img {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 2%;
+}
+
+.candy-card .candy-cont-btn {
+    width: 174px;
+    height: 52px;
+    background-image: linear-gradient(90deg,
+ #057067 0%,
+ #0f9186 100%),
+ linear-gradient(#057067,
+ #057067);
+    background-blend-mode: normal,
+ normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 5px;
+    border: solid 1px #ffffff;
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 52px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto
+}
+
+#candyCont .candy-cont-2 .candy-win,
+#candyCont .candy-cont-3 .candy-receive,
+#candyCont .candy-cont-4 .candy-recommend,
+#candyCont .candy-cont-5 .candy-rule {
+    padding: 50px 0;
+    box-sizing: border-box;
+    border: solid 1px #f1eaea;
+    border-radius: 5px;
+}
+
+.candy-win h5.winning-title,
+.candy-receive h5.receive-title,
+.candy-rule h5.rule-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    text-align: center;
+    margin-bottom:30px;
+}
+
+.candy-win .winning-header {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 1px solid #b3dad3;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.candy-win .winning-header div {
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #287D6E;
+}
+
+.candy-win .winning-part {
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+    line-height: 45px;
+}
+
+.candy-win .winning-part div {
+    font-family: MADEFutureX-Light;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #676767;
+}
+
+
+.candy-receive .candy-receive-text {
+    font-family: MADEFutureX-Light;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #464646;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.candy-receive .candy-receive-text span {
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #287D6E;
+}
+
+
+.candy-receive .candy-receive-btn {
+    width: 174px;
+    height: 52px;
+    background-image: linear-gradient(90deg,
+ #057067 0%,
+ #0f9186 100%),
+ linear-gradient(#057067,
+ #057067);
+    background-blend-mode: normal,
+ normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 5px;
+    border: solid 1px #ffffff;
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 52px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.candy-recommend .candy-recommend-title {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.candy-recommend .candy-recommend-title span {
+    font-family:  MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+}
+
+
+.candy-recommend .candy-recommend-title div {
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+}
+
+.candy-recommend .candy-recommend-text {
+    font-family: MADEFutureX-Light;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #464646;
+    width: 70%;
+    margin: 0 auto;
+    padding:40px 0
+
+}
+
+.candy-recommend .candy-recommend-input {
+    width: 70%;
+    margin: 0 auto;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.candy-recommend .candy-recommend-input textarea {
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    color: #287D6E;
+    border: none;
+    text-align: center;
+    resize:none;
+    flex: 1;
+}
+
+.candy-recommend .candy-recommend-input .copy-link {
+    font-family: MADEFutureX-Light;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #287D6E;
+    text-align: center;
+    width: 130.5px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.candy-recommend .candy-recommend-btn {
+    width: 174px;
+    height: 52px;
+    background-image: linear-gradient(90deg,
+ #057067 0%,
+ #0f9186 100%),
+ linear-gradient(#057067,
+ #057067);
+    background-blend-mode: normal,
+ normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 5px;
+    border: solid 1px #ffffff;
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 52px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+    margin-right: 53px;
+    cursor: pointer;
+}
+
+.candy-recommend .candy-recommend-num {
+    font-family: MADEFutureX-Light;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #464646;
+    padding-top: 20px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.candy-recommend .candy-recommend-num span {
+    font-family: MADEFutureX-Medium;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #287D6E;
+}
+
+.candy-recommend .candy-recommend-tip {
+    font-family: MADEFutureX-Light;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: red;
+    margin-top: 20px;
+    text-align: center
+}
+
+#candyCont .candy-cont-5 {
+    margin-bottom: 2rem
+}
+
+.candy-rule-cont{
+    width: 70%;
+    margin: 0 auto;
+}
+
+.candy-rule-cont .candy-rule-part span {
+    font-family: MADEFutureX-Medium;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    display: block;
+    margin-top: 20px;
+}
+
+
+.candy-rule-cont .candy-rule-part ul li {
+    font-family: MADEFutureX-Light;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #676767;
+    line-height: 20px;
+    margin-top:10px;
+}
+.candy-bank-card{
+    font-family: MADEFutureX;
+    font-size: 25px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #baca64;
+    white-space: nowrap;
+    margin-top: 0.2rem;
+    text-align: center;
+    display: none;
+}
+
+.winning-cont{
+    width: 70%;
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: 150px;
+}
+
+.rule-req {
+    width: 70%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    font-family: MADEFutureX-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    line-height: 30px;
+}
