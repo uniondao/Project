@@ -172,9 +172,21 @@ var script_Lan = {
         "cn" : "解锁失败",
         "en" : "unlock fail",
     },
+    "waitlock" :{
+        "cn" : "请等待解锁操作完成",
+        "en" : "wait unlock finish",
+    },
     "swap_success" :{
         "cn" : "转换成功",
         "en" : "Exchange Success",
+    },
+    "swap_err" :{
+        "cn" : "转换失败",
+        "en" : "Exchange fail",
+    },
+    "dontAgain" :{
+        "cn" : "请勿重复提交",
+        "en" : "Don't submit again",
     },
     "redemption_now" : {
         "cn" : "立即赎回",
@@ -200,5 +212,36 @@ var script_Lan = {
         "cn" : "转账失败",
         "en" : "Transfer failure",
     },
-
+    "bing_of" : {
+        "cn" : "绑定中",
+        "en" : "Binding",
+    },
+    "determine_binding" : {
+        "cn" : "确定绑定",
+        "en" : "CONFIRM BINDING",
+    },
+    "bind_success" : {
+        "cn" : "绑定成功",
+        "en" : "Successful transfer",
+    },
+    "bind_fail" : {
+        "cn" : "绑定失败",
+        "en" : "Transfer failure",
+    },
+    "invit_not" : {
+        "cn" : "推荐人卡号不存在",
+        "en" : "Recommender card number does not exist",
+    },
+    "aipdrop_success" : {
+        "cn" : "领取成功",
+        "en" : "Receive Success",
+    },
+    "aipdrop_fail" : {
+        "cn" : "领取失败",
+        "en" : "Receive Fail",
+    },
+    "free_receive" : {
+        "cn" : "免费领取",
+        "en" : "FREE RECEIVE",
+    },
 };
