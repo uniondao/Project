@@ -37,6 +37,8 @@ function init() {
     factory_addr = CONFIG.factory_addr;
     exchange_addr = CONFIG.exchange_addr;
     reserve_addr = CONFIG.reserve_addr;
+    airdrop_addr = CONFIG.airdrop_addr;
+    team_addr = CONFIG.team_addr;
     Contract_und = new web3.eth.Contract(abi_und, und_addr); //合约
     Contract_udao = new web3.eth.Contract(abi_udao, udao_addr); //合约
     Contract_usdt = new web3.eth.Contract(abi_usdt, usdt_addr); //代币
@@ -48,4 +50,6 @@ function init() {
     Contract_und_issue = new web3.eth.Contract(abi_und_issue, und_issue_addr); //合约
     // Contract_candy = new web3.eth.Contract(abi_candy, candy_addr); //合约
     //Contract_exchange = new web3.eth.Contract(abi_exchange, exchange_addr); //合约
+    Contract_airdrop = new web3.eth.Contract(abi_airdrop, airdrop_addr); //合约
+    Contract_team = new web3.eth.Contract(abi_team, team_addr); //合约
 }
