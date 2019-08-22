@@ -193,8 +193,10 @@ function addressToAccounts(){
             if(data == 0){
                 $('#bank_card').html("0000000000000000000");
                 $('.noaccounts').css("display","block");
+                $('#candy_card').val('');
             }else{
                 $('#bank_card').html(data);
+                $('#candy_card').val(data);
             }
         })
 }

@@ -102,3 +102,90 @@ async function exchange2ethNum() {
     let num = await Contract_exchange.methods.getTokenToEthInputPrice(1).call();
     return num;
 }
+
+/*********** ETH ⇄ ERC20 ***********/
+
+//获取兑换率
+function getExchangeRate(inputAmount,outputAmount ) {
+    inputAmount = Number(inputAmount);
+    outputAmount = Number(outputAmount);
+    let rate;
+    if(inputAmount <= 0){
+        rate = 0;
+    }else{
+        rate = inputAmount / outputAmount;
+    }
+    return rate;
+}
+
+//获取手续费
+function getFee(inputAmount) {
+    inputAmount = Number(inputAmount);
+    let fee = inputAmount * 0.003;
+    return fee;
+}
+
+//卖单情况下，根据输入数量得到输出数量
+//Sell ETH for ERC20
+async function getOutputAmountE2ERC (inputAmount,coin) {
+    inputAmount = Number(inputAmount);
+    const coin_addr = coin.toLowerCase()+"_addr";
+    const ex_addr = "exchange_"+coin.toLowerCase()+"_addr";
+    window.Contract = await getContract(abi_base, CONFIG[coin_addr]);
+    const inputReserve = await web3.eth.getBalance(CONFIG[ex_addr]);
+    const outputReserve = await Contract.methods.balanceOf(CONFIG[ex_addr]).call();
+
+    const numerator = inputAmount * outputReserve * 997;
+    const denominator = inputReserve * 1000 + inputAmount * 997;
+    const outputAmount = numerator / denominator;
+    return outputAmount;
+}
+
+//卖单情况下，根据输入数量得到输出数量
+//Sell ERC20 for ETH
+async function getOutputAmountERC2E(inputAmount,coin) {
+    inputAmount = Number(inputAmount);
+    const coin_addr = coin.toLowerCase()+"_addr";
+    const ex_addr = "exchange_"+coin.toLowerCase()+"_addr";
+    window.Contract = await getContract(abi_base, CONFIG[coin_addr]);
+    const inputReserve = await Contract_exchange.methods.balanceOf(CONFIG[ex_addr]).call();
+    const outputReserve = await web3.eth.getBalance(CONFIG[ex_addr]);
+
+    const numerator = inputAmount * outputReserve * 997;
+    const denominator = inputReserve * 1000 + inputAmount * 997;
+    const outputAmount = numerator / denominator;
+    return outputAmount;
+}
+
+/*********** ERC20 ⇄ ERC20 ***********/
+async function getOutputAmountERC2ERC(inputAmount,sellCoin,buyCoin){
+    // TokenA (ERC20) to ETH conversion
+    const inputAmountA = Number(inputAmount);
+    const sellCoin_addr = sellCoin.toLowerCase()+"_addr";
+    const ex_sellCoin_addr = "exchange_"+sellCoin.toLowerCase()+"_addr";
+    window.Contract = await getContract(abi_base, CONFIG[sellCoin_addr]);
+    const inputReserveA = await Contract.methods.balanceOf(CONFIG[ex_sellCoin_addr]).call();
+    const outputReserveA = await web3.eth.getBalance(CONFIG[ex_sellCoin_addr]);
+
+    const numeratorA = inputAmountA * outputReserveA * 997
+    const denominatorA = inputReserveA * 1000 + inputAmountA * 997
+    const outputAmountA = numeratorA / denominatorA
+
+    // ETH to TokenB conversion
+    const inputAmountB = outputAmountA
+    const buyCoin_addr = buyCoin.toLowerCase()+"_addr";
+    const ex_buyCoin_addr = "exchange_"+buyCoin.toLowerCase()+"_addr";
+    const inputReserveB = await web3.eth.getBalance(CONFIG[ex_buyCoin_addr])
+    window.Contract = await getContract(abi_base, CONFIG[buyCoin_addr]);
+    const outputReserveB = await Contract.methods.balanceOf(CONFIG[ex_buyCoin_addr]).call();
+
+    const numeratorB = inputAmountB * outputReserveB * 997
+    const denominatorB = inputReserveB * 1000 + inputAmountB * 997
+    const outputAmountB = numeratorB / denominatorB
+    return outputAmountB;
+}
+
+//获取手续费
+function getFeeERC(inputAmount) {
+    return Number(inputAmount) * 0.00591;
+}

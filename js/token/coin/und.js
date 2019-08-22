@@ -45,6 +45,7 @@ function allowance_und() {
 
 //获取und数量
 function balance_und() {
+    console.log(123);
     var SELF_ADDR = $("#address").val();
     Contract_und.methods.balanceOf(SELF_ADDR).call()
         .then(function(data) {
@@ -155,7 +156,7 @@ function withdraw(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas}, function(error, transactionHash){
+    Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas ,gas:400000}, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
@@ -219,7 +220,7 @@ function withdraw_onecoin(num,coin) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+    Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas,gas:300000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
@@ -321,7 +322,7 @@ function getPercent() {
                         str3 += ")";
                         str3 = str3.substr(0, str3.length - 1);
                         $str = str2;
-                        $("#bili").html($str);
+                        $("#bili_redeem").html($str);
                         $("#undopther_txt").attr("placeholder", str1);
                         $("#undopther_txt_cop").val(str1);
                         $(".txt1").html(str4);
