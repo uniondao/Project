@@ -7,7 +7,8 @@
     LM.prototype = {
         menu : function () {
             var _this = this.$element
-            var LI_HEIGHT = _this.find('.f2 li').height() + parseInt(_this.find('.f2 li').css('padding-top')) + parseInt(_this.find('.f2 li').css('padding-bottom'))
+            // var LI_HEIGHT = _this.find('.f2 li').height() + parseInt(_this.find('.f2 li').css('padding-top')) + parseInt(_this.find('.f2 li').css('padding-bottom'))
+            var LI_HEIGHT = 200
             $('.menu-dark-backdrop').on('click', function () {
                 if (_this.hasClass('menu-open')) {
                     _this.removeClass('menu-open')
@@ -38,7 +39,6 @@
                     $(et).addClass('open').siblings().removeClass('open').find('li').removeClass('open')
                 }
 
-                /*li��������չʾ ���㲢����div��height*/
                 var _index = $(et).children().eq(1).children().children().length
                 if (!$(et).hasClass('open')) {
                     $(et).children().eq(1).css({ "height": 0 })

@@ -93,6 +93,7 @@ function Verification_immediate(txid){
                 alert(script_Lan.operate_err[currentLan]);
             }
             $('#createAccount').html(script_Lan.immediate_application[currentLan]);
+            // btnChange();
         }
     });
 }
@@ -178,6 +179,8 @@ function Verification_bind(txid){
             setTimeout(Verification_bind(txid), 1000);
         }else{
             if(data.result.status == '0x1'){
+                $('.bind_card_span').css('display','none');
+                $('.bind_p').css('display','none');
                 alert(script_Lan.bind_success[currentLan]);
             }else{
                 alert(script_Lan.bind_fail[currentLan]);
@@ -187,7 +190,7 @@ function Verification_bind(txid){
     });
 }
 
-//验证领取奖励txid是否成功
+// 
 function Verification_airdrop(txid){
     var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
     $.get(apiurl, function(data) {
@@ -236,6 +239,7 @@ function Verification2(txid,type){
                     alert(script_Lan.swap_err[currentLan]);
                 }
             }
+            btnChange();
         }
     });
 }
