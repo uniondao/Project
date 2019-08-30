@@ -142,11 +142,11 @@ body {
 }
 
 .radio-list .radio_box img {
-    margin: 0 8px 0 20%;
+    margin: 0 8px 0 30px;
     height: 24px;
 }
 
-.radio-list .radio_box label {
+.radio-list .radio_box label.label-sel {
     width: 17px;
     height: 17px;
     position: absolute;
@@ -158,7 +158,14 @@ body {
     cursor: pointer;
 }
 
-.radio-list .radio_box input:checked+label:after {
+
+.radio-list .radio_box label.sel-span{
+    display: flex;
+    display: -webkit-flex;
+    align-items: center
+}
+
+.radio-list .radio_box input:checked+label.label-sel:after {
     content: '';
     width: 7px;
     height: 7px;
@@ -186,8 +193,8 @@ body {
     align-items: center;
     position: relative;
     margin-right: 5%;
-    float: left;
     margin-bottom: 16px;
+    width: 22%;
 }
 
 .radio-list2 .radio_box input {
@@ -199,7 +206,7 @@ body {
     height: 24px;
 }
 
-.radio-list2 .radio_box label {
+.radio-list2 .radio_box label.label-sel {
     width: 17px;
     height: 17px;
     position: absolute;
@@ -211,7 +218,14 @@ body {
     cursor: pointer;
 }
 
-.radio-list2 .radio_box input:checked+label:after {
+
+.radio-list2 .radio_box label.sel-span{
+    display: flex;
+    display: -webkit-flex;
+    align-items: center
+}
+
+.radio-list2 .radio_box input:checked+label.label-sel:after {
     content: '';
     width: 7px;
     height: 7px;
@@ -252,7 +266,7 @@ body {
     height: 24px;
 }
 
-.radio-tip .radio_box label {
+.radio-tip .radio_box label.label-sel {
     width: 17px;
     height: 17px;
     position: absolute;
@@ -264,7 +278,7 @@ body {
     cursor: pointer;
 }
 
-.radio-tip .radio_box input:checked+label:after {
+.radio-tip .radio_box input:checked+label.label-sel:after {
     content: '';
     width: 7px;
     height: 7px;
@@ -340,7 +354,7 @@ body {
     margin: 0 auto
 }
 
-.ex-btn div {
+.ex-btn button {
     width: 100%;
     height: 40px;
     background-image: linear-gradient(180deg,
@@ -359,6 +373,7 @@ body {
     color: #ffffff;
     text-align: center;
     line-height: 40px;
+    border: none;
     cursor: pointer;
 }
 
@@ -393,9 +408,21 @@ body {
 }
 
 .tab-part-2 .radio-list2 {
-    margin: 24px 0 43px 0;
-    overflow: hidden;
 }
+
+.tab-part-2 .radio-list2 .suhui-part{
+    display: flex;
+    display: -webkit-flex;
+}
+
+.tab-part-2 .radio-list2 .suhui-part .pool-show span{
+    font-family: MADEFutureX-Light;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #555555
+}
+
 
 .tab-part-2>span {
     font-family: MADEFutureX;

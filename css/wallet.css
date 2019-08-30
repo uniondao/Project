@@ -166,12 +166,12 @@
     background-color: #ffffff;
     box-shadow: 0px 0px 10px 0px rgba(180, 180, 180, 0.75);
     border-radius: 5px;
-    margin-bottom: 87px;
+    margin-bottom: 70px;
     display: flex;
     display: -webkit-flex;
     justify-content: space-between;
     align-items: center;
-    padding: 61px 3% 65px 5%;
+    padding: 50px 3% 55px 5%;
     box-sizing: border-box
 }
 
@@ -213,7 +213,7 @@
     font-weight: normal;
     font-stretch: normal;
     color: #057067;
-    margin-left: 28px;
+    margin: 0 14px;
 }
 
 .wallet-list-part-2>div {
@@ -255,6 +255,7 @@
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
+    margin-right: 20px;
 }
 
 .wallet-list-part-3 .wallet-list-btn-2 {
@@ -507,8 +508,8 @@ h3.record-title {
 /*payment弹窗*/
 
 #payLayer {
-    width: 1143px;
-    height: 764px;
+    width: 900px;
+    height: 664px;
     background-color: #ffffff;
     box-shadow: 0px 0px 46px 0px rgba(204, 204, 204, 0.75);
     border-radius: 12px;
@@ -544,7 +545,7 @@ h4.col-layer-title {
     font-size: 35px;
     font-weight: normal;
     font-stretch: normal;
-    padding-top: 109px;
+    padding-top: 80px;
     color: #057067;
     text-align: center
 }

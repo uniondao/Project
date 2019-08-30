@@ -149,7 +149,6 @@
 .phase-cont .phase-input {
 	display: flex;
 	display: -webkit-flex;
-	align-items: center
 }
 
 .phase-input-left>div {
@@ -194,7 +193,8 @@
 }
 
 .phase-input-right {
-	margin-left: 13px
+	margin-left: 13px;
+	margin-top: 30px;
 }
 
 .phase-input-right div {
@@ -875,6 +875,7 @@ position: relative;
 	padding: 0 44px;
 	box-sizing: border-box;
 	justify-content: center;
+	border: none;
 	cursor: pointer;
 }
 
@@ -884,7 +885,6 @@ position: relative;
 	font-weight: normal;
 	font-stretch: normal;
 	color: #ffffff;
-	margin-left: 10px;
 }
 
 

@@ -390,7 +390,7 @@ h4.team-title {
 }
 
 #candyBanner .candy-banner {
-    padding: 3.2rem 0 3.7rem 0;
+    padding:2.2rem 0 2.7rem 0;
 }
 
 .candy-banner .candy-banner-text,
@@ -408,7 +408,7 @@ h4.team-title {
 }
 
 .candy-banner .candy-title {
-    font-size: 14px;
+    font-size: 20px;
 }
 
 .candy-banner .candy-banner-text {
@@ -440,7 +440,8 @@ h4.team-title {
     box-sizing: border-box;
     text-align: center;
     cursor: pointer;
-    margin: 0 auto
+    margin: 0 auto;
+    display: block;
 }
 
 .candy-banner .candy-banner-card {
@@ -483,6 +484,17 @@ h4.team-title {
     text-align: center;
 }
 
+.candy-card p{
+    font-family: MADEFutureX-Light;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: red;
+    text-align: center;
+    padding-bottom:0.5rem;
+}
+
+
 .candy-card .candy-input {
     width: 100%;
     margin: 0 auto;
@@ -499,6 +511,17 @@ h4.team-title {
     font-size: 12px;
     border-radius: 5px;
     box-sizing: border-box;
+}
+
+.candy-card .candy-input label{
+    font-family: MADEFutureX-Medium;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #464646;
+    display: inline-block;
+    margin: 10px 0;
 }
 
 .candy-card .candy-input img {
@@ -535,6 +558,7 @@ h4.team-title {
     margin: 0 auto;
     margin-top: 1.2rem;
     margin-bottom: 1rem;
+    display: block;
 }
 
 #candyCont .candy-cont-2 .candy-win,
@@ -571,13 +595,20 @@ h4.team-title {
 }
 
 .candy-win .winning-header div {
-    /* flex:1; */
     font-family: MADEFutureX-Medium;
     font-size: 13px;
     font-weight: normal;
     font-stretch: normal;
     color: #287D6E;
-    padding-right: 3%;
+    width: 33.3%
+}
+
+.candy-win .winning-header div:nth-child(2),.candy-win .winning-part div:nth-child(2){
+    text-align: center
+}
+
+.candy-win .winning-header div:nth-child(3),.candy-win .winning-part div:nth-child(3){
+    text-align: right
 }
 
 .candy-win .winning-part {
@@ -595,7 +626,7 @@ h4.team-title {
     font-weight: normal;
     font-stretch: normal;
     color: #676767;
-    padding-right: 3%;
+    width: 33.3%
 }
 
 
@@ -644,7 +675,8 @@ h4.team-title {
     cursor: pointer;
     margin: 0 auto;
     margin-top: 2rem;
-    margin-bottom: 1.5rem
+    margin-bottom: 1.5rem;
+    display: block;
 }
 
 .candy-recommend .candy-recommend-title {
@@ -675,6 +707,7 @@ h4.team-title {
     letter-spacing: 0px;
     color: #287D6E;
     line-height: 16px;
+    cursor: pointer;
 }
 
 .candy-recommend .candy-recommend-text {
@@ -797,10 +830,10 @@ h4.team-title {
 }
 .candy-bank-card{
     font-family: MADEFutureX;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: normal;
     font-stretch: normal;
-    color: #baca64;
+    color: #e4c297;
     white-space: nowrap;
     margin-top: 0.2rem;
     text-align: center;
@@ -820,4 +853,85 @@ h4.team-title {
     letter-spacing: 0px;
     color: #287D6E;
     line-height: 20px;
+}
+
+button.gray-btn{
+    background: #8a8a8a!important
+}
+
+p.smart-tip{
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #727272;
+    text-align: center;
+    margin-bottom: 10px
+}
+
+#referrerLayer {
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 46px 0px rgba(204, 204, 204, 0.75);
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+#referrerLayer .referrer-layer{
+    position: relative
+}
+
+
+#referrerLayer .referrer-layer .layer-back{
+    position: absolute;
+    top: 9px;
+    right: 7px;
+    box-sizing: border-box;
+}
+
+#referrerLayer .referrer-layer .layer-back img{
+    width: 20px;
+    height: 20px;
+}
+
+.referrer-layer .referrer-header{
+    font-family: MADEFutureX-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #ffffff;
+    background-color: #057067;
+    text-align: center;
+    padding:10px 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.referrer-layer .referrer-all{
+    padding:30px 0;
+    box-sizing: border-box;
+}
+.referrer-layer .referrer-cont{
+    margin: 0 auto;
+    overflow-y: auto;
+    max-height: 330px;
+    width: 80%;
+    margin: 0 auto;
+    border-left: solid 1px #d2d2d2;
+    border-right: solid 1px #d2d2d2;
+    box-sizing: border-box;
+}
+
+.referrer-layer .referrer-cont .referrer-part{
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #9f9f9f;
+    height: 41px;
+    line-height: 41px;
+    border-bottom: solid 1px #d2d2d2;
+    box-sizing: border-box;
+    text-align: center
 }

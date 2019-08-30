@@ -22,13 +22,13 @@
 
 #banner .banner-cont h2 {
     font-family: MADEFutureX-Bold;
-    font-size: 75px;
+    font-size: 65px;
     font-weight: normal;
     font-stretch: normal;
     color: #ffffff;
     line-height: 85px;
     text-align: center;
-    padding-top: 73px;
+    padding-top: 156px;
     padding-bottom: 107px;
 }
 
@@ -67,12 +67,12 @@
 
 #banner .banner-cont h3 {
     font-family: MADEFutureX;
-    font-size: 20px;
+    font-size: 25px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 25px;
+    line-height: 35px;
     color: #ffffff;
-    text-align: center
+    text-align: center;
 }
 
 .banner-text-cont {
@@ -131,7 +131,7 @@
 
 #contOne {
     width: 100%;
-    padding: 202px 0 227px 0;
+    padding: 100px 0 127px 0;
 }
 
 .cont-one {
@@ -351,8 +351,8 @@ h3.cont-title2{
 }
 
 .cont-three-part-detail {
-    width: 95%;
-    height: 360px;
+    width: 92%;
+    height: 300px;
     background-color: #ebebeb;
     box-shadow: 0px 0px 16px 0px rgba(137, 137, 137, 0.75);
     border-radius: 5px;
@@ -401,7 +401,7 @@ h3.cont-title2{
     line-height: 20px;
     letter-spacing: 0px;
     color: #020202;
-    margin-top: 46px;
+    margin-top: 26px;
 }
 
 #contFour {

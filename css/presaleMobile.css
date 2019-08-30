@@ -21,11 +21,14 @@ body {
 #presaleBanner .presale-banner {
     width: 90%;
     margin: 0 auto;
-    padding: 2.1rem 0 2.5rem
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    padding: 2.5rem 0 2rem;
 }
 
 .presale-banner .presale-banner-part {
-    margin-bottom: 30px;
+    flex: 1;
 }
 
 .presale-banner .presale-banner-part a {
@@ -67,6 +70,8 @@ body {
     letter-spacing: 0px;
     color: #ffffff;
     text-align: center;
+    width: 86%;
+    margin: 0 auto;
     margin-top: 7px;
 }
 
@@ -79,7 +84,6 @@ body {
     margin: 0 auto;
     padding-top: 1.9rem;
     padding-bottom: 1.9rem;
-
 }
 
 #contOne {
@@ -506,17 +510,18 @@ h4.cont-title {
     position: relative;
 }
 
-.progress-bar .progress-tip {
+.progress-bar .progress-tips {
     position: relative;
-    width: 210px;
-    margin-bottom: 30px;
+    /* width: 180px; */
+    margin: 0 auto;
+    margin-bottom: 20px;
 }
 
-.progress-bar .progress-tip div {
-    width: 177px;
+.progress-bar .progress-tips div {
+    /* width: 180px; */
     height: 28px;
     background-color: #ececec;
-    line-height: 28px  ;
+    line-height: 28px;
     text-align: center;
     font-family: MADEFutureX;
     font-size: 12px;
@@ -526,12 +531,12 @@ h4.cont-title {
     border-radius: 4px;
 }
 
-.progress-bar .progress-tip span.arrow-down {
+.progress-bar .progress-tips span.arrow-down {
 	width: 0;
 	height: 0;
-	border-left: 12px solid transparent;
-	border-right: 12px solid transparent;
-	border-top: 15px solid #ececec;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+	border-top: 12px solid #ececec;
 	position: absolute;
 	left: 50%;
 	transform: translate(-50%, 0%);
@@ -798,6 +803,7 @@ position: relative;
     box-sizing: border-box;
     justify-content:center;
     cursor: pointer;
+    border: none;
 }
 
 .exchange-w-4 .ex-btn img{
@@ -810,7 +816,6 @@ position: relative;
     font-weight: normal;
     font-stretch: normal;
     color: #ffffff;
-    margin-left: 5px;
 }
 
 

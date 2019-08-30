@@ -132,6 +132,7 @@ body {
 .w-card-part-4 img {
     width: 15.5px;
     height: 15.5px;
+    cursor: pointer;
 }
 
 .wallet-tips {
@@ -172,6 +173,7 @@ body {
     font-stretch: normal;
     text-align: center;
     color: #ffffff;
+    cursor: pointer;
 }
 
 
@@ -360,7 +362,7 @@ body {
 }
 
 #walletRcont .wallet-rcont {
-    padding: 3.2rem 0 3.7rem 0;
+    padding: 2.5rem 0 3rem 0;
     text-align: center;
 }
 
@@ -454,6 +456,7 @@ body {
     color: #2e2e2e;
     text-align: center;
     margin-left: 17px;
+    cursor: pointer;
 }
 
 h3.record-title{
@@ -481,7 +484,8 @@ h3.record-title{
     align-items: center;
     border-top: solid 1px #d2d2d2;
     box-sizing: border-box;
-    padding: 0.9rem 0 0.7rem
+    padding: 0.9rem 0 0.7rem;
+    cursor: pointer;
 }
 
 .record-part-3{
@@ -679,6 +683,7 @@ h4.col-layer-title {
     color: #ffffff;
     text-align: center;
     line-height: 31px;
+    cursor: pointer;
 }
 
 
@@ -759,6 +764,7 @@ input[type="range"]::-webkit-slider-thumb {
     padding-bottom: 5px;
     width: 80%;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 .col-layer-cont .col-code {
