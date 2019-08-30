@@ -16,7 +16,7 @@ function shouquan_und() {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_und.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas}, function(error, transactionHash){
+    Contract_und.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000}, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
@@ -156,6 +156,7 @@ function withdraw(num) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
+    $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
     Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas ,gas:400000}, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
@@ -176,18 +177,43 @@ function withdraw_onecoin(num,coin) {
     {
         case 'usdt':
             var token = CONFIG.usdt_addr;
+            var tokenSupply_usdt = $(".tokenSupply_usdt").text();
+            if(Number(num) > Number(tokenSupply_usdt)){
+                alert(script_Lan.notokenSupply[currentLan]);
+                return false;
+            }
             break;
         case 'dai':
             var token = CONFIG.dai_addr;
+            var tokenSupply_dai = $(".tokenSupply_dai").text();
+            if(Number(num) > Number(tokenSupply_dai)){
+                alert(script_Lan.notokenSupply[currentLan]);
+                return false;
+            }
             break;
         case 'usdc':
             var token = CONFIG.usdc_addr;
+            var tokenSupply_usdc = $(".tokenSupply_usdc").text();
+            if(Number(num) > Number(tokenSupply_usdc)){
+                alert(script_Lan.notokenSupply[currentLan]);
+                return false;
+            }
             break;
         case 'tusd':
             var token = CONFIG.tusd_addr;
+            var tokenSupply_tusd = $(".tokenSupply_tusd").text();
+            if(Number(num) > Number(tokenSupply_tusd)){
+                alert(script_Lan.notokenSupply[currentLan]);
+                return false;
+            }
             break;
         case 'pax':
             var token = CONFIG.pax_addr;
+            var tokenSupply_pax = $(".tokenSupply_pax").text();
+            if(Number(num) > Number(tokenSupply_pax)){
+                alert(script_Lan.notokenSupply[currentLan]);
+                return false;
+            }
             break;
     }
     if(token == '' || token == null){
@@ -220,6 +246,7 @@ function withdraw_onecoin(num,coin) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
+    $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
     Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas,gas:300000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
@@ -247,7 +274,7 @@ function other2und(num, coin_addr, self_addr, wei = CONFIG.usdt_wei) {
     }
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
 
-    Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas}, function(error, transactionHash){
+    Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas , gas: 150000}, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
@@ -352,7 +379,7 @@ function undt_send(){
     num = web3.utils.toBN(num);
     $('#undt_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
-        Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
                 alert(script_Lan.operate_err[currentLan]);
                 $('#undt_send').html(script_Lan.next[currentLan]);
@@ -362,7 +389,7 @@ function undt_send(){
 
         });
     }else{
-        Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
                 alert(script_Lan.operate_err[currentLan]);
                 $('#undt_send').html(script_Lan.next[currentLan]);
@@ -373,4 +400,37 @@ function undt_send(){
         });
     }
 
+}
+
+//每一期实际应该出售的UDAO
+async function getRedeemOneFee(coin,num) {
+    switch(coin)
+    {
+        case 'usdt':
+            var token = CONFIG.usdt_addr;
+            break;
+        case 'dai':
+            var token = CONFIG.dai_addr;
+            break;
+        case 'usdc':
+            var token = CONFIG.usdc_addr;
+            break;
+        case 'tusd':
+            var token = CONFIG.tusd_addr;
+            break;
+        case 'pax':
+            var token = CONFIG.pax_addr;
+            break;
+    }
+    console.log(token);
+    num = web3.utils.toWei(num, CONFIG.udao_wei);
+    num = web3.utils.toBN(num);
+    return new Promise(function (resolve, reject) {
+        Contract_und_issue.methods.getRedeemOneFee(token,num).call()
+            .then(function(data) {
+                console.log("fee:"+data);
+                var balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
+                return resolve(balance_num);
+            })
+    });
 }

@@ -185,7 +185,7 @@ function addressToAccounts(){
                 $('#bank_card').html("0000000000000000000");
                 $('.noaccounts').css("display","block");
             }else{
-                $('#bank_card').html(data);
+                $('#bank_card').html('Card ID: '+data);
             }
         })
 }

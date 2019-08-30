@@ -3,6 +3,8 @@ function bindInvit(){
     var SELF_ADDR = $("#address").val();
     var bind_card = $("#bind_card").val();
     var gas = $("#getGasPrice").val();
+    // $('.candy-cont-btn').addClass('gray-btn');
+    // $('.gray-btn').attr('disabled',true);
     if(!gas){
         gas = 10000000000;
     }else{
@@ -11,6 +13,10 @@ function bindInvit(){
     Contract_udao.methods.accountsToAddress(bind_card).call()
         .then(function(data) {
             console.log(data);
+            var address_ox = data.substring(0, 2);
+            if(address_ox != '0x'){
+                bindInvit();
+            }
             if(data == 0 || isNaN(data)){
                 alert(script_Lan.invit_not[currentLan]);
                 return false;
@@ -19,23 +25,38 @@ function bindInvit(){
                     alert(script_Lan.operate_err[currentLan]);
                     return false;
                 }
-                $('.candy-cont-btn').html(script_Lan.bing_of[currentLan]+"<dot>···</dot>");
-                Contract_team.methods.addReferee(data).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
-                    if(error){
-                        alert(script_Lan.operate_err[currentLan]);
-                        $('.candy-cont-btn').html(script_Lan.determine_binding[currentLan]);
+                Contract_team.methods.status(data).call()
+                .then(function(data2) {
+                    console.log(data2);
+                    if(data2 == true){
+                        $('.candy-cont-btn').html(script_Lan.bing_of[currentLan]+"<dot>···</dot>");
+                        Contract_team.methods.addReferee(data).send({ from: SELF_ADDR, gasPrice: gas ,gas:100000}, function(error, transactionHash){
+                        if(error){
+                            alert(script_Lan.operate_err[currentLan]);
+                            $('.candy-cont-btn').html(script_Lan.determine_binding[currentLan]);
+                        }else{
+                            Verification_bind(transactionHash);
+                        }
+
+                        });
                     }else{
-                        Verification_bind(transactionHash);
+                        alert(script_Lan.addreferee_status[currentLan]);
+                        return false;
                     }
+                   
 
                 });
+               
+
             }
 
         });
 }
 
+
 //获取上级推荐人
 function invit_referee(){
+
     var SELF_ADDR = $("#address").val();
     Contract_team.methods.referee(SELF_ADDR).call()
         .then(function(data) {
@@ -44,7 +65,19 @@ function invit_referee(){
                 return null;
             }
             if(data && data != '0x0000000000000000000000000000000000000000'){
-                $('#invit_referee').val(data);
+
+                Contract_udao.methods.addressToAccounts(data).call()
+                    .then(function(data2) {
+                        if (isNaN(data2)) {
+                            invit_referee();
+                            return null;
+                        }
+                        if(data2 == 0){
+                            $('#invit_referee').val('');
+                        }else{
+                            $('#invit_referee').val(data2);
+                        }
+                    })
             }else{
                 $('#invit_referee').val('');
             }
@@ -131,4 +164,9 @@ function getGift(){
 
     });
 
+}
+
+function btnChange(){
+    $('.gray-btn').attr('disabled',false)
+    $('.gray-btn').removeClass('gray-btn');
 }

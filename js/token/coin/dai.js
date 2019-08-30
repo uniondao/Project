@@ -45,7 +45,7 @@ function shouquan_dai() {
         gas = Number(gas)+Number(3000000000)
     }
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    Contract_dai.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+    Contract_dai.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
@@ -73,4 +73,19 @@ function mortgage_dai(num) {
         return false;
     }
     other2und(num, CONFIG.dai_addr, SELF_ADDR, CONFIG.dai_wei);
+}
+
+//获取DAI资金池
+function tokenSupply_dai(){
+
+    Contract_und_issue.methods.tokenSupply(dai_addr).call()
+        .then(function(data) {
+            if (isNaN(data)) {
+                tokenSupply_dai();
+                return null;
+            }
+            var balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
+            balance_num = parseFloat(balance_num);
+            $(".tokenSupply_dai").text(Number(balance_num).toFixed(4));
+        })
 }

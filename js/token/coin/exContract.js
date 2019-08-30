@@ -4,7 +4,8 @@ async function exchange2other(num,rateNum,sellCoin,buyCoin) {
     let gas = await getGasPrice();
     let min_fee = 1;
     let time = Math.ceil((new Date()).valueOf()/1000) + 900;
-    let wei = sellCoin.toLowerCase()+'_wei';
+    let buyCoin_decimals = buyCoin.toLowerCase()+'_decimals';
+    let sellCoin_decimals = sellCoin.toLowerCase()+'_decimals';
     let buyCoin_addr = buyCoin.toLowerCase()+'_addr';
     let min_num = 0;
 
@@ -15,11 +16,12 @@ async function exchange2other(num,rateNum,sellCoin,buyCoin) {
 
     //单位转换
     min_num = min_num.toFixed(18);
-    min_num = web3.utils.toWei(min_num, CONFIG[wei]);
+    min_num = min_num * Math.pow(10,CONFIG[buyCoin_decimals]);
+    min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
 
     //单位转换
-    num = web3.utils.toWei(num, CONFIG[wei]);
+    num = num * Math.pow(10,CONFIG[sellCoin_decimals]);
     num = web3.utils.toBN(num);
 
     return new Promise(function (resolve, reject) {
@@ -27,6 +29,7 @@ async function exchange2other(num,rateNum,sellCoin,buyCoin) {
             if(error){
                 return reject(error);
             }
+            console.log(transactionHash);
              return  resolve(transactionHash);
          })
     })
@@ -37,7 +40,7 @@ async function eth2exchange(num,buyCoin) {
     let account = await ethAccounts();
     let gas = await getGasPrice();
     let time = Math.ceil((new Date()).valueOf()/1000) + 900;
-    let wei = buyCoin.toLowerCase()+'_wei';
+    let buyCoin_decimals = buyCoin.toLowerCase()+'_decimals';
     let rateNum = await eth2exchangeNum();
 
     gas = Number(gas)+Number(CONFIG.GasExtra);
@@ -47,7 +50,8 @@ async function eth2exchange(num,buyCoin) {
 
     //单位转换
     min_num = min_num.toFixed(18);
-    min_num = web3.utils.toWei(min_num, CONFIG[wei]);
+    min_num = min_num * Math.pow(10,CONFIG[buyCoin_decimals]);
+    min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
     return new Promise(function (resolve, reject) {
         Contract_exchange.methods.ethToTokenSwapInput(min_num,time).send({ from: account,value: web3.utils.toWei(num,'ether'),gasPrice:gas,gas:CONFIG.GasLimit},function (error, transactionHash) {
@@ -64,8 +68,9 @@ async function exchange2eth(num,sellCoin) {
     let account = await ethAccounts();
     let gas = await getGasPrice();
     let time = Math.ceil((new Date()).valueOf()/1000) + 900;
-    let wei = sellCoin.toLowerCase()+'_wei';
+    let sellCoin_decimals = sellCoin.toLowerCase()+'_decimals';
     let rateNum = await eth2exchangeNum();
+    rateNum = 1 / rateNum;
 
     gas = Number(gas)+Number(CONFIG.GasExtra);
 
@@ -74,11 +79,12 @@ async function exchange2eth(num,sellCoin) {
 
     //单位转换
     min_num = min_num.toFixed(18);
-    min_num = web3.utils.toWei(min_num, CONFIG[wei]);
+    min_num = web3.utils.toWei(min_num,'ether');
+    min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
 
     //单位转换
-    num = web3.utils.toWei(num,CONFIG[wei]);
+    num = num * Math.pow(10,CONFIG[sellCoin_decimals]);
     num = web3.utils.toBN(num);
 
     return new Promise(function (resolve, reject) {

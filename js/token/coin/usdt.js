@@ -15,7 +15,7 @@ function shouquan_usdt() {
         gas = Number(gas)+Number(3000000000)
     }
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
-    Contract_usdt.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas }, function(error, transactionHash){
+    Contract_usdt.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
@@ -74,4 +74,19 @@ function mortgage_usdt(num) {
     }
 
     other2und(num, CONFIG.usdt_addr, SELF_ADDR, CONFIG.usdt_wei);
+}
+
+//获取USDT资金池
+function tokenSupply_usdt(){
+
+    Contract_und_issue.methods.tokenSupply(usdt_addr).call()
+        .then(function(data) {
+            if (isNaN(data)) {
+                tokenSupply_usdt();
+                return null;
+            }
+            var balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
+            balance_num = parseFloat(balance_num);
+            $(".tokenSupply_usdt").text(Number(balance_num).toFixed(4));
+        })
 }

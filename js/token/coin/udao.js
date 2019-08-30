@@ -16,7 +16,7 @@ function shouquan_udao() {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
-    Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+    Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
@@ -74,6 +74,11 @@ function getnewprice() {
         })
 }
 
+async function getUdao2UndtNum() {
+    let price = await Contract_udao_issue.methods.newPrice(und_addr).call();
+    return price;
+}
+
 //多少区块为一期
 function how_manyperiod() {
     Contract_udao_issue.methods.blocksPeriod().call()
@@ -94,6 +99,7 @@ function getSaleAmount() {
 //获取当前期数
 function getPeriod() {
     var current_heigh = $(".current_heigh").html();
+    current_heigh = parseInt(current_heigh) - parseInt(CONFIG.start_block);
     Contract_udao_issue.methods.blocksPeriod().call()
         .then(function(data) {
             if (isNaN(data)) {
@@ -116,12 +122,13 @@ function getPeriod() {
                 //已过高度
                 var has_block = parseInt(data - parseInt(shengyu));
                 var prec = dNum(has_block,data);
-                $('.progress-tip div').text(' CURRENT PROGRESS '+prec+"%")
+                $('.progress-tip div').text(html_lan['presale-part-3'][currentLan]+prec+"%")
+                $('.progress-tips div').text(html_lan['presale-part-3'][currentLan]+prec+"%")
 
                 $(".progress-percent ").css('width',prec+"%");
                 var W = $(".progress-percent").width();
                 $(".progress-bar .progress-tip").css('left',W-100);
-
+                $(".progress-bar .progress-tips span.arrow-down").css('left',W);
                 // arr_map(period);
             }
         })
@@ -160,6 +167,16 @@ function getMaxRate(period) {
 }
 
 //每一期实际应该出售的UDAO
+async function investTotalAmount(period) {
+    return new Promise(function (resolve, reject) {
+        Contract_udao_issue.methods.investTotalAmount(period,CONFIG.und_addr).call()
+            .then(function(data) {
+                return resolve(data);
+            })
+    });
+}
+
+//每一期实际应该出售的UDAO
 async function saleTotal(period) {
     return new Promise(function (resolve, reject) {
         Contract_udao_issue.methods.SaleTotal(period,CONFIG.und_addr).call()
@@ -190,8 +207,8 @@ function addressToAccounts(){
                 addressToAccounts();
                 return null;
             }
-            if(data == 0){
-                $('#bank_card').html("0000000000000000000");
+            if(data == 0 || data.length != 19){
+                // $('#bank_card').html("0000000000000000000");
                 $('.noaccounts').css("display","block");
                 $('#candy_card').val('');
             }else{
@@ -204,16 +221,20 @@ function addressToAccounts(){
 function createAccount(){
     var SELF_ADDR = $("#address").val();
     var gas = $("#getGasPrice").val();
+    $('.candy-banner-btn').addClass('gray-btn');
+    $('.gray-btn').attr('disabled',true);
+    // setTimeout("btnChange()",5000);
     if(!gas){
         gas = 10000000000;
     }else{
         gas = Number(gas)+Number(3000000000)
     }
     $('#createAccount').html(script_Lan.create_wait[currentLan]+"<dot>···</dot>");
-    Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+    Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas,gas:100000 }, function(error, transactionHash){
         if(error){
             alert(script_Lan.operate_err[currentLan]);
             $('#createAccount').html(script_Lan.immediate_application[currentLan]);
+            btnChange();
         }else{
             console.log(transactionHash);
             Verification_immediate(transactionHash);
@@ -223,6 +244,13 @@ function createAccount(){
     });
 
 }
+
+
+function btnChange(){
+    $('.gray-btn').attr('disabled',false)
+    $('.gray-btn').removeClass('gray-btn');
+}
+
 //查看地址人数
 function accountsNumber(){
     Contract_udao.methods.accountsNumber().call()
@@ -257,7 +285,7 @@ function udao_send(){
     num = web3.utils.toBN(num);
     $('#udao_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
-        Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
                 alert(script_Lan.operate_err[currentLan]);
                 $('#udao_send').html(script_Lan.next[currentLan]);
@@ -267,7 +295,7 @@ function udao_send(){
 
         });
     }else{
-        Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
+        Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
                 alert(script_Lan.operate_err[currentLan]);
                 $('#udao_send').html(script_Lan.next[currentLan]);

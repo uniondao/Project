@@ -28,7 +28,7 @@ function getBlockNumber() {
             getBlockNumber();
             return null;
         }
-        data = parseInt(data) - parseInt(CONFIG.start_block);
+        data = parseInt(data);
         $("#getBlockNumber").val(data);
         $(".current_heigh").html(data);
     });
