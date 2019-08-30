@@ -6,6 +6,10 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description"
+        content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/issueMobile.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -78,41 +82,47 @@
                                     <div class="radio-list">
                                         <div class="radio_box">
                                             <input type="radio" id="radio_usdt" name="radio" value="usdt" checked>
-                                            <label for="radio_usdt"></label>
-                                            <img src="./images/coin/coin_1.png" alt="">
-                                            <span>USDT</span>
+                                            <label for="radio_usdt" class="label-sel">
+                                            </label>
+                                            <label for="radio_usdt" class="sel-span">
+                                                <img src="./images/coin/coin_1.png" alt="">
+                                                <span>USDT</span>
+                                            </label>
                                         </div>
                                         <div class="radio_box">
                                             <input type="radio" id="radio_dai" name="radio" value="dai">
-                                            <label for="radio_dai"></label>
-                                            <img src="./images/coin/coin_2.png" alt="">
-                                            <span> DAI</span>
+                                            <label for="radio_dai" class="label-sel"> </label>
+                                            <label for="radio_dai" class="sel-span">
+                                                <img src="./images/coin/coin_2.png" alt="">
+                                                <span> DAI</span>
+                                            </label>
                                         </div>
-
                                         <div class="radio_box">
                                             <input type="radio" id="radio_usdc" name="radio" value="usdc">
-                                            <label for="radio_usdc"></label>
-                                            <img src="./images/coin/coin_usdc.png" alt="">
-                                            <span>USDC</span>
+                                            <label for="radio_usdc" class="label-sel"> </label>
+                                            <label for="radio_usdc" class="sel-span">
+                                                <img src="./images/coin/coin_usdc.png" alt="">
+                                                <span>USDC</span>
+                                            </label>
                                         </div>
                                         <div class="radio_box">
                                             <input type="radio" id="radio_tusd" name="radio" value="tusd">
-                                            <label for="radio_tusd"></label>
-                                            <img src="./images/coin/coin_tusd.png" alt="">
-                                            <span>TUSD</span>
+                                            <label for="radio_tusd" class="label-sel"> </label>
+                                            <label for="radio_tusd" class="sel-span">
+                                                <img src="./images/coin/coin_tusd.png" alt="">
+                                                <span>TUSD</span>
+                                            </label>
                                         </div>
-
                                         <div class="radio_box">
                                             <input type="radio" id="radio_pax" name="radio" value="pax">
-                                            <label for="radio_pax"></label>
-                                            <img src="./images/coin/coin_3.png" alt="">
-                                            <span> PAX</span>
-                                        </div>
-                                        <div class="radio_box">
-
+                                            <label for="radio_pax" class="label-sel">
+                                            </label>
+                                            <label for="radio_pax" class="sel-span">
+                                                <img src="./images/coin/coin_3.png" alt="">
+                                                <span> PAX</span>
+                                            </label>
                                         </div>
                                     </div>
-
                                     <div class="ex-input">
                                         <div>
                                             <input type="text" placeholder="INPUT UNDT AMOUNT" id="issue_num"
@@ -141,48 +151,88 @@
                                     <div style="text-align: center;color: red;margin: 10px" class="approve_commit">
                                         &nbsp;</div>
                                     <div class="ex-btn">
-                                        <div onclick="issue()" id="issue" class="translate" data-lang="issue-part-2">
-                                        </div>
+                                        <button onclick="issue()" id="issue" class="translate" data-lang="issue-part-2">
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                             <div id="2" class="tab-part tab-2">
                                 <div class="tab-part-2">
-                                    <span class="translate" data-lang="issue-part-3"></span>
                                     <div class="radio-list2">
-                                        <div class="radio_box">
-                                            <input type="radio" id="radio_7" name="radio_2" value="usdt">
-                                            <label for="radio_7"></label>
-                                            <span>USDT</span>
+                                        <div class="suhui-part">
+                                            <div class="radio_box">
+                                                <input type="radio" id="radio_7" name="radio_2" value="usdt">
+                                                <label for="radio_7" class="label-sel"></label>
+                                                <label for="radio_7" class="sel-span">
+                                                    <span>USDT</span>
+                                                </label>
+                                            </div>
+                                            <div class="pool-show">
+                                                <span class="translate" data-lang="suhui-part-1"></span>
+                                                <span class="tokenSupply_usdt">0.0000</span>
+                                            </div>
                                         </div>
-                                        <div class="radio_box">
-                                            <input type="radio" id="radio_8" name="radio_2" value="dai">
-                                            <label for="radio_8"></label>
-                                            <span>DAI</span>
+                                        <div class="suhui-part">
+                                            <div class="radio_box">
+                                                <input type="radio" id="radio_8" name="radio_2" value="dai">
+                                                <label for="radio_8" class="label-sel"></label>
+                                                <label for="radio_8" class="sel-span">
+                                                    <span>DAI</span>
+                                                </label>
+                                            </div>
+                                            <div class="pool-show">
+                                                <span class="translate" data-lang="suhui-part-1"></span>
+                                                <span class="tokenSupply_dai">0.0000</span>
+                                            </div>
                                         </div>
-                                        <div class="radio_box">
-                                            <input type="radio" id="radio_9" name="radio_2" value="usdc">
-                                            <label for="radio_9"></label>
-                                            <span>USDC</span>
+                                        <div class="suhui-part">
+                                            <div class="radio_box">
+                                                <input type="radio" id="radio_9" name="radio_2" value="usdc">
+                                                <label for="radio_9" class="label-sel"></label>
+                                                <label for="radio_9" class="sel-span">
+                                                    <span>USDC</span>
+                                                </label>
+                                            </div>
+                                            <div class="pool-show">
+                                                <span class="translate" data-lang="suhui-part-1"></span>
+                                                <span class="tokenSupply_usdc">0.0000</span>
+                                            </div>
                                         </div>
-                                        <div class="radio_box">
-                                            <input type="radio" id="radio_10" name="radio_2" value="tusd">
-                                            <label for="radio_10"></label>
-                                            <span>TUSD</span>
+                                        <div class="suhui-part">
+                                            <div class="radio_box">
+                                                <input type="radio" id="radio_10" name="radio_2" value="tusd">
+                                                <label for="radio_10" class="label-sel"></label>
+                                                <label for="radio_10" class="sel-span">
+                                                    <span>TUSD</span>
+                                                </label>
+                                            </div>
+                                            <div class="pool-show">
+                                                <span class="translate" data-lang="suhui-part-1"></span>
+                                                <span class="tokenSupply_tusd">0.0000</span>
+                                            </div>
                                         </div>
-                                        <div class="radio_box">
-                                            <input type="radio" id="radio_11" name="radio_2" value="pax">
-                                            <label for="radio_11"></label>
-                                            <span>PAX</span>
+                                        <div class="suhui-part">
+                                            <div class="radio_box">
+                                                <input type="radio" id="radio_11" name="radio_2" value="pax">
+                                                <label for="radio_11" class="label-sel"></label>
+                                                <label for="radio_11" class="sel-span">
+                                                    <span>PAX</span>
+                                                </label>
+                                            </div>
+                                            <div class="pool-show">
+                                                <span class="translate" data-lang="suhui-part-1"></span>
+                                                <span class="tokenSupply_pax">0.0000</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="radio-tip">
                                         <div class="radio_box">
                                             <input type="radio" id="radio_12" name="radio_2" value="all" checked>
-                                            <label for="radio_12"></label>
-                                            <span class="translate" data-lang="issue-part-4"></span>
+                                            <label for="radio_12" class="label-sel"></label>
+                                            <label for="radio_12" class="sel-span"><span class="translate"
+                                                    data-lang="issue-part-4"></span></label>
                                         </div>
-                                        <span id="bili_redeem" style="overflow-wrap: break-word;margin-left: 26px"></span>
+                                        <span id="bili_redeem" style="margin-left: 32px;"></span>
                                     </div>
                                     <div class="ex-input">
                                         <div>
@@ -192,7 +242,7 @@
                                                     oninput="cop()" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)"
                                                     id="withdraw_num">
                                             </div>
-                                            <span>
+                                            <span >
                                                 <div class="translate" data-lang="issue-part-1" style="display: inline">
                                                 </div>
                                                 <font id="undt_balance"></font> UNDT
@@ -211,17 +261,19 @@
                                                 <font id="udao_balance"></font> UDAO
                                                 <font id="udao_unlock" onclick="udao_unlock()" class="translate"
                                                     data-lang="exchange-part-4"></font>
-                                                <br />
-                                                <div class="translate" data-lang="issue-part-5" style="display: inline">
-                                                </div>
-                                                <font id="fee">0</font>UDAO
+                                                <span class="input-tips" style="margin-left: 0px">
+                                                    <div class="translate" data-lang="issue-part-5"
+                                                        style="display: inline"></div>
+                                                    <font id="fee">0</font> UDAO
+                                                </span>
                                             </span>
                                         </div>
                                         <span class="txt1" style="display: none"></span>
                                     </div>
                                     <div class="ex-btn">
-                                        <div class="submit-issue translate" id="redemption" onclick="redemption()"
-                                            data-lang="issue-part-6"></div>
+                                        <button class="submit-issue translate" id="redemption" onclick="redemption()"
+                                            data-lang="issue-part-6">
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -305,7 +357,7 @@
         $('#tabs li').eq(type - 1).attr('id', 'current').siblings().removeAttr('id');
         $('#tabContent .tab-part').eq(type - 1).fadeIn().siblings().hide();
     })
-    setTimeout(start, 300);
+    setTimeout(start, 1000);
     start_Interval();
     function start() {
         setTimeout(ethAccounts, 500);
@@ -315,6 +367,11 @@
         setTimeout(balance_usdc, 800);
         setTimeout(balance_pax, 800);
         setTimeout(balance_und, 900);
+        setTimeout(tokenSupply_usdt, 1000);
+        setTimeout(tokenSupply_dai, 1000);
+        setTimeout(tokenSupply_usdc, 1000);
+        setTimeout(tokenSupply_tusd, 1000);
+        setTimeout(tokenSupply_pax, 1000);
         setTimeout(getnewprice, 1000);
         setTimeout(balance_und, 1000);
         setTimeout(balance_udao, 1000);
@@ -332,27 +389,32 @@
         all_record(CONFIG.und_issue_addr)
     }
     function start_Interval() {
-        setInterval(ethAccounts, 2000);
-        setInterval(balance_tusd, 2000);
-        setInterval(balance_usdt, 2000);
-        setInterval(balance_dai, 2000);
-        setInterval(balance_usdc, 2000);
-        setInterval(balance_pax, 2000);
-        setInterval(balance_und, 2000);
-        setInterval(getnewprice, 2000);
-        setInterval(balance_und, 2000);
-        setInterval(balance_udao, 2000);
-        setInterval(getFeeCosUDAO, 2000);
-        setInterval(allowance_usdt, 2000);
-        setInterval(allowance_dai, 2000);
-        setInterval(allowance_tusd, 2000);
-        setInterval(allowance_usdc, 2000);
-        setInterval(allowance_pax, 2000);
-        setInterval(allowance_udao, 2000);
-        setInterval(allowance_und, 2000);
-        setInterval(getGasPrice, 2000);
-        setInterval(getPercent, 2000);
-        setInterval(start_first, 2000);
+        setInterval(ethAccounts, 5000);
+        setInterval(balance_tusd, 5000);
+        setInterval(balance_usdt, 5000);
+        setInterval(balance_dai, 5000);
+        setInterval(balance_usdc, 5000);
+        setInterval(balance_pax, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(tokenSupply_usdt, 5000);
+        setInterval(tokenSupply_dai, 5000);
+        setInterval(tokenSupply_usdc, 5000);
+        setInterval(tokenSupply_tusd, 5000);
+        setInterval(tokenSupply_pax, 5000);
+        setInterval(getnewprice, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(balance_udao, 5000);
+        setInterval(getFeeCosUDAO, 5000);
+        setInterval(allowance_usdt, 5000);
+        setInterval(allowance_dai, 5000);
+        setInterval(allowance_tusd, 5000);
+        setInterval(allowance_usdc, 5000);
+        setInterval(allowance_pax, 5000);
+        setInterval(allowance_udao, 5000);
+        setInterval(allowance_und, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(getPercent, 5000);
+        setInterval(start_first, 5000);
     }
     function start_first() {
         var issue_unlock = $('.issue_unlock').attr('data-value');
@@ -563,7 +625,7 @@
         }
     }
 
-    function cop() {
+    async function cop() {
         var udaoPrice = $("#udaoPrice").val();
         var und2udaoP = 0;
         if (udaoPrice == null || udaoPrice <= 0) {
@@ -597,9 +659,13 @@
                 str += " " + s;
             });
             str = str.substr(0, str.length - 1);
+            document.getElementById("fee").innerText = str4.toFixed(4);
         } else {
             str += withdraw_num;
             str += coin.toLocaleUpperCase();
+            let one_fee = await getRedeemOneFee(coin,withdraw_num);
+            one_fee = Number(one_fee).toFixed(5);
+            document.getElementById("fee").innerText = one_fee;
         }
         $("#undopther_txt").val(str);
     }
@@ -612,7 +678,7 @@
         var udao_num = $('.udao_balance').html();
         var fee = $('#fee').html();
         if (click_und2other != 1) {
-            return false;
+        //    return false;
         }
 
         if (Number(num) < 1) {
@@ -650,7 +716,7 @@
                 $('#udao_unlock').css('display', 'block');
                 alert(script_Lan.please_unlock[currentLan] + 'UDAO');
             } else {
-                $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
+
                 withdraw(num);
             }
         } else {
@@ -663,7 +729,6 @@
                 $('#udao_unlock').css('display', 'block');
                 alert(script_Lan.please_unlock[currentLan] + 'UDAO');
             } else {
-                $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
                 withdraw_onecoin(num, coin);
             }
         }

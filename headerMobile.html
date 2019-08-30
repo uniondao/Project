@@ -123,10 +123,14 @@
         overflow: hidden;
     }
 
-    .leftMenu .f1>ul li {
+    .leftMenu .f1>ul>li {
         position: relative;
         padding: 10px 0 10px 10%;
         overflow: hidden;
+    }
+
+    .leftMenu .f1>ul>li ul li {
+        padding: 10px 0 0px 8%;
     }
 
     .leftMenu ul li.padding-li {
@@ -154,7 +158,6 @@
     .f2,
     .f3 {
         height: 0;
-        padding-left: 20px;
         overflow: hidden;
         position: relative;
         transition: height 0.4s ease;
@@ -229,9 +232,6 @@
                                             </li>
                                             <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"
                                                     onclick="alert('In development...')"></a></li> -->
-                                                    <li><a href="./candyMobile.html" class="translate"
-                                                        data-lang="product-6"></a>
-                                                </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -244,7 +244,7 @@
                                     <li class="hasChild">
                                         <ul>
                                             <li><a href="https://udao.zendesk.com" class="translate"
-                                                    data-lang="about-0"></a></li>
+                                                    data-lang="about-0" target="_blank"></a></li>
                                             <li><a href="./docMobile.html" class="translate" data-lang="about-1"></a>
                                             </li>
                                             <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
@@ -256,6 +256,8 @@
                                                     data-lang="about-4"></a></li>
                                             <li><a href="./smartMobile.html" class="translate" data-lang="about-5"></a>
                                             </li>
+                                            <li><a href="./contactMobile.html" class="translate"
+                                                    data-lang="foundation-1"></a></li>
                                             <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
                                         </ul>
                                     </li>
@@ -263,14 +265,16 @@
                             </div>
                         </li>
                         <li class="hasChild padding-li">
-                            <a href="javascript:;" class="translate" data-lang="foundation"></a>
+                            <a href="javascript:;" class="translate" data-lang="product-6"></a>
                             <div class="f2">
                                 <ul>
                                     <li class="hasChild">
                                         <ul>
                                             <!-- <li><a href="./teamMobileMobile.html">TEAM</a></li> -->
-                                            <li><a href="./contactMobile.html" class="translate"
-                                                    data-lang="foundation-1"></a></li>
+
+                                            <li><a href="./candyMobile.html" class="translate"
+                                                    data-lang="foundation-2"></a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -287,5 +291,30 @@
         $('#menu').leftMenu({
             "triggerBtn": ".nav-btn"
         }).init();
+    })
+</script>
+<script>
+    var user_lan = localStorage.getItem("language");
+    if (user_lan == null) {
+        currentLan = "en";
+    } else {
+        currentLan = user_lan;
+    }
+
+    if (currentLan === "en") {
+        $("#en").addClass("language-active");
+        $("#cn").removeClass("language-active");
+    } else if (currentLan === "cn") {
+        $("#cn").addClass("language-active");
+        $("#en").removeClass("language-active");
+    }
+
+    $(".translate").each(function (index, domEle) {
+
+        let cogs = $(domEle).attr('data-lang');
+        $(domEle).text(html_lan[cogs][currentLan]);
+    });
+    $(function () {
+        footerAuto();
     })
 </script>

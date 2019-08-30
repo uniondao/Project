@@ -9,18 +9,21 @@
         background-color: #eaeaea;
     }
 
-    footer .footer-cont {
+    footer .footer-cont{
+        padding: 124px 0 130px 0
+    }
+
+    footer .footer-cont .footer-flex{
         width: 83%;
         margin: 0 auto;
         display: flex;
         display: -webkit-flex;
         justify-content: space-between;
-        padding: 124px 0 153px 0
     }
 
-    .footer-left,
-    .footer-right {
-        /* flex:1  */
+    footer .footer-cont .change-view{
+        text-align: center;
+        margin-top: 20px;
     }
 
     .footer-left {
@@ -137,74 +140,82 @@
 </style>
 <footer>
     <div class="footer-cont">
-        <div class="footer-left">
-            <div class="footer-left-part">
-                <h5 class="translate" data-lang="product"></h5>
-                <hr align="left">
-                <div class="footer-list">
-                    <ul>
-                        <li><a href="./issue.html?type=1" class="translate" data-lang="product-1"></a></li>
-                        <li><a href="./issue.html?type=2" class="translate" data-lang="product-2"></a></li>
-                        <li><a href="./presale.html" class="translate" data-lang="product-3"></a></li>
-                        <li><a href="./wallet.html" class="translate" data-lang="product-4"></a></li>
-                        <li><a href="./exchange.html" class="translate" data-lang="product-5"></a></li>
-                        <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"onclick="alert('In development...')"></a></li> -->
-							<li><a href="./candy.html" class="translate" data-lang="product-6"></a></li>
-                    </ul>
+        <div class="footer-flex">
+            <div class="footer-left">
+                <div class="footer-left-part">
+                    <h5 class="translate" data-lang="product"></h5>
+                    <hr align="left">
+                    <div class="footer-list">
+                        <ul>
+                            <li><a href="./issue.html?type=1" class="translate" data-lang="product-1"></a></li>
+                            <li><a href="./issue.html?type=2" class="translate" data-lang="product-2"></a></li>
+                            <li><a href="./presale.html" class="translate" data-lang="product-3"></a></li>
+                            <li><a href="./wallet.html" class="translate" data-lang="product-4"></a></li>
+                            <li><a href="./exchange.html" class="translate" data-lang="product-5"></a></li>
+                            <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"onclick="alert('In development...')"></a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-left-part">
+                    <h5 class="translate" data-lang="about"></h5>
+                    <hr align="left">
+                    <div class="footer-list">
+                        <ul>
+                            <li><a href="https://udao.zendesk.com" class="translate" data-lang="about-0" target="_blank"></a></li>
+                            <li><a href="./doc.html" class="translate" data-lang="about-1"></a></li>
+                            <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
+                            <li><a href="./privacy.html" class="translate" data-lang="about-2"></a></li>
+                            <li><a href="https://github.com/uniondao" target="_blank" class="translate"
+                                    data-lang="about-3"></a></li>
+                            <li><a href="./uniondao-whitepaper-en.pdf" target="_blank" class="translate"
+                                    data-lang="about-4"></a></li>
+                            <li><a href="./smart.html" class="translate" data-lang="about-5"></a></li>
+                            <li><a href="./contact.html" class="translate" data-lang="foundation-1"></a></li>
+                            <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-left-part">
+                    <h5 class="translate" data-lang="product-6"></h5>
+                    <hr align="left">
+                    <div class="footer-list">
+                        <ul>
+                            <!-- <li><a href="./team.html">TEAM</a></li> -->
+                            <li><a href="./candy.html" class="translate" data-lang="foundation-2"></a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-            <div class="footer-left-part">
-                <h5 class="translate" data-lang="about"></h5>
-                <hr align="left">
-                <div class="footer-list">
-                    <ul>
-                        <li><a href="https://udao.zendesk.com" class="translate" data-lang="about-0"></a></li>
-                        <li><a href="./doc.html" class="translate" data-lang="about-1"></a></li>
-                        <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
-                        <li><a href="./privacy.html" class="translate" data-lang="about-2"></a></li>
-                        <li><a href="https://github.com/uniondao" target="_blank" class="translate"
-                                data-lang="about-3"></a></li>
-                        <li><a href="./uniondao-whitepaper-en.pdf" target="_blank" class="translate"
-                                data-lang="about-4"></a></li>
-                        <li><a href="./smart.html" class="translate" data-lang="about-5"></a></li>
-                        <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
-                    </ul>
+            <div class="footer-right">
+                <h3 class="translate" data-lang="footer-text"></h3>
+                <div class="submit">
+                    <input type="text" placeholder="YOUR@E-MIAL.COM">
+                    <button class="translate" data-lang="footer-send"></button>
                 </div>
-            </div>
-            <div class="footer-left-part">
-                <h5 class="translate" data-lang="foundation"></h5>
-                <hr align="left">
-                <div class="footer-list">
-                    <ul>
-                        <!-- <li><a href="./team.html">TEAM</a></li> -->
-                        <li><a href="./contact.html" class="translate" data-lang="foundation-1"></a></li>
-                    </ul>
+                <div class="contact-img">
+                    <a href="https://twitter.com/uniondao"><img src="./images/footer_2.png" alt=""></a>
+                    <a href="https://t.me/uniondao"><img src="./images/footer_7.png" alt=""></a>
+                    <a href=""><img src="./images/footer_1_g.png" alt=""></a>
+                    <a href=""><img src="./images/footer_3_g.png" alt=""></a>
+                    <!-- <a href=""><img src="./images/footer_4.png" alt=""></a> -->
+                    <a href=""><img src="./images/footer_5_g.png" alt=""></a>
+                    <a href=""><img src="./images/footer_6_g.png" alt=""></a>
                 </div>
             </div>
         </div>
-        <div class="footer-right">
-            <h3 class="translate" data-lang="footer-text"></h3>
-            <div class="submit">
-                <input type="text" placeholder="YOUR@E-MIAL.COM">
-                <button class="translate" data-lang="footer-send"></button>
-            </div>
-            <div class="contact-img">
-                <a href="https://twitter.com/uniondao"><img src="./images/footer_2.png" alt=""></a>
-                <a href="https://t.me/uniondao"><img src="./images/footer_7.png" alt=""></a>
-                <a href=""><img src="./images/footer_1_g.png" alt=""></a>
-                <a href=""><img src="./images/footer_3_g.png" alt=""></a>
-                <!-- <a href=""><img src="./images/footer_4.png" alt=""></a> -->
-                <a href=""><img src="./images/footer_5_g.png" alt=""></a>
-                <a href=""><img src="./images/footer_6_g.png" alt=""></a>
-            </div>
+        <div class="change-view">
+            <a href="./indexMobile.html">
+                <img src="./images/phone.png" alt="">
+            </a>
         </div>
     </div>
+    
 </footer>
 <div id="rights">
-    <p>© 2019 UNIONDAO .ALL RIGHTS RESEVERD.</p>
+    <p>@ 2019 UNIONDAO FOUNDATION</p>
 </div>
 <script>
-     var user_lan = localStorage.getItem("language");
+    var user_lan = localStorage.getItem("language");
     if (user_lan == null) {
         currentLan = "en";
     } else {
@@ -246,5 +257,5 @@
             })
         }
     }
-    
+
 </script>

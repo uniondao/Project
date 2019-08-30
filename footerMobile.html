@@ -15,9 +15,9 @@
         padding: 22.5px 0 16.5px;
     }
 
-    .footer-left,
-    .footer-right {
-        /* flex:1  */
+    footer .footer-cont .change-view {
+        text-align: center;
+        margin-top: 0.5rem
     }
 
     .footer-left {
@@ -167,8 +167,6 @@
                         </li>
                         <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"
                                 onclick="alert('In development...')"></a></li> -->
-                        <li><a href="./candyMobile.html" class="translate" data-lang="product-6"></a>
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -177,7 +175,7 @@
                 <hr align="left">
                 <div class="footer-list">
                     <ul>
-                        <li><a href="https://udao.zendesk.com" class="translate" data-lang="about-0"></a></li>
+                        <li><a href="https://udao.zendesk.com" class="translate" data-lang="about-0" target="_blank"></a></li>
                         <li><a href="./docMobile.html" class="translate" data-lang="about-1"></a>
                         </li>
                         <!-- <li><a href="javascript:;" onclick="alert('In development...')">DEVELOPER</a></li> -->
@@ -188,31 +186,33 @@
                                 data-lang="about-4"></a></li>
                         <li><a href="./smartMobile.html" class="translate" data-lang="about-5"></a>
                         </li>
+                        <li><a href="./contactMobile.html" class="translate" data-lang="foundation-1"></a></li>
                         <!-- <li><a href="javascript:;" onclick="alert('In development...')">OPEN SOURCE CODE</a></li> -->
                     </ul>
                 </div>
             </div>
             <div class="footer-left-part">
-                <h5 class="translate" data-lang="foundation"></h5>
+                <h5 class="translate" data-lang="product-6"></h5>
                 <hr align="left">
                 <div class="footer-list">
                     <ul>
                         <!-- <li><a href="./teamMobileMobile.html">TEAM</a></li> -->
-                        <li><a href="./contactMobile.html" class="translate" data-lang="foundation-1"></a></li>
+
+                        <li><a href="./candyMobile.html" class="translate" data-lang="foundation-2"></a>
+                        </li>
                     </ul>
-                </div>
-                <div>
-                    <a href="./index.html">
-                        <img src="./images/pc.png" alt="" style="width: 20px;">
-                    </a>
                 </div>
             </div>
         </div>
-
+        <div class="change-view">
+            <a href="./index.html">
+                <img src="./images/pc.png" alt="" style="width: 20px;">
+            </a>
+        </div>
     </div>
 </footer>
 <div id="rights">
-    <p>© 2019 UNIONDAO .ALL RIGHTS RESEVERD.</p>
+    <p>@ 2019 UNIONDAO FOUNDATION</p>
 </div>
 <script>
     var user_lan = localStorage.getItem("language");

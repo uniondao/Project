@@ -33,17 +33,31 @@
             $("#footCont").load("./footer.html");
 
         });
-        start();
+
+        setTimeout(start, 1000);
+        start_Interval();
         function start() {
-            setInterval(reserve_undt, 800);
-            setInterval(reserve_usdt, 800);
-            setInterval(reserve_tusd, 800);
-            setInterval(reserve_pax, 800);
-            setInterval(reserve_dai, 800);
-            setInterval(reserve_usdc, 800);
-            setInterval(supply, 1000);
-            setInterval(accountsNumber, 1000);
-            setInterval(fund_banance, 2200);
+            setTimeout(reserve_undt, 1000);
+            setTimeout(reserve_usdt, 1000);
+            setTimeout(reserve_tusd, 1000);
+            setTimeout(reserve_pax, 1000);
+            setTimeout(reserve_dai, 1000);
+            setTimeout(reserve_usdc, 1000);
+            setTimeout(supply, 1000);
+            setTimeout(accountsNumber, 1000);
+            setTimeout(fund_banance, 2200);
+        }
+
+        function start_Interval() {
+            setInterval(reserve_undt, 5000);
+            setInterval(reserve_usdt, 5000);
+            setInterval(reserve_tusd, 5000);
+            setInterval(reserve_pax, 5000);
+            setInterval(reserve_dai, 5000);
+            setInterval(reserve_usdc, 5000);
+            setInterval(supply, 5000);
+            setInterval(accountsNumber, 5000);
+            setInterval(fund_banance, 5000);
         }
         function fund_banance() {
             var fund_banance = Number($('#reserve_undt').val()) + Number($('#reserve_usdt').val()) + Number($('#reserve_tusd').val()) + Number($('#reserve_pax').val()) + Number($('#reserve_dai').val()) + Number($('#reserve_usdc').val());
@@ -68,7 +82,6 @@
                     <h2>
                         <p class="translate" data-lang="banner-h2-1"></p>
                         <p class="translate" data-lang="banner-h2-2"></p>
-                        <p class="translate" data-lang="banner-h2-3"></p>
                     </h2>
                     <div class="banner-icon">
                         <div>
@@ -238,7 +251,7 @@
                                 </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-3">
-                                       
+
                                     </h4>
                                     <p class="translate" data-lang="about-cont-3">
                                     </p>
@@ -251,7 +264,7 @@
                                     <img src="./images/ad_icon_4.png" alt="">
                                 </div>
                                 <div class="cont-three-part-text">
-                                    <h4 class="translate" data-lang="about-h4-4">    
+                                    <h4 class="translate" data-lang="about-h4-4">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-4">
                                     </p>
@@ -268,8 +281,8 @@
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-5">
                                     </h4>
-                                    <p  class="translate" data-lang="about-cont-5">
-                                        
+                                    <p class="translate" data-lang="about-cont-5">
+
                                     </p>
                                 </div>
                             </div>
@@ -281,7 +294,7 @@
                                 </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-6"></h4>
-                                    <p class="translate" data-lang="about-cont-6">    
+                                    <p class="translate" data-lang="about-cont-6">
                                     </p>
                                 </div>
                             </div>
@@ -292,7 +305,7 @@
                                     <img src="./images/ad_icon_7.png" alt="">
                                 </div>
                                 <div class="cont-three-part-text">
-                                    <h4 class="translate" data-lang="about-h4-7"> 
+                                    <h4 class="translate" data-lang="about-h4-7">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-7">
                                     </p>
@@ -320,18 +333,18 @@
                     <div class="cont-four-left">
                         <h3 class="translate" data-lang="index-title-2"></h3>
                         <p class="translate" data-lang="index-left-text">
-                           </p>
+                        </p>
                         <div class="join-link">
                             <div class="join-link-part">
-                                <a href="javascript:;">
-                                    <img src="./images/join_coin_1.png" alt="">
-                                    <span class="translate" data-lang="index-left-text-1"></span>
+                                <a href="https://twitter.com/uniondao" target="_blank">
+                                    <img src="./images/join_coin_5.png" alt="">
+                                    <span class="translate" data-lang="index-left-text-5"></span>
                                 </a>
                             </div>
                             <div class="join-link-part">
-                                <a href="javascript:;">
-                                    <img src="./images/join_coin_2.png" alt="">
-                                    <span class="translate" data-lang="index-left-text-2"></span>
+                                <a href="https://t.me/uniondao" target="_blank">
+                                    <img src="./images/join_coin_6.png" alt="">
+                                    <span class="translate" data-lang="index-left-text-6"></span>
                                 </a>
                             </div>
                             <div class="join-link-part">
@@ -349,37 +362,30 @@
                         </div>
                     </div>
                     <div class="cont-four-right ">
-                        <h3  class="translate" data-lang="index-title-3"></h3>
+                        <h3 class="translate" data-lang="index-title-3"></h3>
                         <div class="news-cont">
                             <div class="news-part">
-                                <p>Upcoming DAPP version.</p>
+                                <p class="translate" data-lang="news-part-1"></p>
                                 <div class="news-down">
-                                    <div class="news-time">—— 2019.08.14</div>
-                                    <div class="more-news">
-                                        <span class="translate" data-lang="readmore"></span>
-                                        <div></div>
-                                    </div>
+                                    <div class="news-time">—— 2019.08.20</div>
+                                    <a href="https://udao.zendesk.com/hc/en-gb/articles/360034111074-UNIONDAO%E5%85%A8%E7%90%83%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E6%BF%80%E5%8A%B1%E8%AE%A1%E5%88%92">
+                                        <div class="more-news">
+                                            <span class="translate" data-lang="readmore"></span>
+                                            <div></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                             <div class="news-part">
-                                <p>Publication of the White Paper.</p>
+                                <p class="translate" data-lang="news-part-2"></p>
                                 <div class="news-down">
-                                    <div class="news-time">—— 2019.08.13</div>
-                                    <div class="more-news">
-                                        <span class="translate" data-lang="readmore"></span>
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="news-part">
-                                <p>Learn more about UNIONDAO, chat with the team, and have your say in shaping the
-                                    future of commerce on the blockchain.</p>
-                                <div class="news-down">
-                                    <div class="news-time">—— 2019.08.08</div>
-                                    <div class="more-news">
-                                        <span class="translate" data-lang="readmore"></span>
-                                        <div></div>
-                                    </div>
+                                    <div class="news-time">—— 2019.08.20</div>
+                                    <a href="https://udao.zendesk.com/hc/en-gb/articles/360034102014-Upcoming-public-test">
+                                        <div class="more-news">
+                                            <span class="translate" data-lang="readmore"></span>
+                                            <div></div>
+                                        </div>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -389,7 +395,7 @@
             <div id="contFive">
                 <div class="cont-five">
                     <h3 class="cont-title-w translate" data-lang="index-title-4">
-                        
+
                     </h3>
                     <div class="cont-five-partner">
                         <div class="partner-part">

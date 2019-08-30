@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/wallet.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -95,7 +98,7 @@
                                     <img src="./images/icon-02_w.png" alt="">
                                 </div>
                                 <div> UDAO</div>
-                                <span>uniondao</span>
+                                <span>UnionDao</span>
                             </a>
                         </div>
                         <div class="wallet-list-part-2">
@@ -134,19 +137,30 @@
     </div>
 </body>
 <script>
-    start();
+    setTimeout(start,1000);
+    start_Interval();
     function start() {
-        setInterval(ethAccounts, 500);
-        setInterval(getnewprice, 700);
-        setInterval(balance_und, 800);
-        setInterval(balance_udao, 800);
-        setInterval(addressToAccounts, 800);
-        setInterval(getGasPrice, 1000);
-        setInterval(accounts, 1500);
+        setTimeout(ethAccounts, 500);
+        setTimeout(getnewprice, 700);
+        setTimeout(balance_und, 800);
+        setTimeout(balance_udao, 800);
+        setTimeout(addressToAccounts, 800);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1500);
+    }
+
+    function start_Interval() {
+        setInterval(ethAccounts, 5000);
+        setInterval(getnewprice, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(balance_udao, 5000);
+        setInterval(addressToAccounts, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(accounts, 5000);
     }
     function accounts() {
         $('#address_account').html($('#address').val());
-        var udao_price = parseFloat($('#udao_balance').html() / $('#udaoPrice').val()).toFixed(4);
+        var udao_price = parseFloat($('#udao_balance').html() * $('#udaoPrice').val()).toFixed(4);
         if (udao_price && udao_price != 'NaN') {
             $('#udao_price').html(udao_price);
         }else{
@@ -165,7 +179,7 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['1143px', '764px'],
+            area: ['900px', '664px'],
             shadeClose: true,
             content: '<div id="payLayer">'
             + ' <div class="pay-layer">'
@@ -231,7 +245,7 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['1143px', '764px'],
+            area: ['900px', '664px'],
             shadeClose: true,
             content: '<div id="payLayer">'
             + ' <div class="pay-layer">'
@@ -279,7 +293,7 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['1143px', '850px'],
+            area: ['900px', '850px'],
             shadeClose: true,
             content: '<div id="coLayer">'
                 + '<div class="col-layer">'

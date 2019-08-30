@@ -6,6 +6,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/presaleMobile.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -46,6 +49,9 @@
             margin-left: 3%;
             display: none;
         }
+        button.gray-btn{
+            background: #8a8a8a!important
+        }
     </style>
 
     <script src="./js/lan/lan_init.js"></script>
@@ -55,6 +61,7 @@
     <script type="text/javascript" src="./js/tools_func.js"></script>
     <script type="text/javascript" src="./js/config2.js"></script>
     <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_base.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
@@ -121,10 +128,10 @@
                             <span>1</span> <span class="sellCoin">UNDT</span> = <span class="getNum">0</span> <span class="buyCoin">UDAO</span>
                         </div>
                         <div class="exchange-w-4">
-                            <div class="ex-btn" onclick="swap()">
-                                <img src="./images/ex_coin_2.png" alt="">
-                                <div class="translate" data-lang="exchange-part-5"></div>
-                            </div>
+                            <button class="ex-btn" onclick="swap()">
+                                <!-- <img src="./images/ex_coin_2.png" alt=""> -->
+                                <div class="translate" data-lang="exchange-part-5" id="ex-btn"></div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -363,10 +370,6 @@
             // console.log("暂不支持该币种");
         }
     });
- // $(document).on("click", ":radio", function () {
-       	// var name = $(this).parents(".select-part").find('.stName').text();
-       	// var logo = $(this).parents(".selec-flex").find('img').attr('src');
-           // var type = $(this).parents(".select-cont").attr('type');
     $(document).on("click", ".select-part", function () {
         var name = $(this).find('.stName').text();
         var logo = $(this).find(".selec-flex").find('img').attr('src');
@@ -387,7 +390,9 @@
             });
         }else{
             var tokenAddr = name .toLowerCase()+'_addr';
-            getTokenBalance(CONFIG[tokenAddr],userAddr,dom);
+            getCoinBalance(name).then(function (v) {
+                $(dom).parents(".exchange-w-1-part").find(".balance").text(v);
+            });
         }
 
         $(".getNum").text(0);
@@ -576,6 +581,8 @@
         if(coin0 == 'UNDT'){
             num = Number(num) * Math.pow(10,pow);
         }else{
+            coin_decimals = coin0.toLowerCase() +'_decimals';
+            pow = 18 - CONFIG[coin_decimals];
             num = Number(num) / Math.pow(10,pow);
         }
         $(".getNum").text(num.toFixed(8));
@@ -618,6 +625,7 @@
         }
 
         if(buttonState.flag === 1){
+            $('.ex-btn').addClass('gray-btn');
             let coin = $(".coin").eq(0).html();
             let temp = 'exchange_'+coin.toLowerCase()+'_addr';
             let Exaddr = CONFIG[temp];
@@ -639,7 +647,14 @@
                     console.log(buttonState);
                 }
             );
+            btnChange();
         }
+    }
+
+    function btnChange() {
+        $('.gray-btn').attr('disabled', false)
+        $('.gray-btn').removeClass('gray-btn');
+        $("#ex-btn").html(html_lan['exchange-part-5'][currentLan]);
     }
 
     //交换
@@ -649,6 +664,9 @@
             return;
         }
 
+        $('.ex-btn').addClass('gray-btn');
+        $("#ex-btn").html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
+
         let num = $("#paywithNum").val();
         let Balance = $(".payCurrentBalance").text();
         let payCoin = $(".paywith").find(".coin-name .CurrentCoin").text();
@@ -656,16 +674,19 @@
         let rateNum = $(".getNum").text();
 
         if(num <= 0){
+            btnChange();
             alert(script_Lan.num_no_empty[currentLan]);
             return;
         }
 
         if(Number(num) > Number(Balance)){
+            btnChange();
             alert(script_Lan.money_no_enough[currentLan]);
             return;
         }
 
         if(Number(rateNum) <= 0 ){
+            btnChange();
             alert(script_Lan.no_rateNum[currentLan]);
             return;
         }
@@ -674,6 +695,7 @@
         receiveCoin   =   receiveCoin.replace(/^\s+|\s+$/g,"");
 
         if(payCoin == receiveCoin){
+            btnChange();
             alert(script_Lan.no_keep_same[currentLan]);
             return;
         }
@@ -692,6 +714,7 @@
                 function (e) {
                     hidePwait();
                     initState();
+                    btnChange();
                     console.log(buttonState);
                 }
             );
@@ -709,10 +732,11 @@
                 function (e) {
                     hidePwait();
                     initState();
+                    btnChange();
                     console.log(buttonState);
                 }
             );
-        }else if(payCoin == "UNDT"){
+        }else if(payCoin == "UNDT" && receiveCoin != "ETH"){
             showPwait();
             buttonState.flag = 1;
             buttonState.forbid = 1;
@@ -726,10 +750,11 @@
                 function (e) {
                     hidePwait();
                     initState();
+                    btnChange();
                     console.log(buttonState);
                 }
             );
-        }else if(receiveCoin == "UNDT"){
+        }else if(receiveCoin == "UNDT" && payCoin != "ETH"){
             let tempCoin = 'exchange_'+payCoin.toLowerCase()+'_addr';
             showPwait();
             buttonState.flag = 1;
@@ -744,10 +769,12 @@
                 function (e) {
                     hidePwait();
                     initState();
+                    btnChange();
                     console.log(buttonState);
                 }
             );
         }else {
+            btnChange();
             alert(script_Lan.operate_err[currentLan]);
         }
     }

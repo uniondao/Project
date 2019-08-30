@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/wallet.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -99,14 +102,26 @@
 <script src="./js/layer.js"></script>
 <script type="text/javascript">
 
-    start();
+    setTimeout(start,1000);
+    start_Interval();
     function start() {
-        setInterval(ethAccounts, 500);
-        setInterval(balance_udao, 1000);
-        setInterval(addressToAccounts, 1000);
-        setInterval(getnewprice, 1000);
-        setInterval(getGasPrice, 1000);
-        setInterval(accounts, 1500);
+        setTimeout(ethAccounts, 500);
+        setTimeout(balance_udao, 1000);
+        setTimeout(addressToAccounts, 1000);
+        setTimeout(getnewprice, 1000);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1500);
+        setTimeout(all_record, 2500);
+
+    }
+
+    function start_Interval() {
+        setInterval(ethAccounts, 5000);
+        setInterval(balance_udao, 5000);
+        setInterval(addressToAccounts, 5000);
+        setInterval(getnewprice, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(accounts, 5000);
     }
 
     $(document).on("click", ".record-part", function () {
@@ -141,7 +156,7 @@
                 + '    </div>'
                 + ' <div class="detail-right-part">'
                 + '  <span>'+html_lan['wallet-part-19'][currentLan]+'</span>'
-                + ' <div><a href="" class="tran-hash"></a></div>'
+                + ' <div><a href="" target="_blank" class="tran-hash"></a></div>'
                 + '  </div>'
                 + '   <div class="detail-right-part">'
                 + '   <span>'+html_lan['wallet-part-8'][currentLan]+':</span>'
@@ -176,6 +191,7 @@
         $('.tran-from').text(transFrom);
         $('.tran-to').text(transTo);
         $('.tran-hash').text(transHash);
+        $('.tran-hash').attr('href',"https://etherscan.io/tx/"+transHash);
         $('.tran-remark').text(transRemark);
     });
     $(document).on("click", ".layer-close3", function () {
@@ -183,14 +199,13 @@
     });
     function accounts() {
 
-        var udao_price = parseFloat($('#udao_balance').html() / $('#udaoPrice').val()).toFixed(4);
+        var udao_price = parseFloat($('#udao_balance').html() * $('#udaoPrice').val()).toFixed(4);
         if (udao_price && udao_price != 'NaN') {
             $('#udao_price').html(udao_price);
         } else {
             $('#udao_price').html($('#udao_balance').html());
         }
     }
-    all_record();
     function all_record() {
         filt_addr = CONFIG.und_issue_addr;
         web3.eth.getAccounts(function (err, accounts) {
@@ -222,8 +237,8 @@
                                                 + '<div class="record-part-1" style="width:55%;">'
                                                 + '<div class="record-address">'
                                                 + '<span>' + item.to + '</span>'
-                                                + '<span>' + account_have + '</span>'
-                                                + '<span>' + account + '</span>'
+//                                                + '<span>' + account_have + '</span>'
+//                                                + '<span>' + account + '</span>'
                                                 + '</div>'
                                                 + '<div class="record-time">'
                                                 + timestampToTime(item.timeStamp)
@@ -232,7 +247,7 @@
                                                 + item.from
                                                 + '</div>'
                                                 + '<div class="record-to" style="display: none">'
-                                                + item.to + account_have + account
+                                                + item.to
                                                 + '</div>'
                                                 + '<div class="record-block" style="display: none">'
                                                 + item.blockNumber
@@ -245,7 +260,7 @@
                                                 + '</div>'
                                                 + '</div>'
                                                 + '<div class="record-part-2">'
-                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + 'UDAO </div>'
                                                 + '</div>'
                                                 + '<div class="record-part-3">'
                                                 + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
@@ -292,7 +307,7 @@
                                                         + '</div>'
                                                         + '</div>'
                                                         + '<div class="record-part-2">'
-                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + 'UDAO </div>'
                                                         + '</div>'
                                                         + '<div class="record-part-3">'
                                                         + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
@@ -317,8 +332,8 @@
                                                 + '<div class="record-part-1" style="width:55%;">'
                                                 + '<div class="record-address">'
                                                 + '<span>' + item.from + '</span>'
-                                                + '<span>' + account_have + '</span>'
-                                                + '<span>' + account + '</span>'
+//                                                + '<span>' + account_have + '</span>'
+//                                                + '<span>' + account + '</span>'
                                                 + '</div>'
                                                 + '<div class="record-time">'
                                                 + timestampToTime(item.timeStamp)
@@ -327,7 +342,7 @@
                                                 + item.from
                                                 + '</div>'
                                                 + '<div class="record-to" style="display: none">'
-                                                + item.to + account_have + account
+                                                + item.to
                                                 + '</div>'
                                                 + '<div class="record-block" style="display: none">'
                                                 + item.blockNumber
@@ -340,7 +355,7 @@
                                                 + '</div>'
                                                 + '</div>'
                                                 + '<div class="record-part-2">'
-                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' UDAO</div>'
                                                 + '</div>'
                                                 + '<div class="record-part-3">'
                                                 + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'
@@ -371,10 +386,10 @@
                                                         + timestampToTime(item.timeStamp)
                                                         + '</div>'
                                                         + '<div class="record-from" style="display: none">'
-                                                        + item.from
+                                                        + item.from + account_have + account
                                                         + '</div>'
                                                         + '<div class="record-to" style="display: none">'
-                                                        + item.to + account_have + account
+                                                        + item.to
                                                         + '</div>'
                                                         + '<div class="record-block" style="display: none">'
                                                         + item.blockNumber
@@ -387,7 +402,7 @@
                                                         + '</div>'
                                                         + '</div>'
                                                         + '<div class="record-part-2">'
-                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + ' </div>'
+                                                        + '<div class="record-num-1">' + web3.utils.fromWei(item.value, CONFIG.udao_wei) + 'UDAO </div>'
                                                         + '</div>'
                                                         + '<div class="record-part-3">'
                                                         + '<div class="record-status">' + html_lan['wallet-part-23'][currentLan] + '</div>'

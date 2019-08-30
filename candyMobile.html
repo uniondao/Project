@@ -6,9 +6,12 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
     <title>UnionDao</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
     <script src="./js/lan/lan_init.js"></script>
     <script src="./js/lan/lan_srcipt.js"></script>
@@ -28,7 +31,16 @@
     <script type="text/javascript" src="./js/token/coin/udao.js"></script>
     <script type="text/javascript" src="./js/token/coin/und.js"></script>
     <script type="text/javascript" src="./js/token/coin/airdrop.js"></script>
-
+    <style>
+        .layui-m-layer1 .layui-m-layerchild {
+            border-radius: 6px !important;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .layui-m-layercont{
+            padding: 0px!important
+        }
+    </style>
     <script>
         $(document).ready(function () {
             $("header").load("./headerMobile.html");
@@ -54,24 +66,26 @@
                     </h4>
                     <div class="candy-banner-text translate" data-lang="candy-part-1">
                     </div>
-                    <div class="candy-banner-btn translate" id="createAccount" onclick="createAccount()"
+                    <button class="candy-banner-btn translate" id="createAccount" onclick="createAccount()" 
                         data-lang="candy-part-2">
-                    </div>
+                    </button>
                     <div class="candy-banner-card translate" data-lang="candy-part-3">
                     </div>
-                    <div id="bank_card" class="candy-bank-card"></div>
+                    <div class="candy-bank-card"> Card ID:  <span id="bank_card"></span></div>
                 </div>
             </div>
             <div id="candyCont">
                 <div class="candy-cont-1">
                     <div class="candy-card">
                         <span class="bind_card_span translate" data-lang="candy-part-4"></span>
+                        <p class="translate bind_p" data-lang="candy-part-46"></p>
                         <div class="candy-input">
+                            <label for="" class="translate" data-lang="candy-part-44"></label>
                             <input type="text" id="bind_card">
                             <!--<img src="./images/code.png" alt="">-->
                         </div>
-                        <div class="candy-cont-btn translate" onclick="bindInvit()" data-lang="candy-part-5">
-                        </div>
+                        <button class="candy-cont-btn translate" onclick="bindInvit()" data-lang="candy-part-5" >
+                        </button>
                     </div>
                 </div>
                 <div class="candy-cont-2">
@@ -108,9 +122,9 @@
                             </div>
                             <span id="not_received">0</span>UDAO
                         </div>
-                        <div class="candy-receive-btn translate" data-lang="candy-part-14" onclick="getGift()">
+                        <button class="candy-receive-btn translate" data-lang="candy-part-14" onclick="getGift()" 
 
-                        </div>
+                        </button>
                     </div>
                 </div>
                 <div class="candy-cont-4">
@@ -124,7 +138,7 @@
                         </div>
                         <div class="candy-recommend-input">
                             <textarea type="text" id="copyAddress" value="https://uniondao.com/candyMobile.html?"
-                                readonly>
+                            readonly="readonly">
                                 </textarea>
                             <div class="copy-link translate" onclick="copyUrl()" data-lang="candy-part-18">
                             </div>
@@ -157,10 +171,9 @@
                 </div>
                 <div class="candy-cont-5">
                     <div class="candy-rule">
-                        <p class="rule-req translate" data-lang="candy-part-44"></p>
-                        <h5 class="rule-title translate" data-lang="candy-part-23">
-
-                        </h5>
+                        <h5 class="rule-title translate" data-lang="candy-part-23"></h5>
+                        <p class="rule-req translate" data-lang="candy-part-45"></p>
+                        
                         <div class="candy-rule-cont">
                             <div class="candy-rule-part">
                                 <span class="translate" data-lang="candy-part-24"></span>
@@ -179,7 +192,7 @@
                                 </ul>
                             </div>
                             <div class="candy-rule-part">
-                                <span class="translate" data-lang="candy-part-31"></span>
+                                <span class="translate" data-lang="candy-part-31" ></span>
                                 <ul>
                                     <li class="translate" data-lang="candy-part-32"></li>
                                     <li class="translate" data-lang="candy-part-33"></li>
@@ -223,8 +236,9 @@
 </body>
 
 </html>
+<script src="./js/layer.js"></script>
 <script>
-    setTimeout(start, 500);
+    setTimeout(start, 1000);
     getQueryVariable();
 
     function start() {
@@ -242,16 +256,16 @@
     }
     setTimeout(start_Interval, 1000);
     function start_Interval() {
-        setInterval(ethAccounts, 2000);
-        setInterval(addressToAccounts, 2000);
-        setInterval(invit_referee, 2000);
-        setInterval(balance_und, 2000);
-        setInterval(getGasPrice, 2000);
-        setInterval(accounts, 2000);
-        setInterval(winning, 200);
-        setInterval(haveGetGift, 200);
-        setInterval(queryRefereeLuck, 2000);
-        setInterval(haveGetRefereeGift, 2000);
+        setInterval(ethAccounts, 5000);
+        setInterval(addressToAccounts, 5000);
+        setInterval(invit_referee, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(accounts, 5000);
+        setInterval(winning, 1000);
+        setInterval(haveGetGift, 1000);
+        setInterval(queryRefereeLuck, 5000);
+        setInterval(haveGetRefereeGift, 5000);
     }
     function accounts() {
         account = $('#candy_card').val();
@@ -268,6 +282,8 @@
         }
         referee = $('#invit_referee').val();
         if (referee) {
+            $('.bind_p').css('display', 'none');
+            $('.bind_card_span').html(script_Lan.invit_referee[currentLan]);
             $('.candy-cont-btn').css('display', 'none');
             $('#bind_card').css('display', 'none');
             $('.candy-input').html(referee);
@@ -319,7 +335,7 @@
                         qi--;
                         if (item != "0" || item != 0) {
 
-                            block = Number(qi) * 6000 + 8395100;
+                            block = Number(qi) * 6000 + 8420500;
                             html += "<div class='winning-part'>" +
                                 "<div>" + qi + "</div>" +
                                 "<div>" + item + "</div>" +
@@ -329,12 +345,13 @@
                         }
                     });
                 }else{
-                    block = 6000 + 8395100;
-                    html += "<div class='winning-part'>" +
-                        "<div>" + 1 + "</div>" +
-                        "<div>" + data + "</div>" +
-                        "<div>" + block + "</div>" +
-                        "</div>";
+                    history();
+//                    block = 6000 + 8420500;
+//                    html += "<div class='winning-part'>" +
+//                        "<div>" + 1 + "</div>" +
+//                        "<div>" + data + "</div>" +
+//                        "<div>" + block + "</div>" +
+//                        "</div>";
 
                 }
 
@@ -343,10 +360,48 @@
     }
 </script>
 <script>
-    function copyUrl() {
-        var Url = document.getElementById("copyAddress");
-        Url.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-        alert("复制成功！");
+    // function copyUrl() {
+    //     var Url = document.getElementById("copyAddress");
+    //     Url.select(); // 选择对象
+    //     document.execCommand("Copy"); // 执行浏览器复制命令
+    //     alert("复制成功！");
+    // }
+    function  copyUrl() {
+        var ele = document.getElementById("copyAddress"); //ele是要复制的元素的对象
+        ele.focus();
+        // ele.select();
+        ele.setSelectionRange(0, ele.value.length);
+        if (document.execCommand('copy', false, null)) {
+            //success info
+            alert("复制成功！");
+        } else {
+            //fail info
+            alert("复制失败！");
+        }
     }
+  
+</script>
+<script type="text/javascript">
+    $(document).on("click", ".candy-recommend .candy-recommend-title div", function () {
+        layer.open({
+            title: false,
+            closeBtn: 0,
+            area: ['550px', '500px'],
+            shadeClose: true,
+            content: '<div id="referrerLayer">'
+                + ' <div class="referrer-layer">'
+                + ' <div class="layer-back">  <img src="./images/layer_back.png" alt="">  </div>'
+                +'<div class="referrer-all">'
+                + ' <div class="referrer-header">'+html_lan['candy-part-47'][currentLan]+' </div>'
+                + '   <div class="referrer-cont">'
+                + '  <div class="referrer-part"> 8888880000000000013</div>'
+                + '  <div class="referrer-part"> 8888880000000000013</div>'
+                + '  <div class="referrer-part"> 8888880000000000013</div>'
+                + '</div></div></div>'
+                + '</div>'
+        })
+    });
+    $(document).on("click", ".layer-back", function () {
+        layer.closeAll();
+    });
 </script>

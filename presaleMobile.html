@@ -6,6 +6,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <title>UnionDao</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/presaleMobile.css">
@@ -91,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="progress-bar">
-                                <div class="progress-tip">
+                                <div class="progress-tips">
                                     <div>
                                         <div class="translate" data-lang="presale-part-3" style="display: initial">
                                         </div> <span>0%</span>
@@ -121,6 +124,7 @@
                                     <input id="invest_num" type="text" placeholder="UNDT" onkeyup="onlyNumber(this)"
                                         onkeydown="onlyNumber(this)">
                                     <span>
+                                        <div><span  class="translate" data-lang="presale-part-35"></span>1UDAO≈<span id="udao2undt">0</span>UNDT</div>
                                         <div class="translate" data-lang="presale-part-7" style="display: initial">
                                         </div>
 
@@ -158,6 +162,7 @@
                                             <thead>
                                                 <th class="translate" data-lang="presale-part-15"></th>
                                                 <th class="translate" data-lang="presale-part-16"></th>
+                                                <th class="translate" data-lang="presale-part-167"></th>
                                                 <th class="translate" data-lang="presale-part-17"></th>
                                             </thead>
                                         </tbody>
@@ -305,14 +310,10 @@
             $(this).parent().attr("id", "current"); // Activate this
             $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
         });
-
-        var W = $(".progress-percent").width();
-        var T = (W / 100 * 100).toFixed(0);
-        $('.progress-tip div').text(' CURRENT PROGRESS ' + T + '%')
-        $(".progress-bar .progress-tip").css('left', W - 100);
+       
     })
 
-    setTimeout(start, 200);
+    setTimeout(start, 1000);
     setTimeout(start_Interval, 1000);
     function start() {
         setTimeout(ethAccounts, 800);
@@ -325,19 +326,21 @@
         setTimeout(getGasPrice, 1500);
         setTimeout(getAmount, 2500);
         setTimeout(getPeriodData, 3000);
-        all_record(CONFIG.und_issue_addr)
+        all_record(CONFIG.und_issue_addr);
+        getOneUdao2Undt();
     }
     function start_Interval() {
-        setInterval(ethAccounts, 2000);
-        setInterval(getBlockNumber, 2000);
-        setInterval(balance_und, 2000);
-        setInterval(ethBalance, 2000);
+        setInterval(ethAccounts, 5000);
+        setInterval(getBlockNumber, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(ethBalance, 5000);
         // setTimeout(getMaxRate, 1000);
-        setInterval(getSaleAmount, 2000);
-        setInterval(getPeriod, 2000);
-        setInterval(getGasPrice, 2000);
-        setInterval(getAmount, 2000);
+        setInterval(getSaleAmount, 5000);
+        setInterval(getPeriod, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(getAmount, 5000);
         // setInterval(getPeriodData, 2000);
+        getOneUdao2Undt();
     }
 
     var click_und2udao = 1;
@@ -365,21 +368,32 @@
             // alert("期数获取失败");
             return;
         }
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 10; i++) {
             period -= 1;
-            let num = await saleTotal(period);
+            let num = await investTotalAmount(period);
             num = web3.utils.fromWei(num, CONFIG.und_wei);
-            num = Number(num).toFixed(CONFIG.Fixed2);
+            num = Number(num).toFixed(5);
+            let num_dao = await saleTotal(period);
+            num_dao = web3.utils.fromWei(num_dao, CONFIG.und_wei);
+            num_dao = Number(num_dao).toFixed(5);
             let rate = await investRate(period);
             rate = web3.utils.fromWei(rate, CONFIG.udao_wei);
-            rate = Number(rate).toFixed(CONFIG.Fixed2);
+            rate = Number(rate).toFixed(5);
             let str = "<tr>" +
                 "<td>" + period + "</td>\n" +
                 "<td>" + num + "</td>\n" +
+                "<td>" + num_dao + "</td>\n" +
                 "<td>1UNDT=" + rate + "UDAO</td>\n" +
                 "</tr>";
             $('.sys_record').append(str);
         }
+    }
+
+    async function getOneUdao2Undt() {
+        let price = await getUdao2UndtNum();
+        price = web3.utils.fromWei(price, CONFIG.udao_wei);
+        price = Number(price).toFixed(8);
+        $("#udao2undt").text(price);
     }
 
     function all_record(filt_addr) {
@@ -405,5 +419,10 @@
                 });
             }
         });
+        let hasChildren = $(".user_record").children().length;
+        if(hasChildren === 0){
+            var temp = '<tr><td>' + '--' + '</td><td>' + '--' + '</td><td>' +'--' + '</td><td>--</td></tr>';
+            $(".user_record").append(temp);
+        }
     }
 </script>

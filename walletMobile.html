@@ -6,6 +6,9 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/walletMobile.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -95,7 +98,7 @@
                                     <img src="./images/icon-02_w.png" alt="">
                                 </div>
                                 <div> UDAO</div>
-                                <span>uniondao</span>
+                                <span>UnionDao</span>
                             </a>
                         </div>
 
@@ -131,20 +134,31 @@
     </div>
 </body>
 <script>
-
-    start();
+    setTimeout(start,1000);
+    start_Interval();
     function start() {
-        setInterval(ethAccounts, 500);
-        setInterval(getnewprice, 700);
-        setInterval(balance_und, 800);
-        setInterval(balance_udao, 800);
-        setInterval(addressToAccounts, 800);
-        setInterval(getGasPrice, 1000);
-        setInterval(accounts, 1500);
+        setTimeout(ethAccounts, 500);
+        setTimeout(getnewprice, 700);
+        setTimeout(balance_und, 800);
+        setTimeout(balance_udao, 800);
+        setTimeout(addressToAccounts, 800);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(accounts, 1500);
     }
+    function start_Interval() {
+        setInterval(ethAccounts, 5000);
+        setInterval(getnewprice, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(balance_udao, 5000);
+        setInterval(addressToAccounts, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(accounts, 5000);
+    }
+
+
     function accounts() {
         $('#address_account').html($('#address').val());
-        var udao_price = parseFloat($('#udao_balance').html() / $('#udaoPrice').val()).toFixed(4);
+        var udao_price = parseFloat($('#udao_balance').html() * $('#udaoPrice').val()).toFixed(4);
         if (udao_price && udao_price != 'NaN') {
             $('#udao_price').html(udao_price);
         } else {
@@ -158,7 +172,7 @@
 <script src="./js/layer.js"></script>
 
 <script type="text/javascript">
-    $(document).on("touchend", ".payment_udao", function () {
+    $(document).on("click", ".payment_udao", function () {
         layer.open({
             type: 1,
             title: false,
@@ -224,7 +238,7 @@
         //        }
     });
 
-    $(document).on("touchend", ".payment_undt", function () {
+    $(document).on("click", ".payment_undt", function () {
         layer.open({
             type: 1,
             title: false,
@@ -272,7 +286,7 @@
 </script>
 
 <script type="text/javascript">
-    $(document).on("touchend", ".collection_udao", function () {
+    $(document).on("click", ".collection_udao", function () {
         layer.open({
             type: 1,
             title: false,
@@ -334,7 +348,7 @@
             $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + bank_card);
         }
     });
-    $(document).on("touchend", ".collection_undt", function () {
+    $(document).on("click", ".collection_undt", function () {
         layer.open({
             type: 1,
             title: false,
@@ -405,7 +419,7 @@
 
 
 <script type="text/javascript">
-    $(document).on("touchend", ".address-img", function () {
+    $(document).on("click", ".address-img", function () {
         layer.open({
             type: 1,
             title: false,
