@@ -4,7 +4,7 @@
 function shouquan_und() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         return false;
     }
     num = Math.pow(10,16);  //+Number(10000)
@@ -18,7 +18,7 @@ function shouquan_und() {
     }
     Contract_und.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000}, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -83,11 +83,11 @@ function invest_und2udao(num) {
     var SELF_ADDR = $("#address").val();
     var und_balance = $(".und_balance").html();
     if (num < 10) {
-        alert(script_Lan.invite_num_min[currentLan]);
+        layer.msg(script_Lan.invite_num_min[currentLan]);
         return 1;
     }
     if (Number(und_balance) <= 0 || Number(num) > Number(und_balance)) {
-        alert(script_Lan.und_no_enough[currentLan]);
+        layer.msg(script_Lan.und_no_enough[currentLan]);
         return 1;
     }
 
@@ -104,7 +104,7 @@ function invest_und2udao(num) {
     click_und2udao = 1;
     Contract_und.methods.approveAndCall(CONFIG.udao_issue_addr, num, "0x31").send({ from: SELF_ADDR , gasPrice: gas}, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#und2udao").html(script_Lan.participate_now[currentLan]);
         }else{
             Verification_presale(transactionHash);
@@ -133,18 +133,18 @@ function getFeeCosUDAO() {
 function withdraw(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     if (num == null || num <= 0) {
-        alert(script_Lan.redeem_num[currentLan]);
+        layer.msg(script_Lan.redeem_num[currentLan]);
         location.reload();
         return false;
     }
     var undSum = $(".und_balance").html();
     if (Number(num) > Number(undSum)) {
-        alert(script_Lan.redeem_num_max[currentLan]);
+        layer.msg(script_Lan.redeem_num_max[currentLan]);
         location.reload();
         return false;
     }
@@ -159,7 +159,7 @@ function withdraw(num) {
     $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
     Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas ,gas:400000}, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -179,7 +179,7 @@ function withdraw_onecoin(num,coin) {
             var token = CONFIG.usdt_addr;
             var tokenSupply_usdt = $(".tokenSupply_usdt").text();
             if(Number(num) > Number(tokenSupply_usdt)){
-                alert(script_Lan.notokenSupply[currentLan]);
+                layer.msg(script_Lan.notokenSupply[currentLan]);
                 return false;
             }
             break;
@@ -187,7 +187,7 @@ function withdraw_onecoin(num,coin) {
             var token = CONFIG.dai_addr;
             var tokenSupply_dai = $(".tokenSupply_dai").text();
             if(Number(num) > Number(tokenSupply_dai)){
-                alert(script_Lan.notokenSupply[currentLan]);
+                layer.msg(script_Lan.notokenSupply[currentLan]);
                 return false;
             }
             break;
@@ -195,7 +195,7 @@ function withdraw_onecoin(num,coin) {
             var token = CONFIG.usdc_addr;
             var tokenSupply_usdc = $(".tokenSupply_usdc").text();
             if(Number(num) > Number(tokenSupply_usdc)){
-                alert(script_Lan.notokenSupply[currentLan]);
+                layer.msg(script_Lan.notokenSupply[currentLan]);
                 return false;
             }
             break;
@@ -203,7 +203,7 @@ function withdraw_onecoin(num,coin) {
             var token = CONFIG.tusd_addr;
             var tokenSupply_tusd = $(".tokenSupply_tusd").text();
             if(Number(num) > Number(tokenSupply_tusd)){
-                alert(script_Lan.notokenSupply[currentLan]);
+                layer.msg(script_Lan.notokenSupply[currentLan]);
                 return false;
             }
             break;
@@ -211,29 +211,29 @@ function withdraw_onecoin(num,coin) {
             var token = CONFIG.pax_addr;
             var tokenSupply_pax = $(".tokenSupply_pax").text();
             if(Number(num) > Number(tokenSupply_pax)){
-                alert(script_Lan.notokenSupply[currentLan]);
+                layer.msg(script_Lan.notokenSupply[currentLan]);
                 return false;
             }
             break;
     }
     if(token == '' || token == null){
-        alert(script_Lan.nocoin[currentLan]);
+        layer.msg(script_Lan.nocoin[currentLan]);
         return false;
     }
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     if (num == null || num <= 0) {
-        alert(script_Lan.redeem_num[currentLan]);
+        layer.msg(script_Lan.redeem_num[currentLan]);
         location.reload();
         return false;
     }
     var undSum = $("#und_balance").val();
 
     if (Number(num) > Number(undSum)) {
-        alert(script_Lan.redeem_num_max[currentLan]);
+        layer.msg(script_Lan.redeem_num_max[currentLan]);
         location.reload();
         return false;
     }
@@ -246,10 +246,11 @@ function withdraw_onecoin(num,coin) {
     }else{
         gas = Number(gas)+Number(3000000000)
     }
+
     $("#redemption").html(script_Lan.redeem_wait[currentLan] + "<dot>···</dot>");
     Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas,gas:300000 }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -276,7 +277,7 @@ function other2und(num, coin_addr, self_addr, wei = CONFIG.usdt_wei) {
 
     Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas , gas: 150000}, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -309,50 +310,52 @@ function getPercent() {
             if (data != 0) {
                 Contract_und_issue.methods.getTokenIssueAmount().call()
                     .then(function(data2) {
-                        var sum = 0;
-                        var len = 0;
-                        var str1 = "";
-                        var str2 = "1 UND = ";
-                        var str3 = "(";
-                        var str4 = "";
-                        data.forEach(function(item, index) {
-                            if (item != "0x0000000000000000000000000000000000000000" || item != 0) {
-                                var Num = web3.utils.fromWei(data2[index], CONFIG[CONFIG[item.toLowerCase()]]);
-                                sum += Number(Num);
-                                len++;
-                            }
-                        });
-
-                        data.forEach(function(item, index) {
-                            if (item != "0x0000000000000000000000000000000000000000" || item != 0) {
-                                if (sum == 0) {
-                                    str1 += "" + parseInt(100 / len) + "%" + CONFIG[item] + "、";
-                                    str2 += parseInt(100 / len) / 100 +" "+ CONFIG[item] + " + ";
-                                    str3 += parseInt(100 / len) + "%" + CONFIG[item] + " + ";
-                                    str4 += "<span class='num_per'>" + parseInt(100 / len) + "%" + CONFIG[item] + "、</span>";
-                                } else {
-                                    var Num2 = web3.utils.fromWei(data2[index], CONFIG[CONFIG[item]]);
-                                    var val2 = (Num2 / sum) * 100;
-                                    val2 = val2.toFixed(CONFIG.Fixed2);
-                                    str1 += "" + val2 + "%" + CONFIG[item] + "、";
-                                    str4 += "<span class='num_per'>" + val2 + "%" + CONFIG[item] + "、</span>";
-                                    var val3 = val2 / 100;
-                                    val3 = val3.toFixed(CONFIG.Fixed2);
-                                    str2 += val3 +" "+ CONFIG[item] + " + ";
-
-                                    str3 += val2 + "%" + CONFIG[item] + " + ";
+                        if (Array.isArray(data2)) {
+                            var sum = 0;
+                            var len = 0;
+                            var str1 = "";
+                            var str2 = "1 UNDT = ";
+                            var str3 = "(";
+                            var str4 = "";
+                            data.forEach(function(item, index) {
+                                if (item != "0x0000000000000000000000000000000000000000" || item != 0) {
+                                    var Num = web3.utils.fromWei(data2[index], CONFIG[CONFIG[item.toLowerCase()]]);
+                                    sum += Number(Num);
+                                    len++;
                                 }
-                            }
-                        });
-                        str1 = str1.substr(0, str1.length - 1);
-                        str2 = str2.substr(0, str2.length - 2);
-                        str3 += ")";
-                        str3 = str3.substr(0, str3.length - 1);
-                        $str = str2;
-                        $("#bili_redeem").html($str);
-                        $("#undopther_txt").attr("placeholder", str1);
-                        $("#undopther_txt_cop").val(str1);
-                        $(".txt1").html(str4);
+                            });
+
+                            data.forEach(function(item, index) {
+                                if (item != "0x0000000000000000000000000000000000000000" || item != 0) {
+                                    if (sum == 0) {
+                                        str1 += "" + parseInt(100 / len) + "%" + CONFIG[item] + "、";
+                                        str2 += parseInt(100 / len) / 100 +" "+ CONFIG[item] + " + ";
+                                        str3 += parseInt(100 / len) + "%" + CONFIG[item] + " + ";
+                                        str4 += "<span class='num_per'>" + parseInt(100 / len) + "%" + CONFIG[item] + "、</span>";
+                                    } else {
+                                        var Num2 = web3.utils.fromWei(data2[index], CONFIG[CONFIG[item]]);
+                                        var val2 = (Num2 / sum) * 100;
+                                        val2 = val2.toFixed(CONFIG.Fixed2);
+                                        str1 += "" + val2 + "%" + CONFIG[item] + "、";
+                                        str4 += "<span class='num_per'>" + val2 + "%" + CONFIG[item] + "、</span>";
+                                        var val3 = val2 / 100;
+                                        val3 = val3.toFixed(CONFIG.Fixed2);
+                                        str2 += val3 +" "+ CONFIG[item] + " + ";
+
+                                        str3 += val2 + "%" + CONFIG[item] + " + ";
+                                    }
+                                }
+                            });
+                            str1 = str1.substr(0, str1.length - 1);
+                            str2 = str2.substr(0, str2.length - 2);
+                            str3 += ")";
+                            str3 = str3.substr(0, str3.length - 1);
+                            $str = str2;
+                            $("#bili_redeem").html($str);
+                            $("#undopther_txt").attr("placeholder", str1);
+                            $("#undopther_txt_cop").val(str1);
+                            $(".txt1").html(str4);
+                        }
                     });
             }
         })
@@ -372,7 +375,7 @@ function undt_send(){
         gas = Number(gas)+Number(3000000000)
     }
     if(Number(num)<0 || Number(num)>Number(und_banance)){
-        alert(script_Lan.issue_num_max[currentLan]);
+        layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
     num = web3.utils.toWei(num, CONFIG.udao_wei);
@@ -381,7 +384,7 @@ function undt_send(){
     if(account.slice(0,2) == '0x'){
         Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
-                alert(script_Lan.operate_err[currentLan]);
+                layer.msg(script_Lan.operate_err[currentLan]);
                 $('#undt_send').html(script_Lan.next[currentLan]);
             }else{
                 Verification_send(transactionHash);
@@ -391,7 +394,7 @@ function undt_send(){
     }else{
         Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
-                alert(script_Lan.operate_err[currentLan]);
+                layer.msg(script_Lan.operate_err[currentLan]);
                 $('#undt_send').html(script_Lan.next[currentLan]);
             }else{
                 Verification_send(transactionHash);

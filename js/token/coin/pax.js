@@ -2,7 +2,7 @@
 function shouquan_pax() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
     }
 
@@ -18,7 +18,7 @@ function shouquan_pax() {
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
     Contract_pax.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -62,13 +62,13 @@ function allowance_pax() {
 function mortgage_pax(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     var pax_balance = $("#pax_balance").val();
     if (Number(num) > Number(pax_balance)) {
-        alert(script_Lan.pax_num_min[currentLan]);
+        layer.msg(script_Lan.pax_num_min[currentLan]);
         location.reload();
         return false;
     }

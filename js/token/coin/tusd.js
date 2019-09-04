@@ -35,7 +35,7 @@ function allowance_tusd() {
 function shouquan_tusd() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
     }
 
@@ -51,7 +51,7 @@ function shouquan_tusd() {
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
     Contract_tusd.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#issue").html(script_Lan.issue_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -67,13 +67,13 @@ function shouquan_tusd() {
 function mortgage_tusd(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     var tusd_balance = $("#tusd_balance").val();
     if (Number(num) > Number(tusd_balance)) {
-        alert(script_Lan.tusd_num_min[currentLan]);
+        layer.msg(script_Lan.tusd_num_min[currentLan]);
         location.reload();
         return false;
     }

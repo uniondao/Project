@@ -4,7 +4,7 @@
 function shouquan_udao() {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         return false;
     }
     udao_num = Math.pow(10,16);  //+Number(10000)
@@ -18,7 +18,7 @@ function shouquan_udao() {
     }
     Contract_udao.methods.approve(CONFIG.und_issue_addr, udao_num).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
             $(".approve_commit").html('&nbsp');
         }else{
@@ -223,7 +223,6 @@ function createAccount(){
     var gas = $("#getGasPrice").val();
     $('.candy-banner-btn').addClass('gray-btn');
     $('.gray-btn').attr('disabled',true);
-    // setTimeout("btnChange()",5000);
     if(!gas){
         gas = 10000000000;
     }else{
@@ -232,13 +231,15 @@ function createAccount(){
     $('#createAccount').html(script_Lan.create_wait[currentLan]+"<dot>···</dot>");
     Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas,gas:100000 }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $('#createAccount').html(script_Lan.immediate_application[currentLan]);
             btnChange();
         }else{
             console.log(transactionHash);
             Verification_immediate(transactionHash);
+            btnChange()
         }
+        btnChange();
 
 
     });
@@ -278,7 +279,7 @@ function udao_send(){
         gas = Number(gas)+Number(3000000000)
     }
     if(Number(num)<0 || Number(num)>Number(udao_banance)){
-        alert(script_Lan.issue_num_max[currentLan]);
+        layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
     num = web3.utils.toWei(num, CONFIG.udao_wei);
@@ -287,7 +288,7 @@ function udao_send(){
     if(account.slice(0,2) == '0x'){
         Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
-                alert(script_Lan.operate_err[currentLan]);
+                layer.msg(script_Lan.operate_err[currentLan]);
                 $('#udao_send').html(script_Lan.next[currentLan]);
             }else{
                 Verification_send(transactionHash);
@@ -297,7 +298,7 @@ function udao_send(){
     }else{
         Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
             if(error){
-                alert(script_Lan.operate_err[currentLan]);
+                layer.msg(script_Lan.operate_err[currentLan]);
                 $('#udao_send').html(script_Lan.next[currentLan]);
             }else{
                 Verification_send(transactionHash);

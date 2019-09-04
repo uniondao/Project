@@ -30,14 +30,19 @@ async function authorize_coin_num(CoinExAddr,coin) {
     let wei = coin.toLowerCase()+'_wei';
     return new Promise(function (resolve, reject) {
         Contract_Coin.methods.allowance(UserAddr, CoinExAddr).call()
-            .then(function(data) {
-                if (data > 0) {
-                    var num = web3.utils.fromWei(data, CONFIG[wei]);
-                } else {
-                    var num = 0;
-                }
-                resolve(num);
-            });
+            .then(
+                    function(data) {
+                        if (data > 0) {
+                            var num = web3.utils.fromWei(data, CONFIG[wei]);
+                        } else {
+                            var num = 0;
+                        }
+                        resolve(num);
+                    },
+                    function (e) {
+                        console.log(e);
+                    }
+                );
     });
 }
 

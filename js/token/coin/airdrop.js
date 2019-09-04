@@ -3,12 +3,12 @@ function bindInvit(){
     var SELF_ADDR = $("#address").val();
     var bind_card = $("#bind_card").val();
     var gas = $("#getGasPrice").val();
-    // $('.candy-cont-btn').addClass('gray-btn');
-    // $('.gray-btn').attr('disabled',true);
+    $('.candy-cont-btn').addClass('gray-btn');
+    
     if(!gas){
         gas = 10000000000;
     }else{
-        gas = Number(gas)+Number(3000000000)
+        gas = Number(gas)+Number(3000000000);
     }
     Contract_udao.methods.accountsToAddress(bind_card).call()
         .then(function(data) {
@@ -18,32 +18,36 @@ function bindInvit(){
                 bindInvit();
             }
             if(data == 0 || isNaN(data)){
-                alert(script_Lan.invit_not[currentLan]);
+                layer.msg(script_Lan.invit_not[currentLan]);
+                btnChange();
                 return false;
             }else{
                 if(SELF_ADDR == data){
-                    alert(script_Lan.operate_err[currentLan]);
+                    layer.msg(script_Lan.operate_err[currentLan]);
+                    btnChange();
                     return false;
                 }
                 Contract_team.methods.status(data).call()
                 .then(function(data2) {
                     console.log(data2);
                     if(data2 == true){
+                        btnChange()
                         $('.candy-cont-btn').html(script_Lan.bing_of[currentLan]+"<dot>···</dot>");
                         Contract_team.methods.addReferee(data).send({ from: SELF_ADDR, gasPrice: gas ,gas:100000}, function(error, transactionHash){
                         if(error){
-                            alert(script_Lan.operate_err[currentLan]);
+                            layer.msg(script_Lan.operate_err[currentLan]);
                             $('.candy-cont-btn').html(script_Lan.determine_binding[currentLan]);
+
                         }else{
                             Verification_bind(transactionHash);
                         }
 
                         });
                     }else{
-                        alert(script_Lan.addreferee_status[currentLan]);
+                        layer.msg(script_Lan.addreferee_status[currentLan]);
                         return false;
                     }
-                   
+                    btnChange();
 
                 });
                
@@ -143,8 +147,11 @@ function haveGetRefereeGift(){
 function getGift(){
     var SELF_ADDR = $("#address").val();
     var und_balance = $("#und_balance").val();
+    $('.candy-receive-btn').addClass('gray-btn');
+    
     if(Number(und_balance) < 0.01){
-        alert(script_Lan.und_no_enough[currentLan]);
+        layer.msg(script_Lan.und_no_enough[currentLan]);
+        btnChange();
         return false;
     }
     var gas = $("#getGasPrice").val();
@@ -156,11 +163,16 @@ function getGift(){
     $(".candy-receive-btn").html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     Contract_airdrop.methods.getGift().send({ from: SELF_ADDR, gasPrice: gas }, function(error, transactionHash){
         if(error){
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
             $(".candy-receive-btn").html(script_Lan.free_receive[currentLan]);
+            btnChange();
+
         }else{
             Verification_airdrop(transactionHash);
+            btnChange();
+
         }
+        btnChange();
 
     });
 

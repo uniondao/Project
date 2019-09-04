@@ -76,11 +76,11 @@ function invest_und2udao(num) {
     var SELF_ADDR = $("#address").val();
     var und_balance = $(".und_balance").html();
     if (num < 10) {
-        alert(script_Lan.invite_num_min[currentLan]);
+        layer.msg(script_Lan.invite_num_min[currentLan]);
         return false;
     }
     if (Number(und_balance) <= 0 || Number(num) > Number(und_balance)) {
-        alert(script_Lan.und_no_enough[currentLan]);
+        layer.msg(script_Lan.und_no_enough[currentLan]);
         return false;
     }
 
@@ -96,11 +96,11 @@ function invest_und2udao(num) {
     }
     Contract_und.methods.approveAndCall(CONFIG.udao_issue_addr, num, "0x31").send({ from: SELF_ADDR , gasPrice: gas})
         .on("receipt", function(data) {
-            alert(script_Lan.submitSuccess[currentLan]);
+            layer.msg(script_Lan.submitSuccess[currentLan]);
             location.reload();
         })
         .on("error", function(error) {
-            alert(script_Lan.submitError[currentLan]);
+            layer.msg(script_Lan.submitError[currentLan]);
             location.reload();
         });
 }
@@ -125,18 +125,18 @@ function getFeeCosUDAO() {
 function withdraw(num) {
     var SELF_ADDR = $("#address").val();
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     if (num == null || num <= 0) {
-        alert(script_Lan.redeem_num[currentLan]);
+        layer.msg(script_Lan.redeem_num[currentLan]);
         location.reload();
         return false;
     }
     var undSum = $(".und_balance").html();
     if (Number(num) > Number(undSum)) {
-        alert(script_Lan.redeem_num_max[currentLan]);
+        layer.msg(script_Lan.redeem_num_max[currentLan]);
         location.reload();
         return false;
     }
@@ -150,11 +150,11 @@ function withdraw(num) {
     }
     Contract_und_issue.methods.redeem(num).send({ from: SELF_ADDR  , gasPrice: gas})
         .on("receipt", function(data) {
-            alert(script_Lan.redeem_success[currentLan]);
+            layer.msg(script_Lan.redeem_success[currentLan]);
             location.reload();
         })
         .on("error", function(error) {
-            alert(script_Lan.redeem_fail[currentLan]);
+            layer.msg(script_Lan.redeem_fail[currentLan]);
             location.reload();
             return false;
         });
@@ -182,23 +182,23 @@ function withdraw_onecoin(num,coin) {
             break;
     }
     if(token == '' || token == null){
-        alert(script_Lan.nocoin[currentLan]);
+        layer.msg(script_Lan.nocoin[currentLan]);
         return false;
     }
     if (!SELF_ADDR) {
-        alert(script_Lan.sign_login[currentLan]);
+        layer.msg(script_Lan.sign_login[currentLan]);
         location.reload();
         return false;
     }
     if (num == null || num <= 0) {
-        alert(script_Lan.redeem_num[currentLan]);
+        layer.msg(script_Lan.redeem_num[currentLan]);
         location.reload();
         return false;
     }
     var undSum = $("#und_balance").val();
 
     if (Number(num) > Number(undSum)) {
-        alert(script_Lan.redeem_num_max[currentLan]);
+        layer.msg(script_Lan.redeem_num_max[currentLan]);
         location.reload();
         return false;
     }
@@ -213,11 +213,11 @@ function withdraw_onecoin(num,coin) {
     }
     Contract_und_issue.methods.redeemOne(num,token).send({ from: SELF_ADDR , gasPrice: gas })
         .on("receipt", function(data) {
-            alert(script_Lan.redeem_success[currentLan]);
+            layer.msg(script_Lan.redeem_success[currentLan]);
             location.reload();
         })
         .on("error", function(error) {
-            alert(script_Lan.redeem_fail[currentLan]);
+            layer.msg(script_Lan.redeem_fail[currentLan]);
             location.reload();
             return false;
         });
@@ -238,11 +238,11 @@ function other2und(num, coin_addr, self_addr, wei = CONFIG.usdt_wei) {
     $("#approve_commit").html(script_Lan.issue_remarks[currentLan]);
     Contract_und_issue.methods.issue(coin_addr, num).send({ from: self_addr , gasPrice: gas})
         .on("receipt", function(receipt) {
-            alert(script_Lan.issue_success[currentLan]);
+            layer.msg(script_Lan.issue_success[currentLan]);
             location.reload();
         })
         .on("error", function(error) {
-            alert(script_Lan.issue_fail[currentLan]);
+            layer.msg(script_Lan.issue_fail[currentLan]);
             location.reload();
             return false;
         });
@@ -334,7 +334,7 @@ function undt_send(){
         gas = Number(gas)+Number(3000000000)
     }
     if(Number(num)<0 || Number(num)>Number(und_banance)){
-        alert(script_Lan.issue_num_max[currentLan]);
+        layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
     num = web3.utils.toWei(num, CONFIG.udao_wei);
@@ -344,14 +344,14 @@ function undt_send(){
         Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
             .then(function(data) {
                 console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
+                layer.msg(script_Lan.submitSuccess[currentLan]);
                 location.reload();
             })
     }else{
         Contract_und.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
             .then(function(data) {
                 console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
+                layer.msg(script_Lan.submitSuccess[currentLan]);
                 location.reload();
             })
     }

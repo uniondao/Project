@@ -202,7 +202,7 @@ function createAccount(){
     Contract_udao.methods.createAccount(SELF_ADDR).send({ from: SELF_ADDR, gasPrice: gas })
         .then(function(data) {
             console.log(data);
-            alert(script_Lan.create_acount[currentLan]);
+            layer.msg(script_Lan.create_acount[currentLan]);
             location.reload();
         })
 }
@@ -233,7 +233,7 @@ function udao_send(){
         gas = Number(gas)+Number(3000000000)
     }
     if(Number(num)<0 || Number(num)>Number(udao_banance)){
-        alert(script_Lan.issue_num_max[currentLan]);
+        layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
     num = web3.utils.toWei(num, CONFIG.udao_wei);
@@ -243,14 +243,14 @@ function udao_send(){
         Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
             .then(function(data) {
                 console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
+                layer.msg(script_Lan.submitSuccess[currentLan]);
                 location.reload();
             })
     }else{
         Contract_udao.methods.transferAndSendMsgByAccount(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas })
             .then(function(data) {
                 console.log(data);
-                alert(script_Lan.submitSuccess[currentLan]);
+                layer.msg(script_Lan.submitSuccess[currentLan]);
                 location.reload();
             })
     }

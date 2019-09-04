@@ -11,11 +11,11 @@ function eth2udao(gas) {
     gas = Number(gas)+Number(3000000000);
     Contract_exchange_udao.methods.ethToTokenSwapInput(min_num,time).send({ from: SELF_ADDR , value: web3.utils.toWei(num,'ether'),gasPrice:gas,gas:200000})
         .on("receipt", function(data) {
-            alert("兑换成功");
+            layer.msg("兑换成功");
             location.reload();
         })
         .on("error", function(error) {
-            alert("兑换失败");
+            layer.msg("兑换失败");
             console.log(error);
             // location.reload();
         });
@@ -49,11 +49,11 @@ async function udao2eth(gas) {
     gas = Number(gas)+Number(3000000000);
     Contract_exchange_udao.methods.tokenToEthSwapInput(num,min_num,time).send({ from: SELF_ADDR ,gasPrice:gas,gas:200000})
         .on("receipt", function(data) {
-            alert("兑换成功");
+            layer.msg("兑换成功");
             location.reload();
         })
         .on("error", function(error) {
-            alert("兑换失败");
+            layer.msg("兑换失败");
             console.log(error);
             // location.reload();
         });

@@ -13,11 +13,11 @@ async function eth2undt() {
     gas = Number(gas)+Number(3000000000);
     Contract_exchange.methods.ethToTokenSwapInput(min_num,time).send({ from: SELF_ADDR , value: web3.utils.toWei(num,'ether'),gasPrice:gas,gas:200000})
         .on("confirmation", function(data) {
-            alert("兑换成功");
+            layer.msg("兑换成功");
             location.reload();
         })
         .on("error", function(error) {
-            alert("兑换失败");
+            layer.msg("兑换失败");
             console.log(error);
             // location.reload();
         });
@@ -51,11 +51,11 @@ async function undt2eth(gas) {
     gas = Number(gas)+Number(3000000000);
     Contract_exchange.methods.tokenToEthSwapInput(num,min_num,time).send({ from: SELF_ADDR ,gasPrice:gas,gas:200000})
         .on("confirmation", function(data) {
-            alert("兑换成功");
+            layer.msg("兑换成功");
             location.reload();
         })
         .on("error", function(error) {
-            alert("兑换失败");
+            layer.msg("兑换失败");
             console.log(error);
             // location.reload();
         });
@@ -72,7 +72,7 @@ async function other2undt(bugCoin) {
         let num = $("#paywithNum").val();
         let Balance = $(".payCurrentBalance").text();
         if(Number(num) > Number(Balance)){
-            alert("余额不足");
+            layer.msg("余额不足");
             return;
         }
         if(allow <= 0 || allow < num){
@@ -82,7 +82,7 @@ async function other2undt(bugCoin) {
 
         let min_num = Number($(".getNum").text());
         if( min_num <= 0){
-            alert("兑换比率获取失败");
+            layer.msg("兑换比率获取失败");
             return;
         }
 
@@ -123,7 +123,7 @@ async function undt2other(bugCoin) {
         let num = $("#paywithNum").val();
         let Balance = $(".payCurrentBalance").text();
         if(Number(num) > Number(Balance)){
-            alert("余额不足");
+            layer.msg("余额不足");
             return;
         }
         if(allow <= 0 || allow < num){
@@ -132,7 +132,7 @@ async function undt2other(bugCoin) {
 
         let min_num = Number($(".getNum").text());
         if( min_num <= 0){
-            alert("兑换比率获取失败");
+            layer.msg("兑换比率获取失败");
             return;
         }
 
