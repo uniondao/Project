@@ -21,6 +21,7 @@ var script_Lan = {
         "en" : "Submit failure",
     },
 
+
     //issue
     "issue_num_min" : {
         "cn" : "数量应大于1",
@@ -244,4 +245,33 @@ var script_Lan = {
         "cn" : "免费领取",
         "en" : "FREE RECEIVE",
     },
+    "addreferee_status" : {
+        "cn" : "您填写的推荐人卡号未激活，不具备推荐资格！",
+        "en" : "The recommender card number you filled in is not activated and does not qualify for recommendation.",
+    },
+    "invit_referee" : {
+        "cn" : "推荐人卡号",
+        "en" : "Referrer card number",
+    },
+    "notokenSupply" : {
+        "cn" : "余额不足，请选择其它币种",
+        "en" : "Insufficient balance, please choose another currency",
+    },
+    "deposit_submit" : {
+        "cn" : "我要理财",
+        "en" : "FINANCIAL MANAGEMENT",
+    },
+    "redeem_submit" : {
+        "cn" : "我要提现",
+        "en" : "FINANCIAL MANAGEMENT",
+    },
+    "fin_18": {
+        "cn": "理财",
+        "en": "FINANCIAL MANAGEMENT",
+    },
+    "fin_19": {
+        "cn": "提现",
+        "en": "WITHDRAWAL",
+    },
+
 };

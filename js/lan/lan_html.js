@@ -64,6 +64,10 @@ var html_lan = {
         "cn": "联系我们",
         "en": "CONTACT US",
     },
+    "foundation-2": {
+        "cn": "CANDY",
+        "en": "CANDY",
+    },
     "language-1": {
         "cn": "英文",
         "en": "EN",
@@ -77,20 +81,16 @@ var html_lan = {
         "en": "DECENTRALIZED",
     },
     "banner-h2-2": {
-        "cn": "金融",
-        "en": "FINANCIAL",
-    },
-    "banner-h2-3": {
-        "cn": "系统",
-        "en": "SYSTEM",
+        "cn": "金融系统",
+        "en": "FINANCIAL SYSTEM",
     },
     "banner-h3-1": {
-        "cn": "UNIONDAO提供稳定币、抵押贷款",
-        "en": "UNIONDAO provides stable currency, mortgage and",
+        "cn": "UNIONDAO提供稳定币",
+        "en": "UNIONDAO provides stable currency"
     },
     "banner-h3-2": {
-        "cn": "和去中心化治理",
-        "en": "decentralized governance",
+        "cn": "抵押贷款和去中心化治理",
+        "en": "mortgage and decentralized governance",
     },
     "banner-part-1": {
         "cn": "发行总数",
@@ -101,7 +101,7 @@ var html_lan = {
         "en": "Address",
     },
     "banner-part-3": {
-        "cn": "VIP 使用者",
+        "cn": "VIP 用户",
         "en": "VIP User",
     },
     "banner-part-4": {
@@ -109,8 +109,8 @@ var html_lan = {
         "en": "Pledged Assets",
     },
     "banner-part-5": {
-        "cn": "备用金",
-        "en": "Standby Fund ",
+        "cn": "平准基金",
+        "en": "Buffer Fund ",
     },
     "cont-h4-1": {
         "cn": "去中心化稳定币",
@@ -272,6 +272,14 @@ var html_lan = {
         "cn": "博客",
         "en": "Blog",
     }, 
+    "index-left-text-5": {
+        "cn": "推特 ",
+        "en": "Twitter",
+    }, 
+    "index-left-text-6": {
+        "cn": "电报",
+        "en": "Telegram",
+    }, 
     "index-title-3": {
         "cn": "UNIONDAO资讯",
         "en": "UNIONDAO INFORMATION",
@@ -346,7 +354,7 @@ var html_lan = {
     }, 
     "presale-part-3": {
         "cn": "目前的进展",
-        "en": "CURRENT PROGRESS",
+        "en": "CURRENT PROGRESS ",
     }, 
     "presale-part-4": {
         "cn": "当前区块高度",
@@ -361,8 +369,8 @@ var html_lan = {
         "en": "Participate in the swap",
     }, 
     "presale-part-7": {
-        "cn": "目前可用",
-        "en": "Currently available ",
+        "cn": "目前可用: ",
+        "en": "Currently available: ",
     },
     "presale-part-8": {
         "cn": "立即参与",
@@ -399,6 +407,10 @@ var html_lan = {
     "presale-part-16": {
         "cn": "UNDT 预售总额",
         "en": "UNDT PRE-SALES TOTAL",
+    },
+    "presale-part-167": {
+        "cn": "UDAO 兑换总额",
+        "en": "UDAO EXCHANGE TOTAL",
     },
     "presale-part-17": {
         "cn": "兑换比率",
@@ -471,6 +483,10 @@ var html_lan = {
     "presale-part-34": {
         "cn": "UDAO用于支付系统内的服务费和贷款利息，用于社区治理投票",
         "en": "Passes are used to pay for service fees and loan interest within the system for community governance voting.",
+    },
+    "presale-part-35": {
+        "cn": "动态兑换比例: ",
+        "en": "Maximum exchange rate: ",
     },
     "wallet-part-1": {
         "cn": "您还没有数字银行卡",
@@ -545,11 +561,11 @@ var html_lan = {
         "en": "Payee:",
     },
     "wallet-part-19": {
-        "cn": "blockHash:",
+        "cn": "交易号:",
         "en": "blockHash:",
     },
     "wallet-part-20": {
-        "cn": "block:",
+        "cn": "区块:",
         "en": "block:",
     },
     "wallet-part-21": {
@@ -581,7 +597,7 @@ var html_lan = {
         "en": " Unlock",
     },
     "exchange-part-5": {
-        "cn": "交换",
+        "cn": "兑换",
         "en": " SWAP",
     },
     "exchange-part-6": {
@@ -669,11 +685,11 @@ var html_lan = {
         "en": "You haven't got a card, so you can't participate in the lottery!",
     },
     "candy-part-4": {
-        "cn": "绑定推荐人卡号",
+        "cn": "绑定推荐人卡号激活账户",
         "en": "Bind the referrer's card ID",
     },
     "candy-part-5": {
-        "cn": " 确定绑定",
+        "cn": " 确认绑定",
         "en": "CONFIRM BINDING",
     },
     "candy-part-6": {
@@ -746,14 +762,14 @@ var html_lan = {
     },
     "candy-part-23": {
         "cn": "活动规则",
-        "en": "RULE OF ACTIVITY",
+        "en": "ACTIVITY DESCRIPTION",
     },
     "candy-part-24": {
         "cn": "参与方式:",
         "en": "WAY OF PARTICIPATION:",
     },
     "candy-part-25": {
-        "cn": "(1) 用户通过trust/imtoken/metamask等区块链钱包打开 网站htpps://uniondao.com，进入dapp的wallet收付款功能，免费申请一张数字美元银行卡(19位长度数字) ;",
+        "cn": "(1) 用户通过trust/imtoken/metamask等区块链钱包打开 网站https://uniondao.com，进入dapp的wallet收付款功能，免费申请一张数字美元银行卡(19位长度数字) ;",
         "en": "(1)	The user opens the website https://uniondao.com through the blockchain wallet such as trust/imtoken/metamask, enters the wallet payment function of dapp, and applies for a digital dollar bank card (19-digit length number) for free;",
     },
     "candy-part-26": {
@@ -818,7 +834,7 @@ var html_lan = {
         "en": "LOTTERY START TIME:",
     },
     "candy-part-41": {
-        "cn": "  2019年8月22日(抽奖开始前领卡达到条件的视同有效参与)",
+        "cn": "  2019年8月26日(抽奖开始前领卡达到条件的视同有效参与)",
         "en": "Creating an account before the lottery starts and meeting the conditions is effective participation.",
     },
     "candy-part-42": {
@@ -830,11 +846,139 @@ var html_lan = {
         "en": "Recommend someone else to create an account and win the prize, and give a 10% prize to the referrer.",
     },
     "candy-part-44": {
-        "cn": " 输入卡号",
-        "en": "Input card ID",
+        "cn": " 输入推荐人卡号",
+        "en": "Input card ID of referrer",
     },
-    "candy-part-44": {
+    "candy-part-45": {
         "cn": " 为建设社区生态，UNIONDAO拿出社区生态建设基金的一部分总共400 000 UDAO（项目总发行量2100万枚UDAO）进行公开的去中心化方式执行的社区激励空投计划。",
         "en": "In order to build a community ecology, UNIONDAO took out a part of the community ecological construction fund, a total of 400 000 UDAO (the total circulation of the project is 21 million UDAO) for the public decentralized implementation of the community incentive airdrop plan.",
+    },
+    "candy-part-46": {
+        "cn": "需首先绑定推荐人方可推荐他人",
+        "en": "You must first bind a referrer to recommend others.",
+    },
+    "news-part-1": {
+        "cn": "UNIONDAO全球中文社区激励计划",
+        "en": "UNIONDAO Global Chinese Community Incentive Program",
+    },
+    "news-part-2": {
+        "cn": "即将公开测试",
+        "en": "Upcoming public test",
+    },
+    "smart-tip": {
+        "cn": "“降维安全实验室”提供合约安全审计",
+        "en": "Contract Safety Audit Provided by “JohnWick Security laboratory”",
+    },
+    "suhui-part-1": {
+        "cn": "资金池:",
+        "en": "Capital pool:",
+    },
+    "candy-part-47": {
+        "cn": "我的推荐人",
+        "en": "MY REERRER",
+    },
+    "fin-1": {
+        "cn": "理财",
+        "en": "FINANCIAL MANAGEMENT",
+    },
+    "fin-1-1": {
+        "cn": "理财产品01号",
+        "en": "FINANCIAL MANAGEMENT NO.1",
+    },
+    "fin-2": {
+        "cn": "UNDT活期理财，对接去中心化借贷市场",
+        "en": "UNDT current wealth management, docking to centralized lending market",
+    },
+    "fin-3": {
+        "cn": "年化收益率",
+        "en": "Annualized rate of return",
+    },
+    "fin-4": {
+        "cn": "24小时收益率",
+        "en": "24-hour yield",
+    },
+    "fin-5": {
+        "cn": "我的理财账户",
+        "en": "Current market demand",
+    },
+    "fin-6": {
+        "cn": "我的累计收益",
+        "en": "My cumulative income",
+    },
+    "fin-7": {
+        "cn": "我的理财账户余额 ",
+        "en": "My financial account balance",
+    },
+    "fin-9": {
+        "cn": "我要理财",
+        "en": "FINANCIAL MANAGEMENT",
+    },
+    "fin-10": {
+        "cn": "我的钱包余额",
+        "en": "My wallet balance",
+    },
+    "fin-12": {
+        "cn": "手续费：",
+        "en": "Handling fee:",
+    },
+    "fin-13": {
+        "cn": "我要提现",
+        "en": "WITHDRAW",
+    },
+    "fin-14": {
+        "cn": "提示: 随时可提现，申请提现时需要收取0.5%服务费。",
+        "en": "Tip: You can withdraw cash at any time. A 0.5% service charge is required to apply for withdrawal.",
+    },
+    "fin-15": {
+        "cn": "交易记录",
+        "en": "Transaction Record",
+    },
+    "fin-16": {
+        "cn": "时间",
+        "en": "TIME",
+    },
+    "fin-17": {
+        "cn": "金额",
+        "en": "AMOUNT",
+    },
+    "fin-18": {
+        "cn": "理财",
+        "en": "FINANCIAL MANAGEMENT",
+    },
+    "fin-19": {
+        "cn": "提现",
+        "en": "WITHDRAWAL",
+    },
+    "fin-20": {
+        "cn": "输入参与理财的UNDT金额",
+        "en": "Enter the amount",
+    },
+    "fin-21": {
+        "cn": "输入提现UNDT金额",
+        "en": "Enter the amount",
+    },
+    "fin-22": {
+        "cn": " DeFi借贷市场 UNDT活期 年化收益率",
+        "en": "DeFi lending market UNDT current annualized rate of return",
+    },
+    "fin-23": {
+        "cn": "去理财",
+        "en": "FINANCIAL MANAGEMENT",
+    },
+    "fin-24": {
+        "cn": "存取自由",
+        "en": "access freedom",
+    },
+    "candy-part-48": {
+        "cn": "复制成功！",
+        "en": "Successful copy!",
+    },
+    "candy-part-49": {
+        "cn": "复制失败！",
+        "en": "Copy failed!",
+    },
+    "fin-25": {
+        "cn": "当前资金方需求",
+        "en": "Current funding needs",
     },
 }
