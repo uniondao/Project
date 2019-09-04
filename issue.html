@@ -6,9 +6,7 @@
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="uniondao,udao,undt" />
-    <meta name="description"
-        content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
-
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/issue.css">
     <link rel="stylesheet" href="./js/need/layer.css">
@@ -255,15 +253,15 @@
                                                 <input type="text" placeholder="" id="undopther_txt" readonly>
                                             </div>
                                             <span>
-                                                <div class="translate" data-lang="issue-part-1" style="display: inline">
-                                                </div>
-                                                <font id="udao_balance"></font> UDAO
+                                                    <div class="translate" data-lang="issue-part-5"
+                                                         style="display: inline"></div>
+                                                    <font id="fee">0</font> UDAO
+
                                                 <font id="udao_unlock" onclick="udao_unlock()" class="translate"
                                                     data-lang="exchange-part-4"></font>
                                                 <span class="input-tips">
-                                                    <div class="translate" data-lang="issue-part-5"
-                                                        style="display: inline"></div>
-                                                    <font id="fee">0</font> UDAO
+                                                  <div class="translate" data-lang="issue-part-1" style="display: inline">   </div>
+                                                        <font id="udao_balance"></font> UDAO
                                                 </span>
                                             </span>
                                         </div>
@@ -543,7 +541,7 @@
         coin = $("input[name='radio']:checked").val();
         var num = $('#issue_num').val();
         if (Number(num) < 1) {
-            alert(script_Lan.issue_num_min[currentLan]);
+            layer.msg(script_Lan.issue_num_min[currentLan]);
             return false;
         }
         switch (coin) {
@@ -553,14 +551,14 @@
                     return false;
                 }
                 if (parseFloat(num) > parseFloat(usdt_balance)) {
-                    alert(script_Lan.issue_num_max[currentLan]);
+                    layer.msg(script_Lan.issue_num_max[currentLan]);
                     return false;
                 }
 
                 var usdt_allowance = $("#usdt_allowance").val();
                 usdt_allowance = Number(usdt_allowance);
                 if (usdt_allowance > 0 && num > usdt_allowance) {
-                    alert(script_Lan.issue_user_max[currentLan] + usdt_allowance);
+                    layer.msg(script_Lan.issue_user_max[currentLan] + usdt_allowance);
                     return false;
                 }
                 click_und = 0;
@@ -571,7 +569,7 @@
                 } else {
                     $('.issue_unlock').css('display', 'block');
                     $('.issue_unlock').attr('data-value', coin);
-                    alert(script_Lan.please_unlock[currentLan]);
+                    layer.msg(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'dai':
@@ -580,7 +578,7 @@
                     return false;
                 }
                 if (parseFloat(num) > parseFloat(dai_balance)) {
-                    alert(script_Lan.issue_num_max[currentLan]);
+                    layer.msg(script_Lan.issue_num_max[currentLan]);
                     return false;
                 }
                 click_und = 0;
@@ -593,7 +591,7 @@
                 } else {
                     $('.issue_unlock').css('display', 'block');
                     $('.issue_unlock').attr('data-value', coin);
-                    alert(script_Lan.please_unlock[currentLan]);
+                    layer.msg(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'usdc':
@@ -602,7 +600,7 @@
                     return false;
                 }
                 if (parseFloat(num) > parseFloat(usdc_balance)) {
-                    alert(script_Lan.issue_num_max[currentLan]);
+                    layer.msg(script_Lan.issue_num_max[currentLan]);
                     return false;
                 }
                 click_und = 0;
@@ -615,7 +613,7 @@
                 } else {
                     $('.issue_unlock').css('display', 'block');
                     $('.issue_unlock').attr('data-value', coin);
-                    alert(script_Lan.please_unlock[currentLan]);
+                    layer.msg(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'tusd':
@@ -624,7 +622,7 @@
                     return false;
                 }
                 if (parseFloat(num) > parseFloat(tusd_balance)) {
-                    alert(script_Lan.issue_num_max[currentLan]);
+                    layer.msg(script_Lan.issue_num_max[currentLan]);
                     return false;
                 }
                 click_und = 0;
@@ -637,7 +635,7 @@
                 } else {
                     $('.issue_unlock').css('display', 'block');
                     $('.issue_unlock').attr('data-value', coin);
-                    alert(script_Lan.please_unlock[currentLan]);
+                    layer.msg(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             case 'pax':
@@ -646,7 +644,7 @@
                     return false;
                 }
                 if (parseFloat(num) > parseFloat(pax_balance)) {
-                    alert(script_Lan.issue_num_max[currentLan]);
+                    layer.msg(script_Lan.issue_num_max[currentLan]);
                     return false;
                 }
                 click_und = 0;
@@ -659,7 +657,7 @@
                 } else {
                     $('.issue_unlock').css('display', 'block');
                     $('.issue_unlock').attr('data-value', coin);
-                    alert(script_Lan.please_unlock[currentLan]);
+                    layer.msg(script_Lan.please_unlock[currentLan]);
                 }
                 break;
             default:
@@ -722,20 +720,15 @@
         }
 
         if (Number(num) < 1) {
-            alert(script_Lan.issue_num_min[currentLan]);
+            layer.msg(script_Lan.issue_num_min[currentLan]);
             return false;
         }
         if (parseFloat(num) > parseFloat(und_balance)) {
-            alert(script_Lan.issue_num_max[currentLan]);
-            return false;
-        }
-        if (fee <= 0) {
-            alert(script_Lan.fee_fail[currentLan]);
-            location.reload();
+            layer.msg(script_Lan.issue_num_max[currentLan]);
             return false;
         }
         if (fee > udao_num) {
-            alert(script_Lan.udao_fee_fail[currentLan]);
+            layer.msg(script_Lan.udao_fee_fail[currentLan]);
             return false;
         }
         click_und2other = 0;
@@ -750,12 +743,12 @@
             if (und_allowance == 0 || und_allowance < num) {
                 //授权und
                 $('#undt_unlock').css('display', 'block');
-                alert(script_Lan.please_unlock[currentLan] + 'UNDT');
+                layer.msg(script_Lan.please_unlock[currentLan] + 'UNDT');
 
             } else if (udao_allowance == 0 || udao_allowance < fee) {
                 //授权udao
                 $('#udao_unlock').css('display', 'block');
-                alert(script_Lan.please_unlock[currentLan] + 'UDAO');
+                layer.msg(script_Lan.please_unlock[currentLan] + 'UDAO');
             } else {
                 withdraw(num);
             }
@@ -763,11 +756,11 @@
             if (und_allowance == 0 || und_allowance < num) {
                 //授权und
                 $('#undt_unlock').css('display', 'block');
-                alert(script_Lan.please_unlock[currentLan] + 'UNDT');
+                layer.msg(script_Lan.please_unlock[currentLan] + 'UNDT');
             } else if (udao_allowance == 0 || udao_allowance < fee) {
                 //授权udao
                 $('#udao_unlock').css('display', 'block');
-                alert(script_Lan.please_unlock[currentLan] + 'UDAO');
+                layer.msg(script_Lan.please_unlock[currentLan] + 'UDAO');
             } else {
                 withdraw_onecoin(num, coin);
             }

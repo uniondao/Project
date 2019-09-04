@@ -24,6 +24,7 @@
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
     <script type="text/javascript" src="./js/token/base.js"></script>
     <script type="text/javascript" src="./js/token/coin/pax.js"></script>
@@ -38,13 +39,14 @@
         });
     </script>
     <style>
-        .layui-m-layer1 .layui-m-layerchild {
+        .layui-layer {
             border-radius: 12px !important;
         }
+
         .layui-m-layermain {
-            display: flex!important;
-            justify-content: center!important;
-            align-items: center!important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
     </style>
 </head>
@@ -69,7 +71,7 @@
                             </div>
                             <div class="w-card-part-3">
                                 <span>CARD ID:</span>
-                                <div  id="bank_card">0000000000000000000</div>
+                                <div id="bank_card">0000000000000000000</div>
                             </div>
                             <div class="w-card-part-4">
                                 <span>ADDDRESS:</span>
@@ -83,14 +85,45 @@
                     <div class="wallet-tips noaccounts translate" style="display: none" data-lang="wallet-part-1">
                     </div>
                     <div class="wallet-btn noaccounts" style="display: none">
-                        <div onclick="createAccount()" style="cursor: pointer" id="createAccount" class="translate" data-lang="wallet-part-2">
+                        <div onclick="createAccount()" style="cursor: pointer" id="createAccount" class="translate"
+                            data-lang="wallet-part-2">
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="finBtn">
+                <div class="fin-div">
+                    <div class="fin-flex">
+                        <div class="translate" data-lang="fin-22"></div>
+                        <div class="different-font">10.8%</div>
+                    </div>
+                    <a href="./financial.html">
+                        <div class="translate" data-lang="fin-23">
+                        </div>
+                        <img src="./images/arrow_white.png" alt="">
+                    </a>
+                </div>
+            </div>
             <div id="walletList">
                 <div class="wallet-list">
-
+                    <div class="wallet-list-part">
+                        <div class="wallet-list-part-1">
+                            <a href="./walletRecord_undt.html">
+                                <div class="wallet-list-part-img">
+                                    <img src="./images/icon-01_w.png" alt="">
+                                </div>
+                                <div> UNDT</div>
+                                <span>Union Network Dollar Token</span>
+                            </a>
+                        </div>
+                        <div class="wallet-list-part-2">
+                            <div><span class="und_balance">0.0000</span>≈$<span class="und_balance">0.0000</span></div>
+                        </div>
+                        <div class="wallet-list-part-3">
+                            <div class="wallet-list-btn-1 collection_undt translate" data-lang="wallet-part-3"> </div>
+                            <div class="wallet-list-btn-2 payment_undt translate" data-lang="wallet-part-4"> </div>
+                        </div>
+                    </div>
                     <div class="wallet-list-part">
                         <div class="wallet-list-part-1">
                             <a href="./walletRecord.html">
@@ -112,24 +145,7 @@
                         </div>
                     </div>
 
-                    <div class="wallet-list-part">
-                        <div class="wallet-list-part-1">
-                            <a href="./walletRecord_undt.html">
-                                <div class="wallet-list-part-img">
-                                    <img src="./images/icon-01_w.png" alt="">
-                                </div>
-                                <div> UNDT</div>
-                                <span>Union Network Dollar Token</span>
-                            </a>
-                        </div>
-                        <div class="wallet-list-part-2">
-                            <div><span class="und_balance">0.0000</span>≈$<span class="und_balance">0.0000</span></div>
-                        </div>
-                        <div class="wallet-list-part-3">
-                            <div class="wallet-list-btn-1 collection_undt translate" data-lang="wallet-part-3"> </div>
-                            <div class="wallet-list-btn-2 payment_undt translate" data-lang="wallet-part-4"> </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div id="footCont"> </div>
@@ -137,7 +153,7 @@
     </div>
 </body>
 <script>
-    setTimeout(start,1000);
+    setTimeout(start, 1000);
     start_Interval();
     function start() {
         setTimeout(ethAccounts, 500);
@@ -163,7 +179,7 @@
         var udao_price = parseFloat($('#udao_balance').html() * $('#udaoPrice').val()).toFixed(4);
         if (udao_price && udao_price != 'NaN') {
             $('#udao_price').html(udao_price);
-        }else{
+        } else {
             $('#udao_price').html($('#udao_balance').html());
         }
     }
@@ -182,62 +198,62 @@
             area: ['900px', '664px'],
             shadeClose: true,
             content: '<div id="payLayer">'
-            + ' <div class="pay-layer">'
-            + ' <div class="layer-close">'
-            + ' <img src="./images/close_2.png" alt="">'
-            + '</div>'
-            + ' <h4 class="pay-layer-title">'+html_lan['wallet-part-5'][currentLan]+'</h4>'
-            + ' <div class="pay-layer-cont">'
-            + ' <div class="pay-layer-part">'
-            + ' <span>'+html_lan['wallet-part-6'][currentLan]+'</span>'
-            + ' <input type="text" class="pay-input" id="payee_udao">'
-// + ' < img src="./images/code.png" alt="">'
-            + ' </div>'
-            + ' <div class="pay-layer-part">'
-            + ' <span>'+html_lan['wallet-part-7'][currentLan]+'</span>'
-            + ' <input type="text" class="pay-input" id="amount_udao" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
-            + ' </div>'
-            + ' <div class="pay-layer-part">'
-            + ' <span>'+html_lan['wallet-part-8'][currentLan]+'</span>'
-            + ' <input type="text" class="pay-input" id="remarks_udao">'
-            + ' </div>'
-//            + ' <div class="pay-layer-part" style="margin-top: 60px;">'
-//            + ' <span>Miner Fees</span>'
-//            + ' <div>'
-//            + ' <input type="range" class="pay-input-2" id="udao_range" name="volumeInput" max="" step="" value="">'
-//            + ' <div class="progress-text">'
-//            + ' <div>Slow</div>'
-//            + '<div id="per">0.0012</div>'
-//            + ' <div>Fast</div>'
-//            + ' </div>'
-//            + ' </div>'
-//            + ' </div>'
-            + ' <div class="pay-next">'
-            + ' <a href="javasrcipt:;" id="udao_send" onclick="udao_send()">'+html_lan['wallet-part-9'][currentLan]+'</a>'
-            + ' </div>'
-            + ' </div>'
-            + ' </div>'
-            + ' </div>'
+                + ' <div class="pay-layer">'
+                + ' <div class="layer-close">'
+                + ' <img src="./images/close_2.png" alt="">'
+                + '</div>'
+                + ' <h4 class="pay-layer-title">' + html_lan['wallet-part-5'][currentLan] + '</h4>'
+                + ' <div class="pay-layer-cont">'
+                + ' <div class="pay-layer-part">'
+                + ' <span>' + html_lan['wallet-part-6'][currentLan] + '</span>'
+                + ' <input type="text" class="pay-input" id="payee_udao">'
+                // + ' < img src="./images/code.png" alt="">'
+                + ' </div>'
+                + ' <div class="pay-layer-part">'
+                + ' <span>' + html_lan['wallet-part-7'][currentLan] + '</span>'
+                + ' <input type="text" class="pay-input" id="amount_udao" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
+                + ' </div>'
+                + ' <div class="pay-layer-part">'
+                + ' <span>' + html_lan['wallet-part-8'][currentLan] + '</span>'
+                + ' <input type="text" class="pay-input" id="remarks_udao">'
+                + ' </div>'
+                //            + ' <div class="pay-layer-part" style="margin-top: 60px;">'
+                //            + ' <span>Miner Fees</span>'
+                //            + ' <div>'
+                //            + ' <input type="range" class="pay-input-2" id="udao_range" name="volumeInput" max="" step="" value="">'
+                //            + ' <div class="progress-text">'
+                //            + ' <div>Slow</div>'
+                //            + '<div id="per">0.0012</div>'
+                //            + ' <div>Fast</div>'
+                //            + ' </div>'
+                //            + ' </div>'
+                //            + ' </div>'
+                + ' <div class="pay-next">'
+                + ' <a href="javasrcipt:;" id="udao_send" onclick="udao_send()">' + html_lan['wallet-part-9'][currentLan] + '</a>'
+                + ' </div>'
+                + ' </div>'
+                + ' </div>'
+                + ' </div>'
         });
-//        var b = $('#getGasPrice').val()/1000000000;
-//        var udao_range_max = Number(b) + Number(6);
-//        var step = (udao_range_max+b)/2-1;
-//        console.log(step);
-//        console.log(b);
-//        $('#udao_range').attr("value",(udao_range_max+b)/2);
-//        $('#udao_range').attr('min', b);
-//        $('#udao_range').attr('max', udao_range_max);
-//
-//        $("#volumeShow1").text(b);
-//        $("#volumeShow2").text(udao_range_max);
-//        $("#per").text((udao_range_max+b)/2);
-//        $('#udao_range').attr('step', (udao_range_max+b)/2);
-//        $("input[name='volumeInput']").get(0).oninput = function () {
-//            var volumeInputJQ = $("input[name='volumeInput']");
-//            var volumeValue = volumeInputJQ.val();
-//            /****滑动条的值***/
-//            console.log('aaa'+volumeValue)
-//        }
+        //        var b = $('#getGasPrice').val()/1000000000;
+        //        var udao_range_max = Number(b) + Number(6);
+        //        var step = (udao_range_max+b)/2-1;
+        //        console.log(step);
+        //        console.log(b);
+        //        $('#udao_range').attr("value",(udao_range_max+b)/2);
+        //        $('#udao_range').attr('min', b);
+        //        $('#udao_range').attr('max', udao_range_max);
+        //
+        //        $("#volumeShow1").text(b);
+        //        $("#volumeShow2").text(udao_range_max);
+        //        $("#per").text((udao_range_max+b)/2);
+        //        $('#udao_range').attr('step', (udao_range_max+b)/2);
+        //        $("input[name='volumeInput']").get(0).oninput = function () {
+        //            var volumeInputJQ = $("input[name='volumeInput']");
+        //            var volumeValue = volumeInputJQ.val();
+        //            /****滑动条的值***/
+        //            console.log('aaa'+volumeValue)
+        //        }
     });
 
     $(document).on("click", ".payment_undt", function () {
@@ -248,39 +264,39 @@
             area: ['900px', '664px'],
             shadeClose: true,
             content: '<div id="payLayer">'
-            + ' <div class="pay-layer">'
-            + ' <div class="layer-close">'
-            + ' <img src="./images/close_2.png" alt="">'
-            + '</div>'
-            + '  <h4 class="pay-layer-title">'+html_lan['wallet-part-10'][currentLan]+'</h4>'
-            + '  <div class="pay-layer-cont">'
-            + '  <div class="pay-layer-part">'
-            + ' <span>'+html_lan['wallet-part-6'][currentLan]+'</span>'
-            + '   <input type="text" class="pay-input"  id="payee_undt">'
-//            + ' <img src="./images/code.png" alt="">'
-            + '  </div>'
-            + '  <div class="pay-layer-part">'
-            + ' <span>'+html_lan['wallet-part-7'][currentLan]+'</span>'
-            + ' <input type="text" class="pay-input" id="amount_undt" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
-            + '  </div>'
-            + '    <div class="pay-layer-part">'
-            + '  <span>'+html_lan['wallet-part-8'][currentLan]+'</span>'
-            + ' <input type="text" class="pay-input" id="remarks_undt">'
-            + '  </div>'
-//            + '  <div class="pay-layer-part" style="margin-top: 60px;">'
-//            + '  <span>Miner Fees</span>'
-//            + '  <input type="range" class="pay-input-2" value="0" id="undt_range">'
-//            + '  </div>'
-            + '  <div class="pay-next">'
-            + '   <a href="javasrcipt:;" id="undt_send" onclick="undt_send()">'+html_lan['wallet-part-9'][currentLan]+'</a>'
-            + '   </div>'
-            + '    </div>'
-            + ' </div>'
-            + '  </div>'
+                + ' <div class="pay-layer">'
+                + ' <div class="layer-close">'
+                + ' <img src="./images/close_2.png" alt="">'
+                + '</div>'
+                + '  <h4 class="pay-layer-title">' + html_lan['wallet-part-10'][currentLan] + '</h4>'
+                + '  <div class="pay-layer-cont">'
+                + '  <div class="pay-layer-part">'
+                + ' <span>' + html_lan['wallet-part-6'][currentLan] + '</span>'
+                + '   <input type="text" class="pay-input"  id="payee_undt">'
+                //            + ' <img src="./images/code.png" alt="">'
+                + '  </div>'
+                + '  <div class="pay-layer-part">'
+                + ' <span>' + html_lan['wallet-part-7'][currentLan] + '</span>'
+                + ' <input type="text" class="pay-input" id="amount_undt" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)">'
+                + '  </div>'
+                + '    <div class="pay-layer-part">'
+                + '  <span>' + html_lan['wallet-part-8'][currentLan] + '</span>'
+                + ' <input type="text" class="pay-input" id="remarks_undt">'
+                + '  </div>'
+                //            + '  <div class="pay-layer-part" style="margin-top: 60px;">'
+                //            + '  <span>Miner Fees</span>'
+                //            + '  <input type="range" class="pay-input-2" value="0" id="undt_range">'
+                //            + '  </div>'
+                + '  <div class="pay-next">'
+                + '   <a href="javasrcipt:;" id="undt_send" onclick="undt_send()">' + html_lan['wallet-part-9'][currentLan] + '</a>'
+                + '   </div>'
+                + '    </div>'
+                + ' </div>'
+                + '  </div>'
         });
-//        var b = $('#getGasPrice').val();
-//        var undt_range = Number(b)+Number(3000000000);
-//        $('#undt_range').val(undt_range);
+        //        var b = $('#getGasPrice').val();
+        //        var undt_range = Number(b)+Number(3000000000);
+        //        $('#undt_range').val(undt_range);
     });
     $(document).on("click", ".layer-close", function () {
         layer.closeAll();
@@ -293,41 +309,41 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['900px', '850px'],
+            area: ['843px', '650px'],
             shadeClose: true,
             content: '<div id="coLayer">'
                 + '<div class="col-layer">'
                 + ' <div class="layer-close2">'
                 + '  <img src="./images/close_2.png" alt="">'
                 + '   </div>'
-                + '    <h4 class="col-layer-title">'+html_lan['wallet-part-11'][currentLan]+'</h4>'
+                + '    <h4 class="col-layer-title">' + html_lan['wallet-part-11'][currentLan] + '</h4>'
                 + '   <div class="col-layer-cont">'
                 + '  <div class="col-info">'
-                + '   <span>'+html_lan['wallet-part-12'][currentLan]+'</span>'
+                + '   <span>' + html_lan['wallet-part-12'][currentLan] + '</span>'
                 + '  <div class="col-num">$ <span id="udao_collection">0</span></div>'
                 + '<div class="col-address">'
                 + '  <span style="text-align: center">0000000000000000000</span>'
                 + ' </div>'
                 + '<div class="col-address">'
-                + '      <div id="account_address">'+html_lan['wallet-part-13'][currentLan]+'</div>'
+                + '      <div id="account_address">' + html_lan['wallet-part-13'][currentLan] + '</div>'
                 + ' </div>'
                 + '      <div class="col-code">'
                 + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account">'
                 + '  </div>'
                 + '       </div>'
-//                + '   <div class="col-input">'
-//                + '  <div class="col-input-part">'
-//                + '   <span>Set amount</span>'
-//                + ' <input type="text">'
-//                + '    </div>'
-//                + '  <div class="col-input-part">'
-//                + ' <span>Remark</span>'
-//                + '       <input type="text">'
-//                + '   </div>'
-//                + '  </div>'
-//                + '   <div class="col-next">'
-//                + '  <a href="">NEXT</a>'
-//                + '   </div>'
+                //                + '   <div class="col-input">'
+                //                + '  <div class="col-input-part">'
+                //                + '   <span>Set amount</span>'
+                //                + ' <input type="text">'
+                //                + '    </div>'
+                //                + '  <div class="col-input-part">'
+                //                + ' <span>Remark</span>'
+                //                + '       <input type="text">'
+                //                + '   </div>'
+                //                + '  </div>'
+                //                + '   <div class="col-next">'
+                //                + '  <a href="">NEXT</a>'
+                //                + '   </div>'
                 + '  </div>'
                 + '   </div>'
                 + '    </div>'
@@ -336,18 +352,18 @@
         var c = $('#udao_balance').text();
         $('.col-address span').text(b);
         $('#udao_collection').text(c);
-        $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+b);
+        $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + b);
     });
     $(document).on("click", "#account_address", function () {
         var bank_card = $('#bank_card').text();
         var address_account = $('#address_account').text();
         var collection = $('.col-address span').text();
-        if(bank_card == collection){
+        if (bank_card == collection) {
             $('.col-address span').text(address_account);
-            $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+address_account);
-        }else{
+            $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + address_account);
+        } else {
             $('.col-address span').text(bank_card);
-            $('#code_account').attr('src','http://qr.topscan.com/api.php?text='+bank_card);
+            $('#code_account').attr('src', 'http://qr.topscan.com/api.php?text=' + bank_card);
         }
     });
     $(document).on("click", ".collection_undt", function () {
@@ -355,50 +371,50 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['843px', '350px'],
+            area: ['843px', '650px'],
             shadeClose: true,
             content: '<div id="coLayer">'
-            + '<div class="col-layer">'
-            + ' <div class="layer-close2">'
-            + '  <img src="./images/close_2.png" alt="">'
-            + '   </div>'
-            + '    <h4 class="col-layer-title">'+html_lan['wallet-part-14'][currentLan]+'</h4>'
-            + '   <div class="col-layer-cont">'
-            + '  <div class="col-info">'
-            + '   <span>'+html_lan['wallet-part-12'][currentLan]+'</span>'
-            + '  <div class="col-num">$ <span id="undt_collection">0</span></div>'
-            + '<div class="col-address">'
-            + '  <span style="text-align: center">0000000000000000000</span>'
-            + ' </div>'
-            + '<div class="col-address">'
-            + '       <div id="account_address_undt">'+html_lan['wallet-part-13'][currentLan]+'</div>'
-            + ' </div>'
-            + '      <div class="col-code">'
-            + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account_undt">'
-            + '  </div>'
-            + '       </div>'
-//            + '   <div class="col-input">'
-//            + '  <div class="col-input-part">'
-//            + '   <span>Set amount</span>'
-//            + ' <input type="text">'
-//            + '    </div>'
-//            + '  <div class="col-input-part">'
-//            + ' <span>Remark</span>'
-//            + '       <input type="text">'
-//            + '   </div>'
-//            + '  </div>'
-//                + '   <div class="col-next">'
-//                + '  <a href="">NEXT</a>'
-//                + '   </div>'
-            + '  </div>'
-            + '   </div>'
-            + '    </div>'
+                + '<div class="col-layer">'
+                + ' <div class="layer-close2">'
+                + '  <img src="./images/close_2.png" alt="">'
+                + '   </div>'
+                + '    <h4 class="col-layer-title">' + html_lan['wallet-part-14'][currentLan] + '</h4>'
+                + '   <div class="col-layer-cont">'
+                + '  <div class="col-info">'
+                + '   <span>' + html_lan['wallet-part-12'][currentLan] + '</span>'
+                + '  <div class="col-num">$ <span id="undt_collection">0</span></div>'
+                + '<div class="col-address">'
+                + '  <span style="text-align: center">0000000000000000000</span>'
+                + ' </div>'
+                + '<div class="col-address">'
+                + '       <div id="account_address_undt">' + html_lan['wallet-part-13'][currentLan] + '</div>'
+                + ' </div>'
+                + '      <div class="col-code">'
+                + '   <img src="http://qr.topscan.com/api.php?text=" alt="" id="code_account_undt">'
+                + '  </div>'
+                + '       </div>'
+                //            + '   <div class="col-input">'
+                //            + '  <div class="col-input-part">'
+                //            + '   <span>Set amount</span>'
+                //            + ' <input type="text">'
+                //            + '    </div>'
+                //            + '  <div class="col-input-part">'
+                //            + ' <span>Remark</span>'
+                //            + '       <input type="text">'
+                //            + '   </div>'
+                //            + '  </div>'
+                //                + '   <div class="col-next">'
+                //                + '  <a href="">NEXT</a>'
+                //                + '   </div>'
+                + '  </div>'
+                + '   </div>'
+                + '    </div>'
         });
         var b = $('#bank_card').text();
         var c = $('#und_balance').val();
         $('.col-address span').text(b);
         $('#undt_collection').text(c);
-        $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+b);
+        $('#code_account_undt').attr('src', 'http://qr.topscan.com/api.php?text=' + b);
 
 
     });
@@ -406,12 +422,12 @@
         var bank_card = $('#bank_card').text();
         var address_account = $('#address_account').text();
         var collection = $('.col-address span').text();
-        if(bank_card == collection){
+        if (bank_card == collection) {
             $('.col-address span').text(address_account);
-            $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+address_account);
-        }else{
+            $('#code_account_undt').attr('src', 'http://qr.topscan.com/api.php?text=' + address_account);
+        } else {
             $('.col-address span').text(bank_card);
-            $('#code_account_undt').attr('src','http://qr.topscan.com/api.php?text='+bank_card);
+            $('#code_account_undt').attr('src', 'http://qr.topscan.com/api.php?text=' + bank_card);
         }
     });
     $(document).on("click", ".layer-close2", function () {
@@ -428,16 +444,16 @@
             area: ['400px', '400px'],
             shadeClose: true,
             content: '<div id="layAddress">'
-           + '<div class="layer-close2">'
+                + '<div class="layer-close2">'
                 + '  <img src="./images/close_2.png" alt="">'
                 + '   </div>'
-                +'<div class="lay-address">'
-                +   ' <img src="http://qr.topscan.com/api.php?text=" alt="">'
-              + ' </div>'
-              + ' </div>'
+                + '<div class="lay-address">'
+                + ' <img src="http://qr.topscan.com/api.php?text=" alt="">'
+                + ' </div>'
+                + ' </div>'
         });
     });
-      $(document).on("click", ".layer-close", function () {
+    $(document).on("click", ".layer-close", function () {
         layer.closeAll();
     });
 </script>

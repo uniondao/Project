@@ -165,6 +165,7 @@
                         </li>
                         <li><a href="./exchangeMobile.html" class="translate" data-lang="product-5"></a>
                         </li>
+                        <li><a href="./financialMobile.html" class="translate" data-lang="fin-1"></a></li>
                         <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"
                                 onclick="alert('In development...')"></a></li> -->
                     </ul>
@@ -235,7 +236,10 @@
         let cogs = $(domEle).attr('data-lang');
         $(domEle).text(html_lan[cogs][currentLan]);
     });
-
+    $(".translate-placeholder").each(function (index, domEle) {
+        let cogs = $(domEle).attr('data-lang');
+        $(domEle).attr('placeholder',html_lan[cogs][currentLan]);
+    });
 
     $(function () {
         footerAuto();

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+    <title>UnionDao</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/lan/lan_init.js"></script>
+    <script src="./js/lan/lan_srcipt.js"></script>
+    <script type="text/javascript" src="./js/tools_func.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
+    <script type="text/javascript" src="./js/token/base.js"></script>
+    <script type="text/javascript" src="./js/token/coin/eth.js"></script>
+    <script type="text/javascript" src="./js/token/coin/udao.js"></script>
+    <script type="text/javascript" src="./js/token/coin/und.js"></script>
+    <script type="text/javascript" src="./js/token/coin/dai.js"></script>
+    <script type="text/javascript" src="./js/token/coin/investment.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./headerMobile.html");
+            $("#footCont").load("./footerMobile.html");
+        });
+    </script>
+
+</head>
+
+<body>
+<input type="hidden" id="address">
+<input type="hidden" id="getGasPrice">
+<input type="hidden" id="und_balance">
+<input type="hidden" id="userCash">
+<input type="hidden" id="getExchangeRateCurrent">
+<input type="hidden" id="fee">
+<div class="wrapper">
+    <div class="main">
+        <header></header>
+        <div id="finBanner">
+            <div class="fin-banner">
+                <h4 class="fin-title translate" data-lang="fin-1-1"> </h4>
+                <div class="fin-text translate" data-lang="fin-2"> </div>
+                <div class="fin-text translate" data-lang="fin-24"> </div>
+            </div>
+        </div>
+        <div id="finCont">
+            <div class="fin-cont-1">
+                <div class="fin-num-1">
+                    <span class="translate" data-lang="fin-3"></span>
+                    <div class="getExchangeRateCurrent">0%</div>
+                </div>
+                <div class="fin-num-2">
+                    <span class="translate" data-lang="fin-4"></span>
+                    <div><span class="mr-5 getExchangeRateCurrent_day">0%</span></div>
+                </div>
+            </div>
+            <div class="fin-cont-2">
+                <h5 class="fin-part-title-w translate" data-lang="fin-5"></h5>
+                <div id="bank_card" style="font-family: MADEFutureX-Light;font-size: 12px;font-weight: normal;font-stretch: normal;letter-spacing: 0px;color: #ffffff;text-align: center;padding: 1rem 0;"> </div>
+                <div class="fin-address"> </div>
+                <div class="fin-income">
+                    <div class="fin-num-1">
+                        <span class="translate" data-lang="fin-7"></span>
+                        <div><span class="investment_balance mr-10">0</span>UNDT</div>
+                    </div>
+                    <div class="fin-num-2">
+                        <span class="translate" data-lang="fin-6"></span>
+                        <div><span class="accumulated_income mr-10">0</span>UNDT</div>
+                    </div>
+                </div>
+            </div>
+            <div class="fin-cont-3">
+                <h5 class="fin-part-title translate" data-lang="fin-10"></h5>
+                <div class="fin-balance"><span class="und_balance mr-5">0</span><span>UNDT</span></div>
+                <h5 class="fin-part-title translate" data-lang="fin-25"></h5>
+                <div class="fin-balance"><span class="mr-10 tokenSupply_dai">0</span><span>UNDT</span></div>
+                <div class="fin-input">
+                    <input type="text" class="translate-placeholder" data-lang="fin-20" placeholder="" id="deposit_num">
+                    <font class="investment_unlock translate" data-value="undt" onclick="investment_unlock()" data-lang="exchange-part-4" style="float: right;color: #fff;cursor: pointer;background: #b51717;padding: 5px;border-radius: 3px;font-size: 11px;margin-top: 5px;"></font>
+                </div>
+                <button class="translate deposit_submit" data-lang="fin-9" onclick="deposit()"></button>
+            </div>
+            <div class="fin-cont-3">
+                <h5 class="fin-part-title translate" data-lang="fin-7"></h5>
+                <div class="fin-balance"><span class="investment_balance mr-5">0</span><span>UNDT</span></div>
+                <div class="fin-input">
+                    <input type="text" class="translate-placeholder" data-lang="fin-21" placeholder="" onpropertychange="cop()"
+                           oninput="cop()" onkeyup="onlyNumber(this)" onblur="onlyNumber(this)" id="redeem_num">
+                    <div><span class="translate" data-lang="fin-12"></span><span class="redeem_fee">0</span></div>
+                </div>
+                <button class="translate redeem_submit" data-lang="fin-13" onclick="redeem_investment()"></button>
+                <!--<div class="fin-tips translate" data-lang="fin-14"></div>-->
+            </div>
+        </div>
+        <div class="fin-cont-4">
+            <h5 class="fin-part-title translate" data-lang="fin-15"></h5>
+
+            <table class="record-cont">
+                <tr>
+                    <th class="translate" data-lang="fin-16"></th>
+                    <th class="translate" data-lang="fin-17"></th>
+                    <th>
+                        <span class="translate" data-lang="fin-18"></span>
+                        <span>/</span>
+                        <span class="translate" data-lang="fin-19"></span>
+                </tr>
+
+
+            </table>
+        </div>
+        <div id="footCont"> </div>
+    </div>
+</div>
+</body>
+<script>
+    setTimeout(start, 1000);
+    function start() {
+        setTimeout(ethAccounts, 500);
+        setTimeout(balance_und, 800);
+        setTimeout(addressToAccounts, 800);
+        setTimeout(getGasPrice, 1000);
+        setTimeout(tokenSupply_dai, 1000);
+        setTimeout(getExchangeRateCurrent, 1000);
+        setTimeout(getExchangeRateCurrent_day, 1000);
+        setTimeout(userCash, 1000);
+        setTimeout(investment_balance, 1000);
+        setTimeout(allowance_und_investment, 1000);
+        setTimeout(redeemFee, 1000);
+        setTimeout(loading, 1000);
+
+    }
+    setTimeout(log, 1000);
+    setTimeout(start_Interval, 1000);
+    function start_Interval() {
+        setInterval(ethAccounts, 5000);
+        setInterval(balance_und, 5000);
+        setInterval(addressToAccounts, 5000);
+        setInterval(getGasPrice, 5000);
+        setInterval(tokenSupply_dai, 5000);
+        setInterval(getExchangeRateCurrent, 5000);
+        setInterval(getExchangeRateCurrent_day, 5000);
+        setInterval(investment_balance, 5000);
+        setInterval(userCash, 5000);
+        setInterval(allowance_und_investment, 5000);
+        setInterval(redeemFee, 5000);
+        setInterval(loading, 5000);
+    }
+    function loading(){
+        $('.fin-address').text($('#address').val());
+
+    }
+    function cop(){
+        var temp = $("#redeem_num").val();
+        var fee = $("#fee").val();
+        console.log(temp);
+        temp = toNum(temp);
+        $('.redeem_fee').text(Number(temp*fee).toFixed(4));
+    }
+
+    //交易记录
+    function log(){
+        filt_addr = CONFIG.investment_addr;
+        web3.eth.getAccounts(function (err, accounts) {
+            if (accounts.length != 0) {
+                var selfaddr = accounts[0];
+                var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+                $.get(apiurl, function (data) {
+                    $.each(data.result, function (i, item) {
+                        item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
+                        item.from = item.from.toLocaleUpperCase();
+                        item.to = item.to.toLocaleUpperCase();
+                        selfaddr = selfaddr.toLocaleUpperCase();
+                        filt_addr = filt_addr.toLocaleUpperCase();
+                        if (item.tokenSymbol == 'UNDT') {
+                            if (item.from == selfaddr && item.to == filt_addr) {
+
+                                var temp = '<tr>'
+                                    +'<td>'+timestampToTime(item.timeStamp)+'</td>'
+                                    +'<td>'+web3.utils.fromWei(item.value, CONFIG.und_wei)+'UNDT</td>'
+                                    +'<td>'+script_Lan.fin_18[currentLan]+'</td>'
+                                    +'</tr>';
+                                $(".record-cont").append(temp);
+                            }
+
+                            if (item.from == filt_addr && item.to == selfaddr) {
+
+                                var temp = '<tr>'
+                                    +'<td>'+timestampToTime(item.timeStamp)+'</td>'
+                                    +'<td>'+web3.utils.fromWei(item.value, CONFIG.und_wei)+'UNDT</td>'
+                                    +'<td>'+script_Lan.fin_19[currentLan]+'</td>'
+                                    +'</tr>';
+                                $(".record-cont").append(temp);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+    }
+</script>
+
+
+</html>

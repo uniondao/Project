@@ -21,10 +21,9 @@
         });
     </script>
     <style>
-        .layui-m-layer1 .layui-m-layerchild {
+        .layui-layer {
             border-radius: 6px !important;
-            width: 90%;
-            margin: 0 auto;
+            
         }
 
         .address-table table tr {
@@ -62,12 +61,13 @@
     <script type="text/javascript" src="./js/config2.js"></script>
     <script type="text/javascript" src="./js/token/web3.min.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_base.js"></script>
-    <script type="text/javascript" src="./js/token/abi/abi_und.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
     <script type="text/javascript" src="js/token/abi/abi_exchange.js"></script>
     <script type="text/javascript" src="./js/token/web3_init.js"></script>
 
@@ -95,7 +95,7 @@
                                         <div class="exchange-w-2-part exchange-w-2-select changeOne myType paywith" type="paywith">
                                             <div class="coin-name">
                                                 <img src="./images/coin/coin_14.png" alt="" class="CurrentImg">
-                                                <div class="CurrentCoin">UNDT </div>
+                                                <div class="CurrentCoin">UNDT</div>
                                             </div>
                                             <!--<img src="./images/arrow_left_g.png" alt="">-->
                                         </div>
@@ -250,7 +250,7 @@
                 //实例化web3
                 window.web3 = await getWeb3();
                 //实例化需要用到的合约
-                window.Contract_und = await getContract(abi_und, CONFIG.undt_addr);
+                window.Contract_und = await getContract(abi_undt, CONFIG.undt_addr);
                 window.Contract_udao = await getContract(abi_udao, CONFIG.udao_addr);
                 window.Contract_exchange = await getContract(abi_exchange, CONFIG.exchange_undt_addr);
                 window.Contract_exchange_udao = await getContract(abi_exchange, CONFIG.exchange_udao_addr);
@@ -286,10 +286,11 @@
                         console.log(buttonState);
                     },
                     function (e) {
+                        console.log(e);
                         console.log("获取已授权信息失败");
                     }
                 );
-                getPrice();
+                getPrice('');
             } catch (e) {
                 console.log(e);
             }
@@ -308,7 +309,7 @@
             type: 1,
             title: false,
             closeBtn: 0,
-            area: ['', ''],
+            area: ['90%', ''],
             shadeClose: true,
             content: '<div class="select-layer">' +
             '  <div class="layer-back">' +
@@ -397,7 +398,7 @@
 
         $(".getNum").text(0);
 
-        getPrice();
+        getPrice('');
         hideNeedAuth();
         initState();
         $("#receiveNum").val('');
@@ -440,7 +441,12 @@
         $("#receiveNum").val("");
         hideNeedAuth();
         initState();
-        getPrice();
+        let paynum = $("#paywithNum").val();
+        if(paynum == '' || paynum <= 0){
+            getPrice2('');
+        }else{
+            getPrice2(paynum);
+        }
         let coin = coin1;
         let temp = 'exchange_'+coin.toLowerCase()+'_addr';
         let Exaddr = CONFIG[temp];
@@ -471,6 +477,8 @@
         if(swap_one <= 0){
             console.log("暂未获取到相应比列");
         }
+
+        getPrice2(num);
 
         let swap_num = num * swap_one;
         $("#receiveNum").val(swap_num);
@@ -599,11 +607,48 @@
         $("#receiveNum").val(swap_num);
     }
 
+    async function getPrice2(num) {
+        let temp_num;
+        if(num == ''){
+            temp_num = 1;
+        }else{
+            temp_num = num;
+        }
+        var coin0 = $(".coin").eq(0).html();
+        var coin1 = $(".coin").eq(1).html();
+        $(".sellCoin").text(coin0);
+        $(".buyCoin").text(coin1);
+
+        let output;
+        if(coin0 == 'ETH' && coin1 == 'UNDT'){
+            output = await getOutputAmountE2ERC(temp_num,"UNDT");
+        }else if(coin0 == 'UNDT' && coin1 == 'ETH'){
+            output = await getOutputAmountERC2E(temp_num,"UNDT");
+        }else{
+            output = await getOutputAmountERC2ERC(temp_num,coin0,coin1);
+        }
+
+        if(num != ''){
+            $("#receiveNum").val(output);
+        }
+
+        let paywithNum = $("#paywithNum").val();
+        if(paywithNum == '' || paywithNum <= 0){
+            paywithNum = 1;
+        }
+        $(".getNum").text(output / paywithNum);
+    }
+
     async function IsNeedAuth(exAddr,coin,num) {
         if(coin == 'ETH'){
             return false;
         }else {
+            // let coin_abi = 'abi_'+coin.toLowerCase();
+            coin = $.trim(coin);
+            let coin_addr = coin.toLowerCase()+'_addr';
+            window.Contract_Coin = await getContract(abi_base, CONFIG[coin_addr]);
             let authorizeNum = await authorize_coin_num(exAddr,coin);
+            console.log("授权数量："+authorizeNum);
             if(authorizeNum <= 0){
                 //需要授权
                 return true;
@@ -618,9 +663,9 @@
     }
 
     //授权入口
-    function authorize() {
+    async function authorize() {
         if(buttonState.forbid === 1) {
-            alert(buttonState.msg);
+            layer.msg(buttonState.msg);
             return;
         }
 
@@ -629,10 +674,15 @@
             let coin = $(".coin").eq(0).html();
             let temp = 'exchange_'+coin.toLowerCase()+'_addr';
             let Exaddr = CONFIG[temp];
+
+            coin = $.trim(coin);
+
             showPwait();
             buttonState.flag = 1;
             buttonState.forbid = 1;
             buttonState.msg = script_Lan.waitlock[currentLan];
+            let coin_addr = coin.toLowerCase()+'_addr';
+            window.Contract_Coin = await getContract(abi_base, CONFIG[coin_addr]);
             authorize_coin(Exaddr,coin,Math.pow(10,16)).then(
                 function (v) {
                     console.log(v);
@@ -660,7 +710,7 @@
     //交换
     async function swap() {
         if(buttonState.flag === 1){
-            alert(buttonState.msg);
+            layer.msg(buttonState.msg);
             return;
         }
 
@@ -673,21 +723,34 @@
         let receiveCoin = $(".receive").find(".coin-name .CurrentCoin").text();
         let rateNum = $(".getNum").text();
 
+        payCoin = $.trim(payCoin);
+        receiveCoin = $.trim(receiveCoin);
+
         if(num <= 0){
             btnChange();
-            alert(script_Lan.num_no_empty[currentLan]);
+            layer.msg(script_Lan.num_no_empty[currentLan]);
             return;
         }
 
         if(Number(num) > Number(Balance)){
             btnChange();
-            alert(script_Lan.money_no_enough[currentLan]);
+            layer.msg(script_Lan.money_no_enough[currentLan]);
             return;
         }
 
         if(Number(rateNum) <= 0 ){
             btnChange();
-            alert(script_Lan.no_rateNum[currentLan]);
+            layer.msg(script_Lan.no_rateNum[currentLan]);
+            return;
+        }
+
+        let temp = 'exchange_'+payCoin.toLowerCase()+'_addr';
+        let Exaddr = CONFIG[temp];
+        let hasAuth = await IsNeedAuth(Exaddr,payCoin,num);
+        if(hasAuth){
+            buttonState.forbid = 0;
+            updateState(script_Lan.locked[currentLan]);
+            showNeedAuth();
             return;
         }
 
@@ -696,7 +759,7 @@
 
         if(payCoin == receiveCoin){
             btnChange();
-            alert(script_Lan.no_keep_same[currentLan]);
+            layer.msg(script_Lan.no_keep_same[currentLan]);
             return;
         }
 
@@ -775,7 +838,7 @@
             );
         }else {
             btnChange();
-            alert(script_Lan.operate_err[currentLan]);
+            layer.msg(script_Lan.operate_err[currentLan]);
         }
     }
 
@@ -797,7 +860,7 @@
                 }
             },
             error: function () {
-                // alert('请求失败');
+                // layer.msg('请求失败');
             },
             complete: function (XMLHttpRequest,status) {
                 if(status == 'timeout') {

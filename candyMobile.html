@@ -23,6 +23,7 @@
     <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_udao_issue.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_und_issue.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
@@ -110,17 +111,17 @@
                             <div class="translate" data-lang="candy-part-11" style="display: inline">
 
                             </div>
-                            <span id="all_winning">0</span>UDAO
+                            <span id="all_winning" class="mr-5">0</span>UDAO
                         </div>
                         <div class="candy-receive-text">
                             <div class="translate" data-lang="candy-part-12" style="display: inline">
 
                             </div>
-                            <span id="have_received">0</span>UDAO，
+                            <span id="have_received" class="mr-5">0</span>UDAO，
                             <div class="translate" data-lang="candy-part-13" style="display: inline">
 
                             </div>
-                            <span id="not_received">0</span>UDAO
+                            <span id="not_received" class="mr-5">0</span>UDAO
                         </div>
                         <button class="candy-receive-btn translate" data-lang="candy-part-14" onclick="getGift()" 
 
@@ -150,19 +151,19 @@
                             <div class="translate" data-lang="candy-part-19" style="display: inline">
 
                             </div>
-                            <span id="invit_winning">0</span>UDAO
+                            <span id="invit_winning" class="mr-5">0</span>UDAO
                         </div>
                         <div class="candy-recommend-num">
                             <div class="translate" data-lang="candy-part-20" style="display: inline">
 
                             </div>
-                            <span id="have_received_invit">0</span>UDAO
+                            <span id="have_received_invit" class="mr-5">0</span>UDAO
                         </div>
                         <div class="candy-recommend-num">
                             <div class="translate" data-lang="candy-part-21" style="display: inline">
 
                             </div>
-                            <span id="not_received_invit">0</span>UDAO
+                            <span id="not_received_invit" class="mr-5">0</span>UDAO
                         </div>
                         <div class="candy-recommend-tip translate" data-lang="candy-part-22">
 
@@ -373,10 +374,10 @@
         ele.setSelectionRange(0, ele.value.length);
         if (document.execCommand('copy', false, null)) {
             //success info
-            alert("复制成功！");
+            layer.msg(html_lan['candy-part-48'][currentLan]);
         } else {
             //fail info
-            alert("复制失败！");
+            layer.msg(html_lan['candy-part-49'][currentLan]);
         }
     }
   

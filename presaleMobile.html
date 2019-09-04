@@ -12,7 +12,9 @@
     <title>UnionDao</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/presaleMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/layer.js"></script>
     <script>
         $(document).ready(function () {
             $("header").load("./headerMobile.html");
@@ -31,6 +33,7 @@
     <script type="text/javascript" src="./js/token/abi/abi_usdt.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
     <script type="text/javascript" src="./js/token/base.js"></script>
 
@@ -365,7 +368,7 @@
         let period = $("#current_period").text();
         period = Number(period);
         if (period <= 0) {
-            // alert("期数获取失败");
+            // layer.msg("期数获取失败");
             return;
         }
         for (let i = 0; i < 10; i++) {

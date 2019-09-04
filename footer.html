@@ -152,6 +152,7 @@
                             <li><a href="./presale.html" class="translate" data-lang="product-3"></a></li>
                             <li><a href="./wallet.html" class="translate" data-lang="product-4"></a></li>
                             <li><a href="./exchange.html" class="translate" data-lang="product-5"></a></li>
+							<li><a href="./financial.html" class="translate" data-lang="fin-1"></a></li>
                             <!-- <li><a href="javascript:;" class="translate" data-lang="product-6"onclick="alert('In development...')"></a></li> -->
                         </ul>
                     </div>
@@ -231,9 +232,12 @@
     }
 
     $(".translate").each(function (index, domEle) {
-
         let cogs = $(domEle).attr('data-lang');
         $(domEle).text(html_lan[cogs][currentLan]);
+    });
+    $(".translate-placeholder").each(function (index, domEle) {
+        let cogs = $(domEle).attr('data-lang');
+        $(domEle).attr('placeholder',html_lan[cogs][currentLan]);
     });
     $(function () {
         footerAuto();
