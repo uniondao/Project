@@ -129,6 +129,8 @@ function Verification_apply(txid){
             }
             $("#issue").html(script_Lan.issue_now[currentLan]);
             $("#redemption").html(script_Lan.redemption_now[currentLan]);
+            $(".deposit_submit").html(script_Lan.deposit_submit[currentLan]);
+            $(".investment_unlock").css('display','none');
             $(".approve_commit").html('&nbsp');
         }
     });
@@ -209,6 +211,7 @@ function Verification_airdrop(txid){
 
 function Verification2(txid,type){
     var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    console.log("verification")
     $.get(apiurl, function(data) {
         if(!data.result){
             setTimeout(Verification2(txid,type), 1000);
@@ -240,6 +243,40 @@ function Verification2(txid,type){
                 }
             }
             btnChange();
+        }
+    });
+}
+
+function Verification_deposit(txid) {
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_deposit(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.submitSuccess[currentLan]);
+                location.reload();
+            }else{
+                alert(script_Lan.submitError[currentLan]);
+            }
+            $(".deposit_submit").html(script_Lan.deposit_submit[currentLan]);
+        }
+    });
+}
+
+function Verification_redeem(txid) {
+    var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+    $.get(apiurl, function(data) {
+        if(!data.result){
+            setTimeout(Verification_redeem(txid), 1000);
+        }else{
+            if(data.result.status == '0x1'){
+                alert(script_Lan.submitSuccess[currentLan]);
+                location.reload();
+            }else{
+                alert(script_Lan.submitError[currentLan]);
+            }
+            $(".redeem_submit").html(script_Lan.redeem_submit[currentLan]);
         }
     });
 }
