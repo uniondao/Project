@@ -923,3 +923,275 @@ p.smart-tip{
     box-sizing: border-box;
     text-align: center
 }
+
+
+/*Financial*/
+
+#finBanner {
+    background: url(../images/presale_bg.png) no-repeat center 0;
+    /* background-size: 100%; */
+}
+
+#finBanner .fin-banner {
+    padding:100px 0 150px 0;
+}
+
+.fin-banner h4.fin-title,.fin-banner .fin-text {
+    font-family: MADEFutureX-Medium;
+    font-size:35px;
+    font-weight: normal;
+    font-stretch: normal;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #ffffff;
+}
+
+.fin-banner h4.fin-title{
+    padding-bottom:50px
+}
+
+.fin-banner .fin-text:nth-child(2){
+    padding-bottom:30px
+}
+
+#finCont {
+    width: 100%;
+}
+
+#finCont,
+.fin-cont-1 {
+    width: 83%;
+    margin: 0 auto;
+}
+
+.fin-cont-1{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    padding: 50px 0;
+}
+
+.fin-cont-1 .fin-num-1 span,
+.fin-cont-1 .fin-num-2>span{
+    margin-bottom: 30px;
+    display: block;
+}
+
+.fin-cont-2{
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #287D6E;
+    box-shadow: 0px 0px 10px 0px rgba(175, 175, 175, 0.75);
+    border-radius: 5px;
+    padding: 50px 0;
+}
+
+h5.fin-part-title{
+    font-family: MADEFutureX-Medium;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    text-align: center
+}
+
+h5.fin-part-title-w{
+    font-family: MADEFutureX-Medium;
+    font-size: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center
+}
+
+.fin-cont-2 .fin-address{
+    font-family: MADEFutureX-Light;
+    font-size: 25px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.fin-cont-3{
+    box-sizing: border-box;
+    border: solid 1px #f1eaea;
+    border-radius: 5px;
+    margin-top: 2rem;
+    padding: 50px 0;
+}
+
+
+.fin-cont-3 .fin-balance{
+    font-family: MADEFutureX-Medium;
+    font-size: 25px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #287D6E;
+    text-align: center;
+    margin: 30px 0;
+}
+
+.fin-cont-3 .fin-input{
+    width: 325px;
+    margin: 0 auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.fin-cont-3 .fin-input input{
+    width: 325px;
+    height: 56px;
+    background-color: #ffffff;
+    box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
+    padding: 0 12px;
+    font-family: MADEFutureX-Thin;
+    font-size: 14px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.fin-cont-3 .fin-input div{
+    font-family: MADEFutureX-Light;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #464646;
+    width: 325px;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+.fin-cont-3 button{
+    background: #287D6E;
+    width: auto;
+    padding: 0 30px;
+    height: 52px;
+    background-image: linear-gradient(90deg,
+ #057067 0%,
+ #0f9186 100%),
+ linear-gradient(#057067,
+ #057067);
+    background-blend-mode: normal,
+ normal;
+    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
+    border-radius: 5px;
+    border: solid 1px #ffffff;
+    font-family: MADEFutureX-Medium;
+    font-size: 20px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 52px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+}
+
+.fin-cont-3 .fin-tips{
+    width: 90%;
+    margin: 0 auto;
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: red;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.fin-cont-4{
+    margin-top: 50px;
+}
+
+.fin-cont-4 table {
+    width: 83%;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom:70px;
+}
+
+.fin-cont-4 table thead {
+    height: 41px;
+    background-color: #057067;
+}
+
+.fin-cont-4 table th {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    height: 50px;
+    line-height: 50px;
+    letter-spacing: 0px;
+    color: #ffffff;
+    background-color: #057067;
+
+}
+
+.fin-cont-4 table tr {
+    height: 50px;
+    line-height: 50px;
+}
+
+.fin-cont-4 table tr td {
+    text-align: center;
+    font-family: MADEFutureX-Light;
+    font-size: 14px;
+    font-stretch: normal;
+    color: #9f9f9f;
+}
+
+.fin-cont-4 table tr:nth-child(even) {
+    background-color: #eeeeee;
+    box-sizing: border-box
+}
+
+.fin-cont-4 table tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+#finCont,
+.fin-income {
+    width: 83%;
+    margin: 0 auto;
+}
+
+.fin-income{
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    font-size: 28px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+.fin-income .fin-num-1 span,
+.fin-income .fin-num-2>span{
+    margin-bottom: 20px;
+    display: inline-block;
+}
