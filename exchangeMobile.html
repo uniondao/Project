@@ -290,7 +290,7 @@
                         console.log("获取已授权信息失败");
                     }
                 );
-                getPrice('');
+                getPrice2('');
             } catch (e) {
                 console.log(e);
             }
@@ -398,7 +398,12 @@
 
         $(".getNum").text(0);
 
-        getPrice('');
+        let paywithNum = $("#paywithNum").val();
+        if(paywithNum == '' || paywithNum == 0){
+            getPrice2('');
+        }else{
+            getPrice2(paywithNum);
+        }
         hideNeedAuth();
         initState();
         $("#receiveNum").val('');
@@ -480,9 +485,6 @@
 
         getPrice2(num);
 
-        let swap_num = num * swap_one;
-        $("#receiveNum").val(swap_num);
-
         hideNeedAuth();
         initState();
 
@@ -505,108 +507,6 @@
         );
     });
 
-    async function getPrice() {
-        var coin0 = $(".coin").eq(0).html();
-        var coin1 = $(".coin").eq(1).html();
-        $(".sellCoin").text(coin0);
-        $(".buyCoin").text(coin1);
-
-        let num = 0;
-        if(coin0 == 'ETH' && coin1 == 'UNDT'){
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
-            num = await eth2exchangeNum();
-        }else if(coin0 == 'UNDT' && coin1 == 'ETH'){
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
-            num = await eth2exchangeNum();
-            if(num > 0){
-                num = (1 / num).toFixed(CONFIG.Fixed);
-            }
-        }else if(coin0 == 'UNDT'){
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
-            let eth2exchange1 = await eth2exchangeNum();
-            console.log('1ETH能兑换：'+eth2exchange1+" UNDT")
-            let ex_addr = "exchange_"+coin1.toLowerCase()+"_addr";
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG[ex_addr]);
-            let eth2exchange2 = await eth2exchangeNum();
-
-            if(eth2exchange1 <= 0 && eth2exchange2 <= 0){
-                num = 0;
-            }
-
-            if(eth2exchange1 > 0 && eth2exchange2 > 0){
-                console.log('1ETH能兑换：'+eth2exchange2+" "+coin1)
-                num = Number(eth2exchange2) / Number(eth2exchange1);
-            }
-
-            if(eth2exchange1 >0 && eth2exchange2<= 0){
-                eth2exchange2 = await exchange2ethNum();
-                console.log('1'+coin1+'能兑换：'+eth2exchange2+" ETH")
-
-                if(eth2exchange2 > 0){
-                    num = Number(1/eth2exchange1) * Number(1/eth2exchange2);
-                }else{
-                    num = 0;
-                }
-
-                console.log('1'+coin0+'能兑换：'+num+" "+coin1)
-            }
-
-        }else if(coin1 == 'UNDT'){
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG.exchange_undt_addr);
-            let eth2exchange1 = await eth2exchangeNum();
-            console.log('1ETH能兑换：'+eth2exchange1+" UNDT")
-            let ex_addr = "exchange_"+coin0.toLowerCase()+"_addr";
-            window.Contract_exchange = await getContract(abi_exchange , CONFIG[ex_addr]);
-            let eth2exchange2 = await eth2exchangeNum();
-
-            if(eth2exchange1 <= 0 && eth2exchange2 <= 0){
-                num = 0;
-            }
-
-            if(eth2exchange1 > 0 && eth2exchange2 > 0){
-                console.log('1ETH能兑换：'+eth2exchange2+" "+coin1)
-                num = Number(eth2exchange1) / Number(eth2exchange2);
-            }
-
-            if(eth2exchange1 >0 && eth2exchange2<= 0){
-                eth2exchange2 = await exchange2ethNum();
-
-                if(eth2exchange2 > 0){
-                    num = Number(eth2exchange1) * Number(eth2exchange2);
-                }else{
-                    num = 0;
-                }
-
-                console.log('1'+coin0+'能兑换：'+num+" "+coin1)
-            }
-
-        }else{
-            num = 0;
-        }
-
-        let coin_decimals = coin1.toLowerCase() +'_decimals';
-        let pow = 18 - CONFIG[coin_decimals];
-        if(coin0 == 'UNDT'){
-            num = Number(num) * Math.pow(10,pow);
-        }else{
-            coin_decimals = coin0.toLowerCase() +'_decimals';
-            pow = 18 - CONFIG[coin_decimals];
-            num = Number(num) / Math.pow(10,pow);
-        }
-        $(".getNum").text(num.toFixed(8));
-
-        let num2 = $("#paywithNum").val();
-        let swap_one = num;
-        num2 = Number(num2);
-        swap_one = Number(swap_one);
-        if(swap_one <= 0){
-            console.log("暂未获取到相应比列");
-        }
-
-        let swap_num = num2 * swap_one;
-        $("#receiveNum").val(swap_num);
-    }
-
     async function getPrice2(num) {
         let temp_num;
         if(num == ''){
@@ -619,6 +519,7 @@
         $(".sellCoin").text(coin0);
         $(".buyCoin").text(coin1);
 
+
         let output;
         if(coin0 == 'ETH' && coin1 == 'UNDT'){
             output = await getOutputAmountE2ERC(temp_num,"UNDT");
@@ -628,15 +529,19 @@
             output = await getOutputAmountERC2ERC(temp_num,coin0,coin1);
         }
 
+        if(output > 0){
+            output = Math.floor(Number(output * 0.9948) * Math.pow(10,6)) / Math.pow(10,6);
+        }
         if(num != ''){
-            $("#receiveNum").val(output);
+            $("#receiveNum").val('≈ '+output);
         }
 
         let paywithNum = $("#paywithNum").val();
         if(paywithNum == '' || paywithNum <= 0){
             paywithNum = 1;
         }
-        $(".getNum").text(output / paywithNum);
+        let getNum = (output / paywithNum).toFixed(6);
+        $(".getNum").text(getNum);
     }
 
     async function IsNeedAuth(exAddr,coin,num) {
@@ -714,10 +619,8 @@
             return;
         }
 
-        $('.ex-btn').addClass('gray-btn');
-        $("#ex-btn").html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
-
         let num = $("#paywithNum").val();
+        let num2 = $("#receiveNum").val();
         let Balance = $(".payCurrentBalance").text();
         let payCoin = $(".paywith").find(".coin-name .CurrentCoin").text();
         let receiveCoin = $(".receive").find(".coin-name .CurrentCoin").text();
@@ -725,6 +628,21 @@
 
         payCoin = $.trim(payCoin);
         receiveCoin = $.trim(receiveCoin);
+        // payCoin   =   payCoin.replace(/^\s+|\s+$/g,"");
+        // receiveCoin   =   receiveCoin.replace(/^\s+|\s+$/g,"");
+
+        let temp = 'exchange_'+payCoin.toLowerCase()+'_addr';
+        let Exaddr = CONFIG[temp];
+        let hasAuth = await IsNeedAuth(Exaddr,payCoin,num);
+        if(hasAuth){
+            buttonState.forbid = 0;
+            updateState(script_Lan.locked[currentLan]);
+            showNeedAuth();
+            return;
+        }
+
+        $('.ex-btn').addClass('gray-btn');
+        $("#ex-btn").html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
 
         if(num <= 0){
             btnChange();
@@ -738,24 +656,17 @@
             return;
         }
 
+        if(num2 <= 0){
+            btnChange();
+            layer.msg(script_Lan.no_enough[currentLan]);
+            return;
+        }
+
         if(Number(rateNum) <= 0 ){
             btnChange();
             layer.msg(script_Lan.no_rateNum[currentLan]);
             return;
         }
-
-        let temp = 'exchange_'+payCoin.toLowerCase()+'_addr';
-        let Exaddr = CONFIG[temp];
-        let hasAuth = await IsNeedAuth(Exaddr,payCoin,num);
-        if(hasAuth){
-            buttonState.forbid = 0;
-            updateState(script_Lan.locked[currentLan]);
-            showNeedAuth();
-            return;
-        }
-
-        payCoin   =   payCoin.replace(/^\s+|\s+$/g,"");
-        receiveCoin   =   receiveCoin.replace(/^\s+|\s+$/g,"");
 
         if(payCoin == receiveCoin){
             btnChange();

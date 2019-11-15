@@ -81,7 +81,10 @@
             <div id="presaleCont">
                 <div class="presale-cont">
                     <div id="contOne">
-                        <h3 class="phase-title"> <span></span> PHASE <div id="current_period">0</div>
+                        <h3 class="phase-title"> <span></span> PHASE
+                            <div id="current_period_display" style="display: inline-block;">0</div>
+                            <span id="current_period" style="display:none">0</span>
+
                         </h3>
                         <div class="phase-cont">
                             <div class="phase-data">
@@ -375,12 +378,14 @@
 
     var getPeriodData = async function () {
         let period = $("#current_period").text();
+        let period_display = $("#current_period_display").text();
         period = Number(period);
         if (period <= 0) {
             // window.location.reload();
         }
         for (let i = 0; i < 10; i++) {
             period -= 1;
+            period_display -= 1;
             let num = await investTotalAmount(period);
             num = web3.utils.fromWei(num, CONFIG.und_wei);
             num = Number(num).toFixed(5);
@@ -391,7 +396,7 @@
             rate = web3.utils.fromWei(rate, CONFIG.udao_wei);
             rate = Number(rate).toFixed(5);
             let str = "<tr>" +
-                "<td>" + period + "</td>\n" +
+                "<td>" + period_display + "</td>\n" +
                 "<td>" + num + "</td>\n" +
                 "<td>" + num_dao + "</td>\n" +
                 "<td>1UNDT=" + rate + "UDAO</td>\n" +
@@ -406,27 +411,39 @@
                 var selfaddr = accounts[0];
                 var apiurl = "https://api.etherscan.io/api?module=account&action=tokentx&address=" + selfaddr + "&startblock=0&endblock=999999999&sort=desc&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
                 $.get(apiurl, function (data) {
-                    // console.log(data);
+                    selfaddr = selfaddr.toLocaleUpperCase();
+                    filt_addr = filt_addr.toLocaleUpperCase();
+                    let arr = [];
                     $.each(data.result, function (i, item) {
                         item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
                         item.from = item.from.toLocaleUpperCase();
                         item.to = item.to.toLocaleUpperCase();
-                        selfaddr = selfaddr.toLocaleUpperCase();
-                        filt_addr = filt_addr.toLocaleUpperCase();
-                        if (item.tokenSymbol == 'UNDT') {
-                            if (item.from == selfaddr && item.to == CONFIG.udao_issue_addr.toLocaleUpperCase()) {
-                                var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>' + web3.utils.fromWei(item.value, CONFIG.und_wei) + 'UNDT</td><td>' + web3.utils.fromWei(item.value, CONFIG.und_wei) + 'UNDT</td><td>INVESTMENT</td></tr>';
-                                $(".user_record").append(temp);
-                            }
+
+                        if (item.tokenSymbol == 'UDAO' && item.from == CONFIG.udao_issue_addr.toLocaleUpperCase() && item.to == selfaddr) {
+                            arr.push(web3.utils.fromWei(item.value, CONFIG.udao_wei));
                         }
                     });
+
+                    let count = 0;
+                    $.each(data.result, function (i, item) {
+                        item.tokenSymbol = item.tokenSymbol.toLocaleUpperCase();
+                        item.from = item.from.toLocaleUpperCase();
+                        item.to = item.to.toLocaleUpperCase();
+
+                        if (item.tokenSymbol == 'UNDT' && item.from == selfaddr && item.to == CONFIG.udao_issue_addr.toLocaleUpperCase()) {
+                            var temp = '<tr><td>' + timestampToTime(item.timeStamp) + '</td><td>' + web3.utils.fromWei(item.value, CONFIG.und_wei) + ' UNDT</td><td>' + arr[count] + ' UDAO</td><td>INVESTMENT</td></tr>';
+                            $(".user_record").append(temp);
+                            count++;
+                        }
+                    });
+
+                    let hasChildren = $(".user_record").children().length;
+                    if(hasChildren === 0){
+                        var temp = '<tr><td>' + '--' + '</td><td>' + '--' + '</td><td>' +'--' + '</td><td>--</td></tr>';
+                        $(".user_record").append(temp);
+                    }
                 });
             }
         });
-        let hasChildren = $(".user_record").children().length;
-        if(hasChildren === 0){
-            var temp = '<tr><td>' + '--' + '</td><td>' + '--' + '</td><td>' +'--' + '</td><td>--</td></tr>';
-            $(".user_record").append(temp);
-        }
     }
 </script>

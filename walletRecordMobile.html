@@ -219,7 +219,9 @@
                             var account = '';
                             var remark = '';
                             if (item.from == selfaddr) {
-                                Contract_udao.methods.addressToAccounts(item.to).call()
+                                toaddressToAccounts = item.to.toLocaleLowerCase();
+                                fromaddressToAccounts = item.from.toLocaleLowerCase();
+                                Contract_udao.methods.addressToAccounts(toaddressToAccounts).call()
                                     .then(function (data) {
                                         if (data == 0) {
                                             account = '';
@@ -266,7 +268,7 @@
                                             account = data;
                                             account_have = '/';
                                             Contract_udao.events.TransferAndSendMsg({
-                                                filter: { _from: item.from, _to: item.to },
+                                                filter: { _from: item.from.toLocaleLowerCase(), _to: item.to.toLocaleLowerCase() },
                                                 fromBlock: item.blockNumber
                                             }, function (error, event) { })
                                                 .on('data', function (event) {
@@ -313,7 +315,9 @@
                                         }
                                     })
                             } else if (item.to == selfaddr && item.from != '0X0000000000000000000000000000000000000000') {
-                                Contract_udao.methods.addressToAccounts(item.from).call()
+                                toaddressToAccounts = item.to.toLocaleLowerCase();
+                                fromaddressToAccounts = item.from.toLocaleLowerCase();
+                                Contract_udao.methods.addressToAccounts(fromaddressToAccounts).call()
                                     .then(function (data) {
                                         console.log(data);
                                         if (data == 0) {
@@ -361,7 +365,7 @@
                                             account = data;
                                             account_have = '/';
                                             Contract_udao.events.TransferAndSendMsg({
-                                                filter: { _from: item.from, _to: item.to },
+                                                filter: { _from: item.from.toLocaleLowerCase(), _to: item.to.toLocaleLowerCase() },
                                                 fromBlock: item.blockNumber
                                             }, function (error, event) { })
                                                 .on('data', function (event) {

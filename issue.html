@@ -24,6 +24,7 @@
     <script type="text/javascript" src="./js/token/abi/abi_candy.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_airdrop.js"></script>
     <script type="text/javascript" src="./js/token/abi/abi_team.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_investment.js"></script>
     <script type="text/javascript" src="./js/token/base.js"></script>
     <script type="text/javascript" src="./js/token/coin/usdt.js"></script>
     <script type="text/javascript" src="./js/token/coin/dai.js"></script>
@@ -702,6 +703,7 @@
             str += withdraw_num;
             str += coin.toLocaleUpperCase();
             let one_fee = await getRedeemOneFee(coin,withdraw_num);
+
             one_fee = Number(one_fee).toFixed(5);
             document.getElementById("fee").innerText = one_fee;
         }

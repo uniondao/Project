@@ -3,13 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="keywords" content="uniondao,udao,undt" />
     <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/styleMobile.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
     <script type="text/javascript" src="./js/config.js"></script>
     <script type="text/javascript" src="./js/token/web3.min.js"></script>
@@ -27,95 +26,79 @@
     <script type="text/javascript" src="./js/token/coin/udao.js"></script>
     <script type="text/javascript" src="./js/token/coin/eth.js"></script>
     <title>UnionDao</title>
-</head>
-<script>
-    $(document).ready(function () {
-        $("header").load("./headerMobile.html");
-        $("#footCont").load("./footerMobile.html");
+    <script>
+        $(document).ready(function () {
 
-        HoldersClock = setInterval(function(){
-            getHolders();
-        },15000);
-        getHolders();
-    });
+            $("header").load("./header.html");
+            $("#footCont").load("./footer.html");
 
-    setTimeout(start, 1000);
-    start_Interval();
-    getQueryVariable();
-    function start() {
-        setTimeout(reserve_undt, 1000);
-        setTimeout(reserve_usdt, 1000);
-        setTimeout(reserve_tusd, 1000);
-        setTimeout(reserve_pax, 1000);
-        setTimeout(reserve_dai, 1000);
-        setTimeout(reserve_usdc, 1000);
-        setTimeout(supply, 1000);
-        setTimeout(accountsNumber, 1000);
-        setTimeout(fund_banance, 2200);
-    }
-
-    function start_Interval() {
-        setInterval(reserve_undt, 5000);
-        setInterval(reserve_usdt, 5000);
-        setInterval(reserve_tusd, 5000);
-        setInterval(reserve_pax, 5000);
-        setInterval(reserve_dai, 5000);
-        setInterval(reserve_usdc, 5000);
-        setInterval(supply, 5000);
-        setInterval(accountsNumber, 5000);
-        setInterval(fund_banance, 5000);
-    }
-    function fund_banance() {
-        var fund_banance = Number($('#reserve_undt').val()) + Number($('#reserve_usdt').val()) + Number($('#reserve_tusd').val()) + Number($('#reserve_pax').val()) + Number($('#reserve_dai').val()) + Number($('#reserve_usdc').val());
-        fund_banance = Number(fund_banance).toFixed(CONFIG.Fixed);
-        $('#fund_banance').html(fund_banance);
-
-    }
-
-
-
-    function getHolders() {
-        $.ajax({
-            type: "GET",
-            url: "https://query.uniondao.com/index/getHolders",
-            success: function(res){
-                $('#holders').text(res.data);
-            }
         });
-    }
 
-    function getQueryVariable() {
-        getcookie_name = getCookie('system');
+        setTimeout(start, 1000);
+        start_Interval();
+        getQueryVariable();
+        function start() {
+            setTimeout(reserve_undt, 1000);
+            setTimeout(reserve_usdt, 1000);
+            setTimeout(reserve_tusd, 1000);
+            setTimeout(reserve_pax, 1000);
+            setTimeout(reserve_dai, 1000);
+            setTimeout(reserve_usdc, 1000);
+            setTimeout(supply, 1000);
+            setTimeout(accountsNumber, 1000);
+            setTimeout(fund_banance, 2200);
+        }
 
-        var query = window.location.search.substring(1);
-        var vars = query.split("&");
-        for (var i = 0; i < vars.length; i++) {
-            var pair = vars[i].split("=");
-            if (pair[0] == 'system') {
-                setCookie('system', pair[1]);
-            }
-            if (pair[0] == 'inviter') {
-                setCookie('inviter', pair[1]);
+        function start_Interval() {
+            setInterval(reserve_undt, 5000);
+            setInterval(reserve_usdt, 5000);
+            setInterval(reserve_tusd, 5000);
+            setInterval(reserve_pax, 5000);
+            setInterval(reserve_dai, 5000);
+            setInterval(reserve_usdc, 5000);
+            setInterval(supply, 5000);
+            setInterval(accountsNumber, 5000);
+            setInterval(fund_banance, 5000);
+        }
+        function fund_banance() {
+            var fund_banance = Number($('#reserve_undt').val()) + Number($('#reserve_usdt').val()) + Number($('#reserve_tusd').val()) + Number($('#reserve_pax').val()) + Number($('#reserve_dai').val()) + Number($('#reserve_usdc').val());
+            fund_banance = Number(fund_banance).toFixed(CONFIG.Fixed);
+            $('#fund_banance').html(fund_banance);
+        }
+
+
+        function getQueryVariable() {
+            getcookie_name = getCookie('system');
+
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == 'system') {
+                    setCookie('system', pair[1]);
+                }
+                if (pair[0] == 'inviter') {
+                    setCookie('inviter', pair[1]);
+                }
             }
         }
-    }
-    function getCookie(name) {
-        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        function getCookie(name) {
+            var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
-        if (arr = document.cookie.match(reg))
+            if (arr = document.cookie.match(reg))
 
-            return unescape(arr[2]);
-        else
-            return null;
-    }
+                return unescape(arr[2]);
+            else
+                return null;
+        }
 
-    function setCookie(name, value) {
-        var exp = new Date();
-        exp.setTime(exp.getTime() + 60 * 60 * 1000 * 24 * 30);
-        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
-    }
-
-</script>
+        function setCookie(name, value) {
+            var exp = new Date();
+            exp.setTime(exp.getTime() + 60 * 60 * 1000 * 24 * 30);
+            document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=/";
+        }
+    </script>
+</head>
 
 <body>
     <input type="hidden" id="reserve_undt">
@@ -145,63 +128,42 @@
                     <div class="banner-text-cont">
                         <div class="banner-part">
                             <div class="banner-part-pos">
-                                <div class="banner-part-pos-1">
-                                    <span class="translate" data-lang="banner-part-1"></span>
-                                </div>
-                                <div class="banner-part-pos-2">
-                                    <div class="supply_und">0</div>
-                                    <span class="font-15">UNDT</span>
-                                </div>
-
+                                <span class="translate" data-lang="banner-part-1"></span>
+                                <div class="supply_und">0</div>
+                                <span class="font-15">UNDT</span>
                             </div>
                         </div>
                         <div class="banner-part">
                             <div class="banner-part-pos">
-                                <div class="banner-part-pos-1">
-                                    <span class="translate" data-lang="banner-part-2"> </span>
-                                </div>
-                                <div class="banner-part-pos-2">
-                                    <div id="holders">0</div>
-                                    <span class="font-15" style="color: #FFF; opacity:0">UNDT</span>
-                                </div>
+                                <span class="translate" data-lang="banner-part-2"> </span>
+                                <div id="holders">0</div>
+                                <span class="font-15" style="color: #FFF; opacity:0">UNDT</span>
                             </div>
                         </div>
                         <div class="banner-part">
                             <div class="banner-part-pos">
-                                <div class="banner-part-pos-1">
-                                    <span class="translate" data-lang="banner-part-3"> </span>
-                                </div>
-                                <div class="banner-part-pos-2">
-                                    <div id="user_number">0</div>
-                                    <span class="font-15" style="color: #FFF; opacity:0"> USDT </span>
-                                </div>
-
+                                <span class="translate" data-lang="banner-part-3"> </span>
+                                <div id="user_number">0</div>
+                                <span class="font-15" style="color: #FFF; opacity:0"> USDT </span>
                             </div>
                         </div>
                         <div class="banner-part">
                             <div class="banner-part-pos">
-                                <div class="banner-part-pos-1">
-                                    <span class="translate" data-lang="banner-part-4"> </span>
-                                </div>
-                                <div class="banner-part-pos-2">
-
-                                    <div class="supply_und">0</div>
-                                    <span class="font-15">USDx</span>
-                                </div>
+                                <span class="translate" data-lang="banner-part-4"> </span>
+                                <div class="supply_und">0</div>
+                                <span class="font-15">USDx</span>
                             </div>
                         </div>
                         <div class="banner-part">
                             <div class="banner-part-pos">
-                                <div class="banner-part-pos-1">
-                                    <span class="translate" data-lang="banner-part-5"> </span>
-                                </div>
-                                <div class="banner-part-pos-2">
-                                    <div id="fund_banance">0</div>
-                                    <span class="font-15">USDx</span>
-                                </div>
-
+                                <span class="translate" data-lang="banner-part-5"></span>
+                                <div id="fund_banance">0</div>
+                                <span class="font-15">USDx</span>
                             </div>
                         </div>
+                    </div>
+                    <div class="mouse">
+                        <img src="./images/mouse.png" alt="">
                     </div>
                 </div>
             </div>
@@ -211,67 +173,59 @@
                         <div class="img-part">
                             <img src="./images/icon-01.png" alt="" class="coin-img-1">
                         </div>
-                        <div class="cont-one-part-right">
-                            <h4 class="translate" data-lang="cont-h4-1"></h4>
-                            <p class="translate" data-lang="cont-p-1"></p>
-                            <div class="cont-one-btn">
-                                <a href="./issueMobile.html">
-                                    <div class="translate" data-lang="cont-btn-1"></div>
-                                    <img src="./images/arrow_white.png" alt="">
-                                </a>
-                            </div>
+                        <h4 class="translate" data-lang="cont-h4-1"></h4>
+                        <p class="translate" data-lang="cont-p-1"></p>
+                        <div class="cont-one-btn">
+                            <a href="./issue.html">
+                                <div class="translate" data-lang="cont-btn-1"></div>
+                                <img src="./images/arrow_black.png" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="cont-one-part">
                         <div class="img-part">
                             <img src="./images/icon-02.png" alt="" class="coin-img-2">
                         </div>
-                        <div class="cont-one-part-right">
-                            <h4 class="translate" data-lang="cont-h4-2"></h4>
-                            <p class="translate" data-lang="cont-p-2"></p>
-                            <div class="cont-one-btn">
-                                <a href="./presaleMobile.html">
-                                    <div class="translate" data-lang="cont-btn-2"></div>
-                                    <img src="./images/arrow_white.png" alt="">
-                                </a>
-                            </div>
+                        <h4 class="translate" data-lang="cont-h4-2"></h4>
+                        <p class="translate" data-lang="cont-p-2"></p>
+                        <div class="cont-one-btn">
+                            <a href="./presale.html">
+                                <div class="translate" data-lang="cont-btn-2"></div>
+                                <img src="./images/arrow_black.png" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="cont-one-part">
                         <div class="img-part">
                             <img src="./images/icon-03.png" alt="" class="coin-img-3">
                         </div>
-                        <div class="cont-one-part-right">
-                            <h4 class="translate" data-lang="cont-h4-3"></h4>
-                            <p class="translate" data-lang="cont-p-3"></p>
-                            <div class="cont-one-btn">
-                                <a href="./walletMobile.html">
-                                    <div class="translate" data-lang="cont-btn-3"></div>
-                                    <img src="./images/arrow_white.png" alt="">
-                                </a>
-                            </div>
+                        <h4 class="translate" data-lang="cont-h4-3"></h4>
+                        <p class="translate" data-lang="cont-p-3"></p>
+                        <div class="cont-one-btn">
+                            <a href="./wallet.html">
+                                <div class="translate" data-lang="cont-btn-3"></div>
+                                <img src="./images/arrow_black.png" alt="">
+                            </a>
                         </div>
                     </div>
                     <div class="cont-one-part">
                         <div class="img-part">
                             <img src="./images/icon-04.png" alt="" class="coin-img-4">
                         </div>
-                        <div class="cont-one-part-right">
-                            <h4 class="translate" data-lang="cont-h4-4"></h4>
-                            <p class="translate" data-lang="cont-p-4"></p>
-                            <div class="cont-one-btn">
-                                <a href="./exchangeMobile.html">
-                                    <div class="translate" data-lang="cont-btn-4"> </div>
-                                    <img src="./images/arrow_white.png" alt="">
-                                </a>
-                            </div>
+                        <h4 class="translate" data-lang="cont-h4-4"></h4>
+                        <p class="translate" data-lang="cont-p-4"></p>
+                        <div class="cont-one-btn">
+                            <a href="./exchange.html">
+                                <div class="translate" data-lang="cont-btn-4"> </div>
+                                <img src="./images/arrow_black.png" alt="">
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="contTwo">
                 <div class="cont-two">
-                    <h3 class="cont-title translate" data-lang="about-1">
+                    <h3 class="cont-title2 translate" data-lang="about-1">
                     </h3>
                     <div class="cont-two-cont">
                         <div class="cont-two-part">
@@ -284,7 +238,7 @@
                         </div>
                     </div>
                     <div class="readmore">
-                        <a href="./docMobile.html">
+                        <a href="./doc.html">
                             <img src="./images/down.png" alt="">
                             <span class="translate" data-lang="readmore"></span>
                         </a>
@@ -298,20 +252,21 @@
                     <div class="cont-three-cont">
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_1.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-1">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-1"></p>
                                 </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_1.png" alt="">
-                                </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_2.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-2">
 
@@ -320,14 +275,13 @@
 
                                     </p>
                                 </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_2.png" alt="">
-                                </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_3.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-3">
 
@@ -335,22 +289,18 @@
                                     <p class="translate" data-lang="about-cont-3">
                                     </p>
                                 </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_3.png" alt="">
-                                </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_4.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-4">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-4">
                                     </p>
-                                </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_4.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -358,56 +308,53 @@
                     <div class="cont-three-cont">
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_5.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-5">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-5">
+
                                     </p>
-                                </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_5.png" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
-                                <div class="cont-three-part-text">
-                                    <h4 class="translate" data-lang="about-h4-6">
-                                    </h4>
-                                    <p class="translate" data-lang="about-cont-6">
-                                    </p>
-                                </div>
                                 <div class="icon-bg">
                                     <img src="./images/ad_icon_6.png" alt="">
                                 </div>
+                                <div class="cont-three-part-text">
+                                    <h4 class="translate" data-lang="about-h4-6"></h4>
+                                    <p class="translate" data-lang="about-cont-6">
+                                    </p>
+                                </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
-
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_7.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-7">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-7">
                                     </p>
                                 </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_7.png" alt="">
-                                </div>
                             </div>
                         </div>
                         <div class="cont-three-part">
                             <div class="cont-three-part-detail">
+                                <div class="icon-bg">
+                                    <img src="./images/ad_icon_8.png" alt="">
+                                </div>
                                 <div class="cont-three-part-text">
                                     <h4 class="translate" data-lang="about-h4-8">
                                     </h4>
                                     <p class="translate" data-lang="about-cont-8">
                                     </p>
-                                </div>
-                                <div class="icon-bg">
-                                    <img src="./images/ad_icon_8.png" alt="">
                                 </div>
                             </div>
                         </div>
@@ -423,77 +370,78 @@
                         <div class="join-link">
                             <div class="join-link-part">
                                 <a href="https://twitter.com/uniondao" target="_blank">
-                                    <img src="./images/mobile_icon/join_coin_5.png" alt="">
+                                    <img src="./images/join_coin_5.png" alt="">
                                     <span class="translate" data-lang="index-left-text-5"></span>
                                 </a>
                             </div>
                             <div class="join-link-part">
                                 <a href="https://t.me/uniondao" target="_blank">
-                                    <img src="./images/mobile_icon/join_coin_6.png" alt="">
+                                    <img src="./images/join_coin_6.png" alt="">
                                     <span class="translate" data-lang="index-left-text-6"></span>
                                 </a>
                             </div>
                             <div class="join-link-part">
                                 <a href="javascript:;">
-                                    <img src="./images/mobile_icon/join_coin_3.png" alt="">
+                                    <img src="./images/join_coin_3.png" alt="">
                                     <span class="translate" data-lang="index-left-text-3"></span>
                                 </a>
                             </div>
                             <div class="join-link-part">
                                 <a href="javascript:;">
-                                    <img src="./images/mobile_icon/join_coin_4.png" alt="">
+                                    <img src="./images/join_coin_4.png" alt="">
                                     <span class="translate" data-lang="index-left-text-4"></span>
                                 </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="cont-four-right ">
-                <h3 class="translate" data-lang="index-title-3"></h3>
-                <div class="news-cont">
-                    <div class="news-part">
-                        <p class="translate" data-lang="news-part-1"></p>
-                        <div class="news-down">
-                            <div class="news-time">—— 2019.08.20</div>
-                            <a
-                                href="https://udao.zendesk.com/hc/en-gb/articles/360034111074-UNIONDAO%E5%85%A8%E7%90%83%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E6%BF%80%E5%8A%B1%E8%AE%A1%E5%88%92" target="_blank">
-                                <div class="more-news">
-                                    <span class="translate" data-lang="readmore"></span>
-                                    <div></div>
+                    <div class="cont-four-right ">
+                        <h3 class="translate" data-lang="index-title-3"></h3>
+                        <div class="news-cont">
+                            <div class="news-part">
+                                <p class="translate" data-lang="news-part-1"></p>
+                                <div class="news-down">
+                                    <div class="news-time">—— 2019.08.20</div>
+                                    <a href="https://udao.zendesk.com/hc/en-gb/articles/360034111074-UNIONDAO%E5%85%A8%E7%90%83%E4%B8%AD%E6%96%87%E7%A4%BE%E5%8C%BA%E6%BF%80%E5%8A%B1%E8%AE%A1%E5%88%92" target="_blank">
+                                        <div class="more-news">
+                                            <span class="translate" data-lang="readmore"></span>
+                                            <div></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="news-part">
-                        <p class="translate" data-lang="news-part-2"></p>
-                        <div class="news-down">
-                            <div class="news-time">—— 2019.08.20</div>
-                            <a href="https://udao.zendesk.com/hc/en-gb/articles/360034102014-Upcoming-public-test" target="_blank">
-                                <div class="more-news">
-                                    <span class="translate" data-lang="readmore"></span>
-                                    <div></div>
+                            </div>
+                            <div class="news-part">
+                                <p class="translate" data-lang="news-part-2"></p>
+                                <div class="news-down">
+                                    <div class="news-time">—— 2019.08.20</div>
+                                    <a href="https://udao.zendesk.com/hc/en-gb/articles/360034102014-Upcoming-public-test" target="_blank">
+                                        <div class="more-news">
+                                            <span class="translate" data-lang="readmore"></span>
+                                            <div></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="news-part">
-                        <p class="translate" data-lang="news-part-3"></p>
-                        <div class="news-down">
-                            <div class="news-time">—— 2019.09.05</div>
-                            <a href="https://udao.zendesk.com/hc/en-gb/articles/360035378073--imToken-UDAO%E5%92%8CUNDT%E6%8F%90%E4%BA%A4" target="_blank">
-                                <div class="more-news">
-                                    <span class="translate" data-lang="readmore"></span>
-                                    <div></div>
+                            </div>
+                            <div class="news-part">
+                                <p class="translate" data-lang="news-part-3"></p>
+                                <div class="news-down">
+                                    <div class="news-time">—— 2019.09.05</div>
+                                    <a href="https://udao.zendesk.com/hc/en-gb/articles/360035378073--imToken-UDAO%E5%92%8CUNDT%E6%8F%90%E4%BA%A4" target="_blank">
+                                        <div class="more-news">
+                                            <span class="translate" data-lang="readmore"></span>
+                                            <div></div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div id="contFive">
                 <div class="cont-five">
-                    <h3 class="cont-title-w translate" data-lang="index-title-4"></h3>
+                    <h3 class="cont-title-w translate" data-lang="index-title-4">
+
+                    </h3>
                     <div class="cont-five-partner">
                         <div class="partner-part">
                             <a href="https://www.tokenpocket.pro/" target="_blank">
@@ -502,18 +450,15 @@
                             <a href="https://trustwallet.com/" target="_blank">
                                 <img src="./images/partner_1.png" alt="">
                             </a>
-
-                        </div>
-                        <div class="partner-part">
                             <a href="https://www.coinbase.com/" target="_blank">
                                 <img src="./images/partner_2.png" alt="">
                             </a>
-                            <a href="https://vault.io/" target="_blank">
-                                <img src="./images/partner_3.png" alt="">
-                            </a>
 
                         </div>
                         <div class="partner-part">
+                            <a href="https://vault.io/" target="_blank">
+                                <img src="./images/partner_3.png" alt="">
+                            </a>
                             <a href="https://cobo.com/" target="_blank">
                                 <img src="./images/partner_4.png" alt="">
                             </a>
@@ -524,10 +469,74 @@
                     </div>
                 </div>
             </div>
-            <div id="footCont"> </div>
         </div>
+        <div id="footCont"> </div>
     </div>
     </div>
 </body>
 
 </html>
+<!--<script src="./js/jquery.countUp.js"></script>-->
+<script>
+    $(document).ready(function (e) {
+        $('.cont-one-part').hover(function () {
+            $(this).find('.coin-img-1').attr("src", "./images/icon-01_w.png");
+            $(this).find('.coin-img-2').attr("src", "./images/icon-02_w.png");
+            $(this).find('.coin-img-3').attr("src", "./images/icon-03_w.png");
+            $(this).find('.coin-img-4').attr("src", "./images/icon-04_w.png");
+            $(this).find('.img-part').css({
+                'background': ' #057067',
+                'box-shadow': '0px 0px 37px 0px rgba(99, 99, 99, 0.85)'
+            })
+            $(this).find('.cont-one-btn').css({
+                'background': '  #057067',
+                'box-shadow': '0px 0px 19px 0px rgba(150, 150, 150, 0.84)'
+            })
+            $(this).find('.cont-one-btn a div').css({
+                'color': '  #eee',
+            })
+            $(this).find('.cont-one-btn a div span').css({
+                'color': '  #eee',
+            })
+            $(this).find('.cont-one-btn a img').attr("src", "./images/arrow_white.png");
+        }, function () {
+            $(this).find('.coin-img-1').attr("src", "./images/icon-01.png");
+            $(this).find('.coin-img-2').attr("src", "./images/icon-02.png");
+            $(this).find('.coin-img-3').attr("src", "./images/icon-03.png");
+            $(this).find('.coin-img-4').attr("src", "./images/icon-04.png");
+            $(this).find('.img-part').css({
+                'background': ' #eeeeee',
+                'box-shadow': 'none'
+            })
+            $(this).find('.cont-one-btn').css({
+                'background': '#fff',
+                'box-shadow': 'none'
+            })
+            $(this).find('.cont-one-btn a div').css({
+                'color': '  #666',
+            })
+            $(this).find('.cont-one-btn a div span').css({
+                'color': '  #666',
+            })
+            $(this).find('.cont-one-btn a img').attr("src", "./images/arrow_black.png");
+        });
+        getHolders();
+        HoldersClock = setInterval(function(){
+            getHolders();
+        },15000);
+    })
+
+    function getHolders() {
+        $.ajax({
+            // async: true,
+            type: "GET",
+            contentType: "application/json",
+            url: "https://query.uniondao.com/index/getHolders",
+            success: function(res){
+                $('#holders').text(res.data);
+            }
+        });
+    }
+
+
+</script>

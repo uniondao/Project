@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="uniondao,udao,undt" />
+    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
+    <title>UnionDao</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("header").load("./headerMobile.html");
+            $("#footCont").load("./footerMobile.html");
+        });
+    </script>
+    <style>
+        body {
+            background: #232634
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main">
+            <!-- <header></header> -->
+            <div class="add-back">
+                <a href="javascript:" onclick="window.history.back();return false;">
+                    <img src="./images/mobile_icon/back.png" alt=""> <span>返回</span></a>
+            </div>
+            <div class="add-set-input">
+                <h5>设置支付网关</h5>
+                <div id="tabPay">
+                    <div class="tab-pay-header">
+                        <ul id="tabs">
+                            <li><a href="#" title="tab1">银行转账</a></li>
+                            <li><a href="#" title="tab2">国际电汇</a></li>
+                            <li><a href="#" title="tab2">PayPal</a></li>
+                            <li><a href="#" title="tab2">支付宝</a></li>
+                            <li><a href="#" title="tab2">微信</a></li>
+                            <li><a href="#" title="tab2">加密货币</a></li>
+                        </ul>
+                    </div>
+                    <div id="tabContent">
+                        <div id="tab1" class="tab-part">
+                            <div class="add-set-input-part">
+                                <div class="add-title">国家/地区</div>
+                                <select autofocus>
+                                    <option value="" disabled selected>选择国家</option>
+                                    <option value="1"> 1</option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3">3</option>
+                                </select>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">币种</div>
+                                <select autofocus>
+                                    <option value="" disabled selected>选择币种</option>
+                                    <option value="1"> </option>
+                                    <option value="2"> </option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">银行名称</div>
+                                <select autofocus>
+                                    <option value="" disabled selected>选择银行</option>
+                                    <option value="1"> </option>
+                                    <option value="2"> </option>
+                                    <option value="3"></option>
+                                </select>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">SWFT CODE</div>
+                                <div><input type="text" placeholder="输入银行CODE"></div>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">收款方户名</div>
+                                <div><input type="text" placeholder="输入收款方户名"></div>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">收款方账号</div>
+                                <div><input type="text" placeholder="输入收款方账号"></div>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">网关名称:</div>
+                                <div>HONGKONG-LB-HKD</div>
+                            </div>
+                            <div class="add-set-input-part">
+                                <button>保存</button>
+                            </div>
+                        </div>
+                        <div id="tab2" class="tab-part">
+                            <p>
+                                暂未开放
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="footCont"> </div> -->
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    $(document).ready(function () {
+        $("#tabContent .tab-part").hide(); // Initially hide all content
+        $("#tabs li:first").attr("id", "current"); // Activate first tab
+        $("#tabContent div:first").fadeIn(); // Show first tab content
+
+        $('#tabs a').click(function (e) {
+            e.preventDefault();
+            $("#tabContent .tab-part").hide(); //Hide all content
+            $("#tabs li").attr("id", ""); //Reset id's
+            $(this).parent().attr("id", "current"); // Activate this
+            $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
+        });
+       
+    })
+
+</script>

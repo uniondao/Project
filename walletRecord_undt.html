@@ -111,15 +111,12 @@
         setTimeout(balance_und, 1000);
         setTimeout(addressToAccounts, 1000);
         setTimeout(getGasPrice, 1000);
-        setTimeout(all_record, 2500);
     }
-
     function start_Interval() {
         setInterval(ethAccounts, 5000);
         setInterval(balance_und, 5000);
         setInterval(addressToAccounts, 5000);
         setInterval(getGasPrice, 5000);
-        setInterval(all_record, 5000);
     }
 
     $(document).on("click", ".record-part", function () {
@@ -196,6 +193,7 @@
     $(document).on("click", ".layer-close3", function () {
         layer.closeAll();
     });
+    all_record();
     function all_record() {
         filt_addr = CONFIG.und_issue_addr;
         web3.eth.getAccounts(function (err, accounts) {
@@ -216,8 +214,11 @@
                             var account = '';
                             var remark = '';
                             if (item.from == selfaddr) {
-                                Contract_udao.methods.addressToAccounts(item.to).call()
+                                toaddressToAccounts = item.to.toLocaleLowerCase();
+                                fromaddressToAccounts = item.from.toLocaleLowerCase();
+                                Contract_udao.methods.addressToAccounts(toaddressToAccounts).call()
                                     .then(function (data) {
+                                        console.log(data);
                                         if (data == 0) {
                                             account = '';
                                             account_have = '';
@@ -263,10 +264,11 @@
                                             account = data;
                                             account_have = '/';
                                             Contract_und.events.TransferAndSendMsg({
-                                                filter: { _from: item.from, _to: item.to },
+                                                filter: { _from: item.from.toLocaleLowerCase(), _to: item.to.toLocaleLowerCase() },
                                                 fromBlock: item.blockNumber
                                             }, function (error, event) { })
                                                 .on('data', function (event) {
+                                                    console.log(event);
                                                     remark = event.returnValues._msg;
                                                     var temp = '<div class="record-list">'
                                                         + '<div class="record-part">'
@@ -312,9 +314,11 @@
                                         }
                                     })
                             } else if (item.to == selfaddr && item.from != '0X0000000000000000000000000000000000000000') {
-                                Contract_udao.methods.addressToAccounts(item.from).call()
+                                toaddressToAccounts = item.to.toLocaleLowerCase();
+                                fromaddressToAccounts = item.from.toLocaleLowerCase();
+                                Contract_udao.methods.addressToAccounts(fromaddressToAccounts).call()
                                     .then(function (data) {
-                                        console.log(data);
+
                                         if (data == 0) {
                                             account = '';
                                             account_have = '';
@@ -360,7 +364,7 @@
                                             account = data;
                                             account_have = '/';
                                             Contract_und.events.TransferAndSendMsg({
-                                                filter: { _from: item.from, _to: item.to },
+                                                filter: { _from: item.from.toLocaleLowerCase(), _to: item.to.toLocaleLowerCase() },
                                                 fromBlock: item.blockNumber
                                             }, function (error, event) { })
                                                 .on('data', function (event) {
