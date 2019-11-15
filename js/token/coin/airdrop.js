@@ -10,9 +10,11 @@ function bindInvit(){
     }else{
         gas = Number(gas)+Number(3000000000);
     }
+
     Contract_udao.methods.accountsToAddress(bind_card).call()
         .then(function(data) {
             console.log(data);
+
             var address_ox = data.substring(0, 2);
             if(address_ox != '0x'){
                 bindInvit();
@@ -22,13 +24,17 @@ function bindInvit(){
                 btnChange();
                 return false;
             }else{
+                console.log(1111);
                 if(SELF_ADDR == data){
+
                     layer.msg(script_Lan.operate_err[currentLan]);
                     btnChange();
                     return false;
                 }
+                console.log(2222);
                 Contract_team.methods.status(data).call()
                 .then(function(data2) {
+
                     console.log(data2);
                     if(data2 == true){
                         btnChange()
@@ -119,6 +125,7 @@ function haveGetGift(){
 //查询总推荐奖励
 function queryRefereeLuck(){
     var SELF_ADDR   = $("#address").val();
+
     Contract_airdrop.methods.queryRefereeLuck(SELF_ADDR).call()
         .then(function(data) {
             var data = web3.utils.fromWei(data, CONFIG.udao_wei);

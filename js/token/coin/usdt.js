@@ -6,14 +6,19 @@ function shouquan_usdt() {
         location.reload();
     }
     num = Math.pow(10,16);  //+Number(10000)
+
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.usdt_wei);
+
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
     }else{
         gas = Number(gas)+Number(3000000000)
     }
+
     $(".approve_commit").html(script_Lan.issue_remarks[currentLan]);
     Contract_usdt.methods.approve(CONFIG.und_issue_addr, num).send({ from: SELF_ADDR , gasPrice: gas,gas:70000 }, function(error, transactionHash){
         if(error){

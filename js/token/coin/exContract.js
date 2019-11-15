@@ -7,22 +7,26 @@ async function exchange2other(num,rateNum,sellCoin,buyCoin) {
     let buyCoin_decimals = buyCoin.toLowerCase()+'_decimals';
     let sellCoin_decimals = sellCoin.toLowerCase()+'_decimals';
     let buyCoin_addr = buyCoin.toLowerCase()+'_addr';
-    let min_num = 0;
+    let min_num = $("#receiveNum").val();
+    min_num = min_num.replace('≈','');
+    min_num = $.trim(min_num);
+    min_num = Number(min_num);
+    min_num = min_num * 0.99;
+    console.log("min_num:"+min_num);
 
     gas = Number(gas)+Number(CONFIG.GasExtra);
-
-    min_num = rateNum * num;
-    min_num = min_num - (min_num * 0.1);
 
     //单位转换
     min_num = min_num.toFixed(18);
     min_num = min_num * Math.pow(10,CONFIG[buyCoin_decimals]);
     min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
+    min_num = min_num.toString();
 
     //单位转换
     num = num * Math.pow(10,CONFIG[sellCoin_decimals]);
     num = web3.utils.toBN(num);
+    num = num.toString();
 
     return new Promise(function (resolve, reject) {
          Contract_exchange.methods.tokenToTokenSwapInput(num,min_num,min_fee,time,CONFIG[buyCoin_addr]).send({ from: account,gasPrice:gas,gas:CONFIG.GasLimit},function (error, transactionHash) {
@@ -41,18 +45,21 @@ async function eth2exchange(num,buyCoin) {
     let gas = await getGasPrice();
     let time = Math.ceil((new Date()).valueOf()/1000) + 900;
     let buyCoin_decimals = buyCoin.toLowerCase()+'_decimals';
-    let rateNum = await eth2exchangeNum();
 
     gas = Number(gas)+Number(CONFIG.GasExtra);
 
-    min_num = rateNum * num;
-    min_num = min_num - (min_num * 0.05);
+    let min_num = $("#receiveNum").val();
+    min_num = min_num.replace('≈','');
+    min_num = $.trim(min_num);
+    min_num = Number(min_num);
+    min_num = min_num *0.99;
 
     //单位转换
     min_num = min_num.toFixed(18);
     min_num = min_num * Math.pow(10,CONFIG[buyCoin_decimals]);
     min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
+    min_num = min_num.toString();
     return new Promise(function (resolve, reject) {
         Contract_exchange.methods.ethToTokenSwapInput(min_num,time).send({ from: account,value: web3.utils.toWei(num,'ether'),gasPrice:gas,gas:CONFIG.GasLimit},function (error, transactionHash) {
             if(error){
@@ -69,23 +76,26 @@ async function exchange2eth(num,sellCoin) {
     let gas = await getGasPrice();
     let time = Math.ceil((new Date()).valueOf()/1000) + 900;
     let sellCoin_decimals = sellCoin.toLowerCase()+'_decimals';
-    let rateNum = await eth2exchangeNum();
-    rateNum = 1 / rateNum;
 
     gas = Number(gas)+Number(CONFIG.GasExtra);
 
-    min_num = rateNum * num;
-    min_num = min_num - (min_num * 0.05);
+    let min_num = $("#receiveNum").val();
+    min_num = min_num.replace('≈','');
+    min_num = $.trim(min_num);
+    min_num = Number(min_num);
+    min_num = min_num *0.99;
 
     //单位转换
     min_num = min_num.toFixed(18);
     min_num = web3.utils.toWei(min_num,'ether');
-    min_num = Math.floor(min_num);
     min_num = web3.utils.toBN(min_num);
+    min_num = min_num.toString();
 
     //单位转换
     num = num * Math.pow(10,CONFIG[sellCoin_decimals]);
     num = web3.utils.toBN(num);
+    num = num.toString();
+
 
     return new Promise(function (resolve, reject) {
         Contract_exchange.methods.tokenToEthSwapInput(num,min_num,time).send({ from: account,gasPrice:gas,gas:CONFIG.GasLimit},function (error, transactionHash) {
@@ -138,15 +148,16 @@ async function getOutputAmountE2ERC (inputAmount,coin) {
     const coin_addr = coin.toLowerCase()+"_addr";
     const ex_addr = "exchange_"+coin.toLowerCase()+"_addr";
     window.Contract = await getContract(abi_base, CONFIG[coin_addr]);
-    const inputReserve = await web3.eth.getBalance(CONFIG[ex_addr]);
-    const outputReserve = await Contract.methods.balanceOf(CONFIG[ex_addr]).call();
-
-    const numerator = inputAmount * outputReserve * 997;
-    const denominator = inputReserve * 1000 + inputAmount * 997;
-    const outputAmount = numerator / denominator;
-
-    //损耗
-    const output  = outputAmount * (1  - (outputAmount / outputReserve));
+    let A0 = await web3.eth.getBalance(CONFIG[ex_addr]);
+    let B0 = await Contract.methods.balanceOf(CONFIG[ex_addr]).call();
+    A0 = A0 / Math.pow(10,18);
+    B0 = B0 / Math.pow(10,18);
+    let ji = A0 * B0;
+    let output = ji / (A0 + inputAmount);
+    output = B0 - output;
+    if(output <= 0){
+        output = 0;
+    }
     return output;
 }
 
@@ -157,47 +168,53 @@ async function getOutputAmountERC2E(inputAmount,coin) {
     const coin_addr = coin.toLowerCase()+"_addr";
     const ex_addr = "exchange_"+coin.toLowerCase()+"_addr";
     window.Contract = await getContract(abi_base, CONFIG[coin_addr]);
-    const inputReserve = await Contract.methods.balanceOf(CONFIG[ex_addr]).call();
-    const outputReserve = await web3.eth.getBalance(CONFIG[ex_addr]);
-
-    const numerator = inputAmount * outputReserve * 997;
-    const denominator = inputReserve * 1000 + inputAmount * 997;
-    const outputAmount = numerator / denominator;
-
-    //损耗
-    const output  = outputAmount * (1  - (outputAmount / outputReserve));
+    let A0 = await Contract.methods.balanceOf(CONFIG[ex_addr]).call();
+    let B0 = await web3.eth.getBalance(CONFIG[ex_addr]);
+    A0 = A0 / Math.pow(10,18);
+    B0 = B0 / Math.pow(10,18);
+    let ji = A0 * B0;
+    let output = ji / (A0 + inputAmount);
+    output = B0 - output;
+    if(output <= 0){
+        output = 0;
+    }
     return output;
 }
 
 /*********** ERC20 ⇄ ERC20 ***********/
 async function getOutputAmountERC2ERC(inputAmount,sellCoin,buyCoin){
     // TokenA (ERC20) to ETH conversion
-    const inputAmountA = Number(inputAmount);
+    inputAmount = Number(inputAmount);
+    const sellCoin_decimals = sellCoin.toLowerCase()+'_decimals';
+    const buyCoin_decimals = buyCoin.toLowerCase()+'_decimals';
     const sellCoin_addr = sellCoin.toLowerCase()+"_addr";
     const ex_sellCoin_addr = "exchange_"+sellCoin.toLowerCase()+"_addr";
     window.Contract = await getContract(abi_base, CONFIG[sellCoin_addr]);
-    const inputReserveA = await Contract.methods.balanceOf(CONFIG[ex_sellCoin_addr]).call();
-    const outputReserveA = await web3.eth.getBalance(CONFIG[ex_sellCoin_addr]);
+    let A0  = await Contract.methods.balanceOf(CONFIG[ex_sellCoin_addr]).call();
+    let B0  = await web3.eth.getBalance(CONFIG[ex_sellCoin_addr]);
 
-    const numeratorA = inputAmountA * outputReserveA * 997;
-    const denominatorA = inputReserveA * 1000 + inputAmountA * 997;
-    const outputAmountA = numeratorA / denominatorA;
+    A0 = A0 / Math.pow(10,CONFIG[sellCoin_decimals]);
+    B0 = B0 / Math.pow(10,18);
+    let ji = A0 * B0;
+    let output = ji / (A0 + inputAmount);
+    let eth = B0 - output;
 
     // ETH to TokenB conversion
-    const inputAmountB = outputAmountA;
     const buyCoin_addr = buyCoin.toLowerCase()+"_addr";
     const ex_buyCoin_addr = "exchange_"+buyCoin.toLowerCase()+"_addr";
-    const inputReserveB = await web3.eth.getBalance(CONFIG[ex_buyCoin_addr]);
+    let A1 = await web3.eth.getBalance(CONFIG[ex_buyCoin_addr]);
     window.Contract = await getContract(abi_base, CONFIG[buyCoin_addr]);
-    const outputReserveB = await Contract.methods.balanceOf(CONFIG[ex_buyCoin_addr]).call();
+    let B1 = await Contract.methods.balanceOf(CONFIG[ex_buyCoin_addr]).call();
 
-    const numeratorB = inputAmountB * outputReserveB * 997;
-    const denominatorB = inputReserveB * 1000 + inputAmountB * 997;
-    const outputAmountB = numeratorB / denominatorB;
-
-    //损耗
-    const output  = outputAmountB * (1  - (outputAmountB / outputReserveB));
-    return output;
+    A1 = A1 / Math.pow(10,18);
+    B1 = B1 / Math.pow(10,CONFIG[buyCoin_decimals]);
+    ji = A1 * B1;
+    output = ji / (A1 + eth);
+    let res = B1 - output;
+    if(res <= 0){
+        res = 0;
+    }
+    return res;
 }
 
 //获取手续费

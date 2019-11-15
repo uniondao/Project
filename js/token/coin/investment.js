@@ -47,6 +47,7 @@ function userCash(){
             }
             $("#userCash").val(data);
             var balance_num = data*Math.pow(10,10);
+            balance_num = balance_num.toString();
             balance_num = web3.utils.fromWei(balance_num, CONFIG.und_wei);
             balance_num = parseFloat(balance_num);
             Contract_investment.methods.getExchangeRateCurrent('0xF5DCe57282A584D2746FaF1593d3121Fcac444dC').call()
@@ -99,8 +100,10 @@ function investment_unlock() {
         return false;
     }
     num = Math.pow(10,16);  //+Number(10000)
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.und_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -138,6 +141,7 @@ function investment_balance(){
                     }
 
                     var balance_num_cash = data2*Math.pow(10,10);
+                    balance_num_cash = balance_num_cash.toString();
                     balance_num_cash = web3.utils.fromWei(balance_num_cash, CONFIG.und_wei);
                     balance_num_cash_rate = parseFloat(balance_num_cash);
                     Contract_investment.methods.getExchangeRateCurrent('0xF5DCe57282A584D2746FaF1593d3121Fcac444dC').call()
@@ -187,10 +191,10 @@ function deposit(){
         layer.msg(script_Lan.und_no_enough[currentLan]);
         return false;
     }
-
+    num = num.toString();
     num = web3.utils.toWei(num, 'ether');
     num = web3.utils.toBN(num);
-
+    num = num.toString();
 
     var gas = $("#getGasPrice").val();
     if(!gas){
@@ -223,18 +227,18 @@ function redeem_investment(){
         layer.msg(script_Lan.issue_num_min[currentLan]);
         return false;
     }
-    if (Number(investment_balance) <= 0  || userCash <= 0 || num <= 1) {
+    if (Number(investment_balance) <= 0  || userCash <= 0 || num < 1) {
         layer.msg(script_Lan.und_no_enough[currentLan]);
         return false;
     }
     num_true =  (num*Math.pow(10,36)/getExchangeRateCurrent).toFixed(0);
-    if(Number(num) > Number(investment_balance) || Number(num_true) > Number(userCash)){
+    if(Number(num) >= Number(investment_balance) || Number(num_true) >= Number(userCash)){
         num_true = userCash;
     }
 
     console.log(num_true);
     num_true = web3.utils.toBN(num_true);
-
+    num_true = num_true.toString();
 
     var gas = $("#getGasPrice").val();
     if(!gas){

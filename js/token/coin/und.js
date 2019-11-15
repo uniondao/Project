@@ -8,8 +8,10 @@ function shouquan_und() {
         return false;
     }
     num = Math.pow(10,16);  //+Number(10000)
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.und_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -91,9 +93,10 @@ function invest_und2udao(num) {
         return 1;
     }
 
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.udao_wei);
     num = web3.utils.toBN(num);
-
+    num = num.toString();
     $("#und2udao").html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     var gas = $("#getGasPrice").val();
     if(!gas){
@@ -148,8 +151,10 @@ function withdraw(num) {
         location.reload();
         return false;
     }
+    num = num.toString();
     num = web3.utils.toWei(num, 'ether');
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -237,9 +242,10 @@ function withdraw_onecoin(num,coin) {
         location.reload();
         return false;
     }
-
+    num = num.toString();
     num = web3.utils.toWei(num, 'ether');
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -264,9 +270,10 @@ function withdraw_onecoin(num,coin) {
 //其他币兑换成und
 function other2und(num, coin_addr, self_addr, wei = CONFIG.usdt_wei) {
     num = Number(num);
-
+    num = num.toString();
     num = web3.utils.toWei(num, wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -378,8 +385,10 @@ function undt_send(){
         layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.udao_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     $('#undt_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
         Contract_und.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){
@@ -426,12 +435,15 @@ async function getRedeemOneFee(coin,num) {
             break;
     }
     console.log(token);
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.udao_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     return new Promise(function (resolve, reject) {
         Contract_und_issue.methods.getRedeemOneFee(token,num).call()
             .then(function(data) {
                 console.log("fee:"+data);
+                data = data.toString();
                 var balance_num = web3.utils.fromWei(data, CONFIG.und_wei);
                 return resolve(balance_num);
             })

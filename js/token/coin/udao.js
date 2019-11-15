@@ -8,8 +8,10 @@ function shouquan_udao() {
         return false;
     }
     udao_num = Math.pow(10,16);  //+Number(10000)
+    udao_num = udao_num.toString();
     udao_num = web3.utils.toWei(udao_num, CONFIG.udao_wei);
     udao_num = web3.utils.toBN(udao_num);
+    udao_num = udao_num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
@@ -75,8 +77,23 @@ function getnewprice() {
 }
 
 async function getUdao2UndtNum() {
-    let price = await Contract_udao_issue.methods.newPrice(und_addr).call();
-    return price;
+    return new Promise(function (resolve, reject) {
+        Contract_udao_issue.methods.newPrice(und_addr).call()
+            .then(function(data) {
+                return resolve(data);
+            })
+    });
+
+}
+
+//每一期实际应该出售的UDAO
+async function investTotalAmount(period) {
+    return new Promise(function (resolve, reject) {
+        Contract_udao_issue.methods.investTotalAmount(period,CONFIG.und_addr).call()
+            .then(function(data) {
+                return resolve(data);
+            })
+    });
 }
 
 //多少区块为一期
@@ -114,6 +131,7 @@ function getPeriod() {
                 var period = current_heigh / data;
                 period = parseInt(period);
                 $("#current_period").html(period);
+                $("#current_period_display").html(period-1383);
                 var shengyu = (period * data + data) - current_heigh;
                 if (shengyu == 0) {
                     shengyu = data;
@@ -282,8 +300,10 @@ function udao_send(){
         layer.msg(script_Lan.issue_num_max[currentLan]);
         return false;
     }
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.udao_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     $('#udao_send').html(script_Lan.submitting[currentLan]+"<dot>···</dot>");
     if(account.slice(0,2) == '0x'){
         Contract_udao.methods.transferAndSendMsg(account,num,remarks).send({ from: SELF_ADDR, gasPrice: gas,gas:70000 }, function(error, transactionHash){

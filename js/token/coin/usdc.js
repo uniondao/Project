@@ -6,8 +6,10 @@ function shouquan_usdc() {
         location.reload();
     }
     num = Math.pow(10,16);  //+Number(10000)
+    num = num.toString();
     num = web3.utils.toWei(num, CONFIG.usdc_wei);
     num = web3.utils.toBN(num);
+    num = num.toString();
     var gas = $("#getGasPrice").val();
     if(!gas){
         gas = 10000000000;
