@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="description"
+        content="" />
+    <title>全球网关支付系统</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/func.js"></script>
+    <script type="text/javascript" src="./js/swarm.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_c2c.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
+    <script type="text/javascript" src="./js/token/web3_init.js"></script>
+    <script type="text/javascript" src="./js/token/coin/c2c.js"></script>
+    <script type="text/javascript" src="./js/gate-way.js"></script>
+    <script src="./js/jsencrypt.min.js"></script>
+    <style>
+        body {
+            background: #2D2C2C
+        }
+
+        .add-set-payee {
+            align-items: unset
+        }
+
+        .add-set-payee div div {
+            margin-bottom: 10px
+        }
+
+        .payee-cont h3 {
+            text-align: left
+        }
+    </style>
+</head>
+
+<body>
+<input type="hidden" id="agent">
+    <div class="wrapper">
+        <div class="main">
+            <div class="apply-header">
+                <div class="apply-back">
+                    <a href="javascript:" onclick="window.history.back();return false;">
+                        <img src="./images/back.png" alt="">
+                    </a>
+                </div>
+                <!--<div class="apply-my">-->
+                    <!--<a href="./myMobile.html">-->
+                        <!--<img src="./images/my.png" alt="">-->
+                    <!--</a>-->
+                <!--</div>-->
+            </div>
+            <div class="payee-cont">
+                <!--<h3>申诉原因: 未收到款</h3>-->
+                <div class="add-set-input">
+                    <h5>订单详情</h5>
+                    <div class="add-set-input-part">
+                        <div class="add-title">订单号:</div>
+                        <div id="orderNumber"></div>
+                    </div>
+                    <div class="add-set-input-part">
+                        <div class="add-title">交易时间:</div>
+                        <div id="beginTime"></div>
+                    </div>
+                    <div class="add-set-input-part">
+                        <div class="add-title">订单状态:</div>
+                        <div id="orderStatus"></div>
+                    </div>
+                    <div class="add-set-input-part">
+                        <div class="add-title">国家/地区:</div>
+                        <div id="area"></div>
+                    </div>
+                    <div class="add-set-input-part">
+                        <div class="add-title">金额:</div>
+                        <div><span class="mr-5" id="HKD"></span> <span id="coin_name"></span></div>
+                    </div>
+
+                    <div class="add-set-input-part">
+                        <div class="add-title">收款银行:</div>
+                        <div id="bank"></div>
+                    </div>
+                    <!-- <div class="add-set-input-part">
+                        <div class="add-title">SWFT CODE：</div>
+                        <div id="SWIFT"></div>
+                    </div> -->
+                    <div class="add-set-input-part">
+                        <div class="add-title">收款方户名:</div>
+                        <div id="username"></div>
+                    </div>
+                    <div class="add-set-input-part">
+                        <div class="add-title">收款方账号:</div>
+                        <div id="account"></div>
+                    </div>
+
+                    <div class="add-set-input-part">
+                        <div class="add-title">备注:</div>
+                        <div><span class="mr-5" id="remark"></span> </div>
+                    </div>
+                    <div class="add-set-input-part" style="display: none;" id="paydisplay">
+                        <div class="add-title">付款单号:</div>
+                        <div><span class="mr-5" id="paynubmer"></span> </div>
+                    </div>
+                </div>
+                <div class="appeal-record">
+                    <h3>沟通记录</h3>
+
+                </div>
+                <div class="payee-btn">
+                    <button>
+                        <a href="./respondAppealMobile.html">
+                            沟通
+                        </a>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let init_exchange = async () => {
+        try {
+            //实例化web3
+            window.web3 = await getWeb3();
+            //实例化需要用到的合约
+            window.Contract_c2c = await getContract(abi_c2c, CONFIG.c2c_addr);
+
+            let orderID = localStorage.getItem(String('orderID'));
+            var orderInfo = await orders(orderID);
+            let account = await ethAccounts();
+            let gateWayInfo =localStorage.getItem(String('gateWay'));
+            gateWayInfo = JSON.parse(gateWayInfo);
+            let orderInfoA = await download(orderInfo.orderInfo);
+            var mi = orderInfoA.split(",")[1];
+            let pKey = localStorage.getItem(String('privKeyMerchant'));
+            var miInfo = decrypt(mi,pKey);
+            miInfo = JSON.parse(miInfo);
+            $("#area").text(miInfo.country);
+            $("#bank").text(bank(miInfo.bank));
+            $("#SWIFT").text(miInfo.swift);
+            $("#username").text(miInfo.username);
+            $("#account").text(miInfo.account);
+            $("#remark").text(miInfo.aolastName);
+            $("#orderNumber").text(orderID);
+            $("#beginTime").text(formatTime(orderInfo.beginTime,'Y.M.D'));
+            $("#orderStatus").text(CONFIG['status-msg'][orderInfo.orderStatus]);
+            $("#HKD").text(orderInfo.orderCashAmount);
+            var gateWayss = orderInfo.gateWay;
+            gateWay_arr =gateWayss.split("-");
+            $("#coin_name").text(gateWay_arr[2]);
+            let Merchant =localStorage.getItem(String('Merchant'));
+
+            if(Merchant){
+
+                let merchant = await merchants(Merchant);
+                $("#agent").val(merchant.agent);
+            }
+
+            Contract_c2c.events.CompleteOrder({
+                filter: {ordernum:orderID},
+                fromBlock: 0
+            }, function (error, event) { })
+                .on('data',async function (event) {
+                    if(event){
+                        msg = await download(event.returnValues.msg);
+                        $("#paynubmer").text(msg);
+                        $("#paydisplay").css('display','flex');
+                    }
+                });
+
+            Contract_c2c.events.AppealOrderAnswer({
+                filter: {ordernum:orderID},
+                fromBlock: 0
+            }, function (error, event) { })
+                .on('data', async function (event) {
+                    hash = event.returnValues.msg;
+                    msg = await download(hash);
+
+                    if(account == orderInfo.orderSellAddress){
+                        var mi = msg.split(",")[0];
+                        pKey = localStorage.getItem(String('privKey'));
+                        var miInfo = decrypt(mi,pKey);
+                        miInfo = JSON.parse(miInfo);
+                    }else if(account == orderInfo.orderMerchant || Merchant == orderInfo.orderMerchant){
+                        var mi = msg.split(",")[1];
+                        pKey = localStorage.getItem(String('privKeyMerchant'));
+                        var miInfo = decrypt(mi,pKey);
+                        miInfo = JSON.parse(miInfo);
+                    }else{
+                        var mi = msg.split(",")[2];
+                        pKey = localStorage.getItem(String('privKeyManange'));
+                        var miInfo = decrypt(mi,pKey);
+                        miInfo = JSON.parse(miInfo);
+                    }
+                    if(event.returnValues.user == event.returnValues.merchant || event.returnValues.user == $("#agent").val()){
+                        var html = '<div class="appeal-part">'
+                            +'<span>'+formatTime(miInfo.time,'Y-M-D h:m:s')+'</span>'
+                            +'<div>商家回复:'+miInfo.msg+'</div>'
+                            +'</div>'
+                    }else if(event.returnValues.user == event.returnValues.orderselladdress){
+                        var html = '<div class="appeal-part">'
+                            +'<span>'+formatTime(miInfo.time,'Y-M-D h:m:s')+'</span>'
+                        +'<div>用户回复:'+miInfo.msg+'</div>'
+                        +'</div>'
+
+                    }else{
+                        var html = '<div class="appeal-part">'
+                            +'<span>'+formatTime(miInfo.time,'Y-M-D h:m:s')+'</span>'
+                            +'<div>管理员回复:'+miInfo.msg+'</div>'
+                            +'</div>'
+                    }
+                $(".appeal-record").append(html);
+                console.log(miInfo);
+                });
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    init_exchange();
+
+
+    function decrypt(encrypted,pKey){
+        var decrypt = new JSEncrypt();
+        decrypt.setPrivateKey(pKey);
+        var uncrypted = decrypt.decrypt(encrypted);
+        return uncrypted;
+    }
+
+    function bank(property){
+        var banks = {}
+        for(var i in Bank){
+            for(var j in  Bank[i]){
+                banks[j] =  Bank[i][j]
+            }
+        };
+        return banks[property]
+    }
+</script>

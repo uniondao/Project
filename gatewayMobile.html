@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <style>
+        body {
+            background: #2D2C2C
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main">
+            <div id="gateBanner">
+                <div class="gate-banner">
+                    <img src="./images/map.png" alt="">
+                    <div class="gate-banner-text">
+                        <p>其于社交的点对点全球网关支付系统</p>
+                    </div>
+                </div>
+            </div>
+            <div id="gateCont">
+                <div class="gate-cont">
+                    <div class="important-cont">
+                        <div class="important-part">
+                            <span class="import-title">账号余额</span>
+                            <div class="import-num"><span class="mr-5">18880</span> UNDT </div>
+                        </div>
+                        <div class="important-part important-part-select">
+                            <span class="import-title">选择网关</span>
+                            <select id="unittype" autofocus name="unittype">
+                                <option value="1" selected> HK-UNDT-HKD </option>
+                                <option value="2"> HK-UNDT-EUR</option>
+                                <option value="3"> HK-UNDT-USD </option>
+                                <option value="4"> + 设置新支付网关 </option>title
+                            </select>
+                            <div class="import-detail">
+                                <div class="import-detail-title">详情</div>
+                                <div class="import-detail-cont">
+                                    <p>0054545454545454</p>
+                                    <p>0054545454545454</p>
+                                    <p>0054545454545454</p>
+                                    <p>0054545454545454</p>
+                                    <p>0054545454545454</p>
+                                </div>
+                            </div>
+                            <div class="import-link"><a href="./addMobile.html">+添加</a></div>
+                        </div>
+                        <div class="important-part important-center">
+                            <div class="import-rate">
+                                <div>当前汇率:</div>
+                                <div><span>1</span>UNDT = <span>7.9</span>HKD</div>
+                            </div>
+                            <div class="import-rate">
+                                <div>服务费:</div>
+                                <div>1%</div>
+                            </div>
+                        </div>
+                        <div class="important-part">
+                            <span class="import-title">支付金额</span>
+                            <div><input type="text" placeholder="输入HKD金额" onkeyup="onlyNumber(this)"
+                                    onkeydown="onlyNumber(this)"> </div>
+                            <div class="import-all">全部</div>
+                        </div>
+                        <div class="important-part important-center">
+                            <div class="import-rate">
+                                <div>扣除金额:</div>
+                                <div><span>1235.656555</span>UNDT</div>
+                            </div>
+                        </div>
+                        <div class="important-part">
+                            <span class="import-title">附言</span>
+                            <div><input type="text" maxlength="70" placeholder="输入附言信息，仅限70个英文字符"
+                               id="aolastName"> </div>
+                        </div>
+                        <div class="important-part">
+                            <button>
+                                <a href="./paydetailMobile.html">发起支付</a>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="gateTable">
+                        <h5>交易记录</h5>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>金额</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                <tr class="detail-link">
+                                    <td>2019-09-09</td>
+                                    <td>
+                                        <span>1000</span> USD
+                                    </td>
+                                    <td>等待接单</td>
+                                    <td class="td-y cancelBtn">撤销</td>
+                                </tr>
+                                <tr class="detail-link">
+                                    <td>2019-09-09</td>
+                                    <td>
+                                        <span>1000</span> USD
+                                    </td>
+                                    <td>等待打款</td>
+                                    <td></td>
+                                </tr>
+                                <tr class="detail-link">
+                                    <td>2019-09-09</td>
+                                    <td>
+                                        <span>1000</span> USD
+                                    </td>
+                                    <td>交易完成</td>
+                                    <td class="td-y">
+                                        <a href="./appealMobile.html">申诉</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+</body>
+
+</html>
+
+<script src="./js/layer.js"></script>
+<script>
+    function onlyNumber(obj) {
+        //得到第一个字符是否为负号
+        var t = obj.value.charAt(0);
+        //先把非数字的都替换掉，除了数字和. 
+        obj.value = obj.value.replace(/[^\d\.]/g, '');
+        //必须保证第一个为数字而不是. 
+        obj.value = obj.value.replace(/^\./g, '');
+        //保证只有出现一个.而没有多个. 
+        obj.value = obj.value.replace(/\.{2,}/g, '.');
+        //保证.只出现一次，而不能出现两次以上 
+        obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace(
+            '$#$', '.');
+        //如果第一位是负号，则允许添加
+        if (t == '-') {
+            obj.value = '-' + obj.value;
+        }
+    }
+    $("#aolastName").on('keyup change input',function(e){
+        var keyword=this.value.toLowerCase();//获取文本框的值
+            if(keyword.match(/[^\a-\z\A-\Z]/g)!=null){//如果匹配到了，为空
+            this.value = "";
+        }
+    });
+
+    $(function () {
+        $("#unittype").change(function () {
+            if (unittype.value == 4)
+                window.location = './addMobile.html';
+        });
+        $("#unittype").click(function () {
+            $('.import-detail>.import-detail-cont').hide();
+        })
+    })
+
+    $(document).on("click", ".cancelBtn", function (event) {
+        layer.msg('已撤销订单!');
+        event.stopPropagation();
+    });
+
+    $(document).on("click", ".detail-link", function (event) {
+        window.location = './orderdetailMobile.html';
+        event.stopPropagation();
+    });
+
+    $(document).on("click", ".import-detail-title", function () {
+        if ($('.import-detail>.import-detail-cont').is(':hidden')) {
+            $('.import-detail>.import-detail-cont').show();
+        } else {
+            $('.import-detail>.import-detail-cont').hide();
+        }
+    });
+</script>

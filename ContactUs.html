@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="descripxion" content="" />
+    <title>联系我们</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <style>
+        body {
+            background: #2D2C2C;
+        }
+    </style>
+
+</head>
+<body>
+       <div id="guideCont">
+        <div class="apply-header">
+            <div class="apply-back">
+                <a href="javascript:" onclick="window.history.back();return false;">
+                    <img src="./images/back.png" alt="">
+                </a>
+            </div>
+            <div>
+                联系我们
+            </div>
+            <div></div>
+        </div>
+         <div class="guide-main">
+                <div class="guide-part">
+                <p>您的反馈对我们来说很重要，我们非常乐意您能提交您的使用体验，用户良好的使用体验就是我们平台的价值。</p>
+                <br>
+                <p>如果您有任何想法，疑问，或者认为我们有不足的地方，请不要犹豫马上联系我们。</p>
+                    <br>
+            </div>
+             <div class="important-part">
+            <ul class="email">
+   		        <li><input type="text" name="name" id="name"placeholder="怎么称呼您"></li><br>
+   		        <li><input type="text" name="email" id="email"placeholder="您的邮箱"></li><br>
+   		        <li class="message"><textarea name="message" id="message"placeholder="内容"></textarea> </li>
+	            <button  id="button" type="button"  >
+ 	            <a href="mailto" id="send">发送邮件</a>
+                </button>
+            </ul>
+            </div>
+         </div>
+
+        <div class="apply-footer">
+            <ul>
+                <li><a href="./guide.html">新手指南</a></li>
+                <li><a href="./AboutUs.html">关于我们</a></li>
+                <li><a href="./ContactUs.html">联系我们</a></li>
+                <li><a href="./TermsPrivacy.html">条款与隐私</a></li>
+                <li><a href="./index.html">用户端</a></li>
+                <li><a href="./mymobile.html">商户端</a></li>
+            </ul>
+        </div>
+       </div>
+</body>
+</html>
+<script>
+    window.onload = function(){
+        $("#button").click(function sendEmail(){
+            var name=$("[name='name']").val(),
+                email=$("[name='email']").val(),
+                message=$("[name='message']").val(),
+                body="My Name is: "+name+"%0a%0d"
+                    +"My Email is: "+email+"%0a%0d"
+                    +"Message:"+"%0a%0d"+message;
+            $("#send").attr("href","mailto:xxx6466386@qq.com?body="+body);
+            document.getElementById("send").click();
+        });
+    }
+</script>

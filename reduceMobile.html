@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/func.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_c2c.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
+    <script type="text/javascript" src="./js/token/web3_init.js"></script>
+    <script type="text/javascript" src="./js/token/coin/c2c.js"></script>
+    <script src="./js/layer.js"></script>
+    <style>
+        body {
+            background: #2D2C2C
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" id="worngNum">
+    <input type="hidden" id="lastLockTime">
+    <div class="wrapper">
+        <div class="main">
+            <div class="apply-header">
+                <div class="apply-back">
+                    <a href="javascript:" onclick="window.history.back();return false;">
+                        <img src="./images/back.png" alt=""> 
+                    </a>
+                </div>
+                <div>
+                    减少保证金
+                </div>
+                <div class="apply-my">
+                    <!-- <a href="./ordersMobile.html">
+                        <img src="./images/my.png" alt="">
+                    </a> -->
+                </div>
+            </div>
+            <div id="myCont">
+                <div class="my-cont">
+                    <div class="increase-cont">
+                        <div class="add-set-input-part">
+                            <div class="add-title"><span class="mr-5">UNDT</span>数量</div>
+                            <div><input type="text" placeholder="输入金额" id="num"></div>
+                        </div>
+                        <div class="add-set-input-part">
+                            <div class="add-title">我的UNDT数量:</div>
+                            <div><span id="balance">0</span></div>
+                        </div> 
+                        <div class="add-set-input-part">
+                            <div class="add-title">我的保证金数量:</div>
+                            <div><span id="bond">0</span></div>
+                        </div>
+                        <div class="add-set-input-part">
+                            <div class="add-title">可提取额度:</div>
+                            <div><span id="bond_usable">0</span></div>
+                        </div>
+                    </div>
+                   <div class="payee-btn">
+                       <button onclick="subbond()" id="subbond">确定</button>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let init_exchange = async () => {
+        try {
+            //实例化web3
+            window.web3 = await getWeb3();
+            //实例化需要用到的合约
+            window.Contract_undt = await getContract(abi_undt, CONFIG.undt_addr);
+            window.Contract_c2c = await getContract(abi_c2c, CONFIG.c2c_addr);
+            let account = await ethAccounts();
+            let num = await balance_undt(account);
+            $('#balance').text(num);
+            let merchants_info = await merchants(account);
+            console.log(merchants_info);
+            $("#bond").text(merchants_info.bond/Math.pow(10,18));
+            $("#bond_usable").text(merchants_info.bond/Math.pow(10,18) - merchants_info.bondUsed/Math.pow(10,18));
+            $("#worngNum").val(merchants_info.worngNum);
+            $("#lastLockTime").val(merchants_info.lastLockTime);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    init_exchange();
+
+    async function subbond(){
+        var num = $('#num').val();
+        var bond = $('#bond').text();
+        var bond_usable = $('#bond_usable').text();
+        var worngNum = $('#worngNum').val();
+        var lastLockTime = $('#lastLockTime').val();
+        currentTime = Date.parse(new Date());
+        currentTime = String(currentTime).slice(0,10);
+        currentTime = Number(currentTime);
+
+        if(!num){
+            layer.msg("请填写数量");
+            return false;
+        }
+        if(Number(num)>Number(bond)){
+            layer.msg("保证金余额不足");
+            return false;
+        }
+        if(Number(num)>Number(bond_usable)){
+            layer.msg("可提取额度不足");
+            return false;
+        }
+
+        if(worngNum != 0){
+            layer.msg("您还有订单未处理");
+            return false;
+        }
+
+        if(Number(currentTime) - Number(lastLockTime) < 86400){
+            layer.msg("提款时间需最后一次订单的一天后");
+            return false;
+        }
+
+        $("#subbond").text("提交中，请等待...");
+        subBond(num).then(
+            function (v) {
+                layer.msg("提取成功");
+                window.location.href="/myMobile.html";
+            },
+            function (e) {
+                console.log(e);
+                layer.msg("提取失败");
+                $("#subbond").text("确定");
+                return false;
+            }
+        )
+    }
+    function Verification(txid){
+        var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+        $.get(apiurl, function(data) {
+            if(!data.result){
+                setTimeout(function(){
+                    Verification(txid)
+                },1000);
+            }else{
+                if(data.result.status == '0x1'){
+                    layer.msg("提取成功");
+                    window.location.href="/myMobile.html";
+                }else{
+                    layer.msg("提取失败");
+                }
+            }
+        });
+    }
+</script>
