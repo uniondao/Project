@@ -186,7 +186,6 @@ var CONFIG = {
     "dai_decimals": "18",
     "tusd_decimals": "18",
     "usdc_decimals": "6",
-    "pax_decimals": "18",
     "mkr_decimals": "18",
     "wbtc_decimals": "8",
     "bat_decimals": "18",
