@@ -1,6 +1,19 @@
 var GateWays = {
     "HONGKONG-LB-HKD":"中国香港-银行转账-HKD",
     "CHINA-LB-CNY":"中国大陆-银行转账-CNY",
+    "CHINA-WP-CNY":"微信支付-CNY",
+    "HONGKONG-WP-HKD":"微信支付-HKD",
+    "HONGKONG-WP-USD":"微信支付-USD",
+    "CHINA-AP-CNY":"支付宝支付-CNY",
+    "HONGKONG-AP-USD":"支付宝支付-USD",
+    "HONGKONG-AP-HKD":"支付宝支付-HKD",
+    "ALL-PP-CNY":"PayPal支付-CNY",
+    "ALL-PP-USD":"PayPal支付-USD",
+    "ALL-PP-HKD":"PayPal支付-HKD",
+    "ALL-PP-EURO":"PayPal支付-EURO",
+    "ALL-BIT-BTC":"加密支付-BTC",
+    "ALL-BIT-ETH":"加密支付-ETH",
+    "ALL-BIT-USDT":"加密支付-USDT",
 };
 
 var Country = {
@@ -17,6 +30,17 @@ var Coin = {
     "HONGKONG":[
         "HKD",
         "USD"
+    ],
+    "ALL":[
+        "CNY",
+        "HKD",
+        "USD",
+        "EURO"
+    ],
+    "BIT":[
+        "BTC",
+        "ETH",
+        "USDT",
     ],
     // "USA":[
     //     "USD"
@@ -67,4 +91,17 @@ var Bank = {
 var GateWayss = [
     "HONGKONG-LB-HKD",
     "CHINA-LB-CNY",
+    "CHINA-WP-CNY",
+    "HONGKONG-WP-HKD",
+    "HONGKONG-WP-USD",
+    "CHINA-AP-CNY",
+    "HONGKONG-AP-USD",
+    "HONGKONG-AP-HKD",
+    "ALL-PP-CNY",
+    "ALL-PP-USD",
+    "ALL-PP-HKD",
+    "ALL-PP-EURO",
+    "ALL-BIT-BTC",
+    "ALL-BIT-ETH",
+    "ALL-BIT-USDT",
 ];
