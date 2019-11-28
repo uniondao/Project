@@ -1,9 +1,13 @@
-/*开发文档、隐私调条款、团队、联系我们*/
-
 @media screen and (min-width:900px) {
     body {
         width: 720px !important;
         margin: 0 auto !important;
+    }
+}
+
+@media screen and (max-width:720px) {
+    .menu {
+        width: 100%!important;
     }
 }
 
@@ -12,1200 +16,1600 @@ body {
     margin: 0 auto;
 }
 
-
-.readmore {
-    text-align: center;
-    margin-top: 38px;
+* {
+    list-style: none;
+    font-family: 微软雅黑;
 }
 
-.readmore span {
+select,
+input {
+    outline: none;
+}
+
+
+/*创新支付网关*/
+
+#gateBanner .gate-banner {
+    position: relative;
+    height: 195px;
+    overflow: hidden;
+}
+
+#gateBanner .gate-banner img {
+    max-width: 100%
+}
+
+#gateBanner .gate-banner .gate-banner-text {
+    background-color: rgba(187, 187, 187, 0.85);
     font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 40px;
-    letter-spacing: 0px;
-    color: #a8a8a8;
-    display: block;
-    padding-bottom: 20px;
-}
-
-.readmore img {
-    width: 20px;
-    height: 12px;
-}
-
-#docBanner {
-    background: url('../images/mobile_icon/doc_bg.png') no-repeat center 0;
-    background-size: 100%;
-    position: relative
-}
-
-#docBanner .doc-banner {
-    width: 90%;
-    margin: 0 auto;
-    position: relative;
-    padding: 6.3rem 0 6.8rem 0
-}
-
-
-.doc-icon {
-    background-size: contain;
-    background: url('../images/mobile_icon/doc_c2.png') no-repeat center 0;
-    width: 111px;
-    height: 111px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-}
-
-.doc-icon div.doc-c1 {
-    background-size: contain;
-    background: url('../images/mobile_icon/doc_c1.png') no-repeat center 0;
-    width: 86px;
-    height: 86px;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-.doc-icon div.doc-c2 {
-    width: 60.5px;
-    height: 60.5px;
-    background-color: #ffffff;
-    border-radius: 50%;
+    font-size: 14px;
+    color: #fff;
+    height: 30px;
+    line-height: 30px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    bottom: 0;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box
 }
 
-.doc-icon div img {
-    width: 22px;
-    height: 25px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-#docText {
+#gateCont {
     width: 100%;
 }
 
-#docText .doc-text {
+#gateCont .gate-cont {
     width: 90%;
     margin: 0 auto;
-    margin-bottom: 30px;
-    border-bottom: solid 1px #d2d2d2;
+    margin-top: 20px;
 }
 
-h4.cont-title {
-    font-family: MADEFutureX-Medium;
-    font-size: 22.5px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #057067;
-    margin: 1.9rem 0 1.8rem;
-}
-
-.doc-text-list {
-    border-top: solid 1px #d2d2d2;
-}
-
-.doc-text-list .doc-text-part {
-    padding: 0.7rem 0 0.8rem 0;
-}
-
-.doc-text-list .doc-text-part h5 {
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 15px;
-    margin-bottom: 10px;
-    letter-spacing: 0px;
-    color: #282828;
-}
-
-.doc-text-list .doc-text-part p {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 14px;
-    letter-spacing: 0px;
-    color: #7a7a7a;
-}
-
-
-.doc-text-list .doc-text-part p span {
-    text-decoration: underline
-}
-
-.doc-text-list .doc-text-part ul {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 14px;
-    letter-spacing: 0px;
-    color: #7a7a7a;
-    margin-left: 5%;
-}
-
-.doc-text-list .doc-text-part ul li {
-    list-style-type: disc;
-}
-
-.doc-text-list .doc-text-part ul li ul {
-    margin-left: 5%;
-}
-
-
-#privacyBanner {
-    background: url('../images/mobile_icon/privacy_bg.png') no-repeat center 0;
-    background-size: 100%;
-    position: relative
-}
-
-#privacyBanner .privacy-banner {
-    width: 90%;
-    margin: 0 auto;
-    position: relative;
-
-    padding: 6.3rem 0 6.8rem 0
-}
-
-
-#contactBanner {
-    background: url('../images/mobile_icon/contact_bg.png') no-repeat center 0;
-    background-size: 100%;
-    position: relative
-}
-
-#contactBanner .contact-banner {
-    width: 90%;
-    margin: 0 auto;
-    padding: 8.5rem 0 8.5rem 0
-}
-
-.contact-icon {
-    width: 60.5px;
-    height: 60.5px;
-    background-color: #057067;
-    border-radius: 50%;
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-}
-
-.contact-icon img {
-    width: 21.5px;
-    height: 27.5px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-
-#contactCont {
-    width: 100%;
-}
-
-#contactCont .contact-cont {
-    width: 90%;
-    margin: 0 auto;
-    position: relative;
-    border-bottom: solid 1px #d2d2d2;
-    padding-bottom: 2.8remx;
-    margin-bottom: 1.7rem;
-}
-
-
-h4.contact-title {
-    font-family: MADEFutureX-Medium;
-    font-size: 22.5px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #057067;
-    text-align: center;
-    margin: 2.3rem 0 2.3rem 0;
-}
-
-h4.contact-title:before,
-h4.contact-title:after {
-    content: '';
-    /*CSS伪类用法*/
-    position: absolute;
-    /*定位背景横线的位置*/
-    top: 11px;
-    background: #d2d2d2;
-    /*宽和高做出来的背景横线*/
-    width: 27%;
-    height: 1px;
-}
-
-h4.contact-title:before {
-    left: 0;
-    /*调整背景横线的左右距离*/
-}
-
-h4.contact-title:after {
-    right: 0;
-}
-
-.contact-cont-flex {
-    text-align: center;
-}
-
-
-.contact-cont-flex .contact-part {
-    margin-bottom: 2.1rem;
-}
-
-.contact-cont-flex .contact-part a {
-    display: block
-}
-
-
-.contact-cont-flex .contact-part img {
-    width: 24px;
-}
-
-.contact-cont-flex .contact-part span {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    display: block;
-    font-weight: normal;
-    font-stretch: normal;
-    margin-top: 0.5rem;
-    color: #737373;
-}
-
-#teamBanner {
-    background: url('../images/mobile_icon/team_bg.png') no-repeat center 0;
-    background-size: 100%;
-    position: relative
-}
-
-#teamBanner .team-banner {
-    width: 90%;
-    margin: 0 auto;
-    position: relative;
-    padding: 6.3rem 0 6.9rem 0
-}
-
-#teamCont {
-    width: 100%;
-    margin-bottom: 0.5rem;
-}
-
-#teamCont .team-cont {
-    width: 90%;
+.important-cont {
+    width: auto;
     margin: 0 auto;
 }
 
-
-h4.team-title {
-    font-family: MADEFutureX-Medium;
-    font-size: 30px;
-    font-weight: normal;
-    font-stretch: normal;
-    text-align: center;
-    color: #057067;
-    margin: 2.8rem 0 1.3rem 0
-}
-
-.team-cont-flex {
-
+.important-cont .important-part {
+    display: flex;
+    display: -webkit-flex;
     align-items: center;
-    margin-bottom: 2.3rem;
-
+    margin-top: 20px;
 }
 
-.team-part {
-    margin-bottom: 2.3rem;
-    text-align: center;
+.important-cont .important-center {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    margin-top: 15px;
+    margin-left: 65px;
 }
 
-.team-part .team-img img {
-    width: 345px;
-    border-radius: 5px;
-}
-
-.team-part .team-img {
-    position: relative;
-
-}
-
-.team-part .team-img .team-mask {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: #057067;
-    opacity: 0;
-    border-radius: 5px;
-}
-
-.team-part .team-img .team-mask img {
-    position: relative;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.team-part a:hover .team-mask {
-    opacity: 0.7;
-}
-
-.team-part .team-name {
-    font-family: MADEFutureX-Medium;
-    font-size: 17.5px;
-    font-weight: normal;
-    font-stretch: normal;
-    margin: 1.1rem 0 0.5rem 0;
-    letter-spacing: 0px;
-    color: #057067;
-}
-
-.team-part .team-span {
-    font-family: MADEFutureX-Light;
-    font-size: 14.6px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #737373;
-}
-
-#candyBanner {
-    background: url(../images/mobile_icon/presale_bg.png) no-repeat center 0;
-    background-size: 100%;
-}
-
-#candyBanner .candy-banner {
-    padding: 2.2rem 0 2.7rem 0;
-}
-
-.candy-banner .candy-banner-text,
-.candy-banner .candy-title,
-.candy-banner .candy-banner-card {
-    font-family: MADEFutureX-Medium;
+.important-part .import-title {
+    font-family: 微软雅黑;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
-    line-height: 18px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    text-align: center;
-    margin-top: 7px;
-}
-
-.candy-banner .candy-title {
-    font-size: 20px;
-}
-
-.candy-banner .candy-banner-text {
-    margin: 2.1rem 0 2.3rem 0;
-}
-
-
-.candy-banner .candy-banner-btn {
-    background: #287D6E;
-    width: 180px;
-    height: 29.5px;
-    background-image: linear-gradient(90deg,
-            #057067 0%,
-            #0f9186 100%),
-        linear-gradient(#057067,
-            #057067);
-    background-blend-mode: normal,
-        normal;
-    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
-    border-radius: 5px;
-    border: solid 1px #ffffff;
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
     font-weight: normal;
-    font-stretch: normal;
-    line-height: 29.5px;
-    letter-spacing: 0px;
-    color: #ffffff;
+    letter-spacing: 1px;
+    color: #fff;
+    width: 58px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.important-part input {
+    width: 220px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 5px;
     box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 auto;
-    display: block;
+    border: 1px solid rgb(221, 201, 15);
+    background: none;
+    color: #fff
 }
 
-.candy-banner .candy-banner-card {
-    margin: 1rem 0 2.3rem 0;
-    color: #e4c297
+.important-part .import-num {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #DDC90F;
 }
 
-#candyCont {
-    width: 100%;
-}
-
-
-#candyCont .candy-cont-1,
-#candyCont .candy-cont-2,
-#candyCont .candy-cont-3,
-#candyCont .candy-cont-4,
-#candyCont .candy-cont-5 {
-    width: 90%;
-    margin: 0 auto;
-    padding-top: 2rem;
-}
-
-#candyCont .candy-cont-1 .candy-card {
-    padding: 12.5px 5%;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px 0px rgba(175, 175, 175, 0.75);
-    border-radius: 5px;
-}
-
-.candy-card span {
-    display: block;
+.important-part .import-all,
+.important-part .import-link,
+.important-part .import-link a {
     font-family: MADEFutureX-Medium;
     font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
-    color: #057067;
-    margin: 0.5rem 0;
-    text-align: center;
+    color: #DDC90F;
+    margin-left: 5px;
 }
 
-.candy-card p {
+.important-part .import-rate {
+    display: flex;
+    display: -webkit-flex;
     font-family: MADEFutureX-Light;
     font-size: 10px;
     font-weight: normal;
     font-stretch: normal;
-    color: red;
-    text-align: center;
-    padding-bottom: 0.5rem;
+    letter-spacing: 0px;
+    color: #fff;
 }
 
-
-.candy-card .candy-input {
-    width: 100%;
-    margin: 0 auto;
-    font-size: 14px;
-}
-
-.candy-card .candy-input input {
-    width: 100%;
-    height: 35px;
-    background-color: #ffffff;
-    box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
-    padding: 0 12px;
-    font-family: MADEFutureX-Thin;
+#unittype {
+    width: 220px;
+    height: 36px;
+    padding: 0 10px;
     font-size: 12px;
     border-radius: 5px;
     box-sizing: border-box;
+    border: 1px solid rgb(221, 201, 15);
+    background: none;
+    color: #fff
 }
 
-.candy-card .candy-input label {
-    font-family: MADEFutureX-Medium;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #464646;
-    display: inline-block;
-    margin: 10px 0;
+#unittype option {
+    color: #000;
 }
 
-.candy-card .candy-input img {
-    width: 20px;
-    height: 20px;
-    vertical-align: middle;
-    margin-left: 2%;
+#unittype option:focus {
+    background: #eee;
 }
 
-.candy-card .candy-cont-btn {
-    background: #287D6E;
-    width: 130.5px;
-    height: 29.5px;
-    background-image: linear-gradient(90deg,
-            #057067 0%,
-            #0f9186 100%),
-        linear-gradient(#057067,
-            #057067);
-    background-blend-mode: normal,
-        normal;
-    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
-    border-radius: 5px;
-    border: solid 1px #ffffff;
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 29.5px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    box-sizing: border-box;
+.important-part button {
+    margin-left: 65px;
+    width: 220px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 20px;
+    background-color: rgb(221, 201, 15);
     text-align: center;
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 1.2rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
-#candyCont .candy-cont-2 .candy-win,
-#candyCont .candy-cont-3 .candy-receive,
-#candyCont .candy-cont-4 .candy-recommend,
-#candyCont .candy-cont-5 .candy-rule {
-    padding: 12.5px 5%;
-    box-sizing: border-box;
-    border: solid 1px #f1eaea;
-    border-radius: 5px;
-}
-
-.candy-win h5.winning-title,
-.candy-receive h5.receive-title,
-.candy-rule h5.rule-title {
     font-family: MADEFutureX-Medium;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    text-align: center;
-    margin: 0.5rem 0 1rem 0;
-}
-
-.candy-win .winning-header {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 30px;
-    line-height: 30px;
-    border-bottom: 1px solid #b3dad3
-}
-
-.candy-win .winning-header div {
-    font-family: MADEFutureX-Medium;
-    font-size: 13px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #287D6E;
-    width: 33.3%
-}
-
-.candy-win .winning-header div:nth-child(2),
-.candy-win .winning-part div:nth-child(2) {
-    text-align: center
-}
-
-.candy-win .winning-header div:nth-child(3),
-.candy-win .winning-part div:nth-child(3) {
-    text-align: right
-}
-
-.candy-win .winning-part {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 30px;
-    line-height: 30px;
-}
-
-.candy-win .winning-part div {
-    font-family: MADEFutureX-Light;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #676767;
-    width: 33.3%
-}
-
-
-.candy-receive .candy-receive-text {
-    font-family: MADEFutureX-Light;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #464646;
-    text-align: center;
-    padding-top: 1.5rem;
-}
-
-.candy-receive .candy-receive-text span {
-    font-family: MADEFutureX-Medium;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #287D6E;
-}
-
-
-.candy-receive .candy-receive-btn {
-    background: #287D6E;
-    width: 130.5px;
-    height: 29.5px;
-    background-image: linear-gradient(90deg,
-            #057067 0%,
-            #0f9186 100%),
-        linear-gradient(#057067,
-            #057067);
-    background-blend-mode: normal,
-        normal;
-    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
-    border-radius: 5px;
-    border: solid 1px #ffffff;
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 29.5px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    display: block;
-}
-
-.candy-recommend .candy-recommend-title {
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 30px;
-    line-height: 30px;
-}
-
-.candy-recommend .candy-recommend-title span {
-    font-family: MADEFutureX-Light;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    line-height: 16px;
-}
-
-
-.candy-recommend .candy-recommend-title div {
-    font-family: MADEFutureX-Medium;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    line-height: 16px;
-    cursor: pointer;
-}
-
-.candy-recommend .candy-recommend-text {
-    font-family: MADEFutureX-Light;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #464646;
-    text-align: center;
-    padding: 1.1rem 0;
-}
-
-.candy-recommend .candy-recommend-input {}
-
-.candy-recommend .candy-recommend-input textarea {
-    width: 100%;
-    font-family: MADEFutureX-Medium;
-    font-size: 13px;
-    color: #287D6E;
     border: none;
-    text-align: center;
-    resize: none;
-}
-
-.candy-recommend .candy-recommend-input .copy-link {
-    font-family: MADEFutureX-Light;
+    box-sizing: border-box;
+    color: #000;
     font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #287D6E;
-    text-align: center;
-    width: 130.5px;
-    height: 30px;
-    line-height: 30px;
-    margin: 0 auto;
-    margin-top: 1rem;
-    cursor: pointer;
 }
 
-.candy-recommend .candy-recommend-btn {
-    background: #287D6E;
-    width: 130.5px;
-    height: 29.5px;
-    background-image: linear-gradient(90deg,
-            #057067 0%,
-            #0f9186 100%),
-        linear-gradient(#057067,
-            #057067);
-    background-blend-mode: normal,
-        normal;
-    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
-    border-radius: 5px;
-    border: solid 1px #ffffff;
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 29.5px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem
-}
-
-.candy-recommend .candy-recommend-num {
-    font-family: MADEFutureX-Light;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #464646;
-    padding-top: 1.2rem;
-}
-
-.candy-recommend .candy-recommend-num span {
-    font-family: MADEFutureX-Medium;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #287D6E;
-}
-
-.candy-recommend .candy-recommend-tip {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: red;
-    padding: 1.5rem 0;
-}
-
-#candyCont .candy-cont-5 {
-    margin-bottom: 2rem
-}
-
-.candy-rule-cont .candy-rule-part span {
-    font-family: MADEFutureX-Medium;
-    font-size: 13px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    display: block;
-    margin-top: 1.5rem;
-}
-
-
-.candy-rule-cont .candy-rule-part ul li {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #676767;
-    line-height: 20px;
-    margin-top: 0.5rem;
-}
-
-.candy-bank-card {
-    font-family: MADEFutureX;
-    font-size: 20px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #e4c297;
-    white-space: nowrap;
-    margin-top: 0.2rem;
-    text-align: center;
-    display: none;
-}
-
-.winning-cont {
-    overflow-y: auto;
-    max-height: 150px;
-}
-
-.rule-req {
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    line-height: 20px;
-}
-
-button.gray-btn {
-    background: #8a8a8a !important
-}
-
-p.smart-tip {
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #727272;
-    text-align: center;
-    margin-bottom: 10px
-}
-
-#referrerLayer {
-    width: 100%;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 46px 0px rgba(204, 204, 204, 0.75);
-    border-radius: 12px;
-    margin: 0 auto;
-}
-
-#referrerLayer .referrer-layer {
-    position: relative
-}
-
-
-#referrerLayer .referrer-layer .layer-back {
-    position: absolute;
-    top: 9px;
-    right: 7px;
-    box-sizing: border-box;
-}
-
-#referrerLayer .referrer-layer .layer-back img {
-    width: 20px;
-    height: 20px;
-}
-
-.referrer-layer .referrer-header {
-    font-family: MADEFutureX-Medium;
-    font-size: 15px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: #ffffff;
-    background-color: #057067;
-    text-align: center;
-    padding: 10px 0;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.referrer-layer .referrer-all {
-    padding: 30px 0;
-    box-sizing: border-box;
-}
-
-.referrer-layer .referrer-cont {
-    margin: 0 auto;
-    overflow-y: auto;
-    max-height: 330px;
-    width: 80%;
-    margin: 0 auto;
-    border-left: solid 1px #d2d2d2;
-    border-right: solid 1px #d2d2d2;
-    box-sizing: border-box;
-}
-
-.referrer-layer .referrer-cont .referrer-part {
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #9f9f9f;
-    height: 41px;
-    line-height: 41px;
-    border-bottom: solid 1px #d2d2d2;
-    box-sizing: border-box;
-    text-align: center
-}
-
-
-/*FinancialMobile*/
-
-#finBanner {
-    background: url(../images/mobile_icon/presale_bg.png) no-repeat center 0;
-    background-size: 100%;
-}
-
-#finBanner .fin-banner {
-    padding: 3rem 0 3.5rem 0;
-}
-
-.fin-banner h4.fin-title,.fin-banner .fin-text  {
-    font-family: MADEFutureX-Medium;
-    font-size: 20px;
-    font-weight: normal;
-    font-stretch: normal;
-    text-align: center;
-    letter-spacing: 0px;
-    color: #ffffff;
-    text-align: center;
-}
-
-.fin-banner h4.fin-title{
-    padding-bottom: 2rem
-}
-
-.fin-banner .fin-text:nth-child(2){
-    padding-bottom:1.5rem
-}
-
-
-#finCont {
-    width: 100%;
-}
-
-#finCont,
-.fin-cont-1 {
-    width: 90%;
-    margin: 0 auto;
-}
-
-.fin-cont-1{
-    display: flex;
-    display: -webkit-flex;
-    justify-content: space-around;
-    text-align: center;
-    font-family: MADEFutureX-Medium;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    padding: 1.5rem 0;
-}
-
-.fin-cont-1 .fin-num-1 span,
-.fin-cont-1 .fin-num-2>span{
-    margin-bottom: 0.5rem;
+.important-part button a {
     display: block;
 }
 
-.fin-cont-2{
+#gateTable {
     width: 100%;
-    box-sizing: border-box;
-    background-color: #287D6E;
-    box-shadow: 0px 0px 10px 0px rgba(175, 175, 175, 0.75);
-    border-radius: 5px;
-    padding: 15px 0;
+    margin-top: 30px;
 }
 
-h5.fin-part-title{
+
+/* #gateTable h5 {
+    color: rgba(255, 255, 255, 1);
     font-family: MADEFutureX-Medium;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
-    color: #287D6E;
-    text-align: center
-}
-
-h5.fin-part-title-w{
-    font-family: MADEFutureX-Medium;
-    font-size: 14px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #ffffff;
-    text-align: center
-}
-
-.fin-cont-2 .fin-address{
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #ffffff;
     text-align: center;
-    padding-bottom: 1rem;
-}
+} */
 
-
-.fin-cont-3{
-    box-sizing: border-box;
-    border: solid 1px #f1eaea;
-    border-radius: 5px;
-    margin-top: 2rem;
-    padding: 15px 0;
-}
-
-
-.fin-cont-3 .fin-balance{
-    font-family: MADEFutureX-Medium;
-    font-size: 16px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #287D6E;
-    text-align: center;
-    margin: 1rem 0;
-}
-
-.fin-cont-3 .fin-input{
-    width: 80%;
-    margin: 0 auto
-}
-
-.fin-cont-3 .fin-input input{
-    width: 100%;
-    height: 35px;
-    background-color: #ffffff;
-    box-shadow: inset 0px 1px 5px 0px rgba(0, 0, 0, 0.3);
-    padding: 0 12px;
-    font-family: MADEFutureX-Thin;
-    font-size: 12px;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.fin-cont-3 .fin-input div{
-    font-family: MADEFutureX-Light;
-    font-size: 10px;
-    font-weight: normal;
-    font-stretch: normal;
-    letter-spacing: 0px;
-    color: #464646;
-    display: inline-block;
-}
-
-.fin-cont-3 button{
-    background: #287D6E;
-    height: 29.5px;
-    padding: 0 20px;
-    height: 29.5px;
-    background-image: linear-gradient(90deg,
- #057067 0%,
- #0f9186 100%),
- linear-gradient(#057067,
- #057067);
-    background-blend-mode: normal,
- normal;
-    box-shadow: 0px 0px 10px 0px rgba(135, 135, 135, 0.75);
-    border-radius: 5px;
-    border: solid 1px #ffffff;
-    font-family: MADEFutureX-Medium;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    line-height: 29.5px;
-    letter-spacing: 0px;
-    color: #ffffff;
-    box-sizing: border-box;
-    text-align: center;
-    cursor: pointer;
-    margin: 0 auto;
-    margin-top: 2rem;
-    margin-bottom: 1.5rem;
-    display: block;
-}
-
-.fin-cont-3 .fin-tips{
-    width: 90%;
-    margin: 0 auto;
-    font-family: MADEFutureX-Light;
-    font-size: 12px;
-    font-weight: normal;
-    font-stretch: normal;
-    color: red;
-    padding-bottom: 1.5rem;
-}
-
-.fin-cont-4{
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 1.5rem;
-}
-
-.fin-cont-4 table {
+#gateTable table {
     margin: 1rem 0 2.5rem 0;
     width: 100%;
 }
 
-.fin-cont-4 table thead {
-    height: 41px;
-    background-color: #057067;
+#gateTable table thead {
+    height: 27px;
+    background-color: rgb(221, 201, 15);
 }
 
-.fin-cont-4 table th {
+#gateTable table th {
     font-family: MADEFutureX-Medium;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
-    padding: 10px 0;
-    line-height: 20px;
+    line-height: 27px;
     letter-spacing: 0px;
-    color: #ffffff;
-    background-color: #057067;
-
+    color: #000;
+    background-color: rgb(221, 201, 15);
 }
 
-.fin-cont-4 table tr {
-    height:38px;
-    line-height: 38px;
+#gateTable table tr {
+    height: 27px;
+    line-height: 27px;
 }
 
-.fin-cont-4 table tr td {
+#gateTable table tr td {
     text-align: center;
     font-family: MADEFutureX;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: normal;
     font-stretch: normal;
-    color: #9f9f9f;
+    color: #fff;
 }
 
-.fin-cont-4 table tr:nth-child(even) {
-    background-color: #eeeeee;
+#gateTable table tr td.td-y,
+#gateTable table tr td.td-y a {
+    color: rgb(221, 201, 15);
+}
+
+#gateTable table tr:nth-child(even) {
     box-sizing: border-box
 }
 
-.fin-cont-4 table tr:nth-child(odd) {
-    background-color: #ffffff;
+#gateTable table tr:nth-child(odd) {
+    background-color: #3F404B;
 }
 
-#finCont,
-.fin-income {
+.add-back {
     width: 90%;
     margin: 0 auto;
+    height: 44px;
+    line-height: 44px
 }
 
-.fin-income{
+.add-back a {
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #fff;
+}
+
+.add-back a img {
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+}
+
+.add-back a span {
+    vertical-align: middle;
+}
+
+.add-set-input {
+    width: 90%;
+    margin: 0 auto
+}
+
+.add-set-input h5 {
+    color: rgba(255, 255, 255, 1);
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    text-align: center;
+    margin: 10px 0 20px 0
+}
+
+.add-set-input-part {
     display: flex;
     display: -webkit-flex;
-    justify-content: space-around;
-    text-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.add-set-input-part .add-title {
     font-family: MADEFutureX-Medium;
     font-size: 14px;
     font-weight: normal;
     font-stretch: normal;
     letter-spacing: 0px;
     color: #fff;
-    margin-top: 0.5rem
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
 }
 
-.fin-income .fin-num-1 span,
-.fin-income .fin-num-2>span{
-    margin-bottom: 0.5rem;
-    display: inline-block;
+.add-set-input-part select {
+    width: 220px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(221, 201, 15);
+    outline: none;
+    background: none;
+    color: #fff;
+}
+
+.add-set-input-part select option {
+    color: #000;
+}
+
+.add-set-input-part select option:focus {
+    background: #eee;
+}
+
+.add-set-input-part input {
+    width: 220px;
+    height: 36px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(221, 201, 15);
+    background: none;
+    color: #fff;
+}
+
+.add-set-input-part div {
+    font-family: MADEFutureX-Light;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #fff;
+}
+
+
+/*保存按钮*/
+
+.add-set-input-part .save,
+.add-set-input-part button {
+    width: 180px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 4px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    font-weight: 600;
+    letter-spacing: 8px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+
+
+/*生成并上传*/
+
+.add-set-input-part .upkeys {
+    line-height: 34px;
+    background-color: rgba(0, 0, 0, 0);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    letter-spacing: 1px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: rgb(221, 201, 15);
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.add-set-input-part {
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 30px;
+    height: 30px;
+    background-color: none;
+    margin-left: 0px;
+    letter-spacing: 2px;
+}
+
+
+/*首页选项卡*/
+
+.header_select {
+    width: 95%;
+    height: 30px;
+    margin: 20px auto 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.index_tab1,
+.index_tab2 {
+    width: 50%;
+    height: 100%;
+    line-height: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    border-bottom: 1px solid #bbb;
+}
+
+.selected {
+    color: #DDC90F;
+    border-bottom: 1px solid #FFC900;
+}
+
+
+/*首页-商家选择*/
+
+.fixed {
+    position: fixed;
+}
+
+.merchant_back {
+    position: fixed;
+    display: none;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .7);
+}
+
+.merchant_content {
+    width: 90%;
+    height: 600px;
+    background-color: #1A1C1A;
+    margin: 10% auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.merchant_title {
+    width: 100%;
+    height: 40px;
+    color: #fff;
+    background-color: rgba(113, 111, 111, 0.35);
+    position: relative;
+    line-height: 40px;
+    text-align: center;
+}
+
+.merchant_title>.merchant_close {
+    display: block;
+    position: absolute;
+    left: 20px;
+    font-size: 22px;
+}
+
+.merchant_filter {
+    width: 100%;
+    height: 37px;
+    background-color: rgba(113, 111, 111, 0.2);
+    border-bottom: 1px solid #333333;
+}
+
+#merchant_sort {
+    width: 76px;
+    height: 37px;
+    color: #B3B3B3;
+    margin-left: 10px;
+    background-color: rgba(113, 111, 111, 0.01);
+    outline: none;
+    border: 0;
+}
+
+.merchant_list {
+    width: 100%;
+    height: 523px;
+    overflow-y: scroll;
+}
+
+
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+    width: 10px;
+    padding-bottom: 10px;
+}
+
+
+/* 滚动槽 */
+
+ ::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    padding-bottom: 10px;
+    border-radius: 10px;
+}
+
+
+/* 滚动条滑块 */
+
+ ::-webkit-scrollbar-thumb {
+    background: #DDC90F;
+}
+
+.every_merchant {
+    width: 100%;
+    height: 121px;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #333333;
+}
+
+.item_left,
+.item_right {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.item_left {
+    width: 60%;
+    float: left;
+}
+
+.item_left>li {
+    font-size: 12px;
+    color: #fff;
+}
+
+.item_title {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item_right {
+    width: 40%;
+    padding-right: 15px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.item_right>li {
+    text-align: right;
+}
+
+.item_right>button {
+    width: 70px;
+    height: 30px;
+    margin: 0 auto;
+    font-weight: 600;
+    color: #000;
+    letter-spacing: 2px;
+    background-color: #DDC90F;
+    border-radius: 20px;
+    outline: none;
+    border: 0;
+}
+
+.tab-pay-header {
+    width: 100%;
+    height: 37px;
+    line-height: 37px;
+    background-color: rgb(221, 201, 15);
+    margin-bottom: 22px;
+    overflow-y: hidden;
+}
+
+.tab-pay-header #tabs {
+    display: flex;
+    display: -webkit-flex;
+}
+
+.tab-pay-header #tabs li {
+    width: 20%;
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+    flex: auto;
+    position: relative;
+}
+
+.tab-pay-header #tabs li a {
+    font-weight: 600;
+    color: #6C6B6B;
+}
+
+.tab-pay-header #tabs li#current a {
+    color: #000;
+}
+
+.tab-pay-header #tabs li:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 42px;
+    margin-top: -3px;
+    background-color: gray;
+    transform: rotate(30deg);
+}
+
+.tab-pay-header #tabs li:first-child:before {
+    display: none;
+}
+
+.add-set-bottom {
+    height: 102px;
+    position: absolute;
+    top: 65vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.tab-part p {
+    font-family: MADEFutureX-Light;
+    color: #fff;
+    font-size: 12px;
+    text-align: center
+}
+
+.tab-part .tips {
+    padding-left: 10px;
+    font-size: 10px;
+    color: #DDC90F;
+}
+
+.tab-part .Qrcode {
+    margin-top: 36px;
+    font-size: 12px;
+}
+
+.generate-public-key,
+.havekeys {
+    font-size: 14px;
+    letter-spacing: 1px;
+    color: #DDC90F;
+}
+
+.add-set-input-part textarea {
+    font-family: MADEFutureX-Light;
+    background: none;
+    border-radius: 5px;
+    border: 1px solid rgb(221, 201, 15);
+    padding: 5px 12px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 18px;
+    box-sizing: border-box
+}
+
+.important-part-select {
+    position: relative;
+}
+
+.import-detail {
+    font-family: MADEFutureX-Light;
+    font-size: 10px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+}
+
+.import-detail .import-detail-title {
+    position: absolute;
+    left: 238px;
+    top: 13px;
+    color: rgb(221, 201, 15);
+}
+
+.import-detail .import-detail-cont {
+    display: none;
+    position: absolute;
+    background: #fff;
+    color: #000;
+    box-sizing: border-box;
+    width: 220px;
+    padding: 0 10px;
+    left: 65px;
+    top: 36px;
+    text-align: center;
+}
+
+.import-detail .import-detail-cont p {
+    padding: 5px 0
+}
+
+.priv-flex {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+}
+
+.priv-flex .copy-key {
+    color: #000;
+    border-radius: 5px;
+    padding: 0 6px;
+    background-color: rgb(221, 201, 15);
+}
+
+textarea#privKey {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    border: none;
+    resize: none;
+    width: 100%;
+    height: 188px;
+    padding-top: 10px;
+    box-sizing: border-box;
+    line-height: 19px;
+}
+
+
+/*申请成为商户*/
+
+.apply-header {
+    width: 90%;
+    margin: 0 auto;
+    height: 44px;
+    line-height: 44px;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.apply-header div {
+    color: #fff;
+    font-size: 16px;
+}
+
+.apply-back a img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+.apply-my a img {
+    vertical-align: middle;
+}
+
+.apply-cont {
+    width: 90%;
+    margin: 0 auto
+}
+
+.apply-cont h3,
+.apply-cont p {
+    font-family: MADEFutureX;
+    font-size: 14px;
+    color: #fff
+}
+
+.apply-cont h3 span {
+    color: #E5D91C
+}
+
+.apply-cont {
+    margin-top: 100px;
+}
+
+.apply-cont h3 {
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+.apply-cont p {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 11px;
+    line-height: 20px;
+}
+
+.apply-btn {
+    width: 180px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.apply-btn button {
+    width: 180px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 17px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+}
+
+.apply-btn button a {
+    display: block
+}
+
+
+/*接单页面*/
+
+.order-cont {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.order-cont h3,
+.history-cont h3 {
+    font-family: MADEFutureX;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.his-link {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: flex-end;
+}
+
+.his-link a {
+    font-family: MADEFutureX;
+    font-size: 12px;
+    color: #E5D91C
+}
+
+.order-cont table {
+    margin: 0.5rem 0 2.5rem 0;
+    width: 100%;
+}
+
+.order-cont table thead {
+    height: 27px;
+    background-color: rgb(221, 201, 15);
+}
+
+.order-cont table th {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 27px;
+    letter-spacing: 0px;
+    color: #000;
+    background-color: rgb(221, 201, 15);
+}
+
+.order-cont table tr {
+    height: 27px;
+    line-height: 27px;
+}
+
+.order-cont table tr td {
+    text-align: center;
+    font-family: MADEFutureX;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #fff;
+}
+
+.order-cont table tr:nth-child(even) {
+    box-sizing: border-box
+}
+
+.order-cont table .table-part-2 {
+    background-color: #3F404B;
+}
+
+.order-cont table .tr-y td,
+.orders-link {
+    color: #E5D91C
+}
+
+.orders-color {
+    font-family: MADEFutureX;
+    font-size: 12px;
+    color: #E5D91C
+}
+
+
+/*历史记录*/
+
+.history-cont #tabPay {
+    width: 100%;
+    margin-bottom: 50px
+}
+
+.history-cont .tab-pay-header #tabs li:before {
+    content: none;
+}
+
+.history-cont .tab-pay-header {
+    margin: 0 auto
+}
+
+.history-cont .tab-pay-header #tabs li#current a {
+    color: #000;
+    display: block;
+    font-weight: 600;
+}
+
+.undone-cont {
+    width: 100%;
+}
+
+.undone-cont .undone-part {
+    border-bottom: 1px solid #423e3e;
+    padding: 15px 4% 5px 4%;
+    box-sizing: border-box
+}
+
+.undone-flex {
+    display: flex;
+    display: -webkit-flex;
+    font-family: MADEFutureX-Light;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #fff;
+    margin-bottom: 13px;
+}
+
+.undone-flex .undone-div {
+    flex: 1;
+    display: flex;
+    display: -webkit-flex;
+}
+
+.undone-flex .undone-div span {}
+
+.undone-flex a {
+    font-family: MADEFutureX-Light;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    color: #E5D91C
+}
+
+.undone-flex-end {
+    justify-content: flex-end;
+}
+
+.undone-flex-end a {
+    font-family: MADEFutureX-Blod;
+    margin-left: 20px
+}
+
+.undone-cont .undone-part:nth-child(even) {
+    background-color: #373636;
+}
+
+
+/*订单详情*/
+
+.payee-cont h3 {
+    font-family: MADEFutureX;
+    font-size: 14px;
+    color: #E5D91C;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.payee-cont .add-set-input {
+    border-radius: 4px;
+    background-color: rgba(113, 111, 111, 0.35);
+    padding: 10px 0 20px 0;
+}
+
+.payee-btn {
+    width: 180px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.payee-btn button {
+    width: 180px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 17px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.payee-btn button a {
+    display: block
+}
+
+.fill-in {
+    display: flex;
+    display: -webkit-flex;
+    width: 90%;
+    margin: 0 auto
+}
+
+.fill-in span {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    letter-spacing: 0px;
+    color: #fff;
+    width: 75px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.fill-in textarea {
+    padding: 5px 12px;
+    font-size: 12px;
+    color: #fff;
+    line-height: 18px;
+    box-sizing: border-box;
+    background-color: rgba(113, 111, 111, 0.35);
+    border: none
+}
+
+.appeal-record {
+    width: 100%;
+    margin: 20px 0
+}
+
+.appeal-record h3 {
+    font-family: MADEFutureX-Bold;
+    font-size: 14px;
+    color: #E5D91C;
+    width: 90%;
+    padding: 0 5%;
+    margin-bottom: 16px;
+}
+
+.appeal-record .appeal-part {
+    width: 90%;
+    padding: 12px 5%;
+    display: flex;
+    display: -webkit-flex;
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+    color: #fff;
+    line-height: 20px;
+}
+
+.appeal-record .appeal-part:nth-child(odd) {
+    background-color: #3F404B;
+}
+
+.appeal-record .appeal-part span {
+    margin-right: 10px;
+}
+
+
+/*我的页面*/
+
+#myCont {
+    width: 100%;
+}
+
+.my-cont {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.my-cont h3 {
+    font-family: MADEFutureX;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.my-info .my-info-part-1,
+.my-info .my-info-part-2 {
+    display: flex;
+    display: -webkit-flex;
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #fff;
+    line-height: 18px;
+}
+
+.my-info .my-info-part-2 {
+    align-items: center
+}
+
+.my-info-part-2 .lock-btn button {
+    width: 88px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 17px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+}
+
+.my-info .my-info-part-1 span,
+.my-info .my-info-part-2 span {
+    margin-right: 5px;
+}
+
+.my-info .my-info-part-1 div,
+.my-info .my-info-part-2 div {
+    word-break: break-all;
+    flex: 1;
+}
+
+.my-info .my-info-part-1 {
+    margin-bottom: 10px;
+}
+
+.my-info .my-info-part-2 {
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+
+.purview-cont {
+    background-color: #373636;
+    padding: 20px 3% 20px 3%;
+    margin-bottom: 5px;
+}
+
+.purview-cont .purview-part {
+    margin-bottom: 20px;
+}
+
+.purview-cont .purview-part span {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #fff;
+    line-height: 18px;
+    margin-right: 10px;
+}
+
+.purview-cont .purview-part {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center
+}
+
+.purview-cont .purview-part div {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #E5D91C;
+    line-height: 18px;
+    flex: 1;
+}
+
+.purview-cont .purview-part2 span {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #fff;
+    line-height: 18px;
+    margin-bottom: 20px;
+}
+
+.purview-cont .purview-part2 div {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #E5D91C;
+    line-height: 18px;
+    margin: 15px 0 20px 0;
+}
+
+.purview-cont .purview-part2 div span {
+    color: #E5D91C;
+    margin-left: 10px;
+}
+
+.purview-btn {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around
+}
+
+.purview-btn button {
+    width: 120px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 17px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+}
+
+.purview-btn button a {
+    display: block
+}
+
+.add-btn {
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-around;
+    margin: 20px 0
+}
+
+.add-btn button {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 17px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+}
+
+.add-btn button a {
+    display: block
+}
+
+.parameter-set {
+    margin-bottom: 30px;
+    background-color: rgba(113, 111, 111, 0.35);
+}
+
+.parameter-set a {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: space-between;
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #fff;
+    line-height: 34px;
+    height: 34px
+}
+
+.parameter-set a img {
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    /* IE 9 */
+    -moz-transform: rotate(180deg);
+    /* Firefox */
+    -webkit-transform: rotate(180deg);
+    /* Safari 和 Chrome */
+    -o-transform: rotate(180deg);
+    /* Opera */
+}
+
+.parameter-cont {
+    background-color: #373636;
+    padding: 20px 3% 30px 3%;
+    margin-bottom: 5px;
+}
+
+.parameter-cont>span,
+.set-cont span {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #fff;
+    line-height: 18px;
+}
+
+.parameter-part {
+    font-family: MADEFutureX-Light;
+    font-size: 12px;
+    color: #FF9800;
+    line-height: 18px;
+    margin-top: 16px;
+}
+
+.set-cont {
+    background-color: #373636;
+    padding: 20px 3% 20px 3%;
+    margin-bottom: 5px;
+}
+
+.set-cont2 {
+    background-color: #373636;
+    padding: 20px 3% 10px 3%;
+}
+
+.set-cont .set-select {
+    margin-top: 15px;
+}
+
+.increase-cont {
+    margin-top: 50px;
+}
+
+.input-pos {
+    position: absolute;
+    font-family: MADEFutureX-Medium;
+    font-size: 10px;
+    color: #fff;
+    right: 10px;
+    top: 13px;
+}
+
+.purview-cont .net-list p {
+    font-family: MADEFutureX;
+    font-size: 13px;
+    color: #E5D91C;
+    line-height: 18px;
+    margin: 15px 0 20px 0;
+}
+
+.jsSwitch {
+    position: relative;
+}
+
+.jsSwitch .toggleoff {
+    width: 40px;
+    height: 9px;
+    background-color: #4D4D55;
+    border-radius: 5px;
+}
+
+.jsSwitch .inneroff {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #8897A6;
+    border-radius: 50%;
+    top: -5px;
+}
+
+.jsSwitch .toggleon {
+    width: 40px;
+    height: 9px;
+    background-color: #786516;
+    border-radius: 5px;
+}
+
+.jsSwitch .inneron {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: #FFC900;
+    border-radius: 50%;
+    top: -5px;
+    left: 20px;
+    transition: left 0.5s ease-in-out
+}
+
+.net-part {
+    border-bottom: 1px solid #4c4c4c;
+    padding: 20px 0 10px 0;
+}
+
+.net-part .net-detail {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    font-family: MADEFutureX;
+    font-size: 12px;
+    color: #fff;
+    line-height: 18px;
+    margin-bottom: 5px;
+}
+
+.net-part .net-detail .list-switch,
+.net-part .net-detail .list-switch>div {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.net-part .net-detail .list-switch {
+    justify-content: space-between;
+    width: 95%;
+}
+
+.net-part .net-detail .list-switch span {
+    width: 50px;
+    width: 55px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.net-part .net-detail>span {
+    width: 50px;
+    width: 55px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.net-detail .net-color {
+    display: flex;
+    display: -webkit-flex;
+    width: 95%;
+    justify-content: flex-end;
+}
+
+.net-detail .net-color a {
+    color: #E5D91C;
+}
+
+
+/*操作指南*/
+
+#guideCont {
+    width: 100%;
+}
+
+.guide-main {
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px 0 50px 0;
+}
+
+.guide-part {
+    margin-bottom: 15px;
+    ;
+}
+
+.guide-main h2.terms-title {
+    font-family: MADEFutureX-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    color: #fff;
+    text-align: center;
+}
+
+.guide-part h2 {
+    font-family: MADEFutureX-Medium;
+    font-size: 15px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.guide-part h3 {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    color: #fff;
+    padding: 5px 0;
+}
+
+.guide-part p {
+    font-family: MADEFutureX-Medium;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    color: #ccc;
+}
+
+.guide-part ul li {
+    padding: 3px 0;
+    font-family: MADEFutureX-Medium;
+    font-size: 13px;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 18px;
+    color: #ccc;
+}
+
+.guide-part ul li a {
+    color: #DDC90F;
+}
+
+.apply-footer {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 50px;
+}
+
+.apply-footer ul {}
+
+.apply-footer ul li {
+    padding-bottom: 10px;
+}
+
+.apply-footer ul li a {
+    color: #DDC90F;
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+}
+
+.email .message textarea {
+    width: 220px;
+    height: 100px;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: 1px solid rgb(221, 201, 15);
+    background: none;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+
+/*欢迎页*/
+
+.wel-cont {
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+    ;
+}
+
+.wel-cont h2 {
+    font-family: MADEFutureX-Medium;
+    font-size: 18px;
+    color: #fff;
+    text-align: center;
+    margin: 30px 0 20px 0;
+}
+
+.wel-part {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+    padding: 15px 0;
+}
+
+.wel-part img {
+    width: 35px;
+    height: 35px;
+}
+
+.wel-part div {
+    font-family: MADEFutureX-Medium;
+    font-size: 14px;
+    color: #fff;
+    line-height: 20px;
+    margin-left: 10px;
+}
+
+.wel-part div span {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.menu {
+    width: 720px;
+    position: absolute;
+    bottom: 10px;
+}
+
+.menu ul {
+    display: flex;
+    display: -webkit-flex;
+    align-items: center;
+}
+
+.menu li {
+    flex: 1;
+    text-align: center;
+}
+
+.menu ul li a {
+    color: #DDC90F;
+    font-family: MADEFutureX-Medium;
+    font-size: 12px;
+}
+
+.wel-btn {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.wel-btn a {
+    width: 200px;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 5px;
+    background-color: rgb(221, 201, 15);
+    text-align: center;
+    font-family: MADEFutureX-Medium;
+    border: none;
+    box-sizing: border-box;
+    color: #000;
+    font-size: 14px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
 }
