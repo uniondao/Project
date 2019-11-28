@@ -3,36 +3,40 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="uniondao,udao,undt" />
-    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
-    <title>UnionDao</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mainMobile.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("header").load("./headerMobile.html");
-            $("#footCont").load("./footerMobile.html");
-        });
-    </script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/gate-way.js"></script>
+    <script type="text/javascript" src="./js/func.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_c2c.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
+    <script type="text/javascript" src="./js/token/web3_init.js"></script>
+    <script type="text/javascript" src="./js/token/coin/c2c.js"></script>
+    <script type="text/javascript" src="./js/swarm.js"></script>
+    <script src="./js/layer.js"></script>
     <style>
         body {
-            background: #232634
+            background: #2D2C2C
         }
     </style>
 </head>
 
 <body>
-
+    <input type="hidden" id="reskey">
     <div class="wrapper">
         <div class="main">
-            <!-- <header></header> -->
             <div class="add-back">
                 <a href="javascript:" onclick="window.history.back();return false;">
-                    <img src="./images/mobile_icon/back.png" alt=""> <span>返回</span></a>
+                    <img src="./images/back.png" alt="">
+                    <span>返回</span>
+                </a>
             </div>
             <div class="add-set-input">
                 <h5>设置支付网关</h5>
@@ -40,90 +44,798 @@
                     <div class="tab-pay-header">
                         <ul id="tabs">
                             <li><a href="#" title="tab1">银行转账</a></li>
-                            <li><a href="#" title="tab2">国际电汇</a></li>
                             <li><a href="#" title="tab2">PayPal</a></li>
-                            <li><a href="#" title="tab2">支付宝</a></li>
-                            <li><a href="#" title="tab2">微信</a></li>
-                            <li><a href="#" title="tab2">加密货币</a></li>
+                            <li><a href="#" title="tab3">微&nbsp&nbsp信</a></li>
+                            <li><a href="#" title="tab4">支付宝</a></li>
+                            <li><a href="#" title="tab5">加密货币</a></li>
                         </ul>
                     </div>
                     <div id="tabContent">
+                        <!-- 银行转账 -->
                         <div id="tab1" class="tab-part">
+                            <!--<div class="add-set-input-part">-->
+                            <!--<div class="add-title" >公钥:</div>-->
+                            <!--<div id="upkeys" style="display: none;color: rgb(221, 201, 15);" onclick="upkeys()">生成并上传</div>-->
+                            <!--<div id="havekeys" style="display: none">已上传</div>-->
+
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part" id="keysremark" style="display: none">-->
+                            <!--<div class="parameter-part" >-->
+                            <!--<div  style="color:rgb(221, 201, 15);">(此支付为无痕交易，首次请上传公钥做支付信息加密匹配。)</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
                             <div class="add-set-input-part">
                                 <div class="add-title">国家/地区</div>
-                                <select autofocus>
+                                <select autofocus name="country" id="country" onchange="forgateway('bank')">
                                     <option value="" disabled selected>选择国家</option>
-                                    <option value="1"> 1</option>
-                                    <option value="2"> 2 </option>
-                                    <option value="3">3</option>
+                                    <!--<option value="CHINA">中国大陆</option>-->
+                                    <!-- <option value="HONGKONG">中国香港</option> -->
                                 </select>
                             </div>
                             <div class="add-set-input-part">
                                 <div class="add-title">币种</div>
-                                <select autofocus>
-                                    <option value="" disabled selected>选择币种</option>
-                                    <option value="1"> </option>
-                                    <option value="2"> </option>
-                                    <option value="3"></option>
+                                <select autofocus name="coin" id="coin" onchange="forgateway('bank')">
+                                <option value="" disabled selected>选择币种</option>
+                                    <!-- <option value="HKD">HKD</option> -->
                                 </select>
                             </div>
                             <div class="add-set-input-part">
                                 <div class="add-title">银行名称</div>
-                                <select autofocus>
+                                <select autofocus name="bank" id="bank" onchange="forgateway('bank')">
                                     <option value="" disabled selected>选择银行</option>
-                                    <option value="1"> </option>
-                                    <option value="2"> </option>
-                                    <option value="3"></option>
+                                    <!-- <option value="CMB">招商銀行香港分行</option>
+                                    <option value="SCB">渣打銀行</option>
+                                    <option value="CAI">東方匯理銀行</option>
+                                    <option value="CNA">花旗銀行</option>
+                                    <option value="THE">東亞銀行</option>
+                                    <option value="WLBL">永隆銀行</option>
+                                    <option value="MBL">豐明銀行</option>
+                                    <option value="SHBL">恒生銀行</option>
+                                    <option value="DBL">星展銀行</option>
+                                    <option value="BOCL">中國銀行香港分行</option>
+                                    <option value="WHBL">永亨銀行</option> -->
                                 </select>
                             </div>
-                            <div class="add-set-input-part">
+                            <div class="add-set-input-part" style="display:none;">
                                 <div class="add-title">SWFT CODE</div>
-                                <div><input type="text" placeholder="输入银行CODE"></div>
+                                <div><input type="text" placeholder="输入银行CODE" name="code" id="code" onchange="forgateway('bank')"></div>
                             </div>
                             <div class="add-set-input-part">
                                 <div class="add-title">收款方户名</div>
-                                <div><input type="text" placeholder="输入收款方户名"></div>
+                                <div><input type="text" placeholder="输入收款方户名" name="username" id="username" onchange="forgateway('bank')"></div>
                             </div>
                             <div class="add-set-input-part">
                                 <div class="add-title">收款方账号</div>
-                                <div><input type="text" placeholder="输入收款方账号"></div>
+                                <div><input type="text" placeholder="输入收款方账号" name="account" id="account" onchange="forgateway('bank')"></div>
                             </div>
-                            <div class="add-set-input-part">
-                                <div class="add-title">网关名称:</div>
-                                <div>HONGKONG-LB-HKD</div>
-                            </div>
-                            <div class="add-set-input-part">
-                                <button>保存</button>
+                            <div class="add-set-bottom">
+                                <div class="add-set-input-part">
+                                    <div class="add-title">网关名称</div>
+                                    <div id="gateWay"></div>
+                                </div>
+                                <div class="set-select">
+                                    <div class="add-set-input-part">
+                                        <div class="add-title">公钥</div>
+                                        <div>
+                                            <span style="display: none" id="havekeys" class="havekeys">已上传</span>
+                                            <button id="upkeys" class="upkeys" onclick="upkeys()" style="margin-top: 0px;display: none;">生成并上传</button>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="parameter-part" id="keysremark" style="display: none;text-align: center;">
+                                    <div>此支付为无痕交易，首次请上传公钥做支付信息加密匹配。</div>
+                                </div> -->
+                                </div>
+                                <div class="add-set-input-part">
+                                    <button class="save" onclick="setGateway()">保存</button>
+                                </div>
                             </div>
                         </div>
+                        <!-- 银行转账结束 -->
+                        <!-- PayPal支付 -->
                         <div id="tab2" class="tab-part">
+                            <div class="add-set-input-part">
+                                <div class="add-title">币&nbsp&nbsp种</div>
+                                <select autofocus name="coinPal" id="coinPal" onchange="forgateway('Pal')">
+                                    <option value="" disabled selected >选择币种</option>
+                                </select>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">PayPal 账号</div>
+                                <input type="text" name="accountPal" id="accountPal" placeholder="PayPal 账号">
+                            </div>
+                            <div class="add-set-bottom">
+                                <div class="add-set-input-part">
+                                    <div class="add-title">网关名称</div>
+                                    <div id="gateWayPal"></div>
+                                </div>
+                                <div class="add-set-input-part">
+                                    <div class="add-title">公钥</div>
+                                    <span style="display: none" id="havekeysPal" class="havekeys">已上传</span>
+                                    <button id="upkeysPal" class="upkeys" onclick="upkeys()" style="margin-top: 0px;display: none;">生成并上传</button>
+                                </div>
+                                <div class="add-set-input-part">
+                                    <button class="save" onclick="setGatewayPal()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- PayPal支付结束 -->
+                        <!-- 微信支付 -->
+
+                        <div id="tab3" class="tab-part">
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">国家/地区</div>-->
+                                <!--<select autofocus name="countryWe" id="countryWe" onchange="forgateway('We')">-->
+                                    <!--<option value="" disabled selected>选择国家</option>-->
+                                    <!--&lt;!&ndash;<option value="CHINA">中国大陆</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash; <option value="HONGKONG">中国香港</option> &ndash;&gt;-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">币&nbsp&nbsp种</div>-->
+                                <!--<select autofocus name="coinWe" id="coinWe" onchange="forgateway('We')">-->
+                                    <!--<option value="" disabled selected>选择币种</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">收款账号</div>-->
+                                <!--<input type="text" name="accountWe" id="accountWe" placeholder="微信绑定的手机号码">-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="add-set-input-part Qrcode">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="add-title">收款二维码</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="generate-public-key" onclick="uploadImg()">点击上传图片</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="add-set-input-part tips">&ndash;&gt;-->
+                                <!--&lt;!&ndash;Tips：账号和收款二维码二选一，推荐使用收款二维码&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="add-set-bottom">-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<div class="add-title">网关名称</div>-->
+                                    <!--<div id="gateWayWe"></div>-->
+                                <!--</div>-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<div class="add-title">公钥</div>-->
+                                    <!--<span style="display: none" id="havekeysWe" class="havekeys">已上传</span>-->
+                                    <!--<button id="upkeysWe" class="upkeys" onclick="upkeys()" style="margin-top: 0px;display: none;">生成并上传</button>-->
+                                <!--</div>-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<button class="save" onclick="setGatewayWe()">保存</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
                             <p>
                                 暂未开放
                             </p>
                         </div>
+                        <!-- 微信支付结束 -->
+                        <!-- 支付宝支付 -->
+                        <div id="tab4" class="tab-part">
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">国家/地区</div>-->
+                                <!--<select autofocus name="countryAli" id="countryAli" onchange="forgateway('Ali')">-->
+                                    <!--<option value="" disabled selected>选择国家</option>-->
+                                    <!--&lt;!&ndash;<option value="CHINA">中国大陆</option>&ndash;&gt;-->
+                                    <!--&lt;!&ndash; <option value="HONGKONG">中国香港</option> &ndash;&gt;-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">币&nbsp&nbsp种</div>-->
+                                <!--<select autofocus name="coinAli" id="coinAli" onchange="forgateway('Ali')">-->
+                                    <!--<option value="" disabled selected>选择币种</option>-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part">-->
+                                <!--<div class="add-title">支付宝账号</div>-->
+                                <!--<input type="text" name="accountAli" id="accountAli" placeholder="手机号码/邮箱/账户名">-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;<div class="add-set-input-part Qrcode">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<div class="add-title">收款二维码</div>&ndash;&gt;-->
+                                <!--&lt;!&ndash;<span class="generate-public-key" onclick="uploadImg()">点击上传图片</span>&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="add-set-input-part tips">&ndash;&gt;-->
+                                <!--&lt;!&ndash;Tips：账号和收款二维码二选一，推荐使用收款二维码&ndash;&gt;-->
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--<div class="add-set-bottom">-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<div class="add-title">网关名称</div>-->
+                                    <!--<div id="gateWayAli"></div>-->
+                                <!--</div>-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<div class="add-title">公钥</div>-->
+                                    <!--<span style="display: none" id="havekeysAli" class="havekeys">已上传</span>-->
+                                    <!--<button id="upkeysAli" class="upkeys" onclick="upkeys()" style="margin-top: 0px;display: none;">生成并上传</button>-->
+                                <!--</div>-->
+                                <!--<div class="add-set-input-part">-->
+                                    <!--<button class="save" onclick="setGatewayAli()">保存</button>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <p>
+                                暂未开放
+                            </p>
+                        </div>
+                        <!-- 支付宝支付结束 -->
+                        <!-- 加密货币支付 -->
+                        <div id="tab5" class="tab-part">
+                            <div class="add-set-input-part">
+                                <div class="add-title">币&nbsp&nbsp种</div>
+                                <select autofocus name="coinSecret" id="coinSecret" onchange="forgateway('Secret')">
+                                    <option value="" disabled selected>选择币种</option>
+                                </select>
+                            </div>
+                            <div class="add-set-input-part">
+                                <div class="add-title">钱&nbsp&nbsp包&nbsp&nbsp地&nbsp&nbsp址</div>
+                                <input type="text" name="accountSecret" id="accountSecret" placeholder="填写钱包地址">
+                            </div>
+                            <!--<div class="add-set-input-part Qrcode">-->
+                                <!--<div class="add-title">收款二维码</div>-->
+                                <!--<span class="generate-public-key" onclick="uploadImg()">点击上传图片</span>-->
+                            <!--</div>-->
+                            <!--<div class="add-set-input-part tips">-->
+                                <!--Tips：地址和收款二维码二选一，推荐使用收款二维码-->
+                            <!--</div>-->
+                            <div class="add-set-bottom">
+                                <div class="add-set-input-part">
+                                    <div class="add-title">网关名称</div>
+                                    <div id="gateWaySecret"></div>
+                                </div>
+                                <div class="add-set-input-part">
+                                    <div class="add-title">公钥</div>
+                                    <span style="display: none" id="havekeysSecret" class="havekeys">已上传</span>
+                                    <button id="upkeysSecret" class="upkeys" onclick="upkeys()" style="margin-top: 0px;display: none;">生成并上传</button>
+                                </div>
+                                <div class="add-set-input-part">
+                                    <button class="save" onclick="setGatewaySecret()">保存</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 加密货币支付结束 -->
                     </div>
                 </div>
             </div>
-            <!-- <div id="footCont"> </div> -->
         </div>
     </div>
 </body>
 
 </html>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
         $("#tabContent .tab-part").hide(); // Initially hide all content
         $("#tabs li:first").attr("id", "current"); // Activate first tab
         $("#tabContent div:first").fadeIn(); // Show first tab content
 
-        $('#tabs a').click(function (e) {
+        $('#tabs a').click(function(e) {
             e.preventDefault();
             $("#tabContent .tab-part").hide(); //Hide all content
             $("#tabs li").attr("id", ""); //Reset id's
             $(this).parent().attr("id", "current"); // Activate this
             $('#' + $(this).attr('title')).fadeIn(); // Show content for current tab
         });
-       
+
     })
 
+    $('#country').change(function() {
+        $("#countryWe option:first").prop("selected", 'selected');
+        $("#countryAli option:first").prop("selected", 'selected');
+        var country = $('#country option:selected').val();
+        coinList(country, "bank");
+        bankList(country)
+    })
+
+    $('#countryWe').change(function() {
+        $("#country option:first").prop("selected", 'selected');
+        $("#countryAli option:first").prop("selected", 'selected');
+        var country = $('#countryWe option:selected').val();
+        coinList(country, "We");
+    })
+
+    $('#countryAli').change(function() {
+        $("#countryWe option:first").prop("selected", 'selected');
+        $("#country option:first").prop("selected", 'selected');
+        var country = $('#countryAli option:selected').val();
+        coinList(country, "Ali");
+    })
+</script>
+<script>
+    let init_exchange = async() => {
+        try {
+            //实例化web3
+            window.web3 = await getWeb3();
+            //实例化需要用到的合约
+            window.Contract_undt = await getContract(abi_undt, CONFIG.undt_addr);
+            window.Contract_c2c = await getContract(abi_c2c, CONFIG.c2c_addr);
+
+            $.each(Country, function(i, country) {
+                var str = '<option value="' + i + '" >' + country + '</option>';
+                $("#country").append(str);
+                $("#countryWe").append(str);
+                $("#countryAli").append(str);
+            })
+            $.each(Coin['ALL'], function(key, coin) {
+                var str = '<option value="' + coin + '" >' + coin + '</option>';
+                $("#coinPal").append(str);
+            })
+            $.each(Coin['BIT'], function(key, coin) {
+                var str = '<option value="' + coin + '" >' + coin + '</option>';
+                $("#coinSecret").append(str);
+            })
+            let account = await ethAccounts();
+            let rsakeys = await rsaKeys(account);
+
+            if (rsakeys) {
+                $('#reskey').val(1);
+                $('.havekeys').css('display', 'block');
+            } else {
+                $('.upkeys').css('display', 'block');
+                // $('#keysremark').css('display', 'block');
+            }
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    init_exchange();
+
+    function coinList(country, type) {
+        $("#coin").empty();
+        $("#coinWe").empty();
+        $("#coinAli").empty();
+        $("#coin").append('<option value="" disabled selected>选择币种</option>');
+        $("#coinWe").append('<option value="" disabled selected>选择币种</option>');
+        $("#coinAli").append('<option value="" disabled selected>选择币种</option>');
+
+        $.each(Coin[country], function(key, coin) {
+            console.log(coin);
+            var str = '<option value="' + coin + '" >' + coin + '</option>';
+            if (type == 'We') {
+                $("#coinWe").append(str);
+            } else if (type == 'Ali') {
+                $("#coinAli").append(str);
+            } else {
+                $("#coin").append(str);
+            }
+        });
+    }
+
+    function bankList(country) {
+        $("#bank").empty();
+        $("#bank").append('<option value="" disabled selected>选择银行</option>');
+
+        $.each(Bank[country], function(key, bank) {
+            var str = '<option value="' + key + '" >' + bank + '</option>';
+            $("#bank").append(str);
+        });
+    }
+
+    function getBankName(property) {
+        // $.each(Bank,function(key, bank){
+        var banks = {}
+        for (var i in Bank) {
+            for (var j in Bank[i]) {
+                banks[j] = Bank[i][j]
+            }
+        };
+        return banks[property]
+    }
+
+    //生成网关名称
+    function forgateway(type) {
+        if (type === "bank") {
+            var country = $('#country option:selected').val();
+            var coin = $('#coin option:selected').val();
+            if (!country || !coin || !bank) {
+                return false;
+            } else {
+                var gateway = country + '-' + 'LB' + '-' + coin;
+                $("#gateWay").text(gateway);
+            }
+        } else if (type === "We") {
+            var countryWe = $('#countryWe option:selected').val();
+            var coinWe = $('#coinWe option:selected').val();
+            if (!countryWe || !coinWe) {
+                return false;
+            } else {
+                var gateway = countryWe + '-' + 'WP' + '-' + coinWe;
+                $("#gateWayWe").text(gateway);
+            }
+        } else if (type === "Ali") {
+            var countryAli = $('#countryAli option:selected').val();
+            var coinAli = $('#coinAli option:selected').val();
+            if (!countryAli || !coinAli) {
+                return false;
+            } else {
+                var gateway = countryAli + '-' + 'AP' + '-' + coinAli;
+                $("#gateWayAli").text(gateway);
+            }
+        } else if (type === "Pal") {
+            var coinPal = $('#coinPal option:selected').val();
+            if (!coinPal) {
+                return false;
+            } else {
+                var gateway = "ALL" + '-' + 'PP' + '-' + coinPal;
+                $("#gateWayPal").text(gateway);
+            }
+        } else if (type === "Secret") {
+            var coinSecret = $('#coinSecret option:selected').val();
+            if (!coinSecret) {
+                return false;
+            } else {
+                var gateway = "ALL" + '-' + 'BIT' + '-' + coinSecret;
+                $("#gateWaySecret").text(gateway);
+            }
+        }
+    }
+    //上传二维码图片
+    function uploadImg() {
+        layer.msg('这是上传二维码的方法')
+    }
+    //银行保存
+    function setGateway() {
+        var out = 0;
+        var country = $('#country option:selected').val();
+        var coin = $('#coin option:selected').val();
+        var bank = $('#bank option:selected').val();
+        var code = $("#code").val();
+        var username = $("#username").val();
+        var account = $("#account").val();
+        var gateWay = $("#gateWay").text();
+        var reskey = $("#reskey").val();
+        if (!reskey) {
+            layer.msg("请先上传公钥");
+            return false;
+        }
+        if (!country) {
+            layer.msg("请选择国家/地区");
+            return false;
+        }
+        if (!coin) {
+            layer.msg("请选择币种");
+            return false;
+        }
+        if (!bank) {
+            layer.msg("请选择银行");
+            return false;
+        }
+        //        if(!code){
+        //            layer.msg("请输入银行CODE");
+        //            return false;
+        //        }
+        if (!username) {
+            layer.msg("请输入收款方户名");
+            return false;
+        }
+        if (!account) {
+            layer.msg("请输入收款方账号");
+            return false;
+        }
+        if (!gateWay) {
+            layer.msg("未找到网关");
+            return false;
+        }
+
+        var gateWay_All = jsonGetLocalAll('gateWay');
+
+        if (undefined !== gateWay_All) {
+            console.log(gateWay_All);
+            $.each(gateWay_All, function(index, value) {
+                if (value.gateWay == gateWay) {
+                    gateWay_All.splice(index, 1);
+                    return false;
+                }
+            });
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.bank = bank;
+            obj.code = code;
+            obj.username = username;
+            obj.account = account;
+            gateWay_All.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(gateWay_All));
+        } else {
+            var newobj = [];
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.bank = bank;
+            obj.code = code;
+            obj.username = username;
+            obj.account = account;
+            newobj.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(newobj));
+        }
+        layer.msg("添加成功");
+        window.location.href = "/index.html";
+    }
+
+    //微信保存
+    function setGatewayWe() {
+        var out = 0;
+        var country = $('#countryWe option:selected').val();
+        var coin = $('#coinWe option:selected').val();
+        var account = $("#accountWe").val();
+        var gateWay = $("#gateWayWe").text();
+        var reskey = $("#reskey").val();
+        if (!reskey) {
+            layer.msg("请先上传公钥");
+            return false;
+        }
+        if (!country) {
+            layer.msg("请选择国家/地区");
+            return false;
+        }
+        if (!coin) {
+            layer.msg("请选择币种");
+            return false;
+        }
+        if (!account) {
+            layer.msg("请输入收款方账号");
+            return false;
+        }
+        if (!gateWay) {
+            layer.msg("未找到网关");
+            return false;
+        }
+        var gateWay_All = jsonGetLocalAll('gateWay');
+
+        if (undefined !== gateWay_All) {
+            console.log(gateWay_All);
+            $.each(gateWay_All, function(index, value) {
+                if (value.gateWay == gateWay) {
+                    gateWay_All.splice(index, 1);
+                    return false;
+                }
+            });
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.account = account;
+            gateWay_All.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(gateWay_All));
+        } else {
+            var newobj = [];
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.account = account;
+            newobj.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(newobj));
+        }
+        layer.msg("添加成功");
+        window.location.href = "/index.html";
+    }
+
+    //支付宝保存
+    function setGatewayAli() {
+        var out = 0;
+        var country = $('#countryAli option:selected').val();
+        var coin = $('#coinAli option:selected').val();
+        var account = $("#accountAli").val();
+        var gateWay = $("#gateWayAli").text();
+        var reskey = $("#reskey").val();
+        if (!reskey) {
+            layer.msg("请先上传公钥");
+            return false;
+        }
+        if (!country) {
+            layer.msg("请选择国家/地区");
+            return false;
+        }
+        if (!coin) {
+            layer.msg("请选择币种");
+            return false;
+        }
+        if (!account) {
+            layer.msg("请输入收款方账号");
+            return false;
+        }
+        if (!gateWay) {
+            layer.msg("未找到网关");
+            return false;
+        }
+        var gateWay_All = jsonGetLocalAll('gateWay');
+
+        if (undefined !== gateWay_All) {
+            console.log(gateWay_All);
+            $.each(gateWay_All, function(index, value) {
+                if (value.gateWay == gateWay) {
+                    gateWay_All.splice(index, 1);
+                    return false;
+                }
+            });
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.account = account;
+            gateWay_All.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(gateWay_All));
+        } else {
+            var newobj = [];
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.country = country;
+            obj.coin = coin;
+            obj.account = account;
+            newobj.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(newobj));
+        }
+        layer.msg("添加成功");
+        window.location.href = "/index.html";
+    }
+
+    //PayPal保存
+    function setGatewayPal() {
+        var out = 0;
+        var coin = $('#coinPal option:selected').val();
+        var account = $("#accountPal").val();
+        var gateWay = $("#gateWayPal").text();
+        var reskey = $("#reskey").val();
+        if (!reskey) {
+            layer.msg("请先上传公钥");
+            return false;
+        }
+        if (!coin) {
+            layer.msg("请选择币种");
+            return false;
+        }
+        if (!account) {
+            layer.msg("请输入收款方账号");
+            return false;
+        }
+        if (!gateWay) {
+            layer.msg("未找到网关");
+            return false;
+        }
+        var gateWay_All = jsonGetLocalAll('gateWay');
+
+        if (undefined !== gateWay_All) {
+            console.log(gateWay_All);
+            $.each(gateWay_All, function(index, value) {
+                if (value.gateWay == gateWay) {
+                    gateWay_All.splice(index, 1);
+                    return false;
+                }
+            });
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.coin = coin;
+            obj.account = account;
+            gateWay_All.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(gateWay_All));
+        } else {
+            var newobj = [];
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.coin = coin;
+            obj.account = account;
+            newobj.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(newobj));
+        }
+        layer.msg("添加成功");
+        window.location.href = "/index.html";
+    }
+
+    //加密货币保存
+    function setGatewaySecret() {
+        var out = 0;
+        var coin = $('#coinSecret option:selected').val();
+        var account = $("#accountSecret").val();
+        var gateWay = $("#gateWaySecret").text();
+        var reskey = $("#reskey").val();
+        if (!reskey) {
+            layer.msg("请先上传公钥");
+            return false;
+        }
+        if (!coin) {
+            layer.msg("请选择币种");
+            return false;
+        }
+        if (!account) {
+            layer.msg("请输入收款方地址");
+            return false;
+        }
+        if (!gateWay) {
+            layer.msg("未找到网关");
+            return false;
+        }
+        var gateWay_All = jsonGetLocalAll('gateWay');
+
+        if (undefined !== gateWay_All) {
+            console.log(gateWay_All);
+            $.each(gateWay_All, function(index, value) {
+                if (value.gateWay == gateWay) {
+                    gateWay_All.splice(index, 1);
+                    return false;
+                }
+            });
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.coin = coin;
+            obj.account = account;
+            gateWay_All.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(gateWay_All));
+        } else {
+            var newobj = [];
+            var obj = {};
+            obj.gateWay = gateWay;
+            obj.coin = coin;
+            obj.account = account;
+            newobj.push(obj);
+            localStorage.setItem("gateWay", JSON.stringify(newobj));
+        }
+        layer.msg("添加成功");
+        window.location.href = "/index.html";
+    }
+
+    function jsonGetLocalAll(key) {
+        var local = localStorage.getItem(String(key));
+        if (local === null) {
+            return undefined;
+        }
+        var objLocal = JSON.parse(local);
+        return objLocal;
+    }
+
+    async function upkeys() {
+        var pubKey = localStorage.getItem(String('pubKey'));
+        if (!pubKey) {
+            layer.msg("未找到您的公钥");
+            return false;
+        }
+        let hash = await upload(pubKey);
+
+        console.log(hash);
+
+        $(".upkeys").text("提交中，请等待...");
+        updateRsaKey(hash).then(
+            function(v) {
+                layer.msg("上传成功");
+                $('#reskey').val(1);
+                $('.upkeys').css('display', 'none');
+                $('.havekeys').css('display', 'block');
+                // $('#keysremark').css('display', 'none');
+                //     Verification(v,1);
+            },
+            function(e) {
+                console.log(e);
+                layer.msg("上传失败");
+                $(".upkeys").text("存储公钥");
+                return false;
+            }
+        )
+    }
+
+    function Verification(txid, type) {
+        var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash=" + txid + "&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+        $.get(apiurl, function(data) {
+            if (!data.result) {
+                setTimeout(function() {
+                    Verification(txid, type)
+                }, 1000);
+            } else {
+                if (data.result.status == '0x1') {
+                    if (type == 1) {
+                        layer.msg("上传成功");
+                        $('#reskey').val(1);
+                        $('.upkeys').css('display', 'none');
+                        $('.havekeys').css('display', 'block');
+                    } else {
+                        layer.msg("上传成功");
+                        window.location.href = "/myMobile.html";
+
+                    }
+                } else {
+                    if (type == 1) {
+                        layer.msg("上传失败");
+                        $(".upkeys").text("存储公钥");
+                    } else {
+                        layer.msg("保存失败");
+                        $("#setmerchantorder").text("保存");
+                    }
+                }
+            }
+        });
+    }
 </script>

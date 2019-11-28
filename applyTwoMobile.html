@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script src="./js/layer.js"></script>
+    <style>
+        body {
+            background: #2D2C2C
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main">
+            <div class="apply-header">
+                <div class="apply-back">
+                    <!-- <a href="javascript:" onclick="window.history.back();return false;">
+                        <img src="./images/back.png" alt=""> 
+                    </a> -->
+                </div>
+                <div class="apply-my">
+                    <a href="./ordersMobile.html">
+                        <img src="./images/my.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="apply-cont">
+                <h3>恭喜你成为合格商户，现在可以开始接单。</h3>
+                <p>
+                    接单流程：
+                </p>
+                <p>
+                    1. 选定订单，点击【接单】，确认合约授权订单即锁定；
+                </p>
+                <p> 2. 处理订单，详细核实收款信息，完成付款并提交付款单号，付款完成后点击【完成付款】;</p>
+                <div class="apply-btn">
+                    <button>
+                        <a href="./ordersMobile.html">
+                            开始接单
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
+<script>
+    findrsakey();
+    function findrsakey(){
+        var pubKey = localStorage.getItem(String('pubKeyMerchant'));
+        if(!pubKey){
+            setrsakey();
+        }
+    }
+    function setrsakey() {
+        $.ajax({
+            // async: true,
+            type: "GET",
+            contentType: "application/json",
+            url: "https://query.uniondao.com/queue/new_rsa_key",
+            success: function(res){
+                localStorage.setItem('pubKeyMerchant', res.pubKey);
+                localStorage.setItem('privKeyMerchant', res.privKey);
+                layer.tab({
+                    area: ['90%', '300px'],
+
+                    tab: [{
+                        title: '公钥',
+                        content: res.pubKey
+                    }, {
+                        title: '私钥',
+                        content: '<div class="priv-flex"><div> 请谨慎保存您的私钥:</div> <div class="copy-key" onclick="copyKey()"> 复制私钥</div>  </div>'+
+                        ' <textarea type="text" id="privKey" readonly="readonly">'+res.privKey+'</textarea>'
+                    }]
+                });
+            }
+        });
+    }
+    function copyKey() {
+        var ele = document.getElementById("privKey"); //ele是要复制的元素的对象
+        ele.focus();
+        // ele.select();
+        ele.setSelectionRange(0, ele.value.length);
+        if (document.execCommand('copy', false, null)) {
+            //success info
+            layer.msg('复制成功！');
+        } else {
+            //fail info
+            layer.msg('复制失败!');
+        }
+    }
+</script>

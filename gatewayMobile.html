@@ -6,42 +6,27 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="uniondao,udao,undt" />
-    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
-    <title>UnionDao</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mainMobile.css">
     <link rel="stylesheet" href="./js/need/layer.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("header").load("./headerMobile.html");
-            $("#footCont").load("./footerMobile.html");
-        });
-    </script>
     <style>
         body {
-            background: #232634
+            background: #2D2C2C
         }
     </style>
-    <script src="./js/lan/lan_init.js"></script>
-    <script src="./js/lan/lan_srcipt.js"></script>
-    <!-- 合约 -->
-    <script type="text/javascript" src="./js/tools_func.js"></script>
-    <script type="text/javascript" src="./js/config2.js"></script>
-    <script type="text/javascript" src="./js/token/web3.min.js"></script>
-    <script type="text/javascript" src="./js/token/web3_init.js"></script>
-    <!-- 合约 -->
 </head>
 
 <body>
 
     <div class="wrapper">
         <div class="main">
-            <!-- <header></header> -->
             <div id="gateBanner">
                 <div class="gate-banner">
-                    <img src="./images/mobile_icon/map.png" alt="">
+                    <img src="./images/map.png" alt="">
                     <div class="gate-banner-text">
                         <p>其于社交的点对点全球网关支付系统</p>
                     </div>
@@ -99,7 +84,7 @@
                         <div class="important-part">
                             <span class="import-title">附言</span>
                             <div><input type="text" maxlength="70" placeholder="输入附言信息，仅限70个英文字符"
-                                    οnkeyup="value = value.replace(/[^a-zA-Z]/g, " )"> </div>
+                               id="aolastName"> </div>
                         </div>
                         <div class="important-part">
                             <button>
@@ -148,15 +133,41 @@
                     </div>
                 </div>
             </div>
-            <!-- <div id="footCont"> </div> -->
         </div>
     </div>
+
+
+    
 </body>
 
 </html>
 
 <script src="./js/layer.js"></script>
 <script>
+    function onlyNumber(obj) {
+        //得到第一个字符是否为负号
+        var t = obj.value.charAt(0);
+        //先把非数字的都替换掉，除了数字和. 
+        obj.value = obj.value.replace(/[^\d\.]/g, '');
+        //必须保证第一个为数字而不是. 
+        obj.value = obj.value.replace(/^\./g, '');
+        //保证只有出现一个.而没有多个. 
+        obj.value = obj.value.replace(/\.{2,}/g, '.');
+        //保证.只出现一次，而不能出现两次以上 
+        obj.value = obj.value.replace('.', '$#$').replace(/\./g, '').replace(
+            '$#$', '.');
+        //如果第一位是负号，则允许添加
+        if (t == '-') {
+            obj.value = '-' + obj.value;
+        }
+    }
+    $("#aolastName").on('keyup change input',function(e){
+        var keyword=this.value.toLowerCase();//获取文本框的值
+            if(keyword.match(/[^\a-\z\A-\Z]/g)!=null){//如果匹配到了，为空
+            this.value = "";
+        }
+    });
+
     $(function () {
         $("#unittype").change(function () {
             if (unittype.value == 4)

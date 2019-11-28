@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/mainMobile.css">
+    <link rel="stylesheet" href="./js/need/layer.css">
+    <script src="./js/jquery-3.4.0.min.js"></script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/func.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_c2c.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
+    <script type="text/javascript" src="./js/token/web3_init.js"></script>
+    <script type="text/javascript" src="./js/token/coin/c2c.js"></script>
+    <script src="./js/layer.js"></script>
+    <style>
+        body {
+            background: #2D2C2C
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <div class="main">
+            <div class="apply-header">
+                <div class="apply-back">
+                    <a href="javascript:" onclick="window.history.back();return false;">
+                        <img src="./images/back.png" alt=""> 
+                    </a>
+                </div>
+                <div>
+                    增加保证金
+                </div>
+                <div class="apply-my">
+                    <!-- <a href="./ordersMobile.html">
+                        <img src="./images/my.png" alt="">
+                    </a> -->
+                </div>
+            </div>
+            <div id="myCont">
+                <div class="my-cont">
+                    <div class="increase-cont">
+                        <div class="add-set-input-part">
+                            <div class="add-title"><span class="mr-5">UNDT</span>数量</div>
+                            <div><input type="text" placeholder="输入金额" id="num"></div>
+                        </div>
+                        <div class="add-set-input-part">
+                            <div class="add-title">我的UNDT数量:</div>
+                            <div><span id="balance">0</span></div>
+                        </div> 
+                        <div class="add-set-input-part">
+                            <div style="margin-left: 20px;">(注：最少添加1000UNDT)</div>
+                        </div> 
+                    </div>
+                   <div class="payee-btn">
+                       <button onclick="addbond()" id="addbond">确定</button>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    let init_exchange = async () => {
+        try {
+            //实例化web3
+            window.web3 = await getWeb3();
+            //实例化需要用到的合约
+            window.Contract_undt = await getContract(abi_undt, CONFIG.undt_addr);
+            window.Contract_c2c = await getContract(abi_c2c, CONFIG.c2c_addr);
+            let account = await ethAccounts();
+            let num = await balance_undt(account);
+            $('#balance').text(num);
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    init_exchange();
+
+    async function addbond(){
+        var num = $('#num').val();
+        var balance = $('#balance').text();
+        if(!num){
+            layer.msg("请填写数量");
+            return false;
+        }
+        if(Number(num) < 1000){
+            layer.msg("最少添加1000UNDT");
+            return false;
+        }
+        if(Number(num)>Number(balance)){
+            layer.msg("UNDT余额不足");
+            return false;
+        }
+        let authorize_num = await authorize_coin_num(CONFIG['c2c_addr']);
+        if(authorize_num <= 0 || authorize_num < num){
+            layer.msg("请先解锁");
+            return false;
+        }
+        $("#addbond").text("提交中，请等待...");
+        addBond(num).then(
+            function (v) {
+            //    Verification(v);
+                layer.msg("增加成功");
+                window.location.href="/myMobile.html";
+            },
+            function (e) {
+                console.log(e);
+                layer.msg("增加失败");
+                $("#addbond").text("确定");
+                return false;
+            }
+        )
+    }
+    function Verification(txid){
+        var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+        $.get(apiurl, function(data) {
+            if(!data.result){
+                setTimeout(function(){
+                    Verification(txid)
+                },1000);
+            }else{
+                if(data.result.status == '0x1'){
+                    layer.msg("增加成功");
+                    window.location.href="/myMobile.html";
+                }else{
+                    layer.msg("增加失败");
+                }
+            }
+        });
+    }
+</script>

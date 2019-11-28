@@ -6,21 +6,25 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="keywords" content="uniondao,udao,undt" />
-    <meta name="description" content="UnionDAO is a transparent and sustainable financial system that provides stable currencies, mortgages and decentralized governance." />
-    <title>UnionDao</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>全球网关支付系统</title>
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/mainMobile.css">
     <script src="./js/jquery-3.4.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("header").load("./headerMobile.html");
-            $("#footCont").load("./footerMobile.html");
-        });
-    </script>
+    <script type="text/javascript" src="./js/config.js"></script>
+    <script type="text/javascript" src="./js/func.js"></script>
+    <script type="text/javascript" src="./js/token/web3.min.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_c2c.js"></script>
+    <script type="text/javascript" src="./js/token/abi/abi_undt.js"></script>
+    <script type="text/javascript" src="./js/token/web3_init.js"></script>
+    <script type="text/javascript" src="./js/token/coin/c2c.js"></script>
+    <script type="text/javascript" src="./js/gate-way.js"></script>
+    <script src="./js/jsencrypt.min.js"></script>
+    <script src="./js/layer.js"></script>
     <style>
         body {
-            background: #232634
+            background: #2D2C2C
         }
         .add-set-payee{
             align-items: unset
@@ -35,37 +39,211 @@
 
     <div class="wrapper">
         <div class="main">
-            <!-- <header></header> -->
             <div class="add-back">
                 <a href="javascript:" onclick="window.history.back();return false;">
-                    <img src="./images/mobile_icon/back.png" alt=""> <span>返回</span></a>
+                    <img src="./images/back.png" alt=""> <span>返回</span></a>
             </div>
             <div class="add-set-input">
                 <h5>支付详情</h5>
-                <div class="add-set-input-part">
+                <div class="add-set-input-part" >
+                    <div class="add-title">支付方式:</div>
+                    <div id="paytype"></div>
+                </div>
+                <div class="add-set-input-part" style="display: none" id="user_area">
                     <div class="add-title">国家/地区:</div>
-                    <div>HONGKONG</div>
+                    <div id="area"></div>
+                </div>
+                <div class="add-set-input-part" style="display: none" id="user_coin">
+                    <div class="add-title">币种:</div>
+                    <div id="coin"></div>
                 </div>
                 <div class="add-set-input-part">
                     <div class="add-title">金额:</div>
-                    <div><span class="mr-5">10000</span> HKD</div>
+                    <div><span class="mr-5" id="money"></span> <span id="coin_name"></span></div>
                 </div>
-                <div class="add-set-input-part add-set-payee">
-                    <div class="add-title">收款人:</div>
-                    <div>
-                        <div>0054545454545454</div>
-                        <div>dfd4fd4fd4f5</div>
-                        <div>0054545454545454</div>
-                        <div>dfd4fd4fd4f5</div>
-                    </div>
+                <div class="add-set-input-part" style="display: none" id="user_bank">
+                    <div class="add-title">收款银行:</div>
+                    <div id="bank"></div>
+                </div>
+                <!-- <div class="add-set-input-part">
+                    <div class="add-title">SWFT CODE：</div>
+                    <div id="SWIFT"></div>
+                </div> -->
+                <div class="add-set-input-part" style="display: none" id="user_username">
+                    <div class="add-title">收款方户名:</div>
+                    <div id="username"></div>
+                </div>
+                <div class="add-set-input-part" style="display: none" id="user_account">
+                    <div class="add-title">收款方账号:</div>
+                    <div id="account"></div>
                 </div>
                 <div class="add-set-input-part">
-                    <button>确定支付</button>
+                    <div class="add-title">扣除数量:</div>
+                    <div><span class="mr-5" id="undtnum"></span> UNDT</div>
+                </div>
+                <div class="add-set-input-part">
+                    <button onclick="send()" id="send" style="font-size: 12px">确定支付</button>
                 </div>
             </div>
-            <!-- <div id="footCont"> </div> -->
         </div>
     </div>
 </body>
+<script>
+    let init_exchange = async () => {
+        try {
+            //实例化web3
+            window.web3 = await getWeb3();
+            //实例化需要用到的合约
+            window.Contract_undt = await getContract(abi_undt, CONFIG.undt_addr);
+            window.Contract_c2c = await getContract(abi_c2c, CONFIG.c2c_addr);
 
+            let account = await ethAccounts();
+            let num = await balance_undt(account);
+
+
+            //解密
+            let decrypt = new JSEncrypt();
+            decrypt.setPrivateKey(localStorage.getItem(String('privKey')));
+            let uncrypted = decrypt.decrypt(localStorage.getItem(String('userStr')));
+            uncrypted = JSON.parse(uncrypted);
+
+            let order_info = localStorage.getItem('order_info');
+            order_info = JSON.parse(order_info);
+            console.log(order_info);
+            console.log(uncrypted);
+            let gatewayInfo = await gatewayInfoBase(order_info.gateWay);
+            var arr= order_info.gateWay.split("-");
+            switch (arr[1]){
+                case 'LB':
+                    $("#paytype").text('银行转账');
+                    break;
+                case 'PP':
+                    $("#paytype").text('PayPal');
+                    break;
+                case 'WP':
+                    $("#paytype").text('微信');
+                    break;
+                case 'AP':
+                    $("#paytype").text('支付宝');
+                    break;
+                case 'BIT':
+                    $("#paytype").text('加密货币');
+                    break;
+            }
+            if(uncrypted.country){
+                $("#user_area").css('display','flex');
+                $("#area").text(uncrypted.country);
+            }
+            if(uncrypted.bank){
+                $("#user_bank").css('display','flex');
+                $("#bank").text(uncrypted.country);
+            }
+            if(uncrypted.username){
+                $("#user_username").css('display','flex');
+                $("#username").text(uncrypted.username);
+            }
+            if(uncrypted.account){
+                $("#user_account").css('display','flex');
+                $("#account").text(uncrypted.account);
+            }
+            if(uncrypted.coin){
+                $("#user_coin").css('display','flex');
+                $("#coin").text(uncrypted.coin);
+            }
+
+            order_info.cashAmount = web3.utils.fromWei(order_info.cashAmount, 'mwei');
+            order_info.price = web3.utils.fromWei(order_info.price, 'mwei');
+            $("#money").text(Number(order_info.cashAmount));
+
+            var gateWayss = order_info.gateWay;
+            gateWay_arr =gateWayss.split("-");
+            $("#coin_name").text(gateWay_arr[2]);
+            var undtnum = (Number(order_info.cashAmount)/Number(order_info.price)+Number(order_info.fee)/Math.pow(10,18))*(1+gatewayInfo.arbitrationMarginRatio/Math.pow(10,18));
+            $("#undtnum").text(undtnum);
+
+
+            if(Number(order_info.cashAmount) / Number(order_info.price) > Number(num)){
+                alert("余额不足");
+                window.location.href = "./index.html";
+                return;
+            }
+
+            let authorize_num = await authorize_coin_num(CONFIG['c2c_addr']);
+            if(Number(order_info.cashAmount) * Number(order_info.price) > authorize_num){
+                alert("授权数量不足");
+                window.location.href = "./index.html";
+                return;
+            }
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    init_exchange();
+
+    async function send() {
+        let order_info = localStorage.getItem('order_info');
+        order_info = JSON.parse(order_info);
+        let t = String(order_info.price).split(".");
+        price = web3.utils.toWei(t[0], 'ether');
+        if(!isNaN(t[1])){
+            price += web3.utils.toWei('0.'+t[1], 'ether');
+        }
+        if(String(price).indexOf('e+') != -1){
+            let num_str = String(price).split('e+');
+            let new_str = num_str[0]+'0'.repeat(num_str[1]);
+            price = new_str;
+        }
+        price = web3.utils.toBN(price);
+        price = price.toString();
+        $('#send').text('提交中,请等待...');
+
+
+        sellOrder(order_info.merchantID,order_info.gateWay,price,order_info.fee,order_info.cashAmount,order_info.orderInfoA).then(
+            function (res) {
+                layer.msg("挂单成功");
+                window.location.href="/index.html";
+            },
+            function (e) {
+                $('#send').text('确定支付');
+                layer.msg("挂单失败");
+                console.log(e);
+            }
+        );
+    }
+
+    function Verification(txid){
+        var apiurl = "https://api.etherscan.io/api?module=proxy&action=eth_getTransactionReceipt&txhash="+txid+"&apikey=EE6CHPQTD4GXBQPYKBS4IHHCAG6PM93W2B";
+        $.get(apiurl, function(data) {
+            if(!data.result){
+                setTimeout(function(){
+                    Verification(txid)
+                },1000);
+            }else{
+                if(data.result.status == '0x1'){
+                    layer.msg("挂单成功");
+                    window.location.href="/index.html";
+                }else{
+                    $('#send').text('确定支付');
+                    layer.msg("挂单失败");
+                }
+            }
+        });
+    }
+
+    function bank(property){
+        var banks = {}
+        for(var i in Bank){
+            for(var j in  Bank[i]){
+                banks[j] =  Bank[i][j]
+            }
+        };
+        if(!banks[property]){
+            return property;
+        }else{
+            return banks[property]
+        }
+    }
+</script>
 </html>
